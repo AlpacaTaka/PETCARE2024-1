@@ -1,4 +1,4 @@
-package beans;
+package com.example.iwebproyecto.beans;
 
 public class Usuario {
     private int usuarioID;
@@ -11,7 +11,7 @@ public class Usuario {
     private String estado;
     private int distritoID;
     private int fotosFotoID;
-    private int flag;
+    private int flag;/*Temporal*/
 
     // Constructor vacío
     public Usuario() {
@@ -122,7 +122,7 @@ public class Usuario {
         this.flag = flag;
     }
 
-    // Método toString para facilitar la visualización del objeto
+    // Metodo toString para facilitar la visualización del objeto
     @Override
     public String toString() {
         return "Usuario{" +
