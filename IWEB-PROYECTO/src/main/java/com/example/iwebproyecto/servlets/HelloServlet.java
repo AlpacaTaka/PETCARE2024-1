@@ -1,4 +1,4 @@
-package com.example.iwebproyecto;
+package servlets;
 
 import java.io.*;
 
