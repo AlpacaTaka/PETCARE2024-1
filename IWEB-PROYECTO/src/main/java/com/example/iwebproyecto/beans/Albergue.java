@@ -36,7 +36,7 @@ public class Albergue {
                    int cantidadAnimales, String urlFacebook, String urlInstagram, String direccion,
                    int distritoID, String puntoAcopioDonaciones, String direccionDonaciones,
                    String nombreContactoDonaciones, String numeroContactoDonaciones,
-                   String numeroYape, String numeroPlin, String codigoQR, String estado, int fotosFotoID, String mensaje) {
+                   String numeroYape, String numeroPlin, String codigoQR, String estado, int fotos_FotoID, String mensaje, int flag) {
         this.albergueID = albergueID;
         this.nombreAlbergue = nombreAlbergue;
         this.nombreEncargado = nombreEncargado;
@@ -58,7 +58,7 @@ public class Albergue {
         this.numeroPlin = numeroPlin;
         this.codigoQR = codigoQR;
         this.estado = estado;
-        this.fotosFotoID = fotosFotoID;
+        this.fotos_FotoID = fotos_FotoID;
         this.mensaje = mensaje;
         this.flag = flag;
     }
@@ -233,12 +233,12 @@ public class Albergue {
         this.estado = estado;
     }
 
-    public int getFotosFotoID() {
-        return fotosFotoID;
+    public int getFotos_FotoID() {
+        return fotos_FotoID;
     }
 
-    public void setFotosFotoID(int fotosFotoID) {
-        this.fotosFotoID = fotosFotoID;
+    public void setFotos_FotoID(int fotos_FotoID) {
+        this.fotos_FotoID = fotos_FotoID;
     }
 
     public String getMensaje() {
@@ -282,7 +282,7 @@ public class Albergue {
                 ", numeroPlin='" + numeroPlin + '\'' +
                 ", codigoQR='" + codigoQR + '\'' +
                 ", estado='" + estado + '\'' +
-                ", fotosFotoID=" + fotosFotoID +
+                ", fotosFotoID=" + fotos_FotoID +
                 ", mensaje='" + mensaje + '\'' +
                 ", flag=" + flag +
                 '}';
