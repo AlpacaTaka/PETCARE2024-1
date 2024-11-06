@@ -22,7 +22,7 @@ public class Albergue {
     private String numeroPlin;
     private String codigoQR;
     private String estado; /*Estado:'Aprobado', 'Desaprobado'*/
-    private int fotosFotoID;
+    private int fotos_FotoID;
     private String mensaje;
     private int flag;
 
