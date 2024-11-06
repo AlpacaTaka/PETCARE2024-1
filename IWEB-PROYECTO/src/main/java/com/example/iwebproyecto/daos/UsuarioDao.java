@@ -1,15 +1,15 @@
-package daos;
+package com.example.iwebproyecto.daos;
+
+import com.example.iwebproyecto.beans.Usuario;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
-import beans.Usuario;
 
 
 public class UsuarioDao {
     private Connection connection;
 
-    public UsuarioDao(Connection connection) {
+    public UsuarioDao() {
         this.connection = connection;
     }
 
@@ -26,7 +26,7 @@ public class UsuarioDao {
             statement.setString(6, usuario.getContrasenia());
             statement.setString(7, usuario.getEstado());
             statement.setInt(8, usuario.getDistritoID());
-            statement.setInt(9, usuario.getFotosFotoID());
+            statement.setInt(9, usuario.getFotos_FotoID());
             statement.setInt(10, usuario.getFlag());
 
             statement.executeUpdate();
@@ -59,7 +59,7 @@ public class UsuarioDao {
             statement.setString(6, usuario.getContrasenia());
             statement.setString(7, usuario.getEstado());
             statement.setInt(8, usuario.getDistritoID());
-            statement.setInt(9, usuario.getFotosFotoID());
+            statement.setInt(9, usuario.getFotos_FotoID());
             statement.setInt(10, usuario.getFlag());
             statement.setInt(11, usuario.getUsuarioID());
 
@@ -77,16 +77,16 @@ public class UsuarioDao {
     }
 
     // Metodo para obtener todos los usuarios
-    public List<Usuario> obtenerTodosLosUsuarios() throws SQLException {
-        List<Usuario> usuarios = new ArrayList<>();
+    public ArrayList<Usuario> listarUsuarios() throws SQLException {
+        ArrayList<Usuario> listaUsuarios = new ArrayList<>();
         String sql = "SELECT * FROM usuario";
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
             while (resultSet.next()) {
-                usuarios.add(mapearUsuario(resultSet));
+                listaUsuarios.add(mapearUsuario(resultSet));
             }
         }
-        return usuarios;
+        return listaUsuarios;
     }
 
     // Metodo para mapear un ResultSet a un objeto Usuario
@@ -101,7 +101,7 @@ public class UsuarioDao {
         usuario.setContrasenia(resultSet.getString("contrasenia"));
         usuario.setEstado(resultSet.getString("estado"));
         usuario.setDistritoID(resultSet.getInt("distritoID"));
-        usuario.setFotosFotoID(resultSet.getInt("fotos_fotoID"));
+        usuario.setFotos_FotoID(resultSet.getInt("fotos_fotoID"));
         usuario.setFlag(resultSet.getInt("flag"));
         return usuario;
     }
