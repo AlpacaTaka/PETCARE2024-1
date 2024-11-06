@@ -11,7 +11,7 @@ public class DenunciaMaltrato {
     private int realizoDenuncia;
     private String especie;
     private String fecha;
-    private int fotoID;
+    private int fotos_FotoID;
 
     // Constructor vacío
     public DenunciaMaltrato() {}
@@ -19,7 +19,7 @@ public class DenunciaMaltrato {
     // Constructor con todos los campos
     public DenunciaMaltrato(int denunciaID, int usuarioID, String tamanio, String raza, String tipoMaltrato,
                             String nombreApellidoMaltratador, String direccion, int realizoDenuncia, String especie,
-                            String fecha, int fotoID){
+                            String fecha, int fotos_FotoID){
         this.denunciaID = denunciaID;
         this.usuarioID = usuarioID;
         this.tamanio = tamanio;
@@ -30,7 +30,7 @@ public class DenunciaMaltrato {
         this.realizoDenuncia = realizoDenuncia;
         this.especie = especie;
         this.fecha = fecha;
-        this.fotoID = fotoID;
+        this.fotos_FotoID = fotos_FotoID;
     }
 
 
@@ -115,12 +115,12 @@ public class DenunciaMaltrato {
         this.fecha = fecha;
     }
 
-    public int getFotoID() {
-        return fotoID;
+    public int getFotos_FotoID() {
+        return fotos_FotoID;
     }
 
-    public void setFotoID(int fotoID) {
-        this.fotoID = fotoID;
+    public void setFotos_FotoID(int fotos_FotoID) {
+        this.fotos_FotoID = fotos_FotoID;
     }
 
     @Override
@@ -136,7 +136,7 @@ public class DenunciaMaltrato {
                 ", realizoDenuncia=" + realizoDenuncia + '\'' +
                 ", especie='" + especie + '\'' +
                 ", fecha='" + fecha + '\'' +
-                ", fotoID=" + fotoID +
+                ", fotos_FotoID=" + fotos_FotoID +
                 '}';
     }
 

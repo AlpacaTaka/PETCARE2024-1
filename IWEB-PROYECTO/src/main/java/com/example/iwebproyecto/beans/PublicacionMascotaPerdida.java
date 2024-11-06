@@ -15,7 +15,7 @@ public class PublicacionMascotaPerdida {
     private String telefonoContacto;
     private int recompensa;
     private String estado;/*'Pendiente', 'Aceptado', 'Rechazado'*/
-    private int fotoID;/*Fotos_fotoID*/
+    private int fotos_FotoID;/*Fotos_fotoID*/
     private String fechaPerdida;
     private String especie;
     private String fecha;
@@ -30,7 +30,7 @@ public class PublicacionMascotaPerdida {
     // Constructor con todos los campos
     public PublicacionMascotaPerdida(int publicacionID, int usuarioID, String descripcion, String nombreContacto,int edad, String raza,
                                     String tamanio, String distintivo, String descripcionAdicional, String lugarPerdida, String horaPerdida,
-                                    String telefonoContacto, int recompensa, String estado, int fotoID, String fechaPerdida, String especie, String fecha,
+                                    String telefonoContacto, int recompensa, String estado, int fotos_FotoID, String fechaPerdida, String especie, String fecha,
                                     String nombre, String estadoMascota, String comentario) {
         this.publicacionID = publicacionID;
         this.usuarioID = usuarioID;
@@ -46,7 +46,7 @@ public class PublicacionMascotaPerdida {
         this.telefonoContacto = telefonoContacto;
         this.recompensa = recompensa;
         this.estado = estado;
-        this.fotoID = fotoID;
+        this.fotos_FotoID = fotos_FotoID;
         this.fechaPerdida = fechaPerdida;
         this.especie = especie;
         this.fecha = fecha;
@@ -175,13 +175,11 @@ public class PublicacionMascotaPerdida {
         this.fechaPerdida = fechaPerdida;
     }
 
-    public int getFotoID() {
-        return fotoID;
+    public int getFotos_FotoID() {
+        return fotos_FotoID;
     }
 
-    public void setFotoID(int fotoID) {
-        this.fotoID = fotoID;
-    }
+    public void setFotos_FotoID(int fotos_FotoID) {this.fotos_FotoID = fotos_FotoID;}
 
     public String getEspecie() {
         return especie;
@@ -241,7 +239,7 @@ public class PublicacionMascotaPerdida {
                 ", telefonoContacto='" + telefonoContacto + '\'' +
                 ", recompensa='" + recompensa + '\'' +
                 ", estado='" + estado + '\'' +
-                ", fotoID=" + fotoID + '\'' +
+                ", fotoID=" + fotos_FotoID + '\'' +
                 ", fechaPerdida='" + fechaPerdida + '\'' +
                 ", especie='" + especie + '\'' +
                 ", fecha=" + fecha +

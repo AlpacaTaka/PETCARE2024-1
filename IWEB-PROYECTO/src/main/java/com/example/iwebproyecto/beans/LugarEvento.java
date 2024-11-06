@@ -6,17 +6,17 @@ public class LugarEvento {
     private String direccionLugar;
     private int aforoMax;
     private int administradorID;
-    private int fotoID;
+    private int fotos_FotoID;
 
     public LugarEvento() {}
 
-    public LugarEvento(int lugarID, String nombreLugar, String direccionLugar, int aforoMax, int administradorID, int fotoID) {
+    public LugarEvento(int lugarID, String nombreLugar, String direccionLugar, int aforoMax, int administradorID, int fotos_FotoID) {
         this.lugarID = lugarID;
         this.nombreLugar = nombreLugar;
         this.direccionLugar = direccionLugar;
         this.aforoMax = aforoMax;
         this.administradorID = administradorID;
-        this.fotoID = fotoID;
+        this.fotos_FotoID = fotos_FotoID;
     }
 
     public int getLugarID() {
@@ -59,12 +59,12 @@ public class LugarEvento {
         this.administradorID = administradorID;
     }
 
-    public int getFotoID() {
-        return fotoID;
+    public int getFotos_FotoID() {
+        return fotos_FotoID;
     }
 
-    public void setFotoID(int fotoID) {
-        this.fotoID = fotoID;
+    public void setFotos_FotoID(int fotos_FotoID) {
+        this.fotos_FotoID = fotos_FotoID;
     }
 
 }
