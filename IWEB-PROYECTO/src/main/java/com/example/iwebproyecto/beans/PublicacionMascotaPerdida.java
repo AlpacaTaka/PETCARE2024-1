@@ -247,7 +247,7 @@ public class PublicacionMascotaPerdida {
                 ", fecha=" + fecha +
                 ", nombre='" + nombre + '\'' +
                 ", estadoMascota='" + estadoMascota + '\'' +
-                ", comentario='" + comentario + '\'' +
+                ", comentario='" + comentario +
                 '}';
     }
 

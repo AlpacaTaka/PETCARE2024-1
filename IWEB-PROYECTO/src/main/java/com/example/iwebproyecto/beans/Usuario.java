@@ -126,7 +126,7 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario{" +
-                "usuarioID=" + usuarioID +
+                "usuarioID=" + usuarioID + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", dni='" + dni + '\'' +
@@ -134,8 +134,8 @@ public class Usuario {
                 ", correoElectronico='" + correoElectronico + '\'' +
                 ", contrasenia='" + contrasenia + '\'' +
                 ", estado='" + estado + '\'' +
-                ", distritoID=" + distritoID +
-                ", fotosFotoID=" + fotosFotoID +
+                ", distritoID=" + distritoID + '\'' +
+                ", fotosFotoID=" + fotosFotoID + '\'' +
                 ", flag=" + flag +
                 '}';
     }
