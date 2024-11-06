@@ -1,4 +1,4 @@
-package daos;
+package com.example.iwebproyecto.daos;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -24,6 +24,7 @@ public class Albergue {
     private String estado; /*Estado:'Aprobado', 'Desaprobado'*/
     private int fotosFotoID;
     private String mensaje;
+    private int flag;
 
     // Constructor vacío
     public Albergue() {
@@ -59,6 +60,7 @@ public class Albergue {
         this.estado = estado;
         this.fotosFotoID = fotosFotoID;
         this.mensaje = mensaje;
+        this.flag = flag;
     }
 
     // Getters y Setters para cada campo
@@ -247,6 +249,15 @@ public class Albergue {
         this.mensaje = mensaje;
     }
 
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
+
+
     // Metodo toString para facilitar la visualización del objeto
     @Override
     public String toString() {
@@ -273,6 +284,7 @@ public class Albergue {
                 ", estado='" + estado + '\'' +
                 ", fotosFotoID=" + fotosFotoID +
                 ", mensaje='" + mensaje + '\'' +
+                ", flag=" + flag +
                 '}';
     }
 
