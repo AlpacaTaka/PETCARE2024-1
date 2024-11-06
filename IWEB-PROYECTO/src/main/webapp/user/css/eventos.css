@@ -1,0 +1,55 @@
+#contenidoDerecha{
+    padding: 5px;
+    background-color: #eb903b76;
+    border-radius:  20px;
+}
+#contenidoIzquierda{
+    padding: 20px;
+    border-radius:  20px;
+    
+}
+
+#Eventos{
+    margin-top: 20px;
+}
+
+#MascotasPerdidas{
+    margin-top: 20px;
+}
+
+.card-img-don{
+    height: 220px; /* Asegura que la imagen ocupe toda la altura del contenedor */
+    width: 100%;
+    object-fit: cover; /* Ajuste perfecto sin deformar la imagen */
+
+}
+
+#grilla-perdidos {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+}
+
+.perdido {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    
+    
+    #grilla-perdidos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+
+    #contenidoIzquierda{
+        width: 100%;
+        padding: 20px;
+    }
+
+    
+}

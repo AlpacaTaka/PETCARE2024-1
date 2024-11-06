@@ -33,6 +33,8 @@ public class Usuario {
         this.flag = flag;
     }
 
+
+
     // Getters y Setters para cada campo
     public int getUsuarioID() {
         return usuarioID;

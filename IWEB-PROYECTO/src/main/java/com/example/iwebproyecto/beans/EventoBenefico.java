@@ -16,14 +16,14 @@ public class EventoBenefico {
     private int aforo;
     private int entradaMonetaria;
     private String entradaSuministro;
-    private String fotoID;
+    private int fotos_FotoID;
     private String fechaPublicacion;
 
     public EventoBenefico() {}
 
     public EventoBenefico(int eventoAlbergueID, String nombre, String fechaEvento, String horaInicio, String horaFin,
                           int albergueID, String tipoDonacion, String descripcionEvento, String invitados, String razonEvento,
-                          String estado, int lugarID, int aforo, int entradaMonetaria, String entradaSuministro, String fotoID, String fechaPublicacion){
+                          String estado, int lugarID, int aforo, int entradaMonetaria, String entradaSuministro, int fotos_FotoID, String fechaPublicacion){
         this.eventoAlbergueID = eventoAlbergueID;
         this.nombre = nombre;
         this.fechaEvento = fechaEvento;
@@ -39,7 +39,7 @@ public class EventoBenefico {
         this.aforo = aforo;
         this.entradaMonetaria = entradaMonetaria;
         this.entradaSuministro = entradaSuministro;
-        this.fotoID = fotoID;
+        this.fotos_FotoID = fotos_FotoID;
         this.fechaPublicacion = fechaPublicacion;
     }
 
@@ -164,12 +164,12 @@ public class EventoBenefico {
         this.entradaSuministro = entradaSuministro;
     }
 
-    public String getFotoID() {
-        return fotoID;
+    public int getFotos_FotoID() {
+        return fotos_FotoID;
     }
 
-    public void setFotoID(String fotoID) {
-        this.fotoID = fotoID;
+    public void setFotos_FotoID(int fotos_FotoID) {
+        this.fotos_FotoID = fotos_FotoID;
     }
 
     public String getFechaPublicacion() {
@@ -198,7 +198,7 @@ public class EventoBenefico {
                 ", aforo=" + aforo + '\'' +
                 ", entradaMonetaria=" + entradaMonetaria + '\'' +
                 ", entradaSuministro='" + entradaSuministro + '\'' +
-                ", fotoID='" + fotoID + '\'' +
+                ", fotoID='" + fotos_FotoID + '\'' +
                 ", fechaPublicacion='" + fechaPublicacion +
                 '}';
     }

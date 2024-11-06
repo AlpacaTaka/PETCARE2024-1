@@ -14,5 +14,5 @@ public class MascotasTemporal {
     private String sexo;
     private int poseeDiscapacidad;
     private int descripcionDiscapacidad;
-    private int fotos_fotoID
+    private int fotos_fotoID;
 }

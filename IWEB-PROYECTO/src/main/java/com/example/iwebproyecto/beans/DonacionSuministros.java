@@ -9,12 +9,12 @@ public class DonacionSuministros {
     private String marcaSuministro;
     private String horaRecepcion;
     private String fecha;
-    private int fotoID;
+    private int fotos_FotoID;
 
     public DonacionSuministros() {}
 
     public DonacionSuministros(int donacionSuministrosID, int usuarioID, int albergueID, String fechaRecepcion,
-                               String nombreSuministro, String marcaSuministro, String horaRecepcion, String fecha, int fotoID){
+                               String nombreSuministro, String marcaSuministro, String horaRecepcion, String fecha, int fotos_FotoID){
         this.donacionSuministrosID = donacionSuministrosID;
         this.usuarioID = usuarioID;
         this.albergueID = albergueID;
@@ -23,7 +23,7 @@ public class DonacionSuministros {
         this.marcaSuministro = marcaSuministro;
         this.horaRecepcion = horaRecepcion;
         this.fecha = fecha;
-        this.fotoID = fotoID;
+        this.fotos_FotoID = fotos_FotoID;
     }
 
     public int getDonacionSuministrosID() {
@@ -90,11 +90,11 @@ public class DonacionSuministros {
         this.fecha = fecha;
     }
 
-    public int getFotoID() {
-        return fotoID;
+    public int getFotos_FotoID() {
+        return fotos_FotoID;
     }
 
-    public void setFotoID(int fotoID) {
-        this.fotoID = fotoID;
+    public void setFotos_FotoID(int fotos_FotoID) {
+        this.fotos_FotoID = fotos_FotoID;
     }
 }

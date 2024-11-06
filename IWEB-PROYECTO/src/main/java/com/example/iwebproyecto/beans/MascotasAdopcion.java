@@ -11,7 +11,7 @@ public class MascotasAdopcion {
     private int usuarioID;
     private int albergueID;
     private String sexo;
-    private int fotoID;
+    private int fotos_FotoID;
     private String fecha;
 
     // Constructor vacio
@@ -19,7 +19,7 @@ public class MascotasAdopcion {
 
     // Constructor con todos los campos
     public MascotasAdopcion(int idAdopcion, String raza, String lugarEncontrado, String descripcionGeneral, int edadAprox, int seEncuentraTemporal,
-                            String condicionesAdopcion, int usuarioID, int albergueID, String sexo, int fotoID, String fecha){
+                            String condicionesAdopcion, int usuarioID, int albergueID, String sexo, int fotos_FotoID, String fecha){
         this.idAdopcion = idAdopcion;
         this.raza = raza;
         this.lugarEncontrado = lugarEncontrado;
@@ -30,7 +30,7 @@ public class MascotasAdopcion {
         this.usuarioID = usuarioID;
         this.albergueID = albergueID;
         this.sexo = sexo;
-        this.fotoID = fotoID;
+        this.fotos_FotoID = fotos_FotoID;
         this.fecha = fecha;
     }
 
@@ -114,12 +114,12 @@ public class MascotasAdopcion {
         this.sexo = sexo;
     }
 
-    public int getFotoID() {
-        return fotoID;
+    public int getFotos_FotoID() {
+        return fotos_FotoID;
     }
 
-    public void setFotoID(int fotoID) {
-        this.fotoID = fotoID;
+    public void setFotos_FotoID(int fotos_FotoID) {
+        this.fotos_FotoID = fotos_FotoID;
     }
 
     public String getFecha() {
@@ -143,7 +143,7 @@ public class MascotasAdopcion {
                 ", usuarioID=" + usuarioID + '\'' +
                 ", albergueID=" + albergueID + '\'' +
                 ", sexo='" + sexo + '\'' +
-                ", fotoID=" + fotoID + '\'' +
+                ", fotoID=" + fotos_FotoID + '\'' +
                 ", fecha='" + fecha +
                 '}';
     }

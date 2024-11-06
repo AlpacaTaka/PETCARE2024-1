@@ -9,12 +9,12 @@ public class DonacionMonetaria {
     private String fechaRecepcion;
     private String horaRecepcion;
     private String fecha;
-    private int fotoID;
+    private int fotos_FotoID;
 
     public DonacionMonetaria() {}
 
     public DonacionMonetaria(int donacionMonetariaID, int usuarioID, int albergueID, String tipoDonacion,
-                             String cantidadMonetaria, String fechaRecepcion, String horaRecepcion, String fecha, int fotoID) {
+                             String cantidadMonetaria, String fechaRecepcion, String horaRecepcion, String fecha, int fotos_FotoID) {
         this.donacionMonetariaID = donacionMonetariaID;
         this.usuarioID = usuarioID;
         this.albergueID = albergueID;
@@ -23,7 +23,7 @@ public class DonacionMonetaria {
         this.fechaRecepcion = fechaRecepcion;
         this.horaRecepcion = horaRecepcion;
         this.fecha = fecha;
-        this.fotoID = fotoID;
+        this.fotos_FotoID = fotos_FotoID;
     }
 
     public int getDonacionMonetariaID() {
@@ -50,11 +50,11 @@ public class DonacionMonetaria {
         this.albergueID = albergueID;
     }
 
-    public String getCantidadMonetaria() {
+    public int getCantidadMonetaria() {
         return cantidadMonetaria;
     }
 
-    public void setCantidadMonetaria(String cantidadMonetaria) {
+    public void setCantidadMonetaria(int cantidadMonetaria) {
         this.cantidadMonetaria = cantidadMonetaria;
     }
 
@@ -90,12 +90,12 @@ public class DonacionMonetaria {
         this.horaRecepcion = horaRecepcion;
     }
 
-    public String getFotoID() {
-        return fotoID;
+    public int getFotos_FotoID() {
+        return fotos_FotoID;
     }
 
-    public void setFotoID(String fotoID) {
-        this.fotoID = fotoID;
+    public void setFotos_FotoID(int fotos_FotoID) {
+        this.fotos_FotoID = fotos_FotoID;
     }
 
 

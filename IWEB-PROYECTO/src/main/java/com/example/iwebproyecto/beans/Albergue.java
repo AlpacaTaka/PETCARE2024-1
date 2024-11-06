@@ -233,13 +233,9 @@ public class Albergue {
         this.estado = estado;
     }
 
-    public int getFotos_FotoID() {
-        return fotos_FotoID;
-    }
+    public int getFotos_FotoID() {return fotos_FotoID;}
 
-    public void setFotos_FotoID(int fotos_FotoID) {
-        this.fotos_FotoID = fotos_FotoID;
-    }
+    public void setFotos_FotoID(int fotos_FotoID) {this.fotos_FotoID = fotos_FotoID;}
 
     public String getMensaje() {
         return mensaje;
