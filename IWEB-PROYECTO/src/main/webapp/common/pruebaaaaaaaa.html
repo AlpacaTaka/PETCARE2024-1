@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barra de Navegación Bootstrap</title>
+    <!-- Importa Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="oli.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid justify-content-center">
+            <button id="btnEventos" class="nav-link btn btn-dark active" aria-current="page">Eventos</button>
+            <button id="btnSolicitudes" class="nav-link btn btn-dark">Solicitudes</button>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div id="contentEventos" class="content-section active-content">
+            <h2>Eventos</h2>
+            <p>Aquí se mostrarán los eventos.</p>
+        </div>
+
+        <div id="contentSolicitudes" class="content-section">
+            <h2>Solicitudes</h2>
+            <p>Aquí se mostrarán las solicitudes.</p>
+        </div>
+    </div>
+
+    <!-- Importa Bootstrap JS y el script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="oli.js"></script>
+</body>
+</html>
