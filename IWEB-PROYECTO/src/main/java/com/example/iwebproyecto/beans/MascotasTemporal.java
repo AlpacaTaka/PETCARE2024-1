@@ -15,4 +15,5 @@ public class MascotasTemporal {
     private int poseeDiscapacidad;
     private int descripcionDiscapacidad;
     private int fotos_fotoID;
+    
 }
