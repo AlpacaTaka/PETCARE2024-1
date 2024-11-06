@@ -1,4 +1,4 @@
-package beans;
+package com.example.iwebproyecto.beans;
 
 public class Usuario {
     private int usuarioID;
@@ -10,8 +10,8 @@ public class Usuario {
     private String contrasenia;
     private String estado;
     private int distritoID;
-    private int fotosFotoID;
-    private int flag;
+    private int fotos_FotoID;
+    private int flag;/*Temporal*/
 
     // Constructor vacío
     public Usuario() {
@@ -19,7 +19,7 @@ public class Usuario {
 
     // Constructor con todos los campos
     public Usuario(int usuarioID, String nombre, String apellido, String dni, String direccion, String correoElectronico,
-                   String contrasenia, String estado, int distritoID, int fotosFotoID, int flag) {
+                   String contrasenia, String estado, int distritoID, int fotos_FotoID, int flag) {
         this.usuarioID = usuarioID;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -29,7 +29,7 @@ public class Usuario {
         this.contrasenia = contrasenia;
         this.estado = estado;
         this.distritoID = distritoID;
-        this.fotosFotoID = fotosFotoID;
+        this.fotos_FotoID = fotos_FotoID;
         this.flag = flag;
     }
 
@@ -106,12 +106,12 @@ public class Usuario {
         this.distritoID = distritoID;
     }
 
-    public int getFotosFotoID() {
-        return fotosFotoID;
+    public int getFotos_FotoID() {
+        return fotos_FotoID;
     }
 
-    public void setFotosFotoID(int fotosFotoID) {
-        this.fotosFotoID = fotosFotoID;
+    public void setFotos_FotoID(int fotos_FotoID) {
+        this.fotos_FotoID = fotos_FotoID;
     }
 
     public int getFlag() {
@@ -122,11 +122,11 @@ public class Usuario {
         this.flag = flag;
     }
 
-    // Método toString para facilitar la visualización del objeto
+    // Metodo toString para facilitar la visualización del objeto
     @Override
     public String toString() {
         return "Usuario{" +
-                "usuarioID=" + usuarioID +
+                "usuarioID=" + usuarioID + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", dni='" + dni + '\'' +
@@ -134,8 +134,8 @@ public class Usuario {
                 ", correoElectronico='" + correoElectronico + '\'' +
                 ", contrasenia='" + contrasenia + '\'' +
                 ", estado='" + estado + '\'' +
-                ", distritoID=" + distritoID +
-                ", fotosFotoID=" + fotosFotoID +
+                ", distritoID=" + distritoID + '\'' +
+                ", fotos_FotoID=" + fotos_FotoID + '\'' +
                 ", flag=" + flag +
                 '}';
     }
