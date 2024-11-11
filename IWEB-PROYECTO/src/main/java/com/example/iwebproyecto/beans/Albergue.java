@@ -13,7 +13,7 @@ public class Albergue {
     private String urlFacebook;
     private String urlInstagram;
     private String direccion;
-    private int distritoID;
+    private Distrito distrito;
     private String puntoAcopioDonaciones;
     private String direccionDonaciones;
     private String nombreContactoDonaciones;
@@ -32,7 +32,7 @@ public class Albergue {
 
     // Constructor con todos los campos
 
-    public Albergue(int albergueID, String nombreAlbergue, String nombreEncargado, String apellidoEncargado, int espaciosDisponibles, String anioCreacion, String correoElectronico, String contrasenia, int cantidadAnimales, String urlFacebook, String urlInstagram, String direccion, int distritoID, String puntoAcopioDonaciones, String direccionDonaciones, String nombreContactoDonaciones, String numeroContactoDonaciones, String numeroYape, String numeroPlin, String codigoQR, String estado, Foto foto, String mensaje, boolean flag) {
+    public Albergue(int albergueID, String nombreAlbergue, String nombreEncargado, String apellidoEncargado, int espaciosDisponibles, String anioCreacion, String correoElectronico, String contrasenia, int cantidadAnimales, String urlFacebook, String urlInstagram, String direccion, Distrito distrito, String puntoAcopioDonaciones, String direccionDonaciones, String nombreContactoDonaciones, String numeroContactoDonaciones, String numeroYape, String numeroPlin, String codigoQR, String estado, Foto foto, String mensaje, boolean flag) {
         this.albergueID = albergueID;
         this.nombreAlbergue = nombreAlbergue;
         this.nombreEncargado = nombreEncargado;
@@ -45,7 +45,7 @@ public class Albergue {
         this.urlFacebook = urlFacebook;
         this.urlInstagram = urlInstagram;
         this.direccion = direccion;
-        this.distritoID = distritoID;
+        this.distrito = distrito;
         this.puntoAcopioDonaciones = puntoAcopioDonaciones;
         this.direccionDonaciones = direccionDonaciones;
         this.nombreContactoDonaciones = nombreContactoDonaciones;
@@ -158,13 +158,6 @@ public class Albergue {
         this.direccion = direccion;
     }
 
-    public int getDistritoID() {
-        return distritoID;
-    }
-
-    public void setDistritoID(int distritoID) {
-        this.distritoID = distritoID;
-    }
 
     public String getPuntoAcopioDonaciones() {
         return puntoAcopioDonaciones;
@@ -254,5 +247,13 @@ public class Albergue {
 
     public void setFoto(Foto foto) {
         this.foto = foto;
+    }
+
+    public Distrito getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(Distrito distrito) {
+        this.distrito = distrito;
     }
 }
