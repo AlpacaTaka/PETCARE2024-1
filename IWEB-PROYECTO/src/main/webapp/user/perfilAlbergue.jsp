@@ -1,14 +1,21 @@
+<%@ page import="com.example.iwebproyecto.beans.Albergue" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+
+    Albergue a = (Albergue) request.getAttribute("albergue");
+
+
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css">
+    <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
     <title>Postular como Hogar Temporal</title>
 
@@ -163,11 +170,11 @@
                 <!--Boton de regreso a la página principal-->
                 <div class="col" id="contenido-nofooter">
                     <div class="container md-8 d-flex justify-content-between g-2" style="width: 90%;max-width: 800px; margin-bottom: 20px; padding: 0;">
-                        <button type="button"  class="btn btn-personal2" onclick="location.href='donacionMonetaria.html'">  Regresar   </button>
+                        <button type="button"  class="btn btn-personal2" onclick="location.href='TodosLosAlbergues'">  Regresar   </button>
 
                     </div>
                     <div class="container md-12" style="width: 90%;max-width: 800px; background-color: #fca6519f; border-radius: 30px; margin-bottom: 20px; padding: 10px 20px;">
-                        <h1 style="margin-top: 10px; color: #4d0e0e; font-style: italic" class="text-center" >Albergue Patitas Felices</h1>
+                        <h1 style="margin-top: 10px; color: #4d0e0e; font-style: italic" class="text-center" ><%=a.getNombreAlbergue()%></h1>
         
                         <hr>
                         <div class="row">
@@ -175,7 +182,7 @@
                                 <div class="row justify-content-center p-1">
                                     <div class="col d-flex justify-content-center">
                                         <div class="image-container">
-                                            <img src="/common/img/logos/albergueDefault.png" alt="Perfil de usuario">
+                                            <img src="${pageContext.request.contextPath}<%=a.getFoto().getRutaFoto()%>" alt="Perfil de usuario">
                                         </div>
                                     </div>
                                 </div>
@@ -185,19 +192,19 @@
                                 <div class="row justify-content-center p-2">
                                     <div class="col-md-6 p-2">
                                         <p class="card-text" style="text-align: left;"><strong>Fecha de Creación</strong> </p>
-                                        <p class="card-text" style="text-align: left;"> 16-08-2001 </p>
+                                        <p class="card-text" style="text-align: left;"><%=a.getAnioCreacion()%></p>
                                         <p class="card-text" style="text-align: left;"><strong>Distrito</strong> </p>
-                                        <p class="card-text" style="text-align: left;">Jesús María</p>
+                                        <p class="card-text" style="text-align: left;"><%=a.getDistrito().getNombreDistrito()%></p>
                                         <p class="card-text" style="text-align: left;"><strong>Direccion</strong> </p>
-                                        <p class="card-text" style="text-align: left;">Av. Cuba 2050</p>
+                                        <p class="card-text" style="text-align: left;"><%=a.getDireccion()%></p>
                                         
                                     </div>
                                     <div class="col-md-6 p-2">
                                         
                                         <p class="card-text" style="text-align: left;"><strong>Cantidad de Animales Albergados:</strong> </p>
-                                        <p class="card-text" style="text-align: left;">120</p>
+                                        <p class="card-text" style="text-align: left;"><%=a.getCantidadAnimales()%></p>
                                         <p class="card-text" style="text-align: left;"><strong>Capacidad para nuevos animales:</strong> </p>
-                                        <p class="card-text" style="text-align: left;">170</p>
+                                        <p class="card-text" style="text-align: left;"><%=a.getEspaciosDisponibles()%></p>
                                         
                                     </div>
                                 </div>
@@ -741,7 +748,7 @@
         </div>
     </div>
 
-        <script src="/common/script/neonavbar.js"></script>
+        <script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
         <script src="js/perfilAlbergue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script>

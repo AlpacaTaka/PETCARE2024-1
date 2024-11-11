@@ -13,7 +13,7 @@ public class AlbergueDao extends BaseDao {
     // Método para obtener todos los albergues
     public ArrayList<Albergue> listarAlbergues() {
         ArrayList<Albergue> listaAlbergues = new ArrayList<>();
-        String sql = "SELECT * FROM albergue";
+        String sql = "select * from albergue where estado='Aprobado';";
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
@@ -69,7 +69,7 @@ public class AlbergueDao extends BaseDao {
 
     // Método para obtener un albergue por ID
     public Albergue obtenerAlberguePorID(int albergueID) {
-        String sql = "SELECT * FROM albergue WHERE albergueID = ?";
+        String sql = "select * from albergue where albergueId=?;";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

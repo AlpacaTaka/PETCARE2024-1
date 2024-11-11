@@ -23,8 +23,8 @@ public class DistritoDao extends BaseDao {
             if (rs.next()) {
                 Distrito distrito = new Distrito();
 
-                distrito.setDistritoID(rs.getInt("zonaId"));
-                distrito.setNombreDistrito(rs.getString("nombreZona"));
+                distrito.setDistritoID(rs.getInt("distritoId"));
+                distrito.setNombreDistrito(rs.getString("nombreDistrito"));
 
                 ZonaDao zonaDao = new ZonaDao();
                 Zona zona;

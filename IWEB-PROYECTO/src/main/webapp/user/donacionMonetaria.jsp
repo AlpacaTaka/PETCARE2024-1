@@ -1,5 +1,11 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.iwebproyecto.beans.Albergue" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<jsp:useBean type="java.util.ArrayList<com.example.iwebproyecto.beans.Albergue>" scope="request" id="listaAlbergues" />
+<%
+
+    ArrayList<Albergue> listaAlbergues = (ArrayList) request.getAttribute("listaAlbergues");
+
+%>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -20,6 +26,20 @@
         input[type=number]::-webkit-outer-spin-button {
             -webkit-appearance: none;
             margin: 0;
+        }
+
+        .card-body{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card-img-top{
+            height: 250px;
+            background: cover;
+            object-fit: cover;
+        }
+        .card-text{
+            text-align: center;
         }
     </style>
 </head>
@@ -94,116 +114,33 @@
                     <div class="col-md-9" id="contenidoIzquierda">
                         <div class="container" id="Eventos">
                             <h1>Todos los Albergues</h1>
-                            <div class="container">
-                                <div class="row">
-                                  <div class="col">
-                                    
-                                    <div class="card .perdido" style="margin-top: 20px;">
-                                        <div class="card card-don">
-                                            <img src="/common/img/donaciones/donacion1.png" class="card-img-top card-img-don-movil" alt="...">
-                                            <div class="card-body">
-                                            <h5 class="card-title">Albergue "Patitas de amor"</h5>
-                                            <button onclick="location.href='perfilAlbergue.html'" class="btn btn-personal">Ver Albergue</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                  </div>
-                                  <div class="col">
-                                    <div class="card .perdido" style="margin-top: 20px;">
-                                        <div class="card card-don">
-                                            <img src="/common/img/donaciones/donacion4.jpg" class="card-img-top card-img-don-movil" alt="...">
-                                            <div class="card-body">
-                                            <h5 class="evento4">Albergue "Little ones"</h5>
-                                            <button onclick="location.href='perfilAlbergue.html'" class="btn btn-personal">Ver Albergue</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                  </div>
+                            <div class="row">
 
-                                  <div class="col">
-                                    <div class="card .perdido" style="margin-top: 20px;">
-                                        <div class="card card-don">
-                                            <img src="/common/img/donaciones/donacion2.png" class="card-img-top card-img-don" alt="...">
-                                            <div class="card-body">
-                                            <h5 class="card-title">Albergue "Little ones"</h5>
-                                            <button onclick="location.href='perfilAlbergue.html'" class="btn btn-personal">Ver Albergue</button>
+
+                                <%
+                                    int i = 1;
+                                    for (Albergue a : listaAlbergues) {
+                                %>
+
+                                <!-- Card 1 -->
+                                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                                    <div class="card h-100">
+                                        <img src="${pageContext.request.contextPath}/<%=a.getFoto().getRutaFoto()%>" class="card-img-top" alt="Card 1">
+                                        <div class="card-body">
+                                            <div class="row d-flex justify-content-center">
+                                                <h4 class="card-title text-center"><%=a.getNombreAlbergue()%></h4>
+
                                             </div>
-                                        </div>
-                                    </div>
-  
-                                  </div>  
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="card .perdido" style="margin-top: 20px;">
-                                            <div class="card card-don">
-                                                <img src="/common/img/donaciones/donacion5.jpg" class="card-img-top card-img-don" alt="...">
-                                                <div class="card-body">
-                                                <h5 class="card-title">Albergue "Little ones"</h5>
-                                                <button onclick="location.href='perfilAlbergue.html'" class="btn btn-personal">Ver Albergue</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card .perdido" style="margin-top: 20px;">
-                                            <div class="card card-don">
-                                                <img src="/common/img/donaciones/donacion7.png" class="card-img-top card-img-don" alt="...">
-                                                <div class="card-body">
-                                                <h5 class="card-title">Albergue "Purr Love"s</h5>
-                                                <button onclick="location.href='perfilAlbergue.html'" class="btn btn-personal">Ver Albergue</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card .perdido" style="margin-top: 20px;">
-                                            <div class="card card-don">
-                                                <img src="/common/img/donaciones/donacion6.jpg" class="card-img-top card-img-don" alt="...">
-                                                <div class="card-body">
-                                                <h5 class="card-title">Albergue "Patitas de amor"</h5>
-                                                <button onclick="location.href='perfilAlbergue.html'" class="btn btn-personal">Ver Albergue</button>
-                                                </div>
-                                            </div>
+
+                                            <a href="TodosLosAlbergues?action=vista&id=<%=a.getAlbergueID()%>" class="btn btn-personal">Ver Albergue</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="card .perdido" style="margin-top: 20px;">
-                                            <div class="card card-don">
-                                                <img src="/common/img/donaciones/donacion6.jpg" class="card-img-top card-img-don-movil" alt="...">
-                                                <div class="card-body">
-                                                <h5 class="evento4">Albergue "Little ones"</h5>
-                                                <button onclick="location.href='perfilAlbergue.html'" class="btn btn-personal">Ver Albergue</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card .perdido" style="margin-top: 20px;">
-                                            <div class="card card-don">
-                                                <img src="/common/img/donaciones/donacion9.png" class="card-img-top card-img-don" alt="...">
-                                                <div class="card-body">
-                                                <h5 class="card-title">Albergue "Purr Love"s</h5>
-                                                <button onclick="location.href='perfilAlbergue.html'" class="btn btn-personal">Ver Albergue</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card .perdido" style="margin-top: 20px;">
-                                            <div class="card card-don">
-                                                <img src="/common/img/donaciones/donacion8.png" class="card-img-top card-img-don" alt="...">
-                                                <div class="card-body">
-                                                <h5 class="card-title">Albergue "Little ones"</h5>
-                                                <button onclick="location.href='perfilAlbergue.html'" class="btn btn-personal">Ver Albergue</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+                                <%
+                                        i++;
+                                    }
+                                %>
                             </div>
                         </div>
                     </div>
