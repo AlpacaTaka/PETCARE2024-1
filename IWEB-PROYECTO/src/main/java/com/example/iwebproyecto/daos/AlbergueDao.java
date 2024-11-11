@@ -1,6 +1,10 @@
 package com.example.iwebproyecto.daos;
 
 import com.example.iwebproyecto.beans.Albergue;
+import com.example.iwebproyecto.beans.Distrito;
+import com.example.iwebproyecto.beans.Foto;
+import com.example.iwebproyecto.beans.Zona;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -46,7 +50,7 @@ public class AlbergueDao extends BaseDao {
             statement.setString(9, albergue.getUrlFacebook());
             statement.setString(10, albergue.getUrlInstagram());
             statement.setString(11, albergue.getDireccion());
-            statement.setInt(12, albergue.getDistritoID());
+            //statement.setInt(12, albergue.getDistritoID());
             statement.setString(13, albergue.getPuntoAcopioDonaciones());
             statement.setString(14, albergue.getNombreContactoDonaciones());
             statement.setString(15, albergue.getNumeroContactoDonaciones());
@@ -54,7 +58,7 @@ public class AlbergueDao extends BaseDao {
             statement.setString(17, albergue.getNumeroPlin());
             statement.setString(18, albergue.getCodigoQR());
             statement.setString(19, albergue.getEstado());
-            statement.setInt(20, albergue.getFotos_FotoID());
+            //statement.setInt(20, albergue.getFotos_FotoID());
             statement.setString(21, albergue.getMensaje());
 
             statement.executeUpdate();
@@ -97,7 +101,12 @@ public class AlbergueDao extends BaseDao {
         albergue.setUrlFacebook(rs.getString("urlFacebook"));
         albergue.setUrlInstagram(rs.getString("urlInstagram"));
         albergue.setDireccion(rs.getString("direccion"));
-        albergue.setDistritoID(rs.getInt("distritoID"));
+
+        DistritoDao distritoDao = new DistritoDao();
+        Distrito distrito= distritoDao.obtenerDistritoPorId(rs.getInt("distritoID"));
+        albergue.setDistrito(distrito);
+
+
         albergue.setPuntoAcopioDonaciones(rs.getString("puntoAcopioDonaciones"));
         albergue.setNombreContactoDonaciones(rs.getString("nombreContactoDonaciones"));
         albergue.setNumeroContactoDonaciones(rs.getString("numeroContactoDonaciones"));
@@ -105,7 +114,13 @@ public class AlbergueDao extends BaseDao {
         albergue.setNumeroPlin(rs.getString("numeroPlin"));
         albergue.setCodigoQR(rs.getString("codigoQR"));
         albergue.setEstado(rs.getString("estado"));
-        albergue.setFotos_FotoID(rs.getInt("fotos_fotoID"));
+
+
+        FotoDao fotoDao = new FotoDao();
+        Foto foto =fotoDao.obtenerFotoPorId(rs.getInt("fotos_fotoID"));
+        albergue.setFoto(foto);
+
+
         albergue.setMensaje(rs.getString("mensaje"));
         return albergue;
     }
@@ -131,7 +146,7 @@ public class AlbergueDao extends BaseDao {
             pstmt.setString(9, albergue.getUrlFacebook());
             pstmt.setString(10, albergue.getUrlInstagram());
             pstmt.setString(11, albergue.getDireccion());
-            pstmt.setInt(12, albergue.getDistritoID());
+            //pstmt.setInt(12, albergue.getDistritoID());
             pstmt.setString(13, albergue.getPuntoAcopioDonaciones());
             pstmt.setString(14, albergue.getNombreContactoDonaciones());
             pstmt.setString(15, albergue.getNumeroContactoDonaciones());
@@ -139,7 +154,7 @@ public class AlbergueDao extends BaseDao {
             pstmt.setString(17, albergue.getNumeroPlin());
             pstmt.setString(18, albergue.getCodigoQR());
             pstmt.setString(19, albergue.getEstado());
-            pstmt.setInt(20, albergue.getFotos_FotoID());
+            //pstmt.setInt(20, albergue.getFotos_FotoID());
             pstmt.setString(21, albergue.getMensaje());
             pstmt.setInt(22, albergue.getAlbergueID());
 
