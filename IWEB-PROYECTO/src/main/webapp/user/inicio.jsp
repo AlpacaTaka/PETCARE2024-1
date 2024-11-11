@@ -35,7 +35,7 @@
         <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
         <div class="barside">
             <ul class="navlinks">
-                <li><a href="/user/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
+                <li><a href="MiPerfilUsuario" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                 <li><a href="/user/allEventos.jsp" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
                 <li><a href="/user/postularTemporal.jsp" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
                 <li><a href="/user/solicitudesDonacionSuministros.jsp" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
@@ -49,7 +49,7 @@
         </div>
 
         <div id="menu" class="menu">
-            <a href="/user/miPerfil.jsp">Mi Perfil</a>
+            <a href="MiPerfilUsuario">Mi Perfil</a>
             <a href="/user/misEventos.jsp">Mis Eventos</a>
             <a href="/user/misDonaciones.jsp" id="Sep">Mis Donaciones</a>
             <hr>
@@ -930,7 +930,7 @@
     </div>
 </div>
 
-<script src="/common/script/neonavbar.js"></script>
+<script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 
