@@ -74,6 +74,7 @@ DEFAULT CHARACTER SET = utf8mb3;
 -- -----------------------------------------------------
 -- Table `basededatostele`.`albergue`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `basededatostele`.`albergue` (
   `albergueID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombreAlbergue` VARCHAR(80) NOT NULL,
