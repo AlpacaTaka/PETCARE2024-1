@@ -2,15 +2,17 @@ package com.example.iwebproyecto.beans;
 
 public class InscripcionEvento {
     private int inscripcionID;
-    private int usuarioID;
-    private int eventoID;
+
+    private Usuario usuario;
+    private EventoBenefico evento;
 
     public InscripcionEvento() {}
 
-    public InscripcionEvento(int inscripcionID, int usuarioID, int eventoID) {
+    public InscripcionEvento(int inscripcionID, Usuario usuario, EventoBenefico evento) {
         this.inscripcionID = inscripcionID;
-        this.usuarioID = usuarioID;
-        this.eventoID = eventoID;
+        this.usuario = usuario;
+        this.evento = evento;
+
     }
 
     public int getInscripcionID() {
@@ -21,19 +23,21 @@ public class InscripcionEvento {
         this.inscripcionID = inscripcionID;
     }
 
-    public int getUsuarioID() {
-        return usuarioID;
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioID(int usuarioID) {
-        this.usuarioID = usuarioID;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public int getEventoID() {
-        return eventoID;
+    public EventoBenefico getEvento() {
+        return evento;
     }
 
-    public void setEventoID(int eventoID) {
-        this.eventoID = eventoID;
+    public void setEvento(EventoBenefico evento) {
+        this.evento = evento;
+
     }
 }

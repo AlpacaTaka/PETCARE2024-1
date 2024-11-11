@@ -13,7 +13,9 @@ public class Albergue {
     private String urlFacebook;
     private String urlInstagram;
     private String direccion;
-    private int distritoID;
+
+    private Distrito distrito;
+
     private String puntoAcopioDonaciones;
     private String direccionDonaciones;
     private String nombreContactoDonaciones;
@@ -22,21 +24,21 @@ public class Albergue {
     private String numeroPlin;
     private String codigoQR;
     private String estado; /*Estado:'Aprobado', 'Desaprobado'*/
-    private int fotos_FotoID;
+
+    private Foto foto;
     private String mensaje;
-    private int flag;
+    private boolean flag;
+
 
     // Constructor vacío
     public Albergue() {
     }
 
     // Constructor con todos los campos
-    public Albergue(int albergueID, String nombreAlbergue, String nombreEncargado, String apellidoEncargado,
-                   int espaciosDisponibles, String anioCreacion, String correoElectronico, String contrasenia,
-                   int cantidadAnimales, String urlFacebook, String urlInstagram, String direccion,
-                   int distritoID, String puntoAcopioDonaciones, String direccionDonaciones,
-                   String nombreContactoDonaciones, String numeroContactoDonaciones,
-                   String numeroYape, String numeroPlin, String codigoQR, String estado, int fotos_FotoID, String mensaje, int flag) {
+
+
+    public Albergue(int albergueID, String nombreAlbergue, String nombreEncargado, String apellidoEncargado, int espaciosDisponibles, String anioCreacion, String correoElectronico, String contrasenia, int cantidadAnimales, String urlFacebook, String urlInstagram, String direccion, Distrito distrito, String puntoAcopioDonaciones, String direccionDonaciones, String nombreContactoDonaciones, String numeroContactoDonaciones, String numeroYape, String numeroPlin, String codigoQR, String estado, Foto foto, String mensaje, boolean flag) {
+
         this.albergueID = albergueID;
         this.nombreAlbergue = nombreAlbergue;
         this.nombreEncargado = nombreEncargado;
@@ -49,7 +51,9 @@ public class Albergue {
         this.urlFacebook = urlFacebook;
         this.urlInstagram = urlInstagram;
         this.direccion = direccion;
-        this.distritoID = distritoID;
+
+        this.distrito = distrito;
+
         this.puntoAcopioDonaciones = puntoAcopioDonaciones;
         this.direccionDonaciones = direccionDonaciones;
         this.nombreContactoDonaciones = nombreContactoDonaciones;
@@ -58,7 +62,9 @@ public class Albergue {
         this.numeroPlin = numeroPlin;
         this.codigoQR = codigoQR;
         this.estado = estado;
-        this.fotos_FotoID = fotos_FotoID;
+
+        this.foto = foto;
+
         this.mensaje = mensaje;
         this.flag = flag;
     }
@@ -161,13 +167,7 @@ public class Albergue {
         this.direccion = direccion;
     }
 
-    public int getDistritoID() {
-        return distritoID;
-    }
 
-    public void setDistritoID(int distritoID) {
-        this.distritoID = distritoID;
-    }
 
     public String getPuntoAcopioDonaciones() {
         return puntoAcopioDonaciones;
@@ -233,9 +233,6 @@ public class Albergue {
         this.estado = estado;
     }
 
-    public int getFotos_FotoID() {return fotos_FotoID;}
-
-    public void setFotos_FotoID(int fotos_FotoID) {this.fotos_FotoID = fotos_FotoID;}
 
     public String getMensaje() {
         return mensaje;
@@ -245,43 +242,32 @@ public class Albergue {
         this.mensaje = mensaje;
     }
 
-    public int getFlag() {
+
+    public boolean isFlag() {
         return flag;
     }
 
-    public void setFlag(int flag) {
+    public void setFlag(boolean flag) {
+
         this.flag = flag;
     }
 
 
-    // Metodo toString para facilitar la visualización del objeto
-    @Override
-    public String toString() {
-        return "Albergue{" +
-                "albergueID=" + albergueID +
-                ", nombreEncargado='" + nombreEncargado + '\'' +
-                ", apellidoEncargado='" + apellidoEncargado + '\'' +
-                ", espaciosDisponibles='" + espaciosDisponibles + '\'' +
-                ", anioCreacion='" + anioCreacion + '\'' +
-                ", correoElectronico='" + correoElectronico + '\'' +
-                ", contrasenia='" + contrasenia + '\'' +
-                ", cantidadAnimales" + cantidadAnimales +
-                ", urlFacebook='" + urlFacebook + '\'' +
-                ", urlInstagram='" + urlInstagram + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", distritoID=" + distritoID +
-                ", puntoAcopioDonaciones='" + puntoAcopioDonaciones + '\'' +
-                ", direccionDonaciones='" + direccionDonaciones + '\'' +
-                ", nombreContactoDonaciones='" + nombreContactoDonaciones + '\'' +
-                ", numeroContactoDonaciones='" + numeroContactoDonaciones + '\'' +
-                ", numeroYape='" + numeroYape + '\'' +
-                ", numeroPlin='" + numeroPlin + '\'' +
-                ", codigoQR='" + codigoQR + '\'' +
-                ", estado='" + estado + '\'' +
-                ", fotosFotoID=" + fotos_FotoID +
-                ", mensaje='" + mensaje + '\'' +
-                ", flag=" + flag +
-                '}';
+
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
+    }
+
+    public Distrito getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(Distrito distrito) {
+        this.distrito = distrito;
     }
 
 }

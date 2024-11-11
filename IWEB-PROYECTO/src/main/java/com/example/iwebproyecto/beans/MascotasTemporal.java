@@ -3,8 +3,10 @@ package com.example.iwebproyecto.beans;
 public class MascotasTemporal {
     private int idMascotaTemporal;
     private String estadoUsuario;
-    private int usuario_usuarioID;
-    private int albergue_albergueID;
+
+    private Usuario usuario;
+    private Albergue albergue;
+
     private String estado;
     private String raza;
     private String especie;
@@ -14,18 +16,19 @@ public class MascotasTemporal {
     private String sexo;
     private int poseeDiscapacidad;
     private int descripcionDiscapacidad;
-    private int fotos_FotoID;
+
+    private Foto foto;
+
     private String fecha;
 
     public MascotasTemporal() {}
 
-    public MascotasTemporal(int idMascotaTemporal, String estadoUsuario, int usuario_usuarioID, int albergue_albergueID,
-                            String estado, String raza, String especie, String tamanio, int peso , int edad, String sexo,
-                            int poseeDiscapacidad, int descripcionDiscapacidad, int fotos_FotoID, String fecha) {
+    public MascotasTemporal(int idMascotaTemporal, String estadoUsuario, Usuario usuario, Albergue albergue, String estado, String raza, String especie, String tamanio, int peso, int edad, String sexo, int poseeDiscapacidad, int descripcionDiscapacidad, Foto foto, String fecha) {
         this.idMascotaTemporal = idMascotaTemporal;
         this.estadoUsuario = estadoUsuario;
-        this.usuario_usuarioID = usuario_usuarioID;
-        this.albergue_albergueID = albergue_albergueID;
+        this.usuario = usuario;
+        this.albergue = albergue;
+
         this.estado = estado;
         this.raza = raza;
         this.especie = especie;
@@ -35,7 +38,9 @@ public class MascotasTemporal {
         this.sexo = sexo;
         this.poseeDiscapacidad = poseeDiscapacidad;
         this.descripcionDiscapacidad = descripcionDiscapacidad;
-        this.fotos_FotoID = fotos_FotoID;
+
+        this.foto = foto;
+
         this.fecha = fecha;
     }
 
@@ -55,21 +60,7 @@ public class MascotasTemporal {
         this.estadoUsuario = estadoUsuario;
     }
 
-    public int getUsuario_usuarioID() {
-        return usuario_usuarioID;
-    }
 
-    public void setUsuario_usuarioID(int usuario_usuarioID) {
-        this.usuario_usuarioID = usuario_usuarioID;
-    }
-
-    public int getAlbergue_albergueID() {
-        return albergue_albergueID;
-    }
-
-    public void setAlbergue_albergueID(int albergue_albergueID) {
-        this.albergue_albergueID = albergue_albergueID;
-    }
 
     public String getEstado() {
         return estado;
@@ -143,19 +134,36 @@ public class MascotasTemporal {
         this.descripcionDiscapacidad = descripcionDiscapacidad;
     }
 
-    public int getFotos_FotoID() {
-        return fotos_FotoID;
-    }
-
-    public void setFotos_FotoID(int fotos_FotoID) {
-        this.fotos_FotoID = fotos_FotoID;
-    }
-
     public String getFecha() {
         return fecha;
     }
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Albergue getAlbergue() {
+        return albergue;
+    }
+
+    public void setAlbergue(Albergue albergue) {
+        this.albergue = albergue;
+    }
+
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
+
     }
 }

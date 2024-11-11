@@ -6,40 +6,47 @@ public class EventoBenefico {
     private String fechaEvento;
     private String horaInicio;
     private String horaFin;
-    private int albergueID;
+
+    private Albergue albergue;
+
     private String tipoDonacion;
     private String descripcionEvento;
     private String invitados;
     private String razonEvento;
     private String estado;
-    private int lugarID;
+
+    private LugarEvento lugar;
     private int aforo;
     private int entradaMonetaria;
     private String entradaSuministro;
-    private int fotos_FotoID;
+    private Foto foto;
+
     private String fechaPublicacion;
 
     public EventoBenefico() {}
 
-    public EventoBenefico(int eventoAlbergueID, String nombre, String fechaEvento, String horaInicio, String horaFin,
-                          int albergueID, String tipoDonacion, String descripcionEvento, String invitados, String razonEvento,
-                          String estado, int lugarID, int aforo, int entradaMonetaria, String entradaSuministro, int fotos_FotoID, String fechaPublicacion){
+
+    public EventoBenefico(int eventoAlbergueID, String nombre, String fechaEvento, String horaInicio, String horaFin, Albergue albergue, String tipoDonacion, String descripcionEvento, String invitados, String razonEvento, String estado, LugarEvento lugar, int aforo, int entradaMonetaria, String entradaSuministro, Foto foto, String fechaPublicacion) {
+
         this.eventoAlbergueID = eventoAlbergueID;
         this.nombre = nombre;
         this.fechaEvento = fechaEvento;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
-        this.albergueID = albergueID;
+
+        this.albergue = albergue;
+
         this.tipoDonacion = tipoDonacion;
         this.descripcionEvento = descripcionEvento;
         this.invitados = invitados;
         this.razonEvento = razonEvento;
         this.estado = estado;
-        this.lugarID = lugarID;
+
+        this.lugar = lugar;
         this.aforo = aforo;
         this.entradaMonetaria = entradaMonetaria;
         this.entradaSuministro = entradaSuministro;
-        this.fotos_FotoID = fotos_FotoID;
+        this.foto = foto;
         this.fechaPublicacion = fechaPublicacion;
     }
 
@@ -84,13 +91,7 @@ public class EventoBenefico {
         this.horaFin = horaFin;
     }
 
-    public int getAlbergueID() {
-        return albergueID;
-    }
 
-    public void setAlbergueID(int albergueID) {
-        this.albergueID = albergueID;
-    }
 
     public String getTipoDonacion() {
         return tipoDonacion;
@@ -132,13 +133,7 @@ public class EventoBenefico {
         this.estado = estado;
     }
 
-    public int getLugarID() {
-        return lugarID;
-    }
 
-    public void setLugarID(int lugarID) {
-        this.lugarID = lugarID;
-    }
 
     public int getAforo() {
         return aforo;
@@ -164,13 +159,7 @@ public class EventoBenefico {
         this.entradaSuministro = entradaSuministro;
     }
 
-    public int getFotos_FotoID() {
-        return fotos_FotoID;
-    }
 
-    public void setFotos_FotoID(int fotos_FotoID) {
-        this.fotos_FotoID = fotos_FotoID;
-    }
 
     public String getFechaPublicacion() {
         return fechaPublicacion;
@@ -180,26 +169,29 @@ public class EventoBenefico {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    @Override
-    public String toString() {
-        return "EventoBeneficio{" +
-                "eventoAlbergueID=" + eventoAlbergueID + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", fechaEvento='" + fechaEvento + '\'' +
-                ", horaInicio='" + horaInicio + '\'' +
-                ", horaFin='" + horaFin + '\'' +
-                ", albergueID=" + albergueID + '\'' +
-                ", tipoDonacion='" + tipoDonacion + '\'' +
-                ", descripcionEvento='" + descripcionEvento + '\'' +
-                ", invitados='" + invitados + '\'' +
-                ", razonEvento='" + razonEvento + '\'' +
-                ", estado='" + estado + '\'' +
-                ", lugarID=" + lugarID + '\'' +
-                ", aforo=" + aforo + '\'' +
-                ", entradaMonetaria=" + entradaMonetaria + '\'' +
-                ", entradaSuministro='" + entradaSuministro + '\'' +
-                ", fotoID='" + fotos_FotoID + '\'' +
-                ", fechaPublicacion='" + fechaPublicacion +
-                '}';
+
+    public Albergue getAlbergue() {
+        return albergue;
+    }
+
+    public void setAlbergue(Albergue albergue) {
+        this.albergue = albergue;
+    }
+
+    public LugarEvento getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(LugarEvento lugar) {
+        this.lugar = lugar;
+    }
+
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
+
     }
 }

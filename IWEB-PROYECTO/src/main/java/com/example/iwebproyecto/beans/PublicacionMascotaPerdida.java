@@ -2,7 +2,9 @@ package com.example.iwebproyecto.beans;
 
 public class PublicacionMascotaPerdida {
     private int publicacionID;
-    private int usuarioID;
+
+    private Usuario usuario;
+
     private String descripcion;
     private String nombreContacto;
     private int edad;
@@ -15,7 +17,9 @@ public class PublicacionMascotaPerdida {
     private String telefonoContacto;
     private int recompensa;
     private String estado;/*'Pendiente', 'Aceptado', 'Rechazado'*/
-    private int fotos_FotoID;/*Fotos_fotoID*/
+
+    private Foto foto;/*Fotos_fotoID*/
+
     private String fechaPerdida;
     private String especie;
     private String fecha;
@@ -28,12 +32,12 @@ public class PublicacionMascotaPerdida {
     }
 
     // Constructor con todos los campos
-    public PublicacionMascotaPerdida(int publicacionID, int usuarioID, String descripcion, String nombreContacto,int edad, String raza,
-                                    String tamanio, String distintivo, String descripcionAdicional, String lugarPerdida, String horaPerdida,
-                                    String telefonoContacto, int recompensa, String estado, int fotos_FotoID, String fechaPerdida, String especie, String fecha,
-                                    String nombre, String estadoMascota, String comentario) {
+
+
+    public PublicacionMascotaPerdida(int publicacionID, Usuario usuario, String descripcion, String nombreContacto, int edad, String raza, String tamanio, String distintivo, String descripcionAdicional, String lugarPerdida, String horaPerdida, String telefonoContacto, int recompensa, String estado, Foto foto, String fechaPerdida, String especie, String fecha, String nombre, String estadoMascota, String comentario) {
         this.publicacionID = publicacionID;
-        this.usuarioID = usuarioID;
+        this.usuario = usuario;
+
         this.descripcion = descripcion;
         this.nombreContacto = nombreContacto;
         this.edad = edad;
@@ -46,7 +50,9 @@ public class PublicacionMascotaPerdida {
         this.telefonoContacto = telefonoContacto;
         this.recompensa = recompensa;
         this.estado = estado;
-        this.fotos_FotoID = fotos_FotoID;
+
+        this.foto = foto;
+
         this.fechaPerdida = fechaPerdida;
         this.especie = especie;
         this.fecha = fecha;
@@ -63,13 +69,6 @@ public class PublicacionMascotaPerdida {
         this.publicacionID = publicacionID;
     }
 
-    public int getUsuarioID() {
-        return usuarioID;
-    }
-
-    public void setUsuarioID(int usuarioID) {
-        this.usuarioID = usuarioID;
-    }
 
     public String getDescripcion() {
         return descripcion;
@@ -175,12 +174,6 @@ public class PublicacionMascotaPerdida {
         this.fechaPerdida = fechaPerdida;
     }
 
-    public int getFotos_FotoID() {
-        return fotos_FotoID;
-    }
-
-    public void setFotos_FotoID(int fotos_FotoID) {this.fotos_FotoID = fotos_FotoID;}
-
     public String getEspecie() {
         return especie;
     }
@@ -221,32 +214,22 @@ public class PublicacionMascotaPerdida {
         this.comentario = comentario;
     }
 
-    // Metodo toString para facilitar la visualización del objeto
-    @Override
-    public String toString() {
-        return "PublicacionMascotaPerdida{" +
-                "publicacionID=" + publicacionID +
-                ", usuarioID='" + usuarioID + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", nombreContacto='" + nombreContacto + '\'' +
-                ", edad='" + edad +'\'' +
-                ", raza='" + raza + '\'' +
-                ", tamanio='" + tamanio + '\'' +
-                ", distintivo='" + distintivo + '\'' +
-                ", descripcionAdicional='" + descripcionAdicional + '\'' +
-                ", lugarPerdida='" + lugarPerdida + '\'' +
-                ", horaPerdida='" + horaPerdida + '\'' +
-                ", telefonoContacto='" + telefonoContacto + '\'' +
-                ", recompensa='" + recompensa + '\'' +
-                ", estado='" + estado + '\'' +
-                ", fotoID=" + fotos_FotoID + '\'' +
-                ", fechaPerdida='" + fechaPerdida + '\'' +
-                ", especie='" + especie + '\'' +
-                ", fecha=" + fecha +
-                ", nombre='" + nombre + '\'' +
-                ", estadoMascota='" + estadoMascota + '\'' +
-                ", comentario='" + comentario +
-                '}';
+
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
     }
 
 }

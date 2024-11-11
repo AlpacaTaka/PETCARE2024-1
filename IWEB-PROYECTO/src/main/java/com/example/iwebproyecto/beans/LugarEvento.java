@@ -5,18 +5,22 @@ public class LugarEvento {
     private String nombreLugar;
     private String direccionLugar;
     private int aforoMax;
-    private int administradorID;
-    private int fotos_FotoID;
+
+    private Administrador administrador;
+    private Foto foto;
 
     public LugarEvento() {}
 
-    public LugarEvento(int lugarID, String nombreLugar, String direccionLugar, int aforoMax, int administradorID, int fotos_FotoID) {
+    public LugarEvento(int lugarID, String nombreLugar, String direccionLugar, int aforoMax, Administrador administrador, Foto foto) {
+
         this.lugarID = lugarID;
         this.nombreLugar = nombreLugar;
         this.direccionLugar = direccionLugar;
         this.aforoMax = aforoMax;
-        this.administradorID = administradorID;
-        this.fotos_FotoID = fotos_FotoID;
+
+        this.administrador = administrador;
+        this.foto = foto;
+
     }
 
     public int getLugarID() {
@@ -27,9 +31,9 @@ public class LugarEvento {
         this.lugarID = lugarID;
     }
 
-    public String getNombreLugar() {
-        return nombreLugar;
-    }
+
+    public String getNombreLugar() {return nombreLugar;}
+
 
     public void setNombreLugar(String nombreLugar) {
         this.nombreLugar = nombreLugar;
@@ -51,20 +55,22 @@ public class LugarEvento {
         this.aforoMax = aforoMax;
     }
 
-    public int getAdministradorID() {
-        return administradorID;
+
+
+    public Administrador getAdministrador() {
+        return administrador;
     }
 
-    public void setAdministradorID(int administradorID) {
-        this.administradorID = administradorID;
+    public void setAdministrador(Administrador administrador) {
+        this.administrador = administrador;
     }
 
-    public int getFotos_FotoID() {
-        return fotos_FotoID;
+    public Foto getFoto() {
+        return foto;
     }
 
-    public void setFotos_FotoID(int fotos_FotoID) {
-        this.fotos_FotoID = fotos_FotoID;
+    public void setFoto(Foto foto) {
+        this.foto = foto;
     }
 
 }

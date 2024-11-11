@@ -3,18 +3,20 @@ package com.example.iwebproyecto.beans;
 public class Comentarios {
     private int idComentarios;
     private String comentarios;
-    private int coordinadorZona_coordinadorID;
-    private int publicacionMascotaPerdida_PublicacionID;
+
+    private CoordinadorZona coordinadorZona;
+    private PublicacionMascotaPerdida publicacionMascotaPerdida;
+
     private String fecha;
 
     public Comentarios() {}
 
-    public Comentarios(int idComentarios, String comentarios, int coordinadorZona_coordinadorID,
-                       int publicacionMascotaPerdida_PublicacionID, String fecha) {
+    public Comentarios(int idComentarios, String comentarios, CoordinadorZona coordinadorZona, PublicacionMascotaPerdida publicacionMascotaPerdida, String fecha) {
         this.idComentarios = idComentarios;
         this.comentarios = comentarios;
-        this.coordinadorZona_coordinadorID = coordinadorZona_coordinadorID;
-        this.publicacionMascotaPerdida_PublicacionID = publicacionMascotaPerdida_PublicacionID;
+        this.coordinadorZona = coordinadorZona;
+        this.publicacionMascotaPerdida = publicacionMascotaPerdida;
+
         this.fecha = fecha;
     }
 
@@ -34,21 +36,7 @@ public class Comentarios {
         this.comentarios = comentarios;
     }
 
-    public int getCoordinadorZona_coordinadorID() {
-        return coordinadorZona_coordinadorID;
-    }
 
-    public void setCoordinadorZona_coordinadorID(int coordinadorZona_coordinadorID) {
-        this.coordinadorZona_coordinadorID = coordinadorZona_coordinadorID;
-    }
-
-    public int getPublicacionMascotaPerdida_PublicacionID() {
-        return publicacionMascotaPerdida_PublicacionID;
-    }
-
-    public void setPublicacionMascotaPerdida_PublicacionID(int publicacionMascotaPerdida_PublicacionID) {
-        this.publicacionMascotaPerdida_PublicacionID = publicacionMascotaPerdida_PublicacionID;
-    }
 
     public String getFecha() {
         return fecha;
@@ -56,6 +44,22 @@ public class Comentarios {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public CoordinadorZona getCoordinadorZona() {
+        return coordinadorZona;
+    }
+
+    public void setCoordinadorZona(CoordinadorZona coordinadorZona) {
+        this.coordinadorZona = coordinadorZona;
+    }
+
+    public PublicacionMascotaPerdida getPublicacionMascotaPerdida() {
+        return publicacionMascotaPerdida;
+    }
+
+    public void setPublicacionMascotaPerdida(PublicacionMascotaPerdida publicacionMascotaPerdida) {
+        this.publicacionMascotaPerdida = publicacionMascotaPerdida;
     }
 
 }

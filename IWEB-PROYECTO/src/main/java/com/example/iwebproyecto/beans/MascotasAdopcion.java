@@ -8,18 +8,23 @@ public class MascotasAdopcion {
     private int edadAprox;
     private int seEncuentraTemporal;
     private String condicionesAdopcion;
-    private int usuarioID;
-    private int albergueID;
+
+    private Usuario usuario;
+    private Albergue albergue;
     private String sexo;
-    private int fotos_FotoID;
+    private Foto foto;
+
     private String fecha;
 
     // Constructor vacio
     public MascotasAdopcion() {}
 
     // Constructor con todos los campos
-    public MascotasAdopcion(int idAdopcion, String raza, String lugarEncontrado, String descripcionGeneral, int edadAprox, int seEncuentraTemporal,
-                            String condicionesAdopcion, int usuarioID, int albergueID, String sexo, int fotos_FotoID, String fecha){
+
+
+
+    public MascotasAdopcion(int idAdopcion, String raza, String lugarEncontrado, String descripcionGeneral, int edadAprox, int seEncuentraTemporal, String condicionesAdopcion, Usuario usuario, Albergue albergue, String sexo, Foto foto, String fecha) {
+
         this.idAdopcion = idAdopcion;
         this.raza = raza;
         this.lugarEncontrado = lugarEncontrado;
@@ -27,10 +32,12 @@ public class MascotasAdopcion {
         this.edadAprox = edadAprox;
         this.seEncuentraTemporal = seEncuentraTemporal;
         this.condicionesAdopcion = condicionesAdopcion;
-        this.usuarioID = usuarioID;
-        this.albergueID = albergueID;
+
+        this.usuario = usuario;
+        this.albergue = albergue;
         this.sexo = sexo;
-        this.fotos_FotoID = fotos_FotoID;
+        this.foto = foto;
+
         this.fecha = fecha;
     }
 
@@ -90,21 +97,6 @@ public class MascotasAdopcion {
         this.condicionesAdopcion = condicionesAdopcion;
     }
 
-    public int getUsuarioID() {
-        return usuarioID;
-    }
-
-    public void setUsuarioID(int usuarioID) {
-        this.usuarioID = usuarioID;
-    }
-
-    public int getAlbergueID() {
-        return albergueID;
-    }
-
-    public void setAlbergueID(int albergueID) {
-        this.albergueID = albergueID;
-    }
 
     public String getSexo() {
         return sexo;
@@ -114,13 +106,6 @@ public class MascotasAdopcion {
         this.sexo = sexo;
     }
 
-    public int getFotos_FotoID() {
-        return fotos_FotoID;
-    }
-
-    public void setFotos_FotoID(int fotos_FotoID) {
-        this.fotos_FotoID = fotos_FotoID;
-    }
 
     public String getFecha() {
         return fecha;
@@ -130,21 +115,29 @@ public class MascotasAdopcion {
         this.fecha = fecha;
     }
 
-    @Override
-    public String toString() {
-        return "MascotasAdopcion{" +
-                "idAdopcion=" + idAdopcion+
-                ", raza='" + raza + '\'' +
-                ", lugarEncontrado='" + lugarEncontrado + '\'' +
-                ", descripcionGeneral='" + descripcionGeneral + '\'' +
-                ", edadAprox=" + edadAprox + '\'' +
-                ", seEncuentraTemporal=" + seEncuentraTemporal + '\'' +
-                ", condicionesAdopcion='" + condicionesAdopcion + '\'' +
-                ", usuarioID=" + usuarioID + '\'' +
-                ", albergueID=" + albergueID + '\'' +
-                ", sexo='" + sexo + '\'' +
-                ", fotoID=" + fotos_FotoID + '\'' +
-                ", fecha='" + fecha +
-                '}';
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Albergue getAlbergue() {
+        return albergue;
+    }
+
+    public void setAlbergue(Albergue albergue) {
+        this.albergue = albergue;
+    }
+
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
+
     }
 }

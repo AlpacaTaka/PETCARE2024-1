@@ -3,27 +3,28 @@ package com.example.iwebproyecto.beans;
 public class DonacionMonetaria {
     private int donacionMonetariaID;
     private int usuarioID;
-    private int albergueID;
-    private String tipoDonacion;/*Monetaria*/
+
+    private Albergue albergue;
+
     private int cantidadMonetaria;
     private String fechaRecepcion;
     private String horaRecepcion;
     private String fecha;
-    private int fotos_FotoID;
+
+    private Foto foto;
 
     public DonacionMonetaria() {}
 
-    public DonacionMonetaria(int donacionMonetariaID, int usuarioID, int albergueID, String tipoDonacion,
-                             String cantidadMonetaria, String fechaRecepcion, String horaRecepcion, String fecha, int fotos_FotoID) {
+    public DonacionMonetaria(int donacionMonetariaID, int usuarioID, Albergue albergue, int cantidadMonetaria, String fechaRecepcion, String horaRecepcion, String fecha, Foto foto) {
         this.donacionMonetariaID = donacionMonetariaID;
         this.usuarioID = usuarioID;
-        this.albergueID = albergueID;
-        this.tipoDonacion = tipoDonacion;
-        this.cantidadMonetaria = Integer.parseInt(cantidadMonetaria);
+        this.albergue = albergue;
+        this.cantidadMonetaria = cantidadMonetaria;
         this.fechaRecepcion = fechaRecepcion;
         this.horaRecepcion = horaRecepcion;
         this.fecha = fecha;
-        this.fotos_FotoID = fotos_FotoID;
+        this.foto = foto;
+
     }
 
     public int getDonacionMonetariaID() {
@@ -42,13 +43,7 @@ public class DonacionMonetaria {
         this.usuarioID = usuarioID;
     }
 
-    public int getAlbergueID() {
-        return albergueID;
-    }
 
-    public void setAlbergueID(int albergueID) {
-        this.albergueID = albergueID;
-    }
 
     public int getCantidadMonetaria() {
         return cantidadMonetaria;
@@ -58,13 +53,7 @@ public class DonacionMonetaria {
         this.cantidadMonetaria = cantidadMonetaria;
     }
 
-    public String getTipoDonacion() {
-        return tipoDonacion;
-    }
 
-    public void setTipoDonacion(String tipoDonacion) {
-        this.tipoDonacion = tipoDonacion;
-    }
 
     public String getFechaRecepcion() {
         return fechaRecepcion;
@@ -90,13 +79,21 @@ public class DonacionMonetaria {
         this.horaRecepcion = horaRecepcion;
     }
 
-    public int getFotos_FotoID() {
-        return fotos_FotoID;
+
+    public Albergue getAlbergue() {
+        return albergue;
     }
 
-    public void setFotos_FotoID(int fotos_FotoID) {
-        this.fotos_FotoID = fotos_FotoID;
+    public void setAlbergue(Albergue albergue) {
+        this.albergue = albergue;
     }
 
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
+    }
 
 }

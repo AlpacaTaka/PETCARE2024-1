@@ -2,29 +2,21 @@ package com.example.iwebproyecto.beans;
 
 public class DonacionSuministros {
     private int donacionSuministrosID;
-    private int usuarioID;
-    private int albergueID;
+
+    private Usuario usuario;
+    private Albergue albergue;
+
     private String fechaRecepcion;
     private String nombreSuministro;
     private String marcaSuministro;
     private String horaRecepcion;
     private String fecha;
-    private int fotos_FotoID;
+
+    private Foto foto;
 
     public DonacionSuministros() {}
 
-    public DonacionSuministros(int donacionSuministrosID, int usuarioID, int albergueID, String fechaRecepcion,
-                               String nombreSuministro, String marcaSuministro, String horaRecepcion, String fecha, int fotos_FotoID){
-        this.donacionSuministrosID = donacionSuministrosID;
-        this.usuarioID = usuarioID;
-        this.albergueID = albergueID;
-        this.fechaRecepcion = fechaRecepcion;
-        this.nombreSuministro = nombreSuministro;
-        this.marcaSuministro = marcaSuministro;
-        this.horaRecepcion = horaRecepcion;
-        this.fecha = fecha;
-        this.fotos_FotoID = fotos_FotoID;
-    }
+
 
     public int getDonacionSuministrosID() {
         return donacionSuministrosID;
@@ -34,20 +26,18 @@ public class DonacionSuministros {
         this.donacionSuministrosID = donacionSuministrosID;
     }
 
-    public int getUsuarioID() {
-        return usuarioID;
-    }
 
-    public void setUsuarioID(int usuarioID) {
-        this.usuarioID = usuarioID;
-    }
+    public DonacionSuministros(int donacionSuministrosID, Usuario usuario, Albergue albergue, String fechaRecepcion, String nombreSuministro, String marcaSuministro, String horaRecepcion, String fecha, Foto foto) {
+        this.donacionSuministrosID = donacionSuministrosID;
+        this.usuario = usuario;
+        this.albergue = albergue;
+        this.fechaRecepcion = fechaRecepcion;
+        this.nombreSuministro = nombreSuministro;
+        this.marcaSuministro = marcaSuministro;
+        this.horaRecepcion = horaRecepcion;
+        this.fecha = fecha;
+        this.foto = foto;
 
-    public int getAlbergueID() {
-        return albergueID;
-    }
-
-    public void setAlbergueID(int albergueID) {
-        this.albergueID = albergueID;
     }
 
     public String getFechaRecepcion() {
@@ -90,11 +80,28 @@ public class DonacionSuministros {
         this.fecha = fecha;
     }
 
-    public int getFotos_FotoID() {
-        return fotos_FotoID;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setFotos_FotoID(int fotos_FotoID) {
-        this.fotos_FotoID = fotos_FotoID;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Albergue getAlbergue() {
+        return albergue;
+    }
+
+    public void setAlbergue(Albergue albergue) {
+        this.albergue = albergue;
+    }
+
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
+
     }
 }

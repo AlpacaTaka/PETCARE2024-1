@@ -3,14 +3,16 @@ package com.example.iwebproyecto.beans;
 public class Distrito {
     private int distritoID;
     private String nombreDistrito;
-    private int zonaID;
+
+    private Zona zona;
 
     public Distrito() {}
 
-    public Distrito(int distritoID, String nombreDistrito, int zonaID) {
+    public Distrito(int distritoID, String nombreDistrito, Zona zona) {
         this.distritoID = distritoID;
         this.nombreDistrito = nombreDistrito;
-        this.zonaID = zonaID;
+        this.zona = zona;
+
     }
 
     public int getDistritoID() {
@@ -29,11 +31,13 @@ public class Distrito {
         this.nombreDistrito = nombreDistrito;
     }
 
-    public int getZonaID() {
-        return zonaID;
+
+    public Zona getZona() {
+        return zona;
     }
 
-    public void setZonaID(int zonaID) {
-        this.zonaID = zonaID;
+    public void setZona(Zona zona) {
+        this.zona = zona;
+
     }
 }

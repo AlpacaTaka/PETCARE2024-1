@@ -2,7 +2,9 @@ package com.example.iwebproyecto.beans;
 
 public class DenunciaMaltrato {
     private int denunciaID;
-    private int usuarioID;
+
+    private Usuario usuario;
+
     private String tamanio;
     private String raza;
     private String tipoMaltrato;
@@ -11,17 +13,20 @@ public class DenunciaMaltrato {
     private int realizoDenuncia;
     private String especie;
     private String fecha;
-    private int fotos_FotoID;
+
+    private Foto foto;
 
     // Constructor vacío
     public DenunciaMaltrato() {}
 
     // Constructor con todos los campos
-    public DenunciaMaltrato(int denunciaID, int usuarioID, String tamanio, String raza, String tipoMaltrato,
-                            String nombreApellidoMaltratador, String direccion, int realizoDenuncia, String especie,
-                            String fecha, int fotos_FotoID){
+
+
+
+    public DenunciaMaltrato(int denunciaID, Usuario usuario, String tamanio, String raza, String tipoMaltrato, String nombreApellidoMaltratador, String direccion, int realizoDenuncia, String especie, String fecha, Foto foto) {
         this.denunciaID = denunciaID;
-        this.usuarioID = usuarioID;
+        this.usuario = usuario;
+
         this.tamanio = tamanio;
         this.raza = raza;
         this.tipoMaltrato = tipoMaltrato;
@@ -30,7 +35,8 @@ public class DenunciaMaltrato {
         this.realizoDenuncia = realizoDenuncia;
         this.especie = especie;
         this.fecha = fecha;
-        this.fotos_FotoID = fotos_FotoID;
+
+        this.foto = foto;
     }
 
 
@@ -51,13 +57,7 @@ public class DenunciaMaltrato {
         this.tamanio = tamanio;
     }
 
-    public int getUsuarioID() {
-        return usuarioID;
-    }
 
-    public void setUsuarioID(int usuarioID) {
-        this.usuarioID = usuarioID;
-    }
 
     public String getRaza() {
         return raza;
@@ -115,29 +115,21 @@ public class DenunciaMaltrato {
         this.fecha = fecha;
     }
 
-    public int getFotos_FotoID() {
-        return fotos_FotoID;
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setFotos_FotoID(int fotos_FotoID) {
-        this.fotos_FotoID = fotos_FotoID;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    @Override
-    public String toString() {
-        return "DenunciaMaltrato{" +
-                "denunciaID=" + denunciaID+
-                ", usuarioID='" + usuarioID + '\'' +
-                ", tamanio='" + tamanio + '\'' +
-                ", raza='" + raza + '\'' +
-                ", tipoMaltrato='" + tipoMaltrato + '\'' +
-                ", nombreApellidoMaltratador='" + nombreApellidoMaltratador + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", realizoDenuncia=" + realizoDenuncia + '\'' +
-                ", especie='" + especie + '\'' +
-                ", fecha='" + fecha + '\'' +
-                ", fotos_FotoID=" + fotos_FotoID +
-                '}';
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
     }
 
 }

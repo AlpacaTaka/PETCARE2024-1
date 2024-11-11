@@ -2,7 +2,9 @@ package com.example.iwebproyecto.beans;
 
 public class SolicitudTemporal {
     private int solicitudID;
-    private int usuarioID;
+
+    private Usuario usuario;
+
     private int edad;
     private String genero;
     private String celular;
@@ -20,7 +22,9 @@ public class SolicitudTemporal {
     private String inicioTemporal;
     private String finTemporal;
     private String estado;
-    private int fotos_FotoID;
+
+    private Foto foto;
+
     private String fecha;
     private String estadoTemporal;
     private String comentario;
@@ -28,12 +32,11 @@ public class SolicitudTemporal {
 
     public SolicitudTemporal() {}
 
-    public SolicitudTemporal(int solicitudID, int usuarioID, int edad, String genero, String celular, int cantidadCuartos, int metrajeVivienda,
-                            int tieneMascotas, int cantidadMascota, String tipoMascota, int tieneHijos, int viveSolo, int trabajaRemoto, String nombrePersonaReferencia,
-                            String numeroContactoPR, int tiempoTemporal, String inicioTemporal, String finTemporal, String estado, int fotos_FotoID, String fecha,
-                            String estadoTemporal, String comentario, int numeroRechazos){
+
+    public SolicitudTemporal(int solicitudID, Usuario usuario, int edad, String genero, String celular, int cantidadCuartos, int metrajeVivienda, int tieneMascotas, int cantidadMascota, String tipoMascota, int tieneHijos, int viveSolo, int trabajaRemoto, String nombrePersonaReferencia, String numeroContactoPR, int tiempoTemporal, String inicioTemporal, String finTemporal, String estado, Foto foto, String fecha, String estadoTemporal, String comentario, int numeroRechazos) {
         this.solicitudID = solicitudID;
-        this.usuarioID = usuarioID;
+        this.usuario = usuario;
+
         this.edad = edad;
         this.genero = genero;
         this.celular = celular;
@@ -51,7 +54,9 @@ public class SolicitudTemporal {
         this.inicioTemporal = inicioTemporal;
         this.finTemporal = finTemporal;
         this.estado = estado;
-        this.fotos_FotoID = fotos_FotoID;
+
+        this.foto = foto;
+
         this.fecha = fecha;
         this.estadoTemporal = estadoTemporal;
         this.comentario = comentario;
@@ -66,13 +71,6 @@ public class SolicitudTemporal {
         this.solicitudID = solicitudID;
     }
 
-    public int getUsuarioID() {
-        return usuarioID;
-    }
-
-    public void setUsuarioID(int usuarioID) {
-        this.usuarioID = usuarioID;
-    }
 
     public int getEdad() {
         return edad;
@@ -210,13 +208,7 @@ public class SolicitudTemporal {
         this.estado = estado;
     }
 
-    public int getFotos_FotoID() {
-        return fotos_FotoID;
-    }
 
-    public void setFotos_FotoID(int fotos_FotoID) {
-        this.fotos_FotoID = fotos_FotoID;
-    }
 
     public String getFecha() {
         return fecha;
@@ -249,4 +241,22 @@ public class SolicitudTemporal {
     public void setNumeroRechazos(int numeroRechazos) {
         this.numeroRechazos = numeroRechazos;
     }
+
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
+    }
+
 }

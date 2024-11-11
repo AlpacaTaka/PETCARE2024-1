@@ -9,17 +9,13 @@ public class Usuario {
     private String correoElectronico;
     private String contrasenia;
     private String estado;
-    private int distritoID;
-    private int fotos_FotoID;
-    private int flag;/*Temporal*/
 
-    // Constructor vacío
-    public Usuario() {
-    }
+    private Distrito distrito;
+    private Foto foto;
+    private boolean flag;
 
-    // Constructor con todos los campos
-    public Usuario(int usuarioID, String nombre, String apellido, String dni, String direccion, String correoElectronico,
-                   String contrasenia, String estado, int distritoID, int fotos_FotoID, int flag) {
+    public Usuario(int usuarioID, String nombre, String apellido, String dni, String direccion, String correoElectronico, String contrasenia, String estado, Distrito distrito, Foto foto, boolean flag) {
+
         this.usuarioID = usuarioID;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -28,14 +24,17 @@ public class Usuario {
         this.correoElectronico = correoElectronico;
         this.contrasenia = contrasenia;
         this.estado = estado;
-        this.distritoID = distritoID;
-        this.fotos_FotoID = fotos_FotoID;
+
+        this.distrito = distrito;
+        this.foto = foto;
         this.flag = flag;
     }
 
+    public Usuario() {
+
+    }
 
 
-    // Getters y Setters para cada campo
     public int getUsuarioID() {
         return usuarioID;
     }
@@ -100,45 +99,31 @@ public class Usuario {
         this.estado = estado;
     }
 
-    public int getDistritoID() {
-        return distritoID;
-    }
-
-    public void setDistritoID(int distritoID) {
-        this.distritoID = distritoID;
-    }
-
-    public int getFotos_FotoID() {
-        return fotos_FotoID;
-    }
-
-    public void setFotos_FotoID(int fotos_FotoID) {
-        this.fotos_FotoID = fotos_FotoID;
-    }
-
-    public int getFlag() {
+    public boolean isFlag() {
         return flag;
     }
 
-    public void setFlag(int flag) {
+
+    public void setFlag(boolean flag) {
         this.flag = flag;
     }
 
-    // Metodo toString para facilitar la visualización del objeto
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "usuarioID=" + usuarioID + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", dni='" + dni + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", correoElectronico='" + correoElectronico + '\'' +
-                ", contrasenia='" + contrasenia + '\'' +
-                ", estado='" + estado + '\'' +
-                ", distritoID=" + distritoID + '\'' +
-                ", fotos_FotoID=" + fotos_FotoID + '\'' +
-                ", flag=" + flag +
-                '}';
+    public Distrito getDistrito() {
+        return distrito;
+
+    }
+
+    public void setDistrito(Distrito distrito) {
+        this.distrito = distrito;
+    }
+
+    public Foto getFoto() {
+        return foto;
+    }
+
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
+
     }
 }

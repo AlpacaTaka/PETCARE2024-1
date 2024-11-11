@@ -7,16 +7,18 @@ public class CoordinadorZona {
     private String dni;
     private String contrasenia;
     private String correoElectronico;
-    private int celular; /***Es un String cambiar la base de datos***/
+
+    private String celular; /***Es un String cambiar la base de datos***/
     private String fechaNacimiento;
-    private int fotos_fotoID;
+    private Foto foto;
     private String estado;
-    private int zona_zonaID;
-    private int flag;
+    private Zona zona;
+    private boolean flag;
 
     public CoordinadorZona() {}
 
-    public CoordinadorZona(int coordinadorID, String nombre, String apellido, String dni, String contrasenia, String correoElectronico, int celular, String fechaNacimiento, int fotos_fotoID, String estado, int zona_zonaID, int flag) {
+    public CoordinadorZona(int coordinadorID, String nombre, String apellido, String dni, String contrasenia, String correoElectronico, String celular, String fechaNacimiento, Foto foto, String estado, Zona zona, boolean flag) {
+
         this.coordinadorID = coordinadorID;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -25,9 +27,11 @@ public class CoordinadorZona {
         this.correoElectronico = correoElectronico;
         this.celular = celular;
         this.fechaNacimiento = fechaNacimiento;
-        this.fotos_fotoID = fotos_fotoID;
+
+        this.foto = foto;
         this.estado = estado;
-        this.zona_zonaID = zona_zonaID;
+        this.zona = zona;
+
         this.flag = flag;
     }
 
@@ -79,11 +83,13 @@ public class CoordinadorZona {
         this.correoElectronico = correoElectronico;
     }
 
-    public int getCelular() {
+
+    public String getCelular() {
         return celular;
     }
 
-    public void setCelular(int celular) {
+    public void setCelular(String celular) {
+
         this.celular = celular;
     }
 
@@ -95,13 +101,7 @@ public class CoordinadorZona {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public int getFotos_fotoID() {
-        return fotos_fotoID;
-    }
 
-    public void setFotos_fotoID(int fotos_fotoID) {
-        this.fotos_fotoID = fotos_fotoID;
-    }
 
     public String getEstado() {
         return estado;
@@ -111,19 +111,29 @@ public class CoordinadorZona {
         this.estado = estado;
     }
 
-    public int getZona_zonaID() {
-        return zona_zonaID;
+
+    public Foto getFoto() {
+        return foto;
     }
 
-    public void setZona_zonaID(int zona_zonaID) {
-        this.zona_zonaID = zona_zonaID;
+    public void setFoto(Foto foto) {
+        this.foto = foto;
     }
 
-    public int getFlag() {
+    public Zona getZona() {
+        return zona;
+    }
+
+    public void setZona(Zona zona) {
+        this.zona = zona;
+    }
+
+    public boolean isFlag() {
         return flag;
     }
 
-    public void setFlag(int flag) {
+    public void setFlag(boolean flag) {
+
         this.flag = flag;
     }
 }
