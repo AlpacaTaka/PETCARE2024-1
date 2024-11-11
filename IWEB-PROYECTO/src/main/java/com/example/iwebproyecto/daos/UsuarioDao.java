@@ -1,12 +1,15 @@
 package com.example.iwebproyecto.daos;
 
+import com.example.iwebproyecto.beans.Distrito;
+import com.example.iwebproyecto.beans.Foto;
+import com.example.iwebproyecto.beans.Fotos;
 import com.example.iwebproyecto.beans.Usuario;
 import java.sql.*;
 import java.util.ArrayList;
 
 
 public class UsuarioDao extends BaseDao {
-
+/*
     // Metodo para obtener todos los usuarios
     public ArrayList<Usuario> listarUsuarios(){
         ArrayList<Usuario> listaUsuarios = new ArrayList<>();
@@ -28,8 +31,11 @@ public class UsuarioDao extends BaseDao {
         return listaUsuarios;
     }
 
+
+ */
+
     //Metodo para insertar un nuevo usuario
-    public void insertarUsuario(Usuario usuario){
+    /*public void insertarUsuario(Usuario usuario){
 
         try (Connection conn = this.getConnection();
              PreparedStatement statement = conn.prepareStatement("INSERT INTO usuario (nombre, apellido, dni, direccion, correoelectronico, contrasenia, estado, distritoID, fotos_fotoID, flag) " +
@@ -48,13 +54,17 @@ public class UsuarioDao extends BaseDao {
             e.printStackTrace();
         }
     }
-
+*/
 
 
     //Metodo para obtener un usuario por ID
     public Usuario obtenerUsuarioPorID(int usuarioID) throws SQLException {
         try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM usuario WHERE usuarioID = ?")) {
+             PreparedStatement pstmt = conn.prepareStatement("SELECT u.*, f.rutaFoto, d.nombreDistrito " +
+                     "FROM usuario u " +
+                     "INNER JOIN fotos f ON u.Fotos_fotoId = f.fotoId " +
+                     "INNER JOIN distrito d ON u.distritoId = d.distritoId " +
+                     "WHERE u.usuarioID = ?")) {
 
             pstmt.setInt(1, usuarioID);
 
@@ -77,12 +87,24 @@ public class UsuarioDao extends BaseDao {
         usuario.setCorreoElectronico(resultSet.getString("correoelectronico"));
         usuario.setContrasenia(resultSet.getString("contrasenia"));
         usuario.setEstado(resultSet.getString("estado"));
-        usuario.setDistritoID(resultSet.getInt("distritoID"));
-        usuario.setFotos_FotoID(resultSet.getInt("fotos_fotoID"));
-        usuario.setFlag(resultSet.getInt("flag"));
+
+        Foto foto = new Foto();
+        Distrito distrito= new Distrito();
+
+        foto.setFotoID(resultSet.getInt("fotos_FotoID"));
+        foto.setRutaFoto(resultSet.getString("rutaFoto"));
+        usuario.setFoto(foto);
+
+        distrito.setDistritoID(resultSet.getInt("distritoId"));
+        distrito.setNombreDistrito(resultSet.getString("nombreDistrito"));
+        usuario.setDistrito(distrito);
+
+
         return usuario;
     }
 
+
+/*
     // Metodo para actualizar un usuario
     public void actualizarUsuario(Usuario usuario) throws SQLException {
         String sql = "UPDATE usuario SET nombre = ?, apellido = ?, dni = ?, direccion = ?, correoelectronico = ?, contrasenia = ?, " +
@@ -111,6 +133,6 @@ public class UsuarioDao extends BaseDao {
             pstmt.setInt(1, usuarioID);
             pstmt.executeUpdate();
         }
-    }
+        */
 
-}
+    }
