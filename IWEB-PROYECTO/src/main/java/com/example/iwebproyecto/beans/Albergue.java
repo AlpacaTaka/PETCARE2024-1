@@ -13,7 +13,9 @@ public class Albergue {
     private String urlFacebook;
     private String urlInstagram;
     private String direccion;
+
     private Distrito distrito;
+
     private String puntoAcopioDonaciones;
     private String direccionDonaciones;
     private String nombreContactoDonaciones;
@@ -22,9 +24,11 @@ public class Albergue {
     private String numeroPlin;
     private String codigoQR;
     private String estado; /*Estado:'Aprobado', 'Desaprobado'*/
+
     private Foto foto;
     private String mensaje;
     private boolean flag;
+
 
     // Constructor vacío
     public Albergue() {
@@ -32,7 +36,9 @@ public class Albergue {
 
     // Constructor con todos los campos
 
+
     public Albergue(int albergueID, String nombreAlbergue, String nombreEncargado, String apellidoEncargado, int espaciosDisponibles, String anioCreacion, String correoElectronico, String contrasenia, int cantidadAnimales, String urlFacebook, String urlInstagram, String direccion, Distrito distrito, String puntoAcopioDonaciones, String direccionDonaciones, String nombreContactoDonaciones, String numeroContactoDonaciones, String numeroYape, String numeroPlin, String codigoQR, String estado, Foto foto, String mensaje, boolean flag) {
+
         this.albergueID = albergueID;
         this.nombreAlbergue = nombreAlbergue;
         this.nombreEncargado = nombreEncargado;
@@ -45,7 +51,9 @@ public class Albergue {
         this.urlFacebook = urlFacebook;
         this.urlInstagram = urlInstagram;
         this.direccion = direccion;
+
         this.distrito = distrito;
+
         this.puntoAcopioDonaciones = puntoAcopioDonaciones;
         this.direccionDonaciones = direccionDonaciones;
         this.nombreContactoDonaciones = nombreContactoDonaciones;
@@ -54,11 +62,12 @@ public class Albergue {
         this.numeroPlin = numeroPlin;
         this.codigoQR = codigoQR;
         this.estado = estado;
+
         this.foto = foto;
+
         this.mensaje = mensaje;
         this.flag = flag;
     }
-
 
     // Getters y Setters para cada campo
 
@@ -159,6 +168,7 @@ public class Albergue {
     }
 
 
+
     public String getPuntoAcopioDonaciones() {
         return puntoAcopioDonaciones;
     }
@@ -232,13 +242,16 @@ public class Albergue {
         this.mensaje = mensaje;
     }
 
+
     public boolean isFlag() {
         return flag;
     }
 
     public void setFlag(boolean flag) {
+
         this.flag = flag;
     }
+
 
 
     public Foto getFoto() {
@@ -256,4 +269,5 @@ public class Albergue {
     public void setDistrito(Distrito distrito) {
         this.distrito = distrito;
     }
+
 }

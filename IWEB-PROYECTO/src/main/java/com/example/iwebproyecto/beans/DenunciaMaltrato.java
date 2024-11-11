@@ -2,7 +2,9 @@ package com.example.iwebproyecto.beans;
 
 public class DenunciaMaltrato {
     private int denunciaID;
+
     private Usuario usuario;
+
     private String tamanio;
     private String raza;
     private String tipoMaltrato;
@@ -11,6 +13,7 @@ public class DenunciaMaltrato {
     private int realizoDenuncia;
     private String especie;
     private String fecha;
+
     private Foto foto;
 
     // Constructor vacío
@@ -19,9 +22,11 @@ public class DenunciaMaltrato {
     // Constructor con todos los campos
 
 
+
     public DenunciaMaltrato(int denunciaID, Usuario usuario, String tamanio, String raza, String tipoMaltrato, String nombreApellidoMaltratador, String direccion, int realizoDenuncia, String especie, String fecha, Foto foto) {
         this.denunciaID = denunciaID;
         this.usuario = usuario;
+
         this.tamanio = tamanio;
         this.raza = raza;
         this.tipoMaltrato = tipoMaltrato;
@@ -30,8 +35,10 @@ public class DenunciaMaltrato {
         this.realizoDenuncia = realizoDenuncia;
         this.especie = especie;
         this.fecha = fecha;
+
         this.foto = foto;
     }
+
 
     //Getter and Setter
     public int getDenunciaID() {
@@ -124,4 +131,5 @@ public class DenunciaMaltrato {
     public void setFoto(Foto foto) {
         this.foto = foto;
     }
+
 }

@@ -6,33 +6,42 @@ public class EventoBenefico {
     private String fechaEvento;
     private String horaInicio;
     private String horaFin;
+
     private Albergue albergue;
+
     private String tipoDonacion;
     private String descripcionEvento;
     private String invitados;
     private String razonEvento;
     private String estado;
+
     private LugarEvento lugar;
     private int aforo;
     private int entradaMonetaria;
     private String entradaSuministro;
     private Foto foto;
+
     private String fechaPublicacion;
 
     public EventoBenefico() {}
 
+
     public EventoBenefico(int eventoAlbergueID, String nombre, String fechaEvento, String horaInicio, String horaFin, Albergue albergue, String tipoDonacion, String descripcionEvento, String invitados, String razonEvento, String estado, LugarEvento lugar, int aforo, int entradaMonetaria, String entradaSuministro, Foto foto, String fechaPublicacion) {
+
         this.eventoAlbergueID = eventoAlbergueID;
         this.nombre = nombre;
         this.fechaEvento = fechaEvento;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
+
         this.albergue = albergue;
+
         this.tipoDonacion = tipoDonacion;
         this.descripcionEvento = descripcionEvento;
         this.invitados = invitados;
         this.razonEvento = razonEvento;
         this.estado = estado;
+
         this.lugar = lugar;
         this.aforo = aforo;
         this.entradaMonetaria = entradaMonetaria;
@@ -40,6 +49,7 @@ public class EventoBenefico {
         this.foto = foto;
         this.fechaPublicacion = fechaPublicacion;
     }
+
 
     public int getEventoAlbergueID() {
         return eventoAlbergueID;
@@ -80,6 +90,7 @@ public class EventoBenefico {
     public void setHoraFin(String horaFin) {
         this.horaFin = horaFin;
     }
+
 
 
     public String getTipoDonacion() {
@@ -123,6 +134,7 @@ public class EventoBenefico {
     }
 
 
+
     public int getAforo() {
         return aforo;
     }
@@ -146,6 +158,7 @@ public class EventoBenefico {
     public void setEntradaSuministro(String entradaSuministro) {
         this.entradaSuministro = entradaSuministro;
     }
+
 
 
     public String getFechaPublicacion() {
@@ -179,5 +192,6 @@ public class EventoBenefico {
 
     public void setFoto(Foto foto) {
         this.foto = foto;
+
     }
 }

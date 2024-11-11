@@ -1,0 +1,6 @@
+En esta carpeta, esta todo el contenido que se puede reutilizar para optimizar recursos.
+Uicons es para iconos svg
+
+CSS para el navbar no modificable
+img hay eventos, donaciones,fotoAlbergues, etc
+script esta para que se pueda habilitar el menú de la izquierda (no se modifica)

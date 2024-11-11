@@ -7,6 +7,7 @@ public class CoordinadorZona {
     private String dni;
     private String contrasenia;
     private String correoElectronico;
+
     private String celular; /***Es un String cambiar la base de datos***/
     private String fechaNacimiento;
     private Foto foto;
@@ -17,6 +18,7 @@ public class CoordinadorZona {
     public CoordinadorZona() {}
 
     public CoordinadorZona(int coordinadorID, String nombre, String apellido, String dni, String contrasenia, String correoElectronico, String celular, String fechaNacimiento, Foto foto, String estado, Zona zona, boolean flag) {
+
         this.coordinadorID = coordinadorID;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -25,9 +27,11 @@ public class CoordinadorZona {
         this.correoElectronico = correoElectronico;
         this.celular = celular;
         this.fechaNacimiento = fechaNacimiento;
+
         this.foto = foto;
         this.estado = estado;
         this.zona = zona;
+
         this.flag = flag;
     }
 
@@ -79,11 +83,13 @@ public class CoordinadorZona {
         this.correoElectronico = correoElectronico;
     }
 
+
     public String getCelular() {
         return celular;
     }
 
     public void setCelular(String celular) {
+
         this.celular = celular;
     }
 
@@ -94,6 +100,7 @@ public class CoordinadorZona {
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
 
 
     public String getEstado() {
@@ -126,6 +133,7 @@ public class CoordinadorZona {
     }
 
     public void setFlag(boolean flag) {
+
         this.flag = flag;
     }
 }

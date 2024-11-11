@@ -1,0 +1,39 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.navbar .btn {
+    color: white;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.navbar .btn:hover {
+    color: #FFD700; /* Efecto hover */
+}
+
+.navbar .btn.active {
+    border-bottom: 2px solid #FFD700; /* Opción activa */
+}
+
+.content-section {
+    display: none;
+    text-align: center;
+}
+
+.active-content {
+    display: block;
+}
+
+/* Animación suave */
+.navbar .btn.active {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

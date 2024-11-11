@@ -3,8 +3,10 @@ package com.example.iwebproyecto.beans;
 public class MascotasTemporal {
     private int idMascotaTemporal;
     private String estadoUsuario;
+
     private Usuario usuario;
     private Albergue albergue;
+
     private String estado;
     private String raza;
     private String especie;
@@ -14,7 +16,9 @@ public class MascotasTemporal {
     private String sexo;
     private int poseeDiscapacidad;
     private int descripcionDiscapacidad;
+
     private Foto foto;
+
     private String fecha;
 
     public MascotasTemporal() {}
@@ -24,6 +28,7 @@ public class MascotasTemporal {
         this.estadoUsuario = estadoUsuario;
         this.usuario = usuario;
         this.albergue = albergue;
+
         this.estado = estado;
         this.raza = raza;
         this.especie = especie;
@@ -33,7 +38,9 @@ public class MascotasTemporal {
         this.sexo = sexo;
         this.poseeDiscapacidad = poseeDiscapacidad;
         this.descripcionDiscapacidad = descripcionDiscapacidad;
+
         this.foto = foto;
+
         this.fecha = fecha;
     }
 
@@ -52,6 +59,7 @@ public class MascotasTemporal {
     public void setEstadoUsuario(String estadoUsuario) {
         this.estadoUsuario = estadoUsuario;
     }
+
 
 
     public String getEstado() {
@@ -156,5 +164,6 @@ public class MascotasTemporal {
 
     public void setFoto(Foto foto) {
         this.foto = foto;
+
     }
 }

@@ -3,8 +3,10 @@ package com.example.iwebproyecto.beans;
 public class Comentarios {
     private int idComentarios;
     private String comentarios;
+
     private CoordinadorZona coordinadorZona;
     private PublicacionMascotaPerdida publicacionMascotaPerdida;
+
     private String fecha;
 
     public Comentarios() {}
@@ -14,6 +16,7 @@ public class Comentarios {
         this.comentarios = comentarios;
         this.coordinadorZona = coordinadorZona;
         this.publicacionMascotaPerdida = publicacionMascotaPerdida;
+
         this.fecha = fecha;
     }
 
@@ -32,6 +35,7 @@ public class Comentarios {
     public void setComentarios(String comentarios) {
         this.comentarios = comentarios;
     }
+
 
 
     public String getFecha() {
@@ -57,4 +61,5 @@ public class Comentarios {
     public void setPublicacionMascotaPerdida(PublicacionMascotaPerdida publicacionMascotaPerdida) {
         this.publicacionMascotaPerdida = publicacionMascotaPerdida;
     }
+
 }

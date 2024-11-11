@@ -2,7 +2,9 @@ package com.example.iwebproyecto.beans;
 
 public class PublicacionMascotaPerdida {
     private int publicacionID;
+
     private Usuario usuario;
+
     private String descripcion;
     private String nombreContacto;
     private int edad;
@@ -15,7 +17,9 @@ public class PublicacionMascotaPerdida {
     private String telefonoContacto;
     private int recompensa;
     private String estado;/*'Pendiente', 'Aceptado', 'Rechazado'*/
+
     private Foto foto;/*Fotos_fotoID*/
+
     private String fechaPerdida;
     private String especie;
     private String fecha;
@@ -33,6 +37,7 @@ public class PublicacionMascotaPerdida {
     public PublicacionMascotaPerdida(int publicacionID, Usuario usuario, String descripcion, String nombreContacto, int edad, String raza, String tamanio, String distintivo, String descripcionAdicional, String lugarPerdida, String horaPerdida, String telefonoContacto, int recompensa, String estado, Foto foto, String fechaPerdida, String especie, String fecha, String nombre, String estadoMascota, String comentario) {
         this.publicacionID = publicacionID;
         this.usuario = usuario;
+
         this.descripcion = descripcion;
         this.nombreContacto = nombreContacto;
         this.edad = edad;
@@ -45,7 +50,9 @@ public class PublicacionMascotaPerdida {
         this.telefonoContacto = telefonoContacto;
         this.recompensa = recompensa;
         this.estado = estado;
+
         this.foto = foto;
+
         this.fechaPerdida = fechaPerdida;
         this.especie = especie;
         this.fecha = fecha;
@@ -61,6 +68,7 @@ public class PublicacionMascotaPerdida {
     public void setPublicacionID(int publicacionID) {
         this.publicacionID = publicacionID;
     }
+
 
     public String getDescripcion() {
         return descripcion;
@@ -207,6 +215,7 @@ public class PublicacionMascotaPerdida {
     }
 
 
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -222,4 +231,5 @@ public class PublicacionMascotaPerdida {
     public void setFoto(Foto foto) {
         this.foto = foto;
     }
+
 }

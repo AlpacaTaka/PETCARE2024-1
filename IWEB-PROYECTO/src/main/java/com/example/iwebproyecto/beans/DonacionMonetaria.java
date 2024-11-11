@@ -3,11 +3,14 @@ package com.example.iwebproyecto.beans;
 public class DonacionMonetaria {
     private int donacionMonetariaID;
     private int usuarioID;
+
     private Albergue albergue;
+
     private int cantidadMonetaria;
     private String fechaRecepcion;
     private String horaRecepcion;
     private String fecha;
+
     private Foto foto;
 
     public DonacionMonetaria() {}
@@ -21,6 +24,7 @@ public class DonacionMonetaria {
         this.horaRecepcion = horaRecepcion;
         this.fecha = fecha;
         this.foto = foto;
+
     }
 
     public int getDonacionMonetariaID() {
@@ -40,6 +44,7 @@ public class DonacionMonetaria {
     }
 
 
+
     public int getCantidadMonetaria() {
         return cantidadMonetaria;
     }
@@ -47,6 +52,7 @@ public class DonacionMonetaria {
     public void setCantidadMonetaria(int cantidadMonetaria) {
         this.cantidadMonetaria = cantidadMonetaria;
     }
+
 
 
     public String getFechaRecepcion() {
@@ -89,4 +95,5 @@ public class DonacionMonetaria {
     public void setFoto(Foto foto) {
         this.foto = foto;
     }
+
 }

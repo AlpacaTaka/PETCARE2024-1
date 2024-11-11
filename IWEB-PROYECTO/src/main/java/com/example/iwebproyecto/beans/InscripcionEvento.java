@@ -2,6 +2,7 @@ package com.example.iwebproyecto.beans;
 
 public class InscripcionEvento {
     private int inscripcionID;
+
     private Usuario usuario;
     private EventoBenefico evento;
 
@@ -11,6 +12,7 @@ public class InscripcionEvento {
         this.inscripcionID = inscripcionID;
         this.usuario = usuario;
         this.evento = evento;
+
     }
 
     public int getInscripcionID() {
@@ -20,6 +22,7 @@ public class InscripcionEvento {
     public void setInscripcionID(int inscripcionID) {
         this.inscripcionID = inscripcionID;
     }
+
 
     public Usuario getUsuario() {
         return usuario;
@@ -35,5 +38,6 @@ public class InscripcionEvento {
 
     public void setEvento(EventoBenefico evento) {
         this.evento = evento;
+
     }
 }

@@ -8,10 +8,12 @@ public class MascotasAdopcion {
     private int edadAprox;
     private int seEncuentraTemporal;
     private String condicionesAdopcion;
+
     private Usuario usuario;
     private Albergue albergue;
     private String sexo;
     private Foto foto;
+
     private String fecha;
 
     // Constructor vacio
@@ -20,7 +22,9 @@ public class MascotasAdopcion {
     // Constructor con todos los campos
 
 
+
     public MascotasAdopcion(int idAdopcion, String raza, String lugarEncontrado, String descripcionGeneral, int edadAprox, int seEncuentraTemporal, String condicionesAdopcion, Usuario usuario, Albergue albergue, String sexo, Foto foto, String fecha) {
+
         this.idAdopcion = idAdopcion;
         this.raza = raza;
         this.lugarEncontrado = lugarEncontrado;
@@ -28,10 +32,12 @@ public class MascotasAdopcion {
         this.edadAprox = edadAprox;
         this.seEncuentraTemporal = seEncuentraTemporal;
         this.condicionesAdopcion = condicionesAdopcion;
+
         this.usuario = usuario;
         this.albergue = albergue;
         this.sexo = sexo;
         this.foto = foto;
+
         this.fecha = fecha;
     }
 
@@ -132,5 +138,6 @@ public class MascotasAdopcion {
 
     public void setFoto(Foto foto) {
         this.foto = foto;
+
     }
 }

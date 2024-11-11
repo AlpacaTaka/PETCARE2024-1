@@ -3,6 +3,7 @@ package com.example.iwebproyecto.beans;
 public class Distrito {
     private int distritoID;
     private String nombreDistrito;
+
     private Zona zona;
 
     public Distrito() {}
@@ -11,6 +12,7 @@ public class Distrito {
         this.distritoID = distritoID;
         this.nombreDistrito = nombreDistrito;
         this.zona = zona;
+
     }
 
     public int getDistritoID() {
@@ -29,11 +31,13 @@ public class Distrito {
         this.nombreDistrito = nombreDistrito;
     }
 
+
     public Zona getZona() {
         return zona;
     }
 
     public void setZona(Zona zona) {
         this.zona = zona;
+
     }
 }

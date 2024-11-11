@@ -5,18 +5,22 @@ public class LugarEvento {
     private String nombreLugar;
     private String direccionLugar;
     private int aforoMax;
+
     private Administrador administrador;
     private Foto foto;
 
     public LugarEvento() {}
 
     public LugarEvento(int lugarID, String nombreLugar, String direccionLugar, int aforoMax, Administrador administrador, Foto foto) {
+
         this.lugarID = lugarID;
         this.nombreLugar = nombreLugar;
         this.direccionLugar = direccionLugar;
         this.aforoMax = aforoMax;
+
         this.administrador = administrador;
         this.foto = foto;
+
     }
 
     public int getLugarID() {
@@ -27,7 +31,9 @@ public class LugarEvento {
         this.lugarID = lugarID;
     }
 
+
     public String getNombreLugar() {return nombreLugar;}
+
 
     public void setNombreLugar(String nombreLugar) {
         this.nombreLugar = nombreLugar;
@@ -50,6 +56,7 @@ public class LugarEvento {
     }
 
 
+
     public Administrador getAdministrador() {
         return administrador;
     }
@@ -65,4 +72,5 @@ public class LugarEvento {
     public void setFoto(Foto foto) {
         this.foto = foto;
     }
+
 }

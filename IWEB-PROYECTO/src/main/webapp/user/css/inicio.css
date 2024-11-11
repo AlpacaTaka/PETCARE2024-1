@@ -1,0 +1,123 @@
+/* Aca se puede modificar de acuerdo a la pagina */ 
+#contenidoIzquierda{
+    padding: 20px;
+    border-radius:  20px;
+    
+}
+.card-img-eve{
+    height: 400px; /* Asegura que la imagen ocupe toda la altura del contenedor */
+    width: 100%;
+    object-fit: cover; /* Ajuste perfecto sin deformar la imagen */
+}
+#Donaciones{
+    margin-top: 50px;
+}
+#Eventos{
+    margin-top: 20px;
+}
+#MascotasPerdidas{
+    margin-top: 20px;
+}
+
+
+.boton-contenedor{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#contenedor-btn-dos{
+    margin-top: 20px;
+}
+
+.card-img-don{
+    height: 220px; /* Asegura que la imagen ocupe toda la altura del contenedor */
+    width: 100%;
+    object-fit: cover; /* Ajuste perfecto sin deformar la imagen */
+
+}
+.card-img-adop{
+    height: 250px; /* Asegura que la imagen ocupe toda la altura del contenedor */
+    width: 100%;
+    object-fit: cover; /* Ajuste perfecto sin deformar la imagen */
+
+}
+
+.card-img-don-movil{
+    height: 220px; /* Asegura que la imagen ocupe toda la altura del contenedor */
+    width: 100%;
+    object-fit: cover; /* Ajuste perfecto sin deformar la imagen */
+
+}
+
+.card-don{
+    height: 100%;
+}
+
+.card-don .card-body{
+    display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+}
+
+
+/* ================== Contenido de la barra de la derecha============================00*/
+
+/* Contenido derecha es mascotas perdidas, si ya aparecen las opciones no modificar*/
+#contenidoDerecha{
+    padding: 5px;
+    background-color: #eb903b76;
+    border-radius:  20px;
+}
+
+
+#grilla-perdidos {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+}
+
+.perdido {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-personal,.btn-personal2 {
+    position: relative; /* Asegura que el z-index afecte al botón */
+    z-index: 10; /* Establece un valor mayor que el de los controles */
+  }
+.carousel-control-prev, .carousel-control-next {
+    z-index: 5; /* Asegúrate de que el z-index sea menor que el del botón */
+  }
+
+/* El color de los botones se esta modificando en style del html*/
+
+@media (max-width: 768px) {
+    
+    .card-img-eve{
+        height: 300px; /* Asegura que la imagen ocupe toda la altura del contenedor */
+        width: 100%;
+        object-fit: cover; /* Ajuste perfecto sin deformar la imagen */
+    }
+    #grilla-perdidos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+
+    #contenidoIzquierda{
+        width: 100%;
+        padding: 0px;
+        padding-bottom: 10PX;
+    }
+
+    .card-img-adop{
+        height: 350px; /* Asegura que la imagen ocupe toda la altura del contenedor */
+    
+    
+    }
+}
+
+
