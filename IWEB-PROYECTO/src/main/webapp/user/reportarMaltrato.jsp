@@ -5,12 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
-    
+    <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
-    <link rel="stylesheet" href="CSSDELAPAGINA.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/user/css/inicio.css">
     <title>Reportar Maltrato</title>
 
 </head>
@@ -59,7 +59,7 @@
                 <a href="/user/solicitudesAdopcion.jsp">Portal de Adopciones</a>
                 <a href="/user/mascotasPerdidas.jsp">Portal de Mascotas Perdidas</a>
                 <a href="/user/reportarMascotaPerdida.jsp">Reportar Mascota Perdida</a>
-                <a href="/user/reportarMaltrato.html" id="Sep">Reportar Maltrato</a>
+                <a href="/user/reportarMaltrato.html" >Reportar Maltrato</a>
                 <hr>
                 <a href="/login/login.html">Cerrar Sesión</a>
 
@@ -79,23 +79,23 @@
                     </div>
                     <!--Container del formulario-->
                     <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                        <form id="uploadForm" style="padding:10px">
+                        <form action="ReportarMaltrato" method="post" id="uploadForm" style="padding:10px">
                             <h1 style="margin-top: 10px;" class="text-center">Formulario denuncia maltrato</h1>
                             <br>
                             <!--Primera columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
-                                    <label for="">Tamaño</label>
-                                    <select class="form-select" id="Tamaño" aria-label="Floating label select example" required>
+                                    <label for="Tamanio">tamanio</label>
+                                    <select class="form-select" name= "tamanio" id="Tamanio" aria-label="Floating label select example" required>
                                         <option value="" disabled selected>Seleccione una opción</option>
-                                        <option value="Pequeño">Pequeño</option>
+                                        <option value="Pequenio">Pequeño</option>
                                         <option value="Mediano">Mediano</option>
                                         <option value="Grande">Grande</option>
                                     </select> 
                                 </div>
                                 <div class="col-md-6 p-1">
-                                    <label for="">Especie</label>
-                                    <select class="form-select" id="Especies" aria-label="Floating label select example" required>
+                                    <label>Especie</label>
+                                    <select class="form-select" name="Especie" id="Especies" aria-label="Floating label select example" required>
                                         <option value="" disabled selected>Seleccione una opción</option>
                                         <option value="Perro">Perro</option>
                                         <option value="Gato">Gato</option>
@@ -112,21 +112,21 @@
                             <!--Segunda columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
-                                    <label for="">Raza</label>
-                                    <select class="form-select" id="Razas" aria-label="Floating label select example" required>
+                                    <label>Raza</label>
+                                    <select class="form-select" name="Raza" id="Razas" aria-label="Floating label select example" required>
                                     <option value="">Ingrese raza de la mascota</option>
                                   </select>
                                 </div>
                                 <div class="col-md-6 p-1">
-                                    <label for="otra raza"> Si colocó otra raza,  escribala aquí</label>
-                                    <input type="text" class="form-control"  id="otra-raza" placeholder="Indique el tipo de raza" idplaceholder="Otra raza" maxlength="30" disabled>
+                                    <label> Si colocó otra raza,  escribala aquí</label>
+                                    <input type="text" class="form-control" name="otra-raza"  id="otra-raza" placeholder="Indique el tipo de raza" idplaceholder="Otra raza" maxlength="30" disabled>
                                 </div>
                             </div>
                             <!--Tercera columna de selección-->
                             <div class="row justify-content-center p-1">
                                  <div class="col-md-6 p-1">
                                     <label for="tipo-maltrato">Tipo de maltrato</label>
-                                    <select class="form-select" id="tipo-maltrato" aria-label="Floating label select example" required>
+                                    <select class="form-select" id="tipo-maltrato" name="tipo-maltrato" aria-label="Floating label select example" required>
                                         <option value="" disabled selected>Seleccione una opción</option>
                                         <option value="Abandono">Situación de abandono</option>
                                         <option value="Violencia">Violencia</option>
@@ -135,7 +135,7 @@
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="otro-maltrato">Si seleccionó "Otro", especifíquelo aquí</label>
-                                    <input type="text" class="form-control" id="otro-maltrato" placeholder="Especifique el tipo de maltrato" maxlength="50" disabled>
+                                    <input type="text" class="form-control" id="otro-maltrato" name="otro-maltrato" placeholder="Especifique el tipo de maltrato" maxlength="50" disabled>
                                 </div> 
                             </div>
                              <!--Cuarta columna de selección (1 columna)-->  
@@ -156,12 +156,12 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-8  p-1 justify-content-center">
                                     <label for="formFile" class="form-label">Adjunte una foto de la mascota (PNG)</label>
-                                    <input class="form-control" type="file" id="formFile" accept=".png" required>
+                                    <input class="form-control" type="file" id="formFile" accept=".png" required name="imagen">
                                     <div id="fileError" class="text-danger mt-2" style="display: none;">El archivo debe ser una imagen PNG.</div>
                                 </div>
                                 
                                 <div class="col-md-4 p-1 ">
-                                    <label for="Sexo">Realizo una denuncia policial</label>
+                                    <label>Realizo una denuncia policial</label>
                                     <div class="col-md-12 d-flex justify-content-around align-self-center">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
@@ -179,13 +179,15 @@
                                 </div> 
                             </div>
 
+
+
                             <p style="margin: 5px 20px; color:#4d0e0e;" class="text-center">Si esta seguro, pulse el botón para proceder con la denuncia.</p>
                             <!--Boton de enviar-->
                              <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1 d-flex justify-content-center">
                                     <button type="submit" class="btn btn-personal">Enviar</button>
                                 </div>
-                            </div>                           
+                             </div>
                         </form>
                     </div>
                 </div>
