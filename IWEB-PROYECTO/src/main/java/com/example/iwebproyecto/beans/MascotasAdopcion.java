@@ -2,17 +2,22 @@ package com.example.iwebproyecto.beans;
 
 public class MascotasAdopcion {
     private int idAdopcion;
+    private String nombre;
+    private String especie;
     private String raza;
+    private Distrito distrito;
     private String lugarEncontrado;
-    private String descripcionGeneral;
     private int edadAprox;
+    private String sexo;
+    private String descripcionGeneral;
+    private Foto foto;
     private int seEncuentraTemporal;
     private String condicionesAdopcion;
-
-    private Usuario usuario;
+    /*private Usuario usuario;*/
     private Albergue albergue;
-    private String sexo;
-    private Foto foto;
+    private String fechaAdoptado;
+    private int eliminado;
+
 
     private String fecha;
 
@@ -23,7 +28,7 @@ public class MascotasAdopcion {
 
 
 
-    public MascotasAdopcion(int idAdopcion, String raza, String lugarEncontrado, String descripcionGeneral, int edadAprox, int seEncuentraTemporal, String condicionesAdopcion, Usuario usuario, Albergue albergue, String sexo, Foto foto, String fecha) {
+    /*public MascotasAdopcion(int idAdopcion, String raza, String lugarEncontrado, String descripcionGeneral, int edadAprox, int seEncuentraTemporal, String condicionesAdopcion, Usuario usuario, Albergue albergue, String sexo, Foto foto, String fecha) {
 
         this.idAdopcion = idAdopcion;
         this.raza = raza;
@@ -39,7 +44,7 @@ public class MascotasAdopcion {
         this.foto = foto;
 
         this.fecha = fecha;
-    }
+    }*/
 
     public int getIdAdopcion() {
         return idAdopcion;
@@ -116,13 +121,13 @@ public class MascotasAdopcion {
     }
 
 
-    public Usuario getUsuario() {
+    /*public Usuario getUsuario() {
         return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
+    }*/
 
     public Albergue getAlbergue() {
         return albergue;
@@ -138,6 +143,45 @@ public class MascotasAdopcion {
 
     public void setFoto(Foto foto) {
         this.foto = foto;
+    }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+
+    public Distrito getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(Distrito distrito) {
+        this.distrito = distrito;
+    }
+
+    public String getFechaAdoptado() {
+        return fechaAdoptado;
+    }
+
+    public void setFechaAdoptado(String fechaAdoptado) {
+        this.fechaAdoptado = fechaAdoptado;
+    }
+
+    public int getEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(int eliminado) {
+        this.eliminado = eliminado;
     }
 }

@@ -3,4 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
+    <servlet>
+        <servlet-name>ReportarMaltratoServlet</servlet-name>
+        <servlet-class>com.example.iwebproyecto.servlets.ReportarMaltratoServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReportarMaltratoServlet</servlet-name>
+        <url-pattern>/ReportarMaltratoServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>

@@ -10,7 +10,7 @@
 </h1>
 <br/>
 <a href="Inicio">Usuario</a>
-<a href="">Albergue</a>
+<a href="Albergue">Albergue</a>
 
 </body>
 </html>

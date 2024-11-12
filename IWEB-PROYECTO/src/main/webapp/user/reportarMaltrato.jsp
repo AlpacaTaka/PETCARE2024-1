@@ -11,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/user/css/inicio.css">
+
     <title>Reportar Maltrato</title>
 
 </head>
@@ -79,8 +80,10 @@
                     </div>
                     <!--Container del formulario-->
                     <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                        <form action="ReportarMaltrato" method="post" id="uploadForm" style="padding:10px">
-                            <h1 style="margin-top: 10px;" class="text-center">Formulario denuncia maltrato</h1>
+                        <form action="${pageContext.request.contextPath}/ReportarMaltratoServlet" method="post" id="uploadForm" style="padding:10px">
+
+
+                        <h1 style="margin-top: 10px;" class="text-center">Formulario denuncia maltrato</h1>
                             <br>
                             <!--Primera columna de selección-->
                             <div class="row justify-content-center p-1">
