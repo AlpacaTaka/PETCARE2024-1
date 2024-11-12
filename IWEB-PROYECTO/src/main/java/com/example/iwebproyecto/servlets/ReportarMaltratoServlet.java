@@ -33,7 +33,7 @@ import java.time.format.DateTimeFormatter;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "ReportarMaltrato", value = "/ReportarMaltrato")
+@WebServlet(name = "ReportarMaltratoServlet", value = "/ReportarMaltratoServlet")
 @MultipartConfig
 public class ReportarMaltratoServlet extends HttpServlet {
     @Override
