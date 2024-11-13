@@ -78,7 +78,7 @@ public class AlbergueDao extends BaseDao {
 
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            albergueID = 1;
+            albergueID = 2;
             pstmt.setInt(1, albergueID);
 
             ResultSet rs = pstmt.executeQuery();

@@ -70,7 +70,7 @@
         <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
         <div class="barside">
             <ul class="navlinks">
-                <li><a href="albergue/miPerfil.jsp" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
                 <li><a href="albergue/adoptionTable.jsp" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
                 <li><a href="albergue/eventTable.jsp" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
                 <li><a href="albergue/donationTable.jsp" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>

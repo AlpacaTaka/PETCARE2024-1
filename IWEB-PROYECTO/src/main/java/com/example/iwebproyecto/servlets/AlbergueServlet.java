@@ -12,14 +12,14 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "AlbergueServlet", urlPatterns = {"/albergue/miPerfil"})
+@WebServlet(name = "AlbergueServlet", urlPatterns = {"/miPerfilAlbergue"})
 public class AlbergueServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtener el albergueID del parámetro de la solicitud, usar predeterminado de 1 si no se proporciona
         String idParam = request.getParameter("albergueID");
-        int albergueID = 1; // Predeterminado
+        int albergueID = 2;
 
         if (idParam != null && !idParam.isEmpty()) {
             try {
