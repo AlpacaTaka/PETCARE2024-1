@@ -1,20 +1,26 @@
+<%@ page import="com.example.iwebproyecto.beans.Albergue" %>
+<%@ page import="com.example.iwebproyecto.beans.Distrito" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<%
+    Albergue albergue = (Albergue) request.getAttribute("albergue");
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
-    
+    <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
     <title>Mi  cuenta</title>
     <style>
-        
-        /* Esto es solo de referencia para ver su espacio disponible - borrar*/ 
-        
+
+        /* Esto es solo de referencia para ver su espacio disponible - borrar*/
+
         .image-container {
             width: 170px; /* Puedes ajustar el tamaño según sea necesario */
             height: 170px;
@@ -33,13 +39,14 @@
             height: 100%;
             object-fit: cover; /* Mantiene las proporciones de la imagen dentro del contenedor */
         }
-        
-        
+
+
     </style>
 </head>
 <body>
+
     <div class="contenedor-p">
-        
+
         <header class="cabecera">
             <div class="izquierda" onclick="toggleMenu()">
                 <div class="menu-c">
@@ -65,7 +72,7 @@
                     <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
                     <li id="cerrar-sesion"><a href="#micuenta" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
-                
+
             </div>
 
             <div id="menu" class="menu">
@@ -81,10 +88,7 @@
 
             </div>
 
-
             <div class="container-fluid d-flex" id="contenido-principal">
-                
-            
 
                 <div class="row d-flex flex-column" id="contenido-nofooter">
                     <div class="container">
@@ -92,13 +96,14 @@
                             <a href="eventTable.jsp"><button type="button" class="btn btn-personal2">Regresar   </button></a>
                         </div>
                         <div class="container md-8" style="width: 100%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                            <form id="uploadForm" style="padding:10px" >
+                            <form id="uploadForm" style="padding:10px" method="post" action="miPerfil">
+                                <input type="hidden" name="albergueID" value="<%= albergue.getAlbergueID() %>">
                                 <h1 style="margin-top: 10px;" class="text-center">Perfil de Albergue</h1>
-                                
+
                                 <div class="row justify-content-center p-1">
                                     <div class="col d-flex justify-content-center">
                                         <div class="image-container">
-                                            <img src="/common/img/logos/albergueDefault.png" alt="Perfil de usuario">
+                                            <img src="${pageContext.request.contextPath}/common/img/logos/albergueDefault.png" alt="Perfil de usuario">
                                         </div>
                                     </div>
                                 </div>
@@ -108,12 +113,12 @@
                                         <h5>Datos del Encargado</h5>
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <label for="">Nombre </label>
-                                        <input type="text" class="form-control" placeholder="Juan Ernesto" required disabled>
+                                        <label >Nombre </label>
+                                        <input type="text" class="form-control" value="<%= albergue.getNombreEncargado() %>"required disabled>
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <label for="">Apellido</label>
-                                        <input type="text" class="form-control" placeholder="Sifuentes Martinez" required disabled>
+                                        <label >Apellido</label>
+                                        <input type="text" class="form-control" value="<%= albergue.getApellidoEncargado() %>"required disabled>
                                     </div>
                                 </div>
                                 <hr>
@@ -123,38 +128,38 @@
                                         <h5>Datos del Albergue</h5>
                                     </div>
                                     <div class="col-md-9 p-1">
-                                        <label for="">Nombre</label>
-                                        
-                                        <input type="text" class="form-control" placeholder=" Patitas Felices" required disabled>
-                                      
+                                        <label>Nombre</label>
+
+                                        <input type="text" class="form-control" value="<%= albergue.getNombreAlbergue() %>" required disabled>
+
                                     </div>
                                     <div class="col-md-3 p-1">
-                                        <label for="distrito">Año de Creación:</label>
-                                        <input type="number" class="form-control" placeholder="2008" required disabled>
+                                        <label for="distrito">Fecha de Creación:</label>
+                                        <input type="text" class="form-control" value="<%= albergue.getFechaCreacion() %>" required disabled>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1" >
-                                        <label for="correo">Correo:</label>
-                                        <input type="text" class="form-control" placeholder="patitasfelices@gmail.com" required disabled>
+                                        <label>Correo:</label>
+                                        <input type="text" class="form-control" value="<%= albergue.getCorreoElectronico() %>" required disabled>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1" >
                                         <label for="direccion">Cantidad de animales albergados</label>
-                                        <input type="number" class="form-control" placeholder="70" required disabled>
+                                        <input type="number" class="form-control" value="<%= albergue.getCantidadAnimales() %>" required disabled>
                                     </div>
                                     <div class="col-md-6 p-1" >
                                         <label for="direccion">Cantidad de espacios para nuevos animales</label>
-                                        <input type="number" class="form-control" placeholder="30" required disabled>
+                                        <input type="number" class="form-control" value="<%= albergue.getEspaciosDisponibles() %>" required disabled>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-4 p-1" >
                                         <label for="distrito">Distrito</label>
                                         <select class="form-select" name="distrito" id="distrito" required disabled>
-                                            <option value="">San Martín de Porres</option>
+                                            <option value=""><%= albergue.getDistrito().getNombreDistrito() %></option>
                                             <optgroup label="Lima Norte">
                                                 <option value="ancon">Ancon</option>
                                                 <option value="santa_rosa">Santa Rosa</option>
@@ -209,70 +214,69 @@
                                     </div>
                                     <div class="col-md-8 p-1">
                                         <label for="Direccion">Dirección</label>
-                                        <input type="text" class="form-control" placeholder="Mz. E Lt. 3 Urb. Señor de los Milagros (espalda de la posta)" maxlength="100" id="Direccion" name="Direccion" disabled>
+                                        <input type="text" class="form-control" value="<%= albergue.getDireccion() %>" maxlength="100" id="Direccion" name="Direccion" disabled>
                                     </div>
 
                                 </div>
-                                
+
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1">
                                         <label for="direc_donac">Direccion de donaciones</label>
-                                        <input type="text" class="form-control" id="direc_donac" maxlength="100" placeholder="Mz. E Lt. 3 Urb. Señor de los Milagros (espalda de la posta)" required disabled>
+                                        <input type="text" class="form-control" id="direc_donac" maxlength="100" value="<%= albergue.getDireccionDonaciones() %>" required disabled>
 
                                     </div>
-                                    
+
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1">
                                         <label for="nom_contac">Nombre de contacto de Donaciones</label>
-                                        <input type="text" class="form-control" id="nom_contac" maxlength="100" placeholder="Simeon Carrasco" required disabled>
+                                        <input type="text" class="form-control" id="nom_contac" maxlength="100" value="<%= albergue.getNombreContactoDonaciones() %>" required disabled>
 
                                     </div>
                                     <div class="col-md-6 p-1">
                                         <label for="num_donac">Numero de contacto Donaciones</label>
-                                        <input type="number" id="num_donac" class="form-control" placeholder="993081812" required disabled>
+                                        <input type="number" id="num_donac" class="form-control" value="<%= albergue.getNumeroContactoDonaciones() %>" required disabled>
 
                                     </div>
-                                    
+
                                 </div>
-                                
+
                                 <hr>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1">
-                                        <label for="cantidad_albergados">Cantidad de animales albergados</label>
-                                        <input type="number" id="cantidad_albergados" class="form-control" placeholder="70" required disabled>
+                                        <label for="cantidad_animales">Cantidad de animales albergados</label>
+                                        <input type="number" id="cantidad_animales" name="cantidad_animales" class="form-control" value="<%= albergue.getCantidadAnimales() %>" required disabled>
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <label for="espacios_nuevos">Cantidad de espacios para nuevos animales</label>
-                                        <input type="number" id="espacios_nuevos" class="form-control" placeholder="30" required disabled>
+                                        <label for="espacios_disponibles">Cantidad de espacios para nuevos animales</label>
+                                        <input type="number" id="espacios_disponibles" name="espacios_disponibles" class="form-control" value="<%= albergue.getEspaciosDisponibles() %>" required disabled>
                                     </div>
                                 </div>
-                                
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1">
                                         <label for="punto_acopio">Punto de acopio de donaciones</label>
-                                        <input type="text" id="punto_acopio" class="form-control" maxlength="100" placeholder="Colegio Humanitas San Miguel" required disabled>
+                                        <input type="text" id="punto_acopio" name="punto_acopio" class="form-control" maxlength="100" value="<%= albergue.getPuntoAcopioDonaciones() %>" required disabled>
                                     </div>
                                 </div>
-                                
+
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1 d-flex justify-content-center">
                                         <button type="button" class="btn btn-personal" id="editarBtn">Editar datos</button>
                                     </div>
                                 </div>
                                 <hr>
-                                
-    
+
+
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1 d-flex justify-content-center">
                                         <p>Si necesita cambiar alguno de estos datos, contactar son Soporte</p>
                                     </div>
-    
-                                </div>                           
+
+                                </div>
                             </form>
                         </div>
 
-                        
+
                     </div>
                 </div>
 
@@ -295,21 +299,23 @@
     <script>
         // Referencias a los inputs y al botón
         const editarBtn = document.getElementById('editarBtn');
-        const inputs = document.querySelectorAll('#cantidad_albergados, #espacios_nuevos, #punto_acopio');
-    
+        const inputs = document.querySelectorAll('#cantidad_animales, #espacios_disponibles, #punto_acopio');
+
         // Estado inicial: false (no en modo edición)
         let modoEdicion = false;
-    
+
         // Evento de clic para alternar entre editar y guardar
         editarBtn.addEventListener('click', () => {
             modoEdicion = !modoEdicion; // Alterna el modo
-    
+
             if (modoEdicion) {
                 editarBtn.textContent = 'Guardar'; // Cambia el texto a "Guardar"
                 inputs.forEach(input => input.disabled = false); // Habilita los inputs
             } else {
                 editarBtn.textContent = 'Editar datos'; // Cambia el texto a "Editar datos"
                 inputs.forEach(input => input.disabled = true); // Deshabilita los inputs
+                // Envía el formulario
+                document.getElementById('uploadForm').submit();
             }
         });
     </script>
@@ -321,7 +327,7 @@
                 this.value = this.value.slice(0,3);
             }
         })
-    
+
     </script>
     <script>
         //Limita la cant digitos de números
@@ -331,9 +337,9 @@
                 this.value = this.value.slice(0,3);
             }
         })
-    
+
     </script>
-    
-    
+
+
 </body>
 </html>
