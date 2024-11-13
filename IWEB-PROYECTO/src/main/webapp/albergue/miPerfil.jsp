@@ -1,4 +1,8 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.example.iwebproyecto.beans.Albergue" %>
+
+<%
+    Albergue albergue = (Albergue) request.getAttribute("albergue");
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -38,6 +42,7 @@
     </style>
 </head>
 <body>
+
     <div class="contenedor-p">
         
         <header class="cabecera">
@@ -81,10 +86,7 @@
 
             </div>
 
-
             <div class="container-fluid d-flex" id="contenido-principal">
-                
-            
 
                 <div class="row d-flex flex-column" id="contenido-nofooter">
                     <div class="container">
@@ -92,7 +94,8 @@
                             <a href="eventTable.jsp"><button type="button" class="btn btn-personal2">Regresar   </button></a>
                         </div>
                         <div class="container md-8" style="width: 100%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                            <form id="uploadForm" style="padding:10px" >
+                            <form id="uploadForm" style="padding:10px" method="post" action="miPerfil">
+                                <input type="hidden" name="albergueID" value="<%= albergue.getAlbergueID() %>">
                                 <h1 style="margin-top: 10px;" class="text-center">Perfil de Albergue</h1>
                                 
                                 <div class="row justify-content-center p-1">
@@ -239,19 +242,18 @@
                                 <hr>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1">
-                                        <label for="cantidad_albergados">Cantidad de animales albergados</label>
-                                        <input type="number" id="cantidad_albergados" class="form-control" placeholder="70" required disabled>
+                                        <label for="cantidad_animales">Cantidad de animales albergados</label>
+                                        <input type="number" id="cantidad_animales" name="cantidad_animales" class="form-control" value="<%= albergue.getCantidadAnimales() %>" required disabled>
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <label for="espacios_nuevos">Cantidad de espacios para nuevos animales</label>
-                                        <input type="number" id="espacios_nuevos" class="form-control" placeholder="30" required disabled>
+                                        <label for="espacios_disponibles">Cantidad de espacios para nuevos animales</label>
+                                        <input type="number" id="espacios_disponibles" name="espacios_disponibles" class="form-control" value="<%= albergue.getEspaciosDisponibles() %>" required disabled>
                                     </div>
                                 </div>
-                                
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1">
                                         <label for="punto_acopio">Punto de acopio de donaciones</label>
-                                        <input type="text" id="punto_acopio" class="form-control" maxlength="100" placeholder="Colegio Humanitas San Miguel" required disabled>
+                                        <input type="text" id="punto_acopio" name="punto_acopio" class="form-control" maxlength="100" value="<%= albergue.getPuntoAcopioDonaciones() %>" required disabled>
                                     </div>
                                 </div>
                                 
@@ -295,21 +297,23 @@
     <script>
         // Referencias a los inputs y al botón
         const editarBtn = document.getElementById('editarBtn');
-        const inputs = document.querySelectorAll('#cantidad_albergados, #espacios_nuevos, #punto_acopio');
-    
+        const inputs = document.querySelectorAll('#cantidad_animales, #espacios_disponibles, #punto_acopio');
+
         // Estado inicial: false (no en modo edición)
         let modoEdicion = false;
-    
+
         // Evento de clic para alternar entre editar y guardar
         editarBtn.addEventListener('click', () => {
             modoEdicion = !modoEdicion; // Alterna el modo
-    
+
             if (modoEdicion) {
                 editarBtn.textContent = 'Guardar'; // Cambia el texto a "Guardar"
                 inputs.forEach(input => input.disabled = false); // Habilita los inputs
             } else {
                 editarBtn.textContent = 'Editar datos'; // Cambia el texto a "Editar datos"
                 inputs.forEach(input => input.disabled = true); // Deshabilita los inputs
+                // Envía el formulario
+                document.getElementById('uploadForm').submit();
             }
         });
     </script>

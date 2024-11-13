@@ -6,7 +6,7 @@ public class Albergue {
     private String nombreEncargado;
     private String apellidoEncargado;
     private int espaciosDisponibles;
-    private String anioCreacion;
+    private java.sql.Date fechaCreacion;
     private String correoElectronico;
     private String contrasenia;
     private int cantidadAnimales;
@@ -23,37 +23,31 @@ public class Albergue {
     private String numeroYape;
     private String numeroPlin;
     private String codigoQR;
-    private String estado; /*Estado:'Aprobado', 'Desaprobado'*/
-
-    private Foto foto;
-    private String mensaje;
-    private boolean flag;
-
+    private int aprobado; // TINYINT para booleano (0 o 1)
+    private int fotoID;
+    private int eliminado; // TINYINT UNSIGNED para booleano (0 o 1)
+    private String fechaRegistrado;
+    private String descripcion;
 
     // Constructor vacío
     public Albergue() {
     }
 
     // Constructor con todos los campos
-
-
-    public Albergue(int albergueID, String nombreAlbergue, String nombreEncargado, String apellidoEncargado, int espaciosDisponibles, String anioCreacion, String correoElectronico, String contrasenia, int cantidadAnimales, String urlFacebook, String urlInstagram, String direccion, Distrito distrito, String puntoAcopioDonaciones, String direccionDonaciones, String nombreContactoDonaciones, String numeroContactoDonaciones, String numeroYape, String numeroPlin, String codigoQR, String estado, Foto foto, String mensaje, boolean flag) {
-
+    public Albergue(int albergueID, String nombreAlbergue, String nombreEncargado, String apellidoEncargado, int espaciosDisponibles, java.sql.Date fechaCreacion, String correoElectronico, String contrasenia, int cantidadAnimales, String urlFacebook, String urlInstagram, String direccion, Distrito distrito, String puntoAcopioDonaciones, String direccionDonaciones, String nombreContactoDonaciones, String numeroContactoDonaciones, String numeroYape, String numeroPlin, String codigoQR, int aprobado, int fotoID, int eliminado, String fechaRegistrado, String descripcion) {
         this.albergueID = albergueID;
         this.nombreAlbergue = nombreAlbergue;
         this.nombreEncargado = nombreEncargado;
         this.apellidoEncargado = apellidoEncargado;
         this.espaciosDisponibles = espaciosDisponibles;
-        this.anioCreacion = anioCreacion;
+        this.fechaCreacion = fechaCreacion;
         this.correoElectronico = correoElectronico;
         this.contrasenia = contrasenia;
         this.cantidadAnimales = cantidadAnimales;
         this.urlFacebook = urlFacebook;
         this.urlInstagram = urlInstagram;
         this.direccion = direccion;
-
         this.distrito = distrito;
-
         this.puntoAcopioDonaciones = puntoAcopioDonaciones;
         this.direccionDonaciones = direccionDonaciones;
         this.nombreContactoDonaciones = nombreContactoDonaciones;
@@ -61,16 +55,16 @@ public class Albergue {
         this.numeroYape = numeroYape;
         this.numeroPlin = numeroPlin;
         this.codigoQR = codigoQR;
-        this.estado = estado;
-
-        this.foto = foto;
-
-        this.mensaje = mensaje;
-        this.flag = flag;
+        this.aprobado = aprobado;
+        this.fotoID = fotoID;
+        this.eliminado = eliminado;
+        this.fechaRegistrado = fechaRegistrado;
+        this.descripcion = descripcion;
     }
 
     // Getters y Setters para cada campo
 
+    // Getters y setters para campos básicos
     public int getAlbergueID() {
         return albergueID;
     }
@@ -111,12 +105,12 @@ public class Albergue {
         this.espaciosDisponibles = espaciosDisponibles;
     }
 
-    public String getAnioCreacion() {
-        return anioCreacion;
+    public java.sql.Date getFechaCreacion() {
+        return fechaCreacion;
     }
 
-    public void setAnioCreacion(String anioCreacion) {
-        this.anioCreacion = anioCreacion;
+    public void setFechaCreacion(java.sql.Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
     public String getCorreoElectronico() {
@@ -167,7 +161,13 @@ public class Albergue {
         this.direccion = direccion;
     }
 
+    public Distrito getDistrito() {
+        return distrito;
+    }
 
+    public void setDistrito(Distrito distrito) {
+        this.distrito = distrito;
+    }
 
     public String getPuntoAcopioDonaciones() {
         return puntoAcopioDonaciones;
@@ -225,49 +225,43 @@ public class Albergue {
         this.codigoQR = codigoQR;
     }
 
-    public String getEstado() {
-        return estado;
+    public int getAprobado() {
+        return aprobado;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setAprobado(int aprobado) {
+        this.aprobado = aprobado;
     }
 
-
-    public String getMensaje() {
-        return mensaje;
+    public int getFotoID() {
+        return fotoID;
     }
 
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
+    public void setFotoID(int fotoID) {
+        this.fotoID = fotoID;
     }
 
-
-    public boolean isFlag() {
-        return flag;
+    public int getEliminado() {
+        return eliminado;
     }
 
-    public void setFlag(boolean flag) {
-
-        this.flag = flag;
+    public void setEliminado(int eliminado) {
+        this.eliminado = eliminado;
     }
 
-
-
-    public Foto getFoto() {
-        return foto;
+    public String getFechaRegistrado() {
+        return fechaRegistrado;
     }
 
-    public void setFoto(Foto foto) {
-        this.foto = foto;
+    public void setFechaRegistrado(String fechaRegistrado) {
+        this.fechaRegistrado = fechaRegistrado;
     }
 
-    public Distrito getDistrito() {
-        return distrito;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDistrito(Distrito distrito) {
-        this.distrito = distrito;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
-
 }
