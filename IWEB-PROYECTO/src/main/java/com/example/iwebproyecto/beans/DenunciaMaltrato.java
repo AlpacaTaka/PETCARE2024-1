@@ -14,7 +14,7 @@ public class DenunciaMaltrato {
     private String especie;
     private String fecha;
 
-    private Fotos foto;
+    private Foto foto;
 
     // Constructor vacío
     public DenunciaMaltrato() {}
@@ -23,7 +23,7 @@ public class DenunciaMaltrato {
 
 
 
-    public DenunciaMaltrato(int denunciaID, Usuario usuario, String tamanio, String raza, String tipoMaltrato, String nombreApellidoMaltratador, String direccion, int realizoDenuncia, String especie, String fecha, Fotos foto) {
+    public DenunciaMaltrato(int denunciaID, Usuario usuario, String tamanio, String raza, String tipoMaltrato, String nombreApellidoMaltratador, String direccion, int realizoDenuncia, String especie, String fecha, Foto foto) {
         this.denunciaID = denunciaID;
         this.usuario = usuario;
 
@@ -124,12 +124,11 @@ public class DenunciaMaltrato {
         this.usuario = usuario;
     }
 
-    public Fotos getFoto() {
+    public Foto getFoto() {
         return foto;
     }
 
-    public void setFoto(Fotos foto) {
+    public void setFoto(Foto foto) {
         this.foto = foto;
     }
-
 }

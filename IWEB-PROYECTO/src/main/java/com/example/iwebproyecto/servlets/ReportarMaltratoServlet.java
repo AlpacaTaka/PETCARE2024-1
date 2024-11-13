@@ -1,12 +1,9 @@
 package com.example.iwebproyecto.servlets;
 
 import com.example.iwebproyecto.beans.DenunciaMaltrato;
-import com.example.iwebproyecto.beans.Fotos;
-import com.example.iwebproyecto.beans.Usuario;
+import com.example.iwebproyecto.beans.Foto;
 import com.example.iwebproyecto.daos.DenunciaMaltratoDao;
 import com.example.iwebproyecto.daos.FotoDao;
-import com.example.iwebproyecto.daos.UsuarioDao;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,24 +11,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
-import java.util.List;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-
-import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet(name = "ReportarMaltratoServlet", value = "/ReportarMaltratoServlet")
 @MultipartConfig
@@ -82,14 +69,14 @@ public class ReportarMaltratoServlet extends HttpServlet {
         // Ruta de guardado en el servidor
         String uploadPath = getServletContext().getRealPath("") + File.separator + "common" + File.separator + "img";
 
-        Fotos foto = new Fotos();
-        foto.setRuta(uploadPath);
+        Foto foto = new Foto();
+        foto.setRutaFoto(uploadPath);
 
         FotoDao fotoDao = new FotoDao();
         fotoDao.GuadarFoto(foto);
 
         // Nombre del archivo
-        String fileName = "("+foto.getIdFoto()+")"+request.getParameter("imagen");
+        String fileName = "("+foto.getFotoID()+")"+request.getParameter("imagen");
         String filePath = uploadPath + File.separator + fileName;
 
         fotoDao.ActualizarFoto(foto,filePath);

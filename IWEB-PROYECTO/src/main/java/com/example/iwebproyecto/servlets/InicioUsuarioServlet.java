@@ -3,6 +3,8 @@ package com.example.iwebproyecto.servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.example.iwebproyecto.beans.MascotasAdopcion;
+import com.example.iwebproyecto.daos.MascotasDao;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -19,17 +21,24 @@ public class InicioUsuarioServlet extends HttpServlet {
         // Establece el tipo de contenido de la respuesta
         response.setContentType("text/html");
 
-        // Obtiene el RequestDispatcher para la página JSP
-        RequestDispatcher rd = request.getRequestDispatcher("user/inicio.jsp");
 
-        // Reenvía la solicitud y la respuesta al JSP
-        rd.forward(request, response);
-
-        String action = request.getParameter("action") == null ? "crear" : request.getParameter("action");
+        String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
 
         switch (action){
-            case "crear"://voy a crear un nuevo trabajo
+            case "lista"://voy a crear un nuevo trabajo
 
+
+                MascotasDao mascotasDao = new MascotasDao();
+                ArrayList<MascotasAdopcion> listaMascotasAdopcion= mascotasDao.listarMascotasActivasAdopcion8();
+                System.out.println("Lista de Adopciones: " + listaMascotasAdopcion.size() + " elementos.");
+                request.setAttribute("listaAdopcion", listaMascotasAdopcion);
+
+                // Obtiene el RequestDispatcher para la página JSP
+
+                RequestDispatcher rd = request.getRequestDispatcher("user/inicio.jsp");
+
+                // Reenvía la solicitud y la respuesta al JSP
+                rd.forward(request, response);
                 break;
             case "e": //voy a actualizar
 

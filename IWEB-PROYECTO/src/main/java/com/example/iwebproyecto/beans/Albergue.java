@@ -1,12 +1,13 @@
 package com.example.iwebproyecto.beans;
 
+
 public class Albergue {
     private int albergueID;
     private String nombreAlbergue;
     private String nombreEncargado;
     private String apellidoEncargado;
     private int espaciosDisponibles;
-    private String anioCreacion;
+    private String fechaCreacion;
     private String correoElectronico;
     private String contrasenia;
     private int cantidadAnimales;
@@ -23,11 +24,13 @@ public class Albergue {
     private String numeroYape;
     private String numeroPlin;
     private String codigoQR;
-    private String estado; /*Estado:'Aprobado', 'Desaprobado'*/
+    private boolean aprobado; /*Estado:'Aprobado', 'Desaprobado'*/
 
     private Foto foto;
     private String mensaje;
-    private boolean flag;
+    private boolean eliminado;
+    private String fechaRegistrado;
+    private String descripcion;
 
 
     // Constructor vacío
@@ -37,14 +40,14 @@ public class Albergue {
     // Constructor con todos los campos
 
 
-    public Albergue(int albergueID, String nombreAlbergue, String nombreEncargado, String apellidoEncargado, int espaciosDisponibles, String anioCreacion, String correoElectronico, String contrasenia, int cantidadAnimales, String urlFacebook, String urlInstagram, String direccion, Distrito distrito, String puntoAcopioDonaciones, String direccionDonaciones, String nombreContactoDonaciones, String numeroContactoDonaciones, String numeroYape, String numeroPlin, String codigoQR, String estado, Foto foto, String mensaje, boolean flag) {
+    public Albergue(int albergueID, String nombreAlbergue, String nombreEncargado, String apellidoEncargado, int espaciosDisponibles, String fechaCreacion, String correoElectronico, String contrasenia, int cantidadAnimales, String urlFacebook, String urlInstagram, String direccion, Distrito distrito, String puntoAcopioDonaciones, String direccionDonaciones, String nombreContactoDonaciones, String numeroContactoDonaciones, String numeroYape, String numeroPlin, String codigoQR, boolean aprobado, Foto foto, String mensaje, boolean eliminado) {
 
         this.albergueID = albergueID;
         this.nombreAlbergue = nombreAlbergue;
         this.nombreEncargado = nombreEncargado;
         this.apellidoEncargado = apellidoEncargado;
         this.espaciosDisponibles = espaciosDisponibles;
-        this.anioCreacion = anioCreacion;
+        this.fechaCreacion = fechaCreacion;
         this.correoElectronico = correoElectronico;
         this.contrasenia = contrasenia;
         this.cantidadAnimales = cantidadAnimales;
@@ -61,12 +64,12 @@ public class Albergue {
         this.numeroYape = numeroYape;
         this.numeroPlin = numeroPlin;
         this.codigoQR = codigoQR;
-        this.estado = estado;
+        this.aprobado = aprobado;
 
         this.foto = foto;
 
         this.mensaje = mensaje;
-        this.flag = flag;
+        this.eliminado = eliminado;
     }
 
     // Getters y Setters para cada campo
@@ -111,13 +114,7 @@ public class Albergue {
         this.espaciosDisponibles = espaciosDisponibles;
     }
 
-    public String getAnioCreacion() {
-        return anioCreacion;
-    }
 
-    public void setAnioCreacion(String anioCreacion) {
-        this.anioCreacion = anioCreacion;
-    }
 
     public String getCorreoElectronico() {
         return correoElectronico;
@@ -225,13 +222,7 @@ public class Albergue {
         this.codigoQR = codigoQR;
     }
 
-    public String getEstado() {
-        return estado;
-    }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 
 
     public String getMensaje() {
@@ -243,16 +234,45 @@ public class Albergue {
     }
 
 
-    public boolean isFlag() {
-        return flag;
+    public String getFechaCreacion() {
+        return fechaCreacion;
     }
 
-    public void setFlag(boolean flag) {
-
-        this.flag = flag;
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
+    public boolean isAprobado() {
+        return aprobado;
+    }
 
+    public void setAprobado(boolean aprobado) {
+        this.aprobado = aprobado;
+    }
+
+    public boolean isEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
+    }
+
+    public String getFechaRegistrado() {
+        return fechaRegistrado;
+    }
+
+    public void setFechaRegistrado(String fechaRegistrado) {
+        this.fechaRegistrado = fechaRegistrado;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
     public Foto getFoto() {
         return foto;

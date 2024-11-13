@@ -116,6 +116,17 @@
                             <h1>Todos los Albergues</h1>
                             <div class="row">
 
+                            <hr>
+                            <div class="row justify-content-between pt-3 mb-4">
+                                <div class="col-sm-5" style="min-width: 300px;">
+                                    <div class="input-group">
+                                        <button class="btn" type="button" aria-label="Close" style="background-color: #4D0E0E; cursor: default;">
+                                            <span class="fi-rr-search" style="font-size: 20px; color: rgb(255, 255, 255);"></span>
+                                        </button>
+                                        <input type="text" id="searchInput" class="form-control" placeholder="Busque por nombre del albergue" maxlength="60">
+                                    </div>
+                                </div>
+                            </div>
 
                                 <%
                                     int i = 1;
@@ -143,6 +154,18 @@
                                 %>
                             </div>
                         </div>
+
+                        <!-- Pagination -->
+                        <div class="container d-flex justify-content-center mt-5">
+                            <div class="row">
+                                <nav aria-label="...">
+                                    <ul class="pagination" id="pagination">
+                                    <!-- Pagos dinámicos -->
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        
                     </div>
                     <div class="col-md-3 d-flex flex-column" id="contenidoDerecha">
                         <div class="container" id="MascotasPerdidas">
@@ -314,3 +337,160 @@
 
     });
 </script>
+
+<!--Barra de busqueda y creacion de nuevo archivo-->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Capturamos el campo de búsqueda
+        var searchInput = document.querySelector('.form-control');
+        var pagination = document.getElementById('pagination'); // Referencia a la paginación
+
+        // Evento 'keyup' para filtrar las cards cuando se escribe
+        searchInput.addEventListener('keyup', function() {
+            var inputValue = searchInput.value.toLowerCase(); // Convertir el texto a minúsculas
+            var cards = document.querySelectorAll('.card-item'); // Seleccionar todas las cards
+
+            let visibleCards = 0; // Contador para cards visibles
+
+            cards.forEach(function(card) {
+                var cardTitle = card.querySelector('.card-title').textContent.toLowerCase(); // Obtener título
+                
+                if (cardTitle.includes(inputValue)) {
+                    if (inputValue.length > 0 || visibleCards < 9) { // Mostrar solo 6 como máximo cuando no hay búsqueda
+                        card.classList.add('d-block'); // Mostrar la card si coincide
+                        card.classList.remove('d-none'); // Asegurarse de que no esté oculta
+                        visibleCards++; // Aumentar el contador de cards visibles
+                    } else {
+                        card.classList.remove('d-block'); // Ocultar si excede 6 cards
+                        card.classList.add('d-none'); // Asegurarse de que esté oculta
+                    }
+                } else {
+                    card.classList.remove('d-block'); // Ocultar la card si no coincide
+                    card.classList.add('d-none'); // Asegurarse de que esté oculta
+                }
+            });
+
+                // Si el input está vacío, asegúrate de que no se muestren más de 9 cards
+                if (inputValue.length === 0) {
+                    visibleCards = 0;
+                    cards.forEach(function(card) {
+                        if (visibleCards < 9) {
+                            card.classList.add('d-block');
+                            card.classList.remove('d-none');
+                            visibleCards++;
+                        } else {
+                            card.classList.remove('d-block');
+                            card.classList.add('d-none');
+                        }
+                    });
+                }
+
+                // Si se está buscando, ocultar la paginación
+                if (inputValue.length > 0) {
+                    pagination.style.display = 'none'; // Ocultar la paginación
+                } else {
+                    pagination.style.display = ''; // Mostrar la paginación si no hay búsqueda
+                    showPage(1); // Mostrar la primera página cuando no hay búsqueda
+                }
+            });
+
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const itemsPerPage = 9;
+        let currentPage = 1;
+        const cardItems = document.querySelectorAll('.card-item');
+        const totalPages = Math.ceil(cardItems.length / itemsPerPage);
+        const pagination = document.getElementById('pagination');
+
+        function showPage(page) {
+            const visibleCards = getVisibleCards(); // Obtener las tarjetas visibles después del filtro de búsqueda
+            const totalPages = Math.ceil(visibleCards.length / itemsPerPage);
+            if (page < 1 || page > totalPages) {
+                return;
+            }
+
+            currentPage = page; // Actualiza la página actual
+            let start = (currentPage - 1) * itemsPerPage;
+            let end = start + itemsPerPage;
+
+            // Mostrar solo los elementos de la página actual
+            cardItems.forEach((card, index) => {
+            const isVisible = visibleCards.includes(card);
+                if (isVisible) {
+                    if (index >= start && index < end) {
+                        card.classList.add('d-block');
+                        card.classList.remove('d-none');
+                    } else {
+                        card.classList.remove('d-block');
+                        card.classList.add('d-none');
+                    }
+                } else {
+                    card.classList.remove('d-block');
+                    card.classList.add('d-none');
+                }
+            });
+
+            renderPagination(totalPages); // Re-renderizar la paginación
+        }
+
+        // Función para obtener todas las tarjetas visibles (después de aplicar búsqueda)
+        function getVisibleCards() {
+            const inputValue = searchInput.value.toLowerCase();
+            let visibleCards = [];
+
+            cardItems.forEach(function(card) {
+                const cardTitle = card.querySelector('.card-title').textContent.toLowerCase();
+                if (cardTitle.includes(inputValue)) {
+                    visibleCards.push(card);
+                }
+            });
+
+            return visibleCards;
+        }
+
+        function renderPagination(totalPages) {
+            pagination.innerHTML = '';
+
+            // Botón anterior (se desactiva si estamos en la primera página)
+            let prevClass = currentPage === 1 ? 'disabled' : '';
+            pagination.innerHTML += `<li class="page-item ${prevClass}"><a class="page-link" data-page="${currentPage - 1}" href="#">Anterior</a></li>`;
+
+            // Números de página
+            for (let i = 1; i <= totalPages; i++) {
+                let activeClass = currentPage === i ? 'active' : '';
+                let pageClass = activeClass ? 'bg-brown text-white' : 'bg-white text-brown'; // Añadir clases de color marrón para la página activa
+                pagination.innerHTML += `<li class="page-item ${activeClass} ${pageClass}"><a class="page-link" data-page="${i}" href="#">${i}</a></li>`;
+            }
+
+            // Botón siguiente (se desactiva si estamos en la última página)
+            let nextClass = currentPage === totalPages ? 'disabled' : '';
+            pagination.innerHTML += `<li class="page-item ${nextClass}"><a class="page-link" data-page="${currentPage + 1}" href="#">Siguiente</a></li>`;
+
+            // Añadir un evento a los enlaces de la paginación para que llamen a showPage()
+            const paginationLinks = document.querySelectorAll('.page-link');
+            paginationLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const page = parseInt(this.getAttribute('data-page'));
+                    showPage(page);
+                });
+            });
+        }
+
+        // Lógica de búsqueda
+        searchInput.addEventListener('keyup', function() {
+            showPage(1); // Reiniciar a la primera página cuando se haga una búsqueda
+        });
+
+        // Inicializar la paginación
+        function initPagination() {
+            const visibleCards = getVisibleCards(); // Obtener las tarjetas visibles
+            const totalPages = Math.ceil(visibleCards.length / itemsPerPage);
+            renderPagination(totalPages);
+            showPage(currentPage);
+        }
+
+        initPagination(); // Llamar la función para inicializar la paginación
+     });
+  </script>

@@ -2,19 +2,23 @@ package com.example.iwebproyecto.beans;
 
 public class MascotasAdopcion {
     private int idAdopcion;
+    private String nombreMascota;
+    private String especie;
     private String raza;
-    private String lugarEncontrado;
-    private String descripcionGeneral;
+    private Distrito distrito;
+    private String direccionHallazgo;
     private int edadAprox;
-    private int seEncuentraTemporal;
-    private String condicionesAdopcion;
-
-    private Usuario usuario;
-    private Albergue albergue;
     private String sexo;
+    private String descripcionGeneral;
+
+    private boolean seEncuentraTemporal;
+    private String condicionesAdopcion;
+    private boolean eliminado;
+    private Albergue albergue;
+
     private Foto foto;
 
-    private String fecha;
+    private String fechaAdoptado;
 
     // Constructor vacio
     public MascotasAdopcion() {}
@@ -22,23 +26,60 @@ public class MascotasAdopcion {
     // Constructor con todos los campos
 
 
+    public String getNombreMascota() {
+        return nombreMascota;
+    }
 
-    public MascotasAdopcion(int idAdopcion, String raza, String lugarEncontrado, String descripcionGeneral, int edadAprox, int seEncuentraTemporal, String condicionesAdopcion, Usuario usuario, Albergue albergue, String sexo, Foto foto, String fecha) {
+    public void setNombreMascota(String nombreMascota) {
+        this.nombreMascota = nombreMascota;
+    }
 
-        this.idAdopcion = idAdopcion;
-        this.raza = raza;
-        this.lugarEncontrado = lugarEncontrado;
-        this.descripcionGeneral = descripcionGeneral;
-        this.edadAprox = edadAprox;
+    public String getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+
+    public Distrito getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(Distrito distrito) {
+        this.distrito = distrito;
+    }
+
+    public String getDireccionHallazgo() {
+        return direccionHallazgo;
+    }
+
+    public void setDireccionHallazgo(String direccionHallazgo) {
+        this.direccionHallazgo = direccionHallazgo;
+    }
+
+    public boolean isSeEncuentraTemporal() {
+        return seEncuentraTemporal;
+    }
+
+    public void setSeEncuentraTemporal(boolean seEncuentraTemporal) {
         this.seEncuentraTemporal = seEncuentraTemporal;
-        this.condicionesAdopcion = condicionesAdopcion;
+    }
 
-        this.usuario = usuario;
-        this.albergue = albergue;
-        this.sexo = sexo;
-        this.foto = foto;
+    public boolean isEliminado() {
+        return eliminado;
+    }
 
-        this.fecha = fecha;
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
+    }
+
+    public String getFechaAdoptado() {
+        return fechaAdoptado;
+    }
+
+    public void setFechaAdoptado(String fechaAdoptado) {
+        this.fechaAdoptado = fechaAdoptado;
     }
 
     public int getIdAdopcion() {
@@ -57,13 +98,7 @@ public class MascotasAdopcion {
         this.raza = raza;
     }
 
-    public String getLugarEncontrado() {
-        return lugarEncontrado;
-    }
 
-    public void setLugarEncontrado(String lugarEncontrado) {
-        this.lugarEncontrado = lugarEncontrado;
-    }
 
     public String getDescripcionGeneral() {
         return descripcionGeneral;
@@ -81,13 +116,7 @@ public class MascotasAdopcion {
         this.edadAprox = edadAprox;
     }
 
-    public int getSeEncuentraTemporal() {
-        return seEncuentraTemporal;
-    }
 
-    public void setSeEncuentraTemporal(int seEncuentraTemporal) {
-        this.seEncuentraTemporal = seEncuentraTemporal;
-    }
 
     public String getCondicionesAdopcion() {
         return condicionesAdopcion;
@@ -107,22 +136,6 @@ public class MascotasAdopcion {
     }
 
 
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
 
     public Albergue getAlbergue() {
         return albergue;

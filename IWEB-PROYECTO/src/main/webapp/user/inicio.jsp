@@ -1,4 +1,9 @@
+<%@ page import="com.example.iwebproyecto.beans.MascotasAdopcion" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    ArrayList<MascotasAdopcion> listaAdopcion = (ArrayList) request.getAttribute("listaAdopcion");
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -537,96 +542,41 @@
                         <!-- Carrusel para Escritorio (4 cards por slide) -->
                         <div id="Adop-dsk" class="carousel carousel-dark slide d-none d-lg-block" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
+                                <%
+                                    int i = 0; // Contador para controlar los slides
+                                    for (MascotasAdopcion mascota : listaAdopcion) {
+                                        String activeClass = (i == 0) ? "active" : ""; // Solo el primer elemento será activo
+                                %>
+                                <% if (i % 4 == 0) { %>
+                                <!-- Empieza un nuevo slide cada 4 tarjetas -->
+                                <div class="carousel-item <%= activeClass %>">
                                     <div class="row">
+                                        <% } %>
+
                                         <div class="col-md-3">
                                             <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido1.jpg" class="card-img-top card-img-adop" alt="...">
+                                                <!-- Aquí puedes acceder a las propiedades de la mascota -->
+                                                <img src="${pageContext.request.contextPath}/<%=mascota.getFoto().getRutaFoto()%>" class="card-img-top card-img-adop" alt="...">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">REX</h5>
-                                                    <p class="card-text">Descripción de la card 1.</p>
-                                                    <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
+                                                    <h5 class="card-title"><%= mascota.getNombreMascota() %></h5>
+                                                    <a href="PortalDeAdopcion?action=vista&id=<%=mascota.getIdAdopcion()%>" class="btn btn-personal" id="btn-crd-cr">Ver Solicitud</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido2.jpg" class="card-img-top card-img-adop" alt="...">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">JUAN</h5>
-                                                    <p class="card-text">Descripción de la card 2.</p>
-                                                    <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido3.jpg" class="card-img-top card-img-adop" alt="...">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">LOGAN</h5>
-                                                    <p class="card-text">Descripción de la card 3.</p>
-                                                    <a href="/user/solicitudAdopcion.jsp" class="btn btn-personal" id="btn-crd-cr">Ver Solicitud</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido4.jpg" class="card-img-top card-img-adop" alt="...">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">PRINCESA</h5>
-                                                    <p class="card-text">Descripción de la card 4.</p>
-                                                    <a href="#" class="btn btn-personal"  id="btn-crd-cr ">Ver Solicitud</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Agrega más slides aquí -->
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido5.jpg" class="card-img-top card-img-adop" alt="...">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">ROSITA</h5>
-                                                    <p class="card-text">Descripción de la card 5.</p>
-                                                    <a href="#" class="btn btn-personal"  id="btn-crd-cr ">Ver Solicitud</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido6.jpg" class="card-img-top card-img-adop" alt="...">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">PEPE</h5>
-                                                    <p class="card-text">Descripción de la card 6.</p>
-                                                    <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido7.jpg" class="card-img-top card-img-adop" alt="...">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">COCO</h5>
-                                                    <p class="card-text">Descripción de la card 7.</p>
-                                                    <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido8.jpg" class="card-img-top card-img-adop" alt="...">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">PANCHITO</h5>
-                                                    <p class="card-text">Descripción de la card 8.</p>
-                                                    <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+                                        <% if ((i+1) % 4 == 0 || i == listaAdopcion.size() - 1) { %>
+                                        <!-- Cierra la fila y el slide después de 4 tarjetas o si es el último elemento -->
+                                    </div> <!-- Cierra la fila -->
+                                </div> <!-- Cierra el slide -->
+                                <% } %>
+
+                                <%
+                                        i++; // Aumenta el índice después de cada tarjeta
+                                    }
+                                %>
                             </div>
+
+
                             <button class="carousel-control-prev" type="button" data-bs-target="#Adop-dsk" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>

@@ -11,9 +11,9 @@ import java.util.ArrayList;
 public class AlbergueDao extends BaseDao {
 
     // Método para obtener todos los albergues
-    public ArrayList<Albergue> listarAlbergues() {
+    public ArrayList<Albergue> listarAlberguesActivosAprobados() {
         ArrayList<Albergue> listaAlbergues = new ArrayList<>();
-        String sql = "select * from albergue where estado='Aprobado';";
+        String sql = "select * from albergue where aprobado=1 and eliminado=0";
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
@@ -43,7 +43,7 @@ public class AlbergueDao extends BaseDao {
             statement.setString(2, albergue.getNombreEncargado());
             statement.setString(3, albergue.getApellidoEncargado());
             statement.setInt(4, albergue.getEspaciosDisponibles());
-            statement.setString(5, albergue.getAnioCreacion());
+            //statement.setString(5, albergue.getAnioCreacion());
             statement.setString(6, albergue.getCorreoElectronico());
             statement.setString(7, albergue.getContrasenia());
             statement.setInt(8, albergue.getCantidadAnimales());
@@ -57,7 +57,7 @@ public class AlbergueDao extends BaseDao {
             statement.setString(16, albergue.getNumeroYape());
             statement.setString(17, albergue.getNumeroPlin());
             statement.setString(18, albergue.getCodigoQR());
-            statement.setString(19, albergue.getEstado());
+            //statement.setString(19, albergue.getEstado());
             //statement.setInt(20, albergue.getFotos_FotoID());
             statement.setString(21, albergue.getMensaje());
 
@@ -94,7 +94,7 @@ public class AlbergueDao extends BaseDao {
         albergue.setNombreEncargado(rs.getString("nombreEncargado"));
         albergue.setApellidoEncargado(rs.getString("apellidoEncargado"));
         albergue.setEspaciosDisponibles(rs.getInt("espaciosDisponibles"));
-        albergue.setAnioCreacion(rs.getString("anioCreacion"));
+        albergue.setFechaCreacion(rs.getString("fechaCreacion"));
         albergue.setCorreoElectronico(rs.getString("correoElectronico"));
         albergue.setContrasenia(rs.getString("contrasenia"));
         albergue.setCantidadAnimales(rs.getInt("cantidadAnimales"));
@@ -113,15 +113,15 @@ public class AlbergueDao extends BaseDao {
         albergue.setNumeroYape(rs.getString("numeroYape"));
         albergue.setNumeroPlin(rs.getString("numeroPlin"));
         albergue.setCodigoQR(rs.getString("codigoQR"));
-        albergue.setEstado(rs.getString("estado"));
-
+        albergue.setAprobado(rs.getBoolean("aprobado"));
 
         FotoDao fotoDao = new FotoDao();
-        Foto foto =fotoDao.obtenerFotoPorId(rs.getInt("fotos_fotoID"));
+        Foto foto =fotoDao.obtenerFotoPorId(rs.getInt("fotoID"));
         albergue.setFoto(foto);
 
-
-        albergue.setMensaje(rs.getString("mensaje"));
+        albergue.setEliminado(rs.getBoolean("eliminado"));
+        albergue.setFechaRegistrado(rs.getString("fechaRegistrado"));
+        albergue.setDescripcion(rs.getString("descripcion"));
         return albergue;
     }
 
@@ -139,7 +139,7 @@ public class AlbergueDao extends BaseDao {
             pstmt.setString(2, albergue.getNombreEncargado());
             pstmt.setString(3, albergue.getApellidoEncargado());
             pstmt.setInt(4, albergue.getEspaciosDisponibles());
-            pstmt.setString(5, albergue.getAnioCreacion());
+            //pstmt.setString(5, albergue.getAnioCreacion());
             pstmt.setString(6, albergue.getCorreoElectronico());
             pstmt.setString(7, albergue.getContrasenia());
             pstmt.setInt(8, albergue.getCantidadAnimales());
@@ -153,7 +153,7 @@ public class AlbergueDao extends BaseDao {
             pstmt.setString(16, albergue.getNumeroYape());
             pstmt.setString(17, albergue.getNumeroPlin());
             pstmt.setString(18, albergue.getCodigoQR());
-            pstmt.setString(19, albergue.getEstado());
+            //pstmt.setString(19, albergue.getEstado());
             //pstmt.setInt(20, albergue.getFotos_FotoID());
             pstmt.setString(21, albergue.getMensaje());
             pstmt.setInt(22, albergue.getAlbergueID());

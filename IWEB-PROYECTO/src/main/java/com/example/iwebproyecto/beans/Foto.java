@@ -3,23 +3,14 @@ package com.example.iwebproyecto.beans;
 public class Foto {
     private int fotoID;
     private String rutaFoto;
-    private String ubicacion;
     // Constructor vacío
     public Foto() {}
     // Constructor con todos los campos
     public Foto(int fotoID, String rutaFoto, String ubicacion) {
         this.fotoID = fotoID;
         this.rutaFoto = rutaFoto;
-        this.ubicacion = ubicacion;
     }
     // Getters y Setters para cada campo
-    public String getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
 
     public int getFotoID() {
         return fotoID;
@@ -43,7 +34,6 @@ public class Foto {
         return "Foto{" +
                 "fotoID=" + fotoID +
                 ", rutaFoto='" + rutaFoto + '\'' +
-                ", ubicacion='" + ubicacion + '\'' +
                 '}';
     }
 }

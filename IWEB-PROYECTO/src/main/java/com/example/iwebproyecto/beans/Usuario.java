@@ -8,13 +8,13 @@ public class Usuario {
     private String direccion;
     private String correoElectronico;
     private String contrasenia;
-    private String estado;
+    private boolean activo;
 
     private Distrito distrito;
     private Foto foto;
-    private boolean flag;
+    private boolean eliminado;
 
-    public Usuario(int usuarioID, String nombre, String apellido, String dni, String direccion, String correoElectronico, String contrasenia, String estado, Distrito distrito, Foto foto, boolean flag) {
+    public Usuario(int usuarioID, String nombre, String apellido, String dni, String direccion, String correoElectronico, String contrasenia, boolean activo, Distrito distrito, Foto foto, boolean eliminado) {
 
         this.usuarioID = usuarioID;
         this.nombre = nombre;
@@ -23,11 +23,11 @@ public class Usuario {
         this.direccion = direccion;
         this.correoElectronico = correoElectronico;
         this.contrasenia = contrasenia;
-        this.estado = estado;
+        this.activo = activo;
 
         this.distrito = distrito;
         this.foto = foto;
-        this.flag = flag;
+        this.eliminado = eliminado;
     }
 
     public Usuario() {
@@ -91,21 +91,20 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
-    public String getEstado() {
-        return estado;
+    public boolean isActivo() {
+        return activo;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
-    public boolean isFlag() {
-        return flag;
+    public boolean isEliminado() {
+        return eliminado;
     }
 
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
     }
 
     public Distrito getDistrito() {

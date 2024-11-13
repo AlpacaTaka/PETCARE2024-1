@@ -1,10 +1,8 @@
 package com.example.iwebproyecto.daos;
 
 import com.example.iwebproyecto.beans.DenunciaMaltrato;
-import com.example.iwebproyecto.beans.Fotos;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class DenunciaMaltratoDao extends BaseDao {
 
@@ -22,7 +20,7 @@ public class DenunciaMaltratoDao extends BaseDao {
             stmt.setInt(6, DenunciaMaltrato.getRealizoDenuncia());
             stmt.setString(7, DenunciaMaltrato.getEspecie());
             stmt.setString(8, DenunciaMaltrato.getFecha());
-            stmt.setInt(9, DenunciaMaltrato.getFoto().getIdFoto());
+            stmt.setInt(9, DenunciaMaltrato.getFoto().getFotoID());
 
 
             stmt.executeUpdate();

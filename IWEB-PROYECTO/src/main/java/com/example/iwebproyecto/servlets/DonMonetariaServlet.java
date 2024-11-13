@@ -20,7 +20,7 @@ public class DonMonetariaServlet extends HttpServlet {
             case "lista":
 
                 AlbergueDao albergueDao = new AlbergueDao();
-                ArrayList<Albergue> listaAlbergues = albergueDao.listarAlbergues();
+                ArrayList<Albergue> listaAlbergues = albergueDao.listarAlberguesActivosAprobados();
 
                 request.setAttribute("listaAlbergues", listaAlbergues);
 
@@ -51,6 +51,13 @@ public class DonMonetariaServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String albergueIdStr = request.getParameter("albergueId");
+        String montoStr = request.getParameter("monto");
+
+
+
+
+
 
     }
 }

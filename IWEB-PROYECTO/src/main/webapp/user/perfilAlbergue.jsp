@@ -6,6 +6,7 @@
 
 
 %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -126,7 +127,7 @@
                 </div>
                 <div class="welcome-text">Hola, Juan</div>
             </div>
-            <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="/user/inicio.html"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
 
         <div class="main">
@@ -134,33 +135,34 @@
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="/user/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="/user/allEventos.jsp" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
-                    <li><a href="/user/postularTemporal.jsp" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
-                    <li><a href="/user/solicitudesDonacionSuministros.jsp" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
-                    <li><a href="/user/donacionMonetaria.jsp" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
-                    <li><a href="/user/solicitudesAdopcion.jsp" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                    <li><a href="/user/reportarMascotaPerdida.jsp" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
-                    <li><a href="/user/reportarMaltrato.jsp" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
+                    <li><a href="/user/miPerfil.html" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="/user/allEventos.html" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
+                    <li><a href="/user/postularTemporal.html" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
+                    <li><a href="/user/solicitudesDonacionSuministros.html" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
+                    <li><a href="/user/donacionMonetaria.html" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
+                    <li><a href="/user/solicitudesAdopcion.html" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                    <li><a href="/user/reportarMascotaPerdida.html" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
+                    <li><a href="/user/reportarMaltrato.html" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
                     <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
                 
             </div>
 
             <div id="menu" class="menu">
-                <a href="/user/miPerfil.jsp">Mi Perfil</a>
-                <a href="/user/misEventos.jsp">Mis Eventos</a>
-                <a href="/user/misDonaciones.jsp" id="Sep">Mis Donaciones</a>
+                <a href="/user/miPerfil.html">Mi Perfil</a>
+                <a href="/user/misEventos.html">Mis Eventos</a>
+                <a href="/user/misDonaciones.html" id="Sep">Mis Donaciones</a>
                 <hr>
-                <a href="/user/allEventos.jsp">Eventos</a>
-                <a href="/user/postularAlbergue.jsp">Postular a Albergue</a>
-                <a href="/user/postularTemporal.jsp">Hogar Temporal</a>
-                <a href="/user/solicitudesDonacionSuministros.jsp">Donaciones de Suministros</a>
-                <a href="/user/donacionMonetaria.jsp">Donaciones Monetarias</a>
-                <a href="/user/solicitudesAdopcion.jsp">Portal de Adopciones</a>
-                <a href="/user/mascotasPerdidas.jsp">Portal de Mascotas Perdidas</a>
-                <a href="/user/reportarMascotaPerdida.jsp">Reportar Mascota Perdida</a>
-                <a href="/user/reportarMaltrato.jsp" id="Sep">Reportar Maltrato</a>
+                <a href="/user/allEventos.html">Eventos</a>
+                <a href="/user/postularAlbergue.html">Postular a Albergue</a>
+                <a href="/user/postularTemporal.html">Hogar Temporal</a>
+                <a href="/user/solicitudesDonacionSuministros.html">Donaciones de Suministros</a>
+                <a href="/user/donacionMonetaria.html">Donaciones Monetarias</a>
+                <a href="/user/solicitudesAdopcion.html">Portal de Adopciones</a>
+                <a href="/user/mascotasPerdidas.html">Portal de Mascotas Perdidas</a>
+                <a href="/user/avistamientoPerdidos.html">Portal Avistamiento Perdidos</a>
+                <a href="/user/reportarMascotaPerdida.html">Reportar Mascota Perdida</a>
+                <a href="/user/reportarMaltrato.html" id="Sep">Reportar Maltrato</a>
                 <hr>
                 <a href="/login/login.html">Cerrar Sesión</a>
 
@@ -170,7 +172,7 @@
                 <!--Boton de regreso a la página principal-->
                 <div class="col" id="contenido-nofooter">
                     <div class="container md-8 d-flex justify-content-between g-2" style="width: 90%;max-width: 800px; margin-bottom: 20px; padding: 0;">
-                        <button type="button"  class="btn btn-personal2" onclick="location.href='TodosLosAlbergues'">  Regresar   </button>
+                        <button type="button"  class="btn btn-personal2" onclick="location.href='donacionMonetaria.html'">  Regresar   </button>
 
                     </div>
                     <div class="container md-12" style="width: 90%;max-width: 800px; background-color: #fca6519f; border-radius: 30px; margin-bottom: 20px; padding: 10px 20px;">
@@ -192,7 +194,7 @@
                                 <div class="row justify-content-center p-2">
                                     <div class="col-md-6 p-2">
                                         <p class="card-text" style="text-align: left;"><strong>Fecha de Creación</strong> </p>
-                                        <p class="card-text" style="text-align: left;"><%=a.getAnioCreacion()%></p>
+                                        <p class="card-text" style="text-align: left;"><%=a.getFechaCreacion()%></p>
                                         <p class="card-text" style="text-align: left;"><strong>Distrito</strong> </p>
                                         <p class="card-text" style="text-align: left;"><%=a.getDistrito().getNombreDistrito()%></p>
                                         <p class="card-text" style="text-align: left;"><strong>Direccion</strong> </p>
@@ -221,9 +223,8 @@
                         </div>
                         <hr>
                         <article style="text-align: justify;">
-                            <p>Desde el año 2001, Patitas Felices ha sido un refugio para animales abandonados, brindándoles un hogar temporal y la oportunidad de encontrar una familia amorosa. Nuestro compromiso con el bienestar animal nos ha llevado a rescatar a miles de perros y gatos, ofreciéndoles cuidados veterinarios, alimentación adecuada y un ambiente seguro.</p>
-                            <p>A lo largo de estos años, hemos logrado reubicar a cientos de animales en hogares responsables, donde han encontrado el amor y la felicidad que merecen. Nuestro trabajo no solo ha beneficiado a los animales, sino que también ha tenido un impacto positivo en la comunidad, promoviendo la adopción responsable y la conciencia sobre el cuidado animal.</p>
-                            <p>Estamos orgullosos de nuestra labor y continuaremos trabajando incansablemente para mejorar la vida de los animales abandonados. Con tu apoyo, podemos seguir brindando esperanza y amor a aquellos que más lo necesitan.</p>
+                            <p><%=a.getDescripcion()%></p>
+                           
                         </article>
                         <div class="container md-8 d-flex justify-content-center">
                             <button type="button"  class="btn btn-personal d-flex " onclick="showDonarSumDialog()" style="font-size: 19px;"><span class="fi-rr-hand-holding-usd"></span>&nbsp;Realizar un aporte</button>
@@ -323,7 +324,7 @@
                                                         
             
                                                           <p class="card-text">Animate a caminar con tu amigo de 4 patas. Tendremos grandes premios y artistas invitados.</p>
-                                                        <a href="evento.jsp" class="btn btn-personal">Ver Evento</a>
+                                                        <a href="evento.html" class="btn btn-personal">Ver Evento</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -341,7 +342,7 @@
                                                         
             
                                                           <p class="card-text">Se acerca Halloween! Ven con tu peludito disfrazado y podras ganar grandes premios.</p>
-                                                        <a href="evento.jsp" class="btn btn-personal">Ver Evento</a>
+                                                        <a href="evento.html" class="btn btn-personal">Ver Evento</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -359,7 +360,7 @@
                                                         
             
                                                           <p class="card-text">Se acerca Halloween! Ven con tu peludito disfrazado y podras ganar grandes premios.</p>
-                                                        <a href="eventoTraslape.jsp" class="btn btn-personal">Ver Evento</a>
+                                                        <a href="eventoTraslape.html" class="btn btn-personal">Ver Evento</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -377,7 +378,7 @@
                                                         
             
                                                           <p class="card-text">Ven al parque el faro en San Isidro para la fiesta de nuestros perritos albergados en Huellitas Felices</p>
-                                                        <a href="evento.jsp" class="btn btn-personal">Ver Evento</a>
+                                                        <a href="evento.html" class="btn btn-personal">Ver Evento</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -397,7 +398,7 @@
             
                                                           <p class="card-text">La Municipalidad Distrital de Surco y el Albergue Rayito de Sol-Surco los invita a este  evento de gran importancia para la comunidad</p>
             
-                                                        <a href="evento.jsp" class="btn btn-personal">Ver Evento</a>
+                                                        <a href="evento.html" class="btn btn-personal">Ver Evento</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -415,7 +416,7 @@
                                                         
             
                                                           <p class="card-text">Unete a esta fiesta! Trae a tu mascota</p>
-                                                        <a href="eventoCompleto.jsp" class="btn btn-personal">Ver Evento</a>
+                                                        <a href="eventoCompleto.html" class="btn btn-personal">Ver Evento</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -433,7 +434,7 @@
                                                         
             
                                                           <p class="card-text">Unete a esta fiesta! Trae a tu mascota</p>
-                                                        <a href="evento.jsp" class="btn btn-personal">Ver Evento</a>
+                                                        <a href="evento.html" class="btn btn-personal">Ver Evento</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -459,7 +460,7 @@
                                                   </li>
                                                   
                                                   <li class="page-item disabled">
-                                                    <a class="page-link" href="allEventos2.jsp">Siguiente</a>
+                                                    <a class="page-link" href="allEventos2.html">Siguiente</a>
                                                   </li>
                                                 </ul>
                                               </nav>
@@ -546,7 +547,7 @@
                         
             
                                                           <p class="card-text"> Animate a donar, ayudanos a ayudar</p>
-                                                        <a href="evento.jsp" class="btn btn-personal">Ver Solicitud</a>
+                                                        <a href="evento.html" class="btn btn-personal">Ver Solicitud</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -564,7 +565,7 @@
                                                         
             
                                                           <p class="card-text">Animate a donar, ayudanos a ayudar</p>
-                                                        <a href="evento.jsp" class="btn btn-personal">Ver Solicitud</a>
+                                                        <a href="evento.html" class="btn btn-personal">Ver Solicitud</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -582,7 +583,7 @@
                                                         
             
                                                           <p class="card-text">Animate a donar, ayudanos a ayudar</p>
-                                                        <a href="eventoTraslape.jsp" class="btn btn-personal">Ver Solicitud</a>
+                                                        <a href="eventoTraslape.html" class="btn btn-personal">Ver Solicitud</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -600,7 +601,7 @@
                                                         
             
                                                           <p class="card-text">Animate a donar, ayudanos a ayudar</p>
-                                                        <a href="evento.jsp" class="btn btn-personal">Ver Solicitud</a>
+                                                        <a href="evento.html" class="btn btn-personal">Ver Solicitud</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -621,7 +622,7 @@
             
                                                           <p class="card-text">Animate a donar, ayudanos a ayudar</p>
             
-                                                        <a href="evento.jsp" class="btn btn-personal">Ver Solicitud</a>
+                                                        <a href="evento.html" class="btn btn-personal">Ver Solicitud</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -639,7 +640,7 @@
                                                         
             
                                                           <p class="card-text">Animate a donar, ayudanos a ayudar</p>
-                                                        <a href="eventoCompleto.jsp" class="btn btn-personal">Ver Solicitud</a>
+                                                        <a href="eventoCompleto.html" class="btn btn-personal">Ver Solicitud</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -657,7 +658,7 @@
                                                         
             
                                                           <p class="card-text">Animate a donar, ayudanos a ayudar</p>
-                                                        <a href="evento.jsp" class="btn btn-personal">Ver Solicitud</a>
+                                                        <a href="evento.html" class="btn btn-personal">Ver Solicitud</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -683,7 +684,7 @@
                                                   </li>
                                                   
                                                   <li class="page-item disabled">
-                                                    <a class="page-link" href="allEventos2.jsp">Siguiente</a>
+                                                    <a class="page-link" href="allEventos2.html">Siguiente</a>
                                                   </li>
                                                 </ul>
                                               </nav>
@@ -725,9 +726,18 @@
                         <form id="suministroForm" onsubmit="handleFormSubmit(event)" >
                             <!--Primera columna de selección-->
                             <div class="row justify-content-center p-1">
-                                <div class="col-md-8 p-1">                         
+                                <div class="col-md-5 p-1">                         
                                     <label for="cant-donacion" style="font-size: 14px; font-weight: bold;">Ingrese el monto</label>
                                     <input type="number" class="form-control" placeholder="Ingrese el monto a donar" id="cant-donacion" name="cant-donacion" min="10" max="500" required>      
+                                </div>
+                                <div class="col-md-7 p-1">                         
+                                    <label for="solicitud-donacion" style="font-size: 14px; font-weight: bold;">Solicitud elegida</label>
+                                    <select class="form-select" id="solicitud-donacion" aria-label="Floating label select example" required >
+                                        <option value="" selected>Ninguna solicitud seleccionada</option>
+                                        <option value="1">Ayudanos a ayudar</option>
+                                        <option value="2">Necesitamos su apoyo</option>
+                                        <option value="3">Necesitamos vacunas</option>
+                                    </select>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-personal"> Enviar </button>
@@ -748,7 +758,7 @@
         </div>
     </div>
 
-        <script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
+        <script src="/common/script/neonavbar.js"></script>
         <script src="js/perfilAlbergue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script>

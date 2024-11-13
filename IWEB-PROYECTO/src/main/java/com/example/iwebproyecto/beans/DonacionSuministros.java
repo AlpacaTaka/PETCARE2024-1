@@ -2,17 +2,25 @@ package com.example.iwebproyecto.beans;
 
 public class DonacionSuministros {
     private int donacionSuministrosID;
+    private String tituloAvisoDonacion;
+    private String correoElectronicoDonacion;
+    private String tipoSuministro;
+    private String nombreSuministro;
+    private int cantidadDonacionesTotales;
 
-    private Usuario usuario;
+    private String marcaSuministro;
+
+    private Distrito distrito;
+
     private Albergue albergue;
 
-    private String fechaRecepcion;
-    private String nombreSuministro;
-    private String marcaSuministro;
-    private String horaRecepcion;
-    private String fecha;
-
+    private String fechaInicioRecepcion;
+    private String fechaFinRecepcion;
+    private String horaInicioRecepcion;
+    private String horaFinRecepcion;
     private Foto foto;
+
+    private String mensajeParaDonantes;
 
     public DonacionSuministros() {}
 
@@ -27,26 +35,8 @@ public class DonacionSuministros {
     }
 
 
-    public DonacionSuministros(int donacionSuministrosID, Usuario usuario, Albergue albergue, String fechaRecepcion, String nombreSuministro, String marcaSuministro, String horaRecepcion, String fecha, Foto foto) {
-        this.donacionSuministrosID = donacionSuministrosID;
-        this.usuario = usuario;
-        this.albergue = albergue;
-        this.fechaRecepcion = fechaRecepcion;
-        this.nombreSuministro = nombreSuministro;
-        this.marcaSuministro = marcaSuministro;
-        this.horaRecepcion = horaRecepcion;
-        this.fecha = fecha;
-        this.foto = foto;
 
-    }
 
-    public String getFechaRecepcion() {
-        return fechaRecepcion;
-    }
-
-    public void setFechaRecepcion(String fechaRecepcion) {
-        this.fechaRecepcion = fechaRecepcion;
-    }
 
     public String getNombreSuministro() {
         return nombreSuministro;
@@ -64,28 +54,85 @@ public class DonacionSuministros {
         this.marcaSuministro = marcaSuministro;
     }
 
-    public String getHoraRecepcion() {
-        return horaRecepcion;
+
+    public String getTituloAvisoDonacion() {
+        return tituloAvisoDonacion;
     }
 
-    public void setHoraRecepcion(String horaRecepcion) {
-        this.horaRecepcion = horaRecepcion;
+    public void setTituloAvisoDonacion(String tituloAvisoDonacion) {
+        this.tituloAvisoDonacion = tituloAvisoDonacion;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getCorreoElectronicoDonacion() {
+        return correoElectronicoDonacion;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setCorreoElectronicoDonacion(String correoElectronicoDonacion) {
+        this.correoElectronicoDonacion = correoElectronicoDonacion;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public String getTipoSuministro() {
+        return tipoSuministro;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setTipoSuministro(String tipoSuministro) {
+        this.tipoSuministro = tipoSuministro;
+    }
+
+    public int getCantidadDonacionesTotales() {
+        return cantidadDonacionesTotales;
+    }
+
+    public void setCantidadDonacionesTotales(int cantidadDonacionesTotales) {
+        this.cantidadDonacionesTotales = cantidadDonacionesTotales;
+    }
+
+    public Distrito getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(Distrito distrito) {
+        this.distrito = distrito;
+    }
+
+    public String getFechaInicioRecepcion() {
+        return fechaInicioRecepcion;
+    }
+
+    public void setFechaInicioRecepcion(String fechaInicioRecepcion) {
+        this.fechaInicioRecepcion = fechaInicioRecepcion;
+    }
+
+    public String getFechaFinRecepcion() {
+        return fechaFinRecepcion;
+    }
+
+    public void setFechaFinRecepcion(String fechaFinRecepcion) {
+        this.fechaFinRecepcion = fechaFinRecepcion;
+    }
+
+    public String getHoraInicioRecepcion() {
+        return horaInicioRecepcion;
+    }
+
+    public void setHoraInicioRecepcion(String horaInicioRecepcion) {
+        this.horaInicioRecepcion = horaInicioRecepcion;
+    }
+
+    public String getHoraFinRecepcion() {
+        return horaFinRecepcion;
+    }
+
+    public void setHoraFinRecepcion(String horaFinRecepcion) {
+        this.horaFinRecepcion = horaFinRecepcion;
+    }
+
+    public String getMensajeParaDonantes() {
+        return mensajeParaDonantes;
+    }
+
+    public void setMensajeParaDonantes(String mensajeParaDonantes) {
+        this.mensajeParaDonantes = mensajeParaDonantes;
     }
 
     public Albergue getAlbergue() {

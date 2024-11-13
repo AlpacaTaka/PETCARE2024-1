@@ -2,10 +2,8 @@ package com.example.iwebproyecto.daos;
 
 import com.example.iwebproyecto.beans.Distrito;
 import com.example.iwebproyecto.beans.Foto;
-import com.example.iwebproyecto.beans.Fotos;
 import com.example.iwebproyecto.beans.Usuario;
 import java.sql.*;
-import java.util.ArrayList;
 
 
 public class UsuarioDao extends BaseDao {
@@ -60,11 +58,7 @@ public class UsuarioDao extends BaseDao {
     //Metodo para obtener un usuario por ID
     public Usuario obtenerUsuarioPorID(int usuarioID) throws SQLException {
         try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement("SELECT u.*, f.rutaFoto, d.nombreDistrito " +
-                     "FROM usuario u " +
-                     "INNER JOIN fotos f ON u.Fotos_fotoId = f.fotoId " +
-                     "INNER JOIN distrito d ON u.distritoId = d.distritoId " +
-                     "WHERE u.usuarioID = ?")) {
+             PreparedStatement pstmt = conn.prepareStatement("SELECT * from usuario WHERE usuarioID = ?")) {
 
             pstmt.setInt(1, usuarioID);
 
@@ -86,18 +80,19 @@ public class UsuarioDao extends BaseDao {
         usuario.setDireccion(resultSet.getString("direccion"));
         usuario.setCorreoElectronico(resultSet.getString("correoelectronico"));
         usuario.setContrasenia(resultSet.getString("contrasenia"));
-        usuario.setEstado(resultSet.getString("estado"));
+        usuario.setActivo(resultSet.getBoolean("activo"));
+        usuario.setEliminado(resultSet.getBoolean("eliminado"));
 
-        Foto foto = new Foto();
-        Distrito distrito= new Distrito();
 
-        foto.setFotoID(resultSet.getInt("fotos_FotoID"));
-        foto.setRutaFoto(resultSet.getString("rutaFoto"));
+        FotoDao fotoDao = new FotoDao();
+        DistritoDao distritoDao = new DistritoDao();
+
+        Foto foto =fotoDao.obtenerFotoPorId(resultSet.getInt("fotoID"));
         usuario.setFoto(foto);
 
-        distrito.setDistritoID(resultSet.getInt("distritoId"));
-        distrito.setNombreDistrito(resultSet.getString("nombreDistrito"));
+        Distrito distrito= distritoDao.obtenerDistritoPorId(resultSet.getInt("distritoID"));
         usuario.setDistrito(distrito);
+
 
 
         return usuario;
