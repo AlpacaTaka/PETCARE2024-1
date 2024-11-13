@@ -10,15 +10,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/common/img/logos/paw.ico">
     <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
     <title>Mi  cuenta</title>
     <style>
-        
-        /* Esto es solo de referencia para ver su espacio disponible - borrar*/ 
-        
+
+        /* Esto es solo de referencia para ver su espacio disponible - borrar*/
+
         .image-container {
             width: 170px; /* Puedes ajustar el tamaño según sea necesario */
             height: 170px;
@@ -37,14 +37,14 @@
             height: 100%;
             object-fit: cover; /* Mantiene las proporciones de la imagen dentro del contenedor */
         }
-        
-        
+
+
     </style>
 </head>
 <body>
 
     <div class="contenedor-p">
-        
+
         <header class="cabecera">
             <div class="izquierda" onclick="toggleMenu()">
                 <div class="menu-c">
@@ -70,7 +70,7 @@
                     <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
                     <li id="cerrar-sesion"><a href="#micuenta" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
-                
+
             </div>
 
             <div id="menu" class="menu">
@@ -97,7 +97,7 @@
                             <form id="uploadForm" style="padding:10px" method="post" action="miPerfil">
                                 <input type="hidden" name="albergueID" value="<%= albergue.getAlbergueID() %>">
                                 <h1 style="margin-top: 10px;" class="text-center">Perfil de Albergue</h1>
-                                
+
                                 <div class="row justify-content-center p-1">
                                     <div class="col d-flex justify-content-center">
                                         <div class="image-container">
@@ -111,7 +111,7 @@
                                         <h5>Datos del Encargado</h5>
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <label for="">Nombre </label>
+                                        <label >Nombre </label>
                                         <input type="text" class="form-control" placeholder="Juan Ernesto" required disabled>
                                     </div>
                                     <div class="col-md-6 p-1">
@@ -127,9 +127,9 @@
                                     </div>
                                     <div class="col-md-9 p-1">
                                         <label for="">Nombre</label>
-                                        
+
                                         <input type="text" class="form-control" placeholder=" Patitas Felices" required disabled>
-                                      
+
                                     </div>
                                     <div class="col-md-3 p-1">
                                         <label for="distrito">Año de Creación:</label>
@@ -138,7 +138,7 @@
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1" >
-                                        <label for="correo">Correo:</label>
+                                        <label for="correoElectronico">Correo:</label>
                                         <input type="text" class="form-control" placeholder="patitasfelices@gmail.com" required disabled>
                                     </div>
                                 </div>
@@ -151,7 +151,7 @@
                                         <label for="direccion">Cantidad de espacios para nuevos animales</label>
                                         <input type="number" class="form-control" placeholder="30" required disabled>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-4 p-1" >
@@ -216,14 +216,14 @@
                                     </div>
 
                                 </div>
-                                
+
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1">
                                         <label for="direc_donac">Direccion de donaciones</label>
                                         <input type="text" class="form-control" id="direc_donac" maxlength="100" placeholder="Mz. E Lt. 3 Urb. Señor de los Milagros (espalda de la posta)" required disabled>
 
                                     </div>
-                                    
+
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1">
@@ -236,9 +236,9 @@
                                         <input type="number" id="num_donac" class="form-control" placeholder="993081812" required disabled>
 
                                     </div>
-                                    
+
                                 </div>
-                                
+
                                 <hr>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1">
@@ -256,25 +256,25 @@
                                         <input type="text" id="punto_acopio" name="punto_acopio" class="form-control" maxlength="100" value="<%= albergue.getPuntoAcopioDonaciones() %>" required disabled>
                                     </div>
                                 </div>
-                                
+
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1 d-flex justify-content-center">
                                         <button type="button" class="btn btn-personal" id="editarBtn">Editar datos</button>
                                     </div>
                                 </div>
                                 <hr>
-                                
-    
+
+
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1 d-flex justify-content-center">
                                         <p>Si necesita cambiar alguno de estos datos, contactar son Soporte</p>
                                     </div>
-    
-                                </div>                           
+
+                                </div>
                             </form>
                         </div>
 
-                        
+
                     </div>
                 </div>
 
@@ -325,7 +325,7 @@
                 this.value = this.value.slice(0,3);
             }
         })
-    
+
     </script>
     <script>
         //Limita la cant digitos de números
@@ -335,9 +335,9 @@
                 this.value = this.value.slice(0,3);
             }
         })
-    
+
     </script>
-    
-    
+
+
 </body>
 </html>

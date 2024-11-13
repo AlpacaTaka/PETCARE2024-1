@@ -69,42 +69,54 @@ public class AlbergueDao extends BaseDao {
         }
     }
 
-    // Método para obtener un albergue por el correo del encargado
-    public Albergue obtenerAlberguePorCorreo(String correo) {
-        String sql = "select * from albergue where correoElectronico=?;";
 
-        try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, correo);
-
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return mapearAlbergue(rs);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    // Método para obtener un albergue por ID
     public Albergue obtenerAlberguePorID(int albergueID) {
-        String sql = "select * from albergue where albergueId=?;";
+        Albergue albergue = new Albergue();
+        String sql = "SELECT * FROM albergue WHERE albergueID=?;";
 
         try (Connection conn = this.getConnection();
+
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
+            albergueID = 1;
             pstmt.setInt(1, albergueID);
 
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                return mapearAlbergue(rs);
+                albergue.setAlbergueID(rs.getInt("albergueID"));
+                albergue.setNombreAlbergue(rs.getString("nombreAlbergue"));
+                albergue.setNombreEncargado(rs.getString("nombreEncargado"));
+                albergue.setApellidoEncargado(rs.getString("apellidoEncargado"));
+                albergue.setEspaciosDisponibles(rs.getInt("espaciosDisponibles"));
+                albergue.setFechaCreacion(rs.getDate("fechaCreacion"));
+                albergue.setCorreoElectronico(rs.getString("correoElectronico"));
+                albergue.setContrasenia(rs.getString("contrasenia"));
+                albergue.setCantidadAnimales(rs.getInt("cantidadAnimales"));
+                albergue.setUrlFacebook(rs.getString("urlFacebook"));
+                albergue.setUrlInstagram(rs.getString("urlInstagram"));
+                albergue.setDireccion(rs.getString("direccion"));
+
+                DistritoDao distritoDao = new DistritoDao();
+                Distrito distrito = distritoDao.obtenerDistritoPorId(rs.getInt("distritoID"));
+                albergue.setDistrito(distrito);
+
+                albergue.setPuntoAcopioDonaciones(rs.getString("puntoAcopioDonaciones"));
+                albergue.setDireccionDonaciones(rs.getString("direccionDonaciones"));
+                albergue.setNombreContactoDonaciones(rs.getString("nombreContactoDonaciones"));
+                albergue.setNumeroContactoDonaciones(rs.getString("numeroContactoDonaciones"));
+                albergue.setNumeroYape(rs.getString("numeroYape"));
+                albergue.setNumeroPlin(rs.getString("numeroPlin"));
+                albergue.setCodigoQR(rs.getString("codigoQR"));
+                albergue.setAprobado(rs.getInt("aprobado"));
+                albergue.setFotoID(rs.getInt("fotoID"));
+                albergue.setEliminado(rs.getInt("eliminado"));
+                albergue.setFechaRegistrado(rs.getString("fechaRegistrado"));
+                albergue.setDescripcion(rs.getString("descripcion"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return albergue;
     }
 
     private Albergue mapearAlbergue(ResultSet rs) throws SQLException {
@@ -123,7 +135,7 @@ public class AlbergueDao extends BaseDao {
         albergue.setDireccion(rs.getString("direccion"));
 
         DistritoDao distritoDao = new DistritoDao();
-        Distrito distrito= distritoDao.obtenerDistritoPorId(rs.getInt("distritoID"));
+        Distrito distrito = distritoDao.obtenerDistritoPorId(rs.getInt("distritoID"));
         albergue.setDistrito(distrito);
 
         albergue.setPuntoAcopioDonaciones(rs.getString("puntoAcopioDonaciones"));

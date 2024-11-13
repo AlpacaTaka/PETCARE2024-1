@@ -17,27 +17,32 @@ public class AlbergueServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String correo = (String) request.getSession().getAttribute("correo");
+        // Obtener el albergueID del parámetro de la solicitud, usar predeterminado de 1 si no se proporciona
+        String idParam = request.getParameter("albergueID");
+        int albergueID = 1; // Predeterminado
 
-        // Comprueba si el correo está presente en la sesión
-        if (correo == null) {
-            response.sendRedirect("/login.jsp"); // Redirige a la página de inicio de sesión si no hay correo
-            return;
+        if (idParam != null && !idParam.isEmpty()) {
+            try {
+                albergueID = Integer.parseInt(idParam);
+            } catch (NumberFormatException e) {
+                response.sendRedirect("/error.jsp?message=Invalid%20Albergue%20ID");
+                return;
+            }
         }
 
         // Busca el albergue en la base de datos
         AlbergueDao albergueDao = new AlbergueDao();
-        Albergue albergue = albergueDao.obtenerAlberguePorCorreo(correo);
+        Albergue albergue = albergueDao.obtenerAlberguePorID(albergueID);
 
         if (albergue != null) {
             // Establece el atributo del albergue para la página JSP
             request.setAttribute("albergue", albergue);
 
             // Despacha la solicitud a la JSP
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/albergue/miPerfil.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("albergue/miPerfil.jsp");
             dispatcher.forward(request, response);
         } else {
-            response.sendRedirect("/error.jsp"); // Redirige a una página de error si el albergue no es encontrado
+            response.sendRedirect("/error.jsp?message=Albergue%20not%20found");
         }
     }
 
