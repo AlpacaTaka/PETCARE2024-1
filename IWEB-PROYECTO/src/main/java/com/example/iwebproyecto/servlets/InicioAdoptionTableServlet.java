@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.example.iwebproyecto.beans.MascotasAdopcion;
-import com.example.iwebproyecto.daos.AlbergueDao;
+import com.example.iwebproyecto.daos.AlbergueDaoRevenge;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -23,12 +23,12 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         // Establece el tipo de contenido de la respuesta
         response.setContentType("text/html");
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
-        AlbergueDao albergueDao = new AlbergueDao();
+        AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
 
 
         switch (action) {
             case "lista":
-                ArrayList<MascotasAdopcion> list = albergueDao.listarMascotasAdopcion();
+                ArrayList<MascotasAdopcion> list = albergueDaoRevenge.listarMascotasAdopcion();
                 request.setAttribute("lista", list);
                 RequestDispatcher rd = request.getRequestDispatcher("albergue/adoptionTable.jsp");
                 rd.forward(request, response);

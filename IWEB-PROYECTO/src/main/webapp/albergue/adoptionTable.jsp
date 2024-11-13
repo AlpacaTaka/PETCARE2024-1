@@ -142,7 +142,7 @@
                                 <div class="card h-100">
                                     <img src="${pageContext.request.contextPath}/common/img/perdidos/perdido1.jpg" class="card-img-top" alt="Evento 1">
                                     <div class="card-body">
-                                        <h4 class="card-title text-center"><%=mascota.getNombre()%></h4>
+                                        <h4 class="card-title text-center"><%=mascota.getNombreMascota()%></h4>
                                         <hr>
                                         <div style="display: flex; justify-content: center;">
                                             <a href="albergueVisAdop.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>

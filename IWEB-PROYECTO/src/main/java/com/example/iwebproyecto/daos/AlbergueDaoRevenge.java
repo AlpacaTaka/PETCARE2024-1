@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class AlbergueDaoRevenge extends BaseDao {
-
+    /*
     // Método para obtener todos los albergues
     public ArrayList<Albergue> listarAlbergues() {
         ArrayList<Albergue> listaAlbergues = new ArrayList<>();
@@ -208,16 +208,15 @@ public class AlbergueDaoRevenge extends BaseDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 
-
-    public ArrayList<MascotasAdopcion> listarMascotasAdopcion(){
-        String sql="select * from mascotasadopcion where albergueID=?;";
+    public ArrayList<MascotasAdopcion> listarMascotasAdopcion() {
+        String sql = "select * from mascotasadopcion where albergueID=?;";
         ArrayList<MascotasAdopcion> listaMascotasAdopcion = new ArrayList<>();
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            int albergueID=1;
+            int albergueID = 1;
             pstmt.setInt(1, albergueID);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -226,23 +225,23 @@ public class AlbergueDaoRevenge extends BaseDao {
                 Foto foto = new Foto();
                 Albergue albergue = new Albergue();
                 mascotasAdopcion.setIdAdopcion(rs.getInt(1));
-                mascotasAdopcion.setNombre(rs.getString(2));
+                mascotasAdopcion.setNombreMascota(rs.getString(2));
                 mascotasAdopcion.setEspecie(rs.getString(3));
                 mascotasAdopcion.setRaza(rs.getString(4));
                 distrito.setDistritoID(rs.getInt(5));
                 mascotasAdopcion.setDistrito(distrito);
-                mascotasAdopcion.setLugarEncontrado(rs.getString(6));
+                mascotasAdopcion.setDireccionHallazgo(rs.getString(6));
                 mascotasAdopcion.setEdadAprox(rs.getInt(7));
                 mascotasAdopcion.setSexo(rs.getString(8));
                 mascotasAdopcion.setDescripcionGeneral(rs.getString(9));
                 foto.setFotoID(rs.getInt(10));
                 mascotasAdopcion.setFoto(foto);
-                mascotasAdopcion.setSeEncuentraTemporal(rs.getInt(11));
+                mascotasAdopcion.setSeEncuentraTemporal(rs.getBoolean(11));
                 mascotasAdopcion.setCondicionesAdopcion(rs.getString(12));
                 albergue.setAlbergueID(rs.getInt(13));
                 mascotasAdopcion.setAlbergue(albergue);
-                mascotasAdopcion.setFecha(rs.getString(14));
-                mascotasAdopcion.setEliminado(rs.getInt(15));
+                mascotasAdopcion.setFechaAdoptado(rs.getString(14));
+                mascotasAdopcion.setEliminado(rs.getBoolean(15));
                 listaMascotasAdopcion.add(mascotasAdopcion);
             }
         } catch (SQLException e) {
@@ -250,3 +249,4 @@ public class AlbergueDaoRevenge extends BaseDao {
         }
         return listaMascotasAdopcion;
     }
+}

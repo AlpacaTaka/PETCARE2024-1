@@ -10,12 +10,10 @@ public class MascotasAdopcion {
     private int edadAprox;
     private String sexo;
     private String descripcionGeneral;
-
     private boolean seEncuentraTemporal;
     private String condicionesAdopcion;
     private boolean eliminado;
     private Albergue albergue;
-
     private Foto foto;
 
     private String fechaAdoptado;
