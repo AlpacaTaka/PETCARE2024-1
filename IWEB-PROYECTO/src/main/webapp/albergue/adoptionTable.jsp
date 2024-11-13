@@ -7,12 +7,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
+    <link rel="icon" href="<%=request.getContextPath()%>/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
     <link href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css" rel="stylesheet">
 
@@ -62,7 +62,7 @@
             </div>
             <div class="welcome-text">Hola, Patitas Felices</div>
         </div>
-        <div class="logo"><a href="/user/inicio.html"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+        <div class="logo"><a href="/user/inicio.html"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
     </header>
 
     <div class="main">
@@ -70,7 +70,7 @@
         <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
         <div class="barside">
             <ul class="navlinks">
-                <li><a href="${pageContext.request.contextPath}/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
                 <li><a href="albergue/adoptionTable.jsp" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
                 <li><a href="albergue/eventTable.jsp" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
                 <li><a href="albergue/donationTable.jsp" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
@@ -124,7 +124,7 @@
                             <!-- Card 1 -->
                             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
                                 <div class="card h-100">
-                                    <img src="${pageContext.request.contextPath}/common/img/perdidos/perdido1.jpg" class="card-img-top" alt="Evento 1">
+                                    <img src="<%=request.getContextPath()%>/common/img/perdidos/perdido1.jpg" class="card-img-top" alt="Evento 1">
                                     <div class="card-body">
                                         <h4 class="card-title text-center">Canela</h4>
                                         <hr>
@@ -140,7 +140,7 @@
                             <%for (MascotasAdopcion mascota : lista) {%>
                             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
                                 <div class="card h-100">
-                                    <img src="${pageContext.request.contextPath}/common/img/perdidos/perdido1.jpg" class="card-img-top" alt="Evento 1">
+                                    <img src="<%=request.getContextPath()%>/common/img/perdidos/perdido1.jpg" class="card-img-top" alt="Evento 1">
                                     <div class="card-body">
                                         <h4 class="card-title text-center"><%=mascota.getNombreMascota()%></h4>
                                         <hr>
@@ -195,7 +195,7 @@
     </div>
 </div>
 
-<script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
+<script src="<%=request.getContextPath()%>/common/script/neonavbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
     const select1 = document.getElementById('Especies');
@@ -367,18 +367,18 @@
 
             // Botón anterior (se desactiva si estamos en la primera página)
             let prevClass = currentPage === 1 ? 'disabled' : '';
-            pagination.innerHTML += `<li class="page-item ${prevClass}><a class="page-link" data-page="${currentPage - 1}" href="#">Anterior</a></li>`;
+            pagination.innerHTML += `<li class="page-item <%="${prevClass}"%>"><a class="page-link" data-page="<%="${currentPage - 1}"%>" href="#">Anterior</a></li>`;
 
             // Números de página
             for (let i = 1; i <= totalPages; i++) {
                 let activeClass = currentPage === i ? 'active' : '';
                 let pageClass = activeClass ? 'bg-brown text-white' : 'bg-white text-brown'; // Añadir clases de color marrón para la página activa
-                pagination.innerHTML += `<li class="page-item ${activeClass} ${pageClass}"><a class="page-link" data-page="${i}" href="#">${i}</a></li>`;
+                pagination.innerHTML += `<li class="page-item <%="${activeClass} ${pageClass}"%>"><a class="page-link" data-page="<%="${i}"%>" href="#"><%="${i}"%></a></li>`;
             }
 
             // Botón siguiente (se desactiva si estamos en la última página)
             let nextClass = currentPage === totalPages ? 'disabled' : '';
-            pagination.innerHTML += `<li class="page-item ${nextClass}"><a class="page-link" data-page="${currentPage + 1}" href="#">Siguiente</a></li>`;
+            pagination.innerHTML += `<li class="page-item <%="${nextClass}"%>"><a class="page-link" data-page="<%="${currentPage + 1}"%>" href="#">Siguiente</a></li>`;
 
             // Añadir un evento a los enlaces de la paginación para que llamen a showPage()
             const paginationLinks = document.querySelectorAll('.page-link');

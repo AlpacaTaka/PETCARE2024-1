@@ -55,7 +55,7 @@
                 </div>
                 <div class="welcome-text">Hola, Patitas Felices</div>
             </div>
-            <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
 
         <div class="main">
@@ -63,8 +63,8 @@
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="miPerfil.html" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="adoptionTable.jsp" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/Albergue" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
                     <li><a href="eventTable.jsp" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
                     <li><a href="donationTable.jsp" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
                     <li><a href="contactarTemporal.jsp" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
@@ -72,12 +72,11 @@
                     <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
                     <li id="cerrar-sesion"><a href="#micuenta" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
-
             </div>
 
             <div id="menu" class="menu">
-                <a href="miPerfil.html">Mi Perfil</a>
-                <a href="adoptionTable.jsp">Portal de Adopciones</a>
+                <a href="<%=request.getContextPath()%>/miPerfilAlbergue">Mi Perfil</a>
+                <a href="<%=request.getContextPath()%>/Albergue">Portal de Adopciones</a>
                 <a href="eventTable.jsp">Mis Eventos Benéficos</a>
                 <a href="donationTable.jsp">Mis Eventos de Donación</a>
                 <a href="contactarTemporal.jsp">Hogares Temporales</a>
@@ -114,11 +113,11 @@
                                     </div>
                                     <div class="col-md-6 p-1">
                                         <label >Nombre </label>
-                                        <input type="text" class="form-control" value="<%= albergue.getNombreEncargado() %>"required disabled>
+                                        <input type="text" class="form-control" value="<%= albergue.getNombreEncargado() %>" required disabled>
                                     </div>
                                     <div class="col-md-6 p-1">
                                         <label >Apellido</label>
-                                        <input type="text" class="form-control" value="<%= albergue.getApellidoEncargado() %>"required disabled>
+                                        <input type="text" class="form-control" value="<%= albergue.getApellidoEncargado() %>" required disabled>
                                     </div>
                                 </div>
                                 <hr>
@@ -294,7 +293,7 @@
         </div>
     </div>
 
-    <script src="/common/script/neonavbar.js"></script>
+    <script src="<%=request.getContextPath()%>/common/script/neonavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         // Referencias a los inputs y al botón
