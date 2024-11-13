@@ -49,6 +49,44 @@ public class InicioAdoptionTableServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        doGet(request, response);
+        String action = request.getParameter("action");
+        AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
+
+        switch (action) {
+
+            case "create":
+                /*String nombreMascota=request.getParameter("nombreMascota");
+                String especieMascota=request.getParameter("especie");
+                String raza=request.getParameter("raza");
+                String otraRaza=request.getParameter("otraRaza");
+                int distritoID=Integer.parseInt(request.getParameter("distritoID"));
+                int fotoID=147;
+
+                String distritoID=request.getParameter("distritoID");
+                String direccionHallazgo=request.getParameter("direccionHallazgo");
+                String edadAprox=request.getParameter("edadAprox");
+                String sexo=request.getParameter("sexo");
+                String descripcionGeneral=request.getParameter("descripcionGeneral");
+                String fotoID=request.getParameter("fotoID");
+                String seEncuentraTemporal=request.getParameter("seEncuentraTemporal");
+
+                int idAlbergue= Integer.parseInt(request.getParameter("id"));
+                int idActor = actorDao.ultimoID()+1;
+                String nombre = request.getParameter("nombre");
+                String apellido = request.getParameter("apellido");
+                int anoNacimiento = Integer.parseInt(request.getParameter("anoNacimiento"));
+                int premioOscar = Integer.parseInt(request.getParameter("premioOscar"));
+
+                Actor actor = new Actor();
+                actor.setIdActor(idActor);
+                actor.setNombre(nombre);
+                actor.setApellido(apellido);
+                actor.setAnoNacimiento(anoNacimiento);
+                actor.setPremioOscar(premioOscar);
+
+                actorDao.crearActor(actor,idPelicula);
+                response.sendRedirect(request.getContextPath()+"/ActorServlet?action=read&id="+idPelicula);
+                break;*/
+        }
     }
 }

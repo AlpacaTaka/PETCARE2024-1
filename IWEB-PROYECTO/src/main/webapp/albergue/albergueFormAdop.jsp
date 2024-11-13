@@ -69,16 +69,19 @@
                     <a href="<%=request.getContextPath()%>/PortalAdopciones"><button type="button" class="btn btn-personal2">Regresar</button></a>
                 </div>
                 <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                    <form id="uploadForm" style="padding:10px" >
+                    <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/PortalAdopciones?action=create">
+
+                        <input type="hidden" name="id" value="<%=albergueID%>">
+
                         <h1 style="margin-top: 10px;" class="text-center">Creación de perfil de Mascota para Adopción</h1>
                         <div class="row justify-content-center p-1">
                             <div class="col-md-6 p-1">
                                 <label for="nombreMascota">Nombre</label>
-                                <input id="nombreMascota" type="text" class="form-control" placeholder="Ingrese el nombre de la mascota" maxlength="21" required>
+                                <input id="nombreMascota" name="nombreMascota" type="text" class="form-control" placeholder="Ingrese el nombre de la mascota" maxlength="21" required>
                             </div>
                             <div class="col-md-6 p-1">
-                                <label for="ESpecies">Especie</label>
-                                <select class="form-select" id="Especies" aria-label="Floating label select example" required>
+                                <label for="Especies">Especie</label>
+                                <select class="form-select" id="Especies" name="especie" aria-label="Floating label select example" required>
                                     <option selected value="">Seleccione la especie de la Mascota</option>
                                     <option value="Perro">Perro</option>
                                     <option value="Gato">Gato</option>
@@ -95,15 +98,15 @@
                         </div>
                         <div class="row justify-content-center p-1">
                             <div class="col-md-6 p-1">
-                                <label for="">Raza</label>
-                                <select class="form-select" id="Razas" aria-label="Floating label select example" required>
+                                <label for="Razas">Raza</label>
+                                <select class="form-select" id="Razas" name="raza" aria-label="Floating label select example" required>
                                     <option value="">Ingrese raza de la mascota</option>
                                 </select>
                             </div>
                             <div class="col-md-6 p-1">
-                                <label for="otra raza"> Si colocó otra raza,  escribala aquí
+                                <label for="otra-raza"> Si colocó otra raza,  escribala aquí
                                 </label>
-                                <input type="text" class="form-control"  id="otra-raza"  idplaceholder="Otra raza" disabled>
+                                <input type="text" class="form-control" name="otraRaza" id="otra-raza"  idplaceholder="Otra raza" disabled>
                             </div>
                         </div>
                         <div class="row justify-content-center p-1">
@@ -112,78 +115,78 @@
                                 <select class="form-select" name="distrito" id="distrito" required>
                                     <option value="">Selecciona un distrito</option>
                                     <optgroup label="Lima Norte">
-                                        <option value="ancon">Ancon</option>
-                                        <option value="santa_rosa">Santa Rosa</option>
-                                        <option value="carabayllo">Carabayllo</option>
-                                        <option value="puente_piedra">Puente Piedra</option>
-                                        <option value="comas">Comas</option>
-                                        <option value="los_olivos">Los Olivos</option>
-                                        <option value="san_martin_porres">San Martín de Porres</option>
-                                        <option value="independencia">Independencia</option>
+                                        <option value="1">Ancon</option>
+                                        <option value="2">Santa Rosa</option>
+                                        <option value="3">Carabayllo</option>
+                                        <option value="4">Puente Piedra</option>
+                                        <option value="5">Comas</option>
+                                        <option value="6">Los Olivos</option>
+                                        <option value="7">San Martín de Porres</option>
+                                        <option value="8">Independencia</option>
                                     </optgroup>
                                     <optgroup label="Lima Sur">
-                                        <option value="san_juan_miraflores">San Juan de Miraflores</option>
-                                        <option value="villa_maria_triunfo">Villa María del Triunfo</option>
-                                        <option value="villa_salvador">Villa el Salvador</option>
-                                        <option value="pachacamac">Pachacamac</option>
-                                        <option value="lurin">Lurín</option>
-                                        <option value="punta_hermosa">Punta Hermosa</option>
-                                        <option value="punta_negra">Punta Negra</option>
-                                        <option value="san_bartolo">San Bartolo</option>
-                                        <option value="santa_maria_mar">Santa María del Mar</option>
-                                        <option value="pucusana">Pucusana</option>
+                                        <option value="9">San Juan de Miraflores</option>
+                                        <option value="10">Villa María del Triunfo</option>
+                                        <option value="11">Villa el Salvador</option>
+                                        <option value="12">Pachacamac</option>
+                                        <option value="13">Lurín</option>
+                                        <option value="14">Punta Hermosa</option>
+                                        <option value="15">Punta Negra</option>
+                                        <option value="16">San Bartolo</option>
+                                        <option value="17">Santa María del Mar</option>
+                                        <option value="18">Pucusana</option>
                                     </optgroup>
                                     <optgroup label="Lima Este">
-                                        <option value="san_juan_lurigancho">San Juan de Lurigancho</option>
-                                        <option value="chosica">Lurigancho/Chosica</option>
-                                        <option value="ate">Ate</option>
-                                        <option value="el_agustino">El Agustino</option>
-                                        <option value="santa_anita">Santa Anita</option>
-                                        <option value="la_molina">La Molina</option>
-                                        <option value="cieneguilla">Cieneguilla</option>
+                                        <option value="19">San Juan de Lurigancho</option>
+                                        <option value="20">Lurigancho/Chosica</option>
+                                        <option value="21">Ate</option>
+                                        <option value="22">El Agustino</option>
+                                        <option value="23">Santa Anita</option>
+                                        <option value="24">La Molina</option>
+                                        <option value="25">Cieneguilla</option>
                                     </optgroup>
                                     <optgroup label="Lima Oeste">
-                                        <option value="rimac">Rimac</option>
-                                        <option value="cercado_lima">Cercado de Lima</option>
-                                        <option value="breña">Breña</option>
-                                        <option value="pueblo_libre">Pueblo Libre</option>
-                                        <option value="magdalena">Magdalena</option>
-                                        <option value="jesus_maria">Jesus María</option>
-                                        <option value="la_victoria">La Victoria</option>
-                                        <option value="lince">Lince</option>
-                                        <option value="san_isidro">San Isidro</option>
-                                        <option value="san_miguel">San Miguel</option>
-                                        <option value="san_borja">San Borja</option>
-                                        <option value="surquillo">Surquillo</option>
-                                        <option value="santiago_surco">Santiago de Surco</option>
-                                        <option value="barranco">Barranco</option>
-                                        <option value="chorrillos">Chorrillos</option>
-                                        <option value="san_luis">San Luis</option>
-                                        <option value="miraflores">Miraflores</option>
+                                        <option value="26">Rimac</option>
+                                        <option value="27">Cercado de Lima</option>
+                                        <option value="28">Breña</option>
+                                        <option value="29">Pueblo Libre</option>
+                                        <option value="30">Magdalena</option>
+                                        <option value="31">Jesus María</option>
+                                        <option value="32">La Victoria</option>
+                                        <option value="33">Lince</option>
+                                        <option value="34">San Isidro</option>
+                                        <option value="35">San Miguel</option>
+                                        <option value="36">San Borja</option>
+                                        <option value="37">Surquillo</option>
+                                        <option value="38">Santiago de Surco</option>
+                                        <option value="39">Barranco</option>
+                                        <option value="40">Chorrillos</option>
+                                        <option value="41">San Luis</option>
+                                        <option value="42">Miraflores</option>
                                     </optgroup>
                                 </select>
                             </div>
                             <div class="col-md-8 p-1">
                                 <label for="Direccion">Dirección o referencia de Hallazgo</label>
-                                <input type="text" class="form-control" placeholder="Maximo 100 caracteres" maxlength="100" id="Direccion" name="Direccion">
+                                <input type="text" class="form-control" placeholder="Maximo 100 caracteres" maxlength="100" id="Direccion" name="direccionHallazgo">
                             </div>
                         </div>
                         <div class="row justify-content-center p-1">
                             <div class="col-md-7 p-1">
                                 <label for="edad">Edad Aproximada</label>
-                                <input type="number" class="form-control" id="edad" placeholder="Ingrese edad" required>
+                                <input type="number" class="form-control" id="edad" name="edad" placeholder="Ingrese edad" required>
                             </div>
                             <div class="col-md-5 p-1 ">
-                                <label for="Sexo"><strong>Sexo de la Mascota</strong></label>
+                                <label><strong>Sexo de la Mascota</strong></label>
                                 <div style="margin-top: 5px;" class="col-md-12 d-flex justify-content-around align-self-center">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="sexoMascota" id="flexRadioDefault1">
+                                        <input class="form-check-input" type="radio" name="sexoMascota" id="flexRadioDefault1" value="Macho">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             Macho
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="sexoMascota" id="flexRadioDefault2" checked>
+                                        <input class="form-check-input" type="radio" name="sexoMascota" id="flexRadioDefault2" checked value="Hembra">
                                         <label class="form-check-label" for="flexRadioDefault2">
                                             Hembra
                                         </label>
@@ -209,17 +212,17 @@
 
                         <div class="row justify-content-center p-1">
                             <div class="col-md-5 p-1 ">
-                                <label for="hogarTemporal"><strong>¿Se encuentra en un hogar temporal?</strong></label>
+                                <label><strong>¿Se encuentra en un hogar temporal?</strong></label>
                                 <div style="margin-top: 5px;" class="col-md-12 d-flex justify-content-around align-self-center">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="hogarTemp" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
+                                        <input class="form-check-input" type="radio" name="hogarTemp" id="flexRadioDefault3" value="true">
+                                        <label class="form-check-label" for="flexRadioDefault3">
                                             Si
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="hogarTemp" id="flexRadioDefault2" checked>
-                                        <label class="form-check-label" for="flexRadioDefault2">
+                                        <input class="form-check-input" type="radio" name="hogarTemp" id="flexRadioDefault4" checked value="false">
+                                        <label class="form-check-label" for="flexRadioDefault4">
                                             No
                                         </label>
                                     </div>
@@ -235,7 +238,7 @@
 
                         <div class="row justify-content-center p-1">
                             <div class="col-md-12 p-1 d-flex justify-content-center">
-                                <a href="<%=request.getContextPath()%>/PortalAdopciones"><button type="submit" class="btn btn-personal">Crear</button></a>
+                                <button type="submit" class="btn btn-personal">Crear</button>
                             </div>
                         </div>
                     </form>
