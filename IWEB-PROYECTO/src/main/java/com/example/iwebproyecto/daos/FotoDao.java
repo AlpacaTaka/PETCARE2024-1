@@ -52,7 +52,7 @@ public class FotoDao extends BaseDao {
 
 
 
-    public Foto obtenerFotoPorId(int fotoId) throws SQLException {
+    public Fotos obtenerFotoPorId(int fotoId) throws SQLException {
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement("select * from fotos where fotoId=?")) {
 
@@ -60,12 +60,12 @@ public class FotoDao extends BaseDao {
 
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                Foto foto = new Foto();
+                Fotos foto = new Fotos();
 
-                foto.setFotoID(rs.getInt("fotoId"));
+                /*foto.setFotoID(rs.getInt("fotoId"));
                 foto.setRutaFoto(rs.getString("rutaFoto"));
                 foto.setUbicacion(rs.getString("ubicacion"));
-
+                */
                 return foto;
             }
         }
