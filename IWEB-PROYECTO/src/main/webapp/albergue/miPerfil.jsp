@@ -64,7 +64,7 @@
             <div class="barside">
                 <ul class="navlinks">
                     <li><a href="<%=request.getContextPath()%>/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="<%=request.getContextPath()%>/Albergue" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/PortalAdopciones" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
                     <li><a href="eventTable.jsp" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
                     <li><a href="donationTable.jsp" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
                     <li><a href="contactarTemporal.jsp" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
@@ -76,7 +76,7 @@
 
             <div id="menu" class="menu">
                 <a href="<%=request.getContextPath()%>/miPerfilAlbergue">Mi Perfil</a>
-                <a href="<%=request.getContextPath()%>/Albergue">Portal de Adopciones</a>
+                <a href="<%=request.getContextPath()%>/PortalAdopciones">Portal de Adopciones</a>
                 <a href="eventTable.jsp">Mis Eventos Benéficos</a>
                 <a href="donationTable.jsp">Mis Eventos de Donación</a>
                 <a href="contactarTemporal.jsp">Hogares Temporales</a>
@@ -92,7 +92,7 @@
                 <div class="row d-flex flex-column" id="contenido-nofooter">
                     <div class="container">
                         <div class="container md-8" style="width: 100%;max-width: 800px; margin-bottom: 20px; padding: 0;">
-                            <a href="eventTable.jsp"><button type="button" class="btn btn-personal2">Regresar   </button></a>
+                            <a href="${pageContext.request.contextPath}/PortalAdopciones"><button type="button" class="btn btn-personal2">Regresar   </button></a>
                         </div>
                         <div class="container md-8" style="width: 100%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
                             <form id="uploadForm" style="padding:10px" method="post" action="miPerfil">

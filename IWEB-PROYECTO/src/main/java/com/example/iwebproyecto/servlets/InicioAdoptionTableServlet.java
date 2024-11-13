@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.annotation.WebServlet;
 
-@WebServlet(name = "InicioAlbergueServlet", value = "/Albergue")
+@WebServlet(name = "InicioAlbergueServlet", value = "/PortalAdopciones")
 public class InicioAdoptionTableServlet extends HttpServlet {
 
     @Override
@@ -32,6 +32,11 @@ public class InicioAdoptionTableServlet extends HttpServlet {
                 request.setAttribute("lista", list);
                 RequestDispatcher rd = request.getRequestDispatcher("albergue/adoptionTable.jsp");
                 rd.forward(request, response);
+                break;
+            case "create":
+                int idAlbergue= 1;
+                request.setAttribute("idAlbergue", idAlbergue);
+                request.getRequestDispatcher("albergue/albergueFormAdop.jsp").forward(request,response);
                 break;
         }
 

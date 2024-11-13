@@ -249,4 +249,8 @@ public class AlbergueDaoRevenge extends BaseDao {
         }
         return listaMascotasAdopcion;
     }
+
+
+
+
 }

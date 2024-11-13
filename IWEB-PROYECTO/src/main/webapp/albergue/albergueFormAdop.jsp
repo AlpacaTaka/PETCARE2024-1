@@ -1,14 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    int albergueID = (int) request.getAttribute("idAlbergue");
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
+    <link rel="icon" href="<%=request.getContextPath()%>/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
     <title>Formulario de Adopción</title>
     <style>
@@ -28,16 +31,16 @@
                 <div>Menu</div>
                 <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
             </div>
-            <div class="welcome-text">Hola, Patitas Felices</div>
+            <div class="welcome-text"><%=albergueID%>Hola, Patitas Felices</div>
         </div>
-        <div class="logo"><a href="/user/inicio.html"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+        <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
     </header>
     <div class="main">
         <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
         <div class="barside">
             <ul class="navlinks">
-                <li><a href="miPerfil.html" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
-                <li><a href="adoptionTable.html" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/PortalAdopciones" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
                 <li><a href="eventTable.html" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
                 <li><a href="donationTable.html" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
                 <li><a href="contactarTemporal.html" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
@@ -48,8 +51,8 @@
             </ul>
         </div>
         <div id="menu" class="menu">
-            <a href="miPerfil.html">Mi Perfil</a>
-            <a href="adoptionTable.html">Portal de Adopciones</a>
+            <a href="<%=request.getContextPath()%>/miPerfilAlbergue">Mi Perfil</a>
+            <a href="<%=request.getContextPath()%>/PortalAdopciones">Portal de Adopciones</a>
             <a href="eventTable.html">Mis Eventos Benéficos</a>
             <a href="donationTable.html">Mis Eventos de Donación</a>
             <a href="contactarTemporal.html">Hogares Temporales</a>
@@ -63,7 +66,7 @@
         <div class="container-fluid d-flex" id="contenido-principal">
             <div class="row" id="contenido-nofooter" style="flex-grow: 1;align-content:center">
                 <div class="container md-8  d-flex justify-content-center" style="width: 85%; margin-bottom: 20px; padding: 0;">
-                    <a href="adoptionTable.html"><button type="button" class="btn btn-personal2">Regresar</button></a>
+                    <a href="<%=request.getContextPath()%>/PortalAdopciones"><button type="button" class="btn btn-personal2">Regresar</button></a>
                 </div>
                 <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
                     <form id="uploadForm" style="padding:10px" >
@@ -232,7 +235,7 @@
 
                         <div class="row justify-content-center p-1">
                             <div class="col-md-12 p-1 d-flex justify-content-center">
-                                <a href="adoptionTable.html"><button type="submit" class="btn btn-personal">Crear</button></a>
+                                <a href="<%=request.getContextPath()%>/PortalAdopciones"><button type="submit" class="btn btn-personal">Crear</button></a>
                             </div>
                         </div>
                     </form>
@@ -253,7 +256,7 @@
     </div>
 </div>
 
-<script src="/common/script/neonavbar.js"></script>
+<script src="<%=request.getContextPath()%>/common/script/neonavbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
     const select1 = document.getElementById('Especies');
