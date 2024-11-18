@@ -212,7 +212,7 @@ public class AlbergueDaoRevenge extends BaseDao {
 
 
     public ArrayList<MascotasAdopcion> listarMascotasAdopcion() {
-        String sql = "select * from mascotasadopcion where albergueID=?;";
+        String sql = "select * from mascotasadopcion where albergueID=? and eliminado=0;";
         ArrayList<MascotasAdopcion> listaMascotasAdopcion = new ArrayList<>();
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -272,6 +272,18 @@ public class AlbergueDaoRevenge extends BaseDao {
             e.printStackTrace();
         }
     }
+
+    public void borrarMascotaAdopción(int idMascota) {
+        String sql="UPDATE mascotasadopcion set eliminado=1 where idMascota=?;";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, idMascota);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }
