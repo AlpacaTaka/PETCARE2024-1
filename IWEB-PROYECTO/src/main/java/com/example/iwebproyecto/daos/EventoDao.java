@@ -8,8 +8,129 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import java.sql.*;
+
 public class EventoDao extends BaseDao {
 
+    public ArrayList<EventoBenefico> listarEventosPorAlbergue(int albergueID) {
+
+        ArrayList<EventoBenefico> eventos = new ArrayList<>();
+
+        String sql = "SELECT * FROM eventobenefico WHERE albergueID = ? AND eliminado = 0";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, albergueID);
+            try (ResultSet resultSet = pstmt.executeQuery()) {
+                while (resultSet.next()) {
+                    eventos.add(mapearEvento(resultSet));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return eventos;
+    }
+
+    public void guardarEvento(EventoBenefico evento) {
+        String sql = "INSERT INTO eventobenefico (nombre, tipoDonacion, detalleMonetario, detalleSuministro, distritoID, fechaEvento, lugarID, horaInicio, horaFin, razonEvento, descripcionEvento, invitados, fotoID, albergueID, aprobado, eliminado) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            pstmt.setString(1, evento.getNombre());
+            pstmt.setString(2, evento.getTipoDonacion());
+
+            // Handle potential nulls for Integer types:
+            if (evento.getDetalleMonetario() != null) {
+                pstmt.setInt(3, evento.getDetalleMonetario());
+            } else {
+                pstmt.setNull(3, Types.INTEGER);
+            }
+
+            pstmt.setString(4, evento.getDetalleSuministro());
+            pstmt.setInt(5, evento.getDistrito().getDistritoID());
+            pstmt.setDate(6, Date.valueOf(evento.getFechaEvento()));
+            pstmt.setInt(7, evento.getLugar().getLugarID());
+            pstmt.setTime(8, Time.valueOf(evento.getHoraInicio()));
+            pstmt.setTime(9, Time.valueOf(evento.getHoraFin()));
+            pstmt.setString(10, evento.getRazonEvento());
+            pstmt.setString(11, evento.getDescripcionEvento());
+            pstmt.setString(12, evento.getInvitados());
+            pstmt.setInt(13, evento.getFoto().getFotoID());
+            pstmt.setInt(14, evento.getAlbergue().getAlbergueID());
+            pstmt.setBoolean(15, evento.isAprobado());
+            pstmt.setBoolean(16, evento.isEliminado());
+
+
+            // Obtener el ID generado
+            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    evento.setEventoAlbergueID(generatedKeys.getInt(1));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void actualizarEvento(EventoBenefico evento) {
+        String sql = "UPDATE eventobenefico SET nombre=?, tipoDonacion=?, detalleMonetario=?, detalleSuministro=?, distritoID=?, fechaEvento=?, lugarID=?, horaInicio=?, horaFin=?, razonEvento=?, descripcionEvento=?, invitados=?, fotoID=?, albergueID=?, aprobado=?, eliminado=? " +
+                "WHERE eventoAlbergueID = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, evento.getNombre());
+            pstmt.setString(2, evento.getTipoDonacion());
+            if (evento.getDetalleMonetario() != null) {
+                pstmt.setInt(3, evento.getDetalleMonetario());
+            } else {
+                pstmt.setNull(3, Types.INTEGER);
+            }
+            pstmt.setString(4, evento.getDetalleSuministro());
+            pstmt.setInt(5, evento.getDistrito().getDistritoID());
+            pstmt.setDate(6, Date.valueOf(evento.getFechaEvento()));
+            pstmt.setInt(7, evento.getLugar().getLugarID());
+            pstmt.setTime(8, Time.valueOf(evento.getHoraInicio()));
+            pstmt.setTime(9, Time.valueOf(evento.getHoraFin()));
+            pstmt.setString(10, evento.getRazonEvento());
+            pstmt.setString(11, evento.getDescripcionEvento());
+            pstmt.setString(12, evento.getInvitados());
+            pstmt.setInt(13, evento.getFoto().getFotoID());
+            pstmt.setInt(14, evento.getAlbergue().getAlbergueID());
+            pstmt.setBoolean(15, evento.isAprobado());
+            pstmt.setBoolean(16, evento.isEliminado());
+
+            pstmt.setInt(17, evento.getEventoAlbergueID());
+
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public EventoBenefico obtenerEventoPorID(int eventoId) {
+        String sql = "SELECT * FROM eventobenefico WHERE eventoAlbergueID = ?";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, eventoId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return mapearEvento(rs);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 
     private EventoBenefico mapearEvento(ResultSet rs) throws SQLException {
         EventoBenefico evento = new EventoBenefico();
@@ -130,4 +251,22 @@ public class EventoDao extends BaseDao {
 
         return eventos;
     }
+
+    public boolean eliminarEvento(int eventoId) {
+        String sql = "UPDATE eventobenefico SET eliminado = 1 WHERE eventoAlbergueID = ?"; // Soft delete con la columna correcta
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, eventoId);
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }

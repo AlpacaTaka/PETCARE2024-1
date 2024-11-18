@@ -1,4 +1,10 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.iwebproyecto.beans.EventoBenefico" %>
+<%@ page import="com.example.iwebproyecto.daos.EventoDao" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.sql.Date" %> <%-- Import para formatear la fecha --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -104,295 +110,55 @@
                             
                             <div class="container d-flex justify-content-center mt-4" style="margin-bottom: 30px;">
                                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="cardContainer" style="width: 100%;">
-                                  <!-- Card 1 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento1.jpg" class="card-img-top" alt="Evento 1" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">Patatón</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Jr. Las Lilas 1324 <strong><br>Fecha:</strong> 19-10-2024 <br><strong>Hora:</strong> 10:30 am</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
+                                    <%
+                                        EventoDao eventoDao = new EventoDao();
+                                        int albergueId = 6;
+                                        List<EventoBenefico> listaEventos = eventoDao.listarEventosPorAlbergue(albergueId);
 
-                                  <!-- Card 2 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento2.jpeg" class="card-img-top" alt="Evento 2" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">Día canino</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Artes Norte 154 <strong><br>Fecha:</strong> 14-02-2024 <br><strong>Hora:</strong> 8:00 am</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                              
-                                  <!-- Card 3 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento3.jpg" class="card-img-top" alt="Evento 3" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">Concurso canino</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Ejército 458 <strong><br>Fecha:</strong> 03-11-2024 <br><strong>Hora:</strong> 3:00 pm</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
+                                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-                                  <!-- Card 4 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento4.jpg" class="card-img-top" alt="Evento 4" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">Celebra a tu consentido</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Calle Frutales 781<strong><br>Fecha:</strong> 25-08-2024 <br><strong>Hora:</strong> 3:30 pm</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  
-                                  <!-- Card 5 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento5.jpg" class="card-img-top" alt="Evento 5" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">Vacunatón</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Jr. de la Unión 254<strong><br>Fecha:</strong> 31-07-2024 <br><strong>Hora:</strong> 4:30 pm</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
+                                        for (EventoBenefico evento : listaEventos) {
+                                            String nombre = evento.getNombre();
+                                            String direccion = evento.getLugar().getDireccionLugar();
+                                            String fecha = dateFormat.format(Date.valueOf(evento.getFechaEvento()));
+                                            String hora = evento.getHoraInicio().toString();
+                                            int eventoId = evento.getEventoAlbergueID();
+                                            String fotoRuta = evento.getFoto().getRutaFoto();
 
-                                  <!-- Card 6 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento6.jpg" class="card-img-top" alt="Evento 6" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">Expo-Mascotas</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Los Sauces 652<strong><br>Fecha:</strong> 17-07-2024 <br><strong>Hora:</strong> 5:00 pm</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
+                                    %>
+                                      <!-- Card 1 -->
+                                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
+                                        <div class="card h-100">
+                                            <img src="<%= fotoRuta %>" class="card-img-top" alt="<%= nombre %>" style="max-width: 300px; height: 260px; object-fit: cover;">
+                                            <div class="card-body">
+                                                <h4 class="card-title text-center"><%= nombre %></h4>
+                                                <hr>
+                                                <p style="text-align: center; line-height: 23px;">
+                                                    <strong>Dirección:</strong> <%= direccion %> <br>
+                                                    <strong>Fecha:</strong> <%= fecha %> <br>
+                                                    <strong>Hora:</strong> <%= hora %>
+                                                </p>
+                                                <div style="display: flex; justify-content: center;">
+                                                    <a href="/eventos?action=visualizar&id=<%= evento.getEventoAlbergueID() %>">
+                                                        <button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar">
+                                                            <span class="fi fi-rr-eye"></span>
+                                                        </button>
+                                                    </a>
+                                                    <a href="/eventos?action=editar&id=<%= evento.getEventoAlbergueID() %>"">
+                                                        <button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar">
+                                                            <span class="fi fi-rr-edit"></span>
+                                                        </button>
+                                                    </a>
+                                                    <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup(event, <%= eventoId %>)">
+                                                        <span class="fi fi-rr-trash"></span>
+                                                    </button>
+                                                </div>
                                             </div>
-                                      </div>
+                                        </div>
                                     </div>
-                                  </div>
-
-                                  <!-- Card 7 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento7.png" class="card-img-top" alt="Evento 7" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">Adopta un amigo</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Guardia Civil 840<strong><br>Fecha:</strong> 24-09-2024 <br><strong>Hora:</strong> 12:00 pm</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                  <!-- Card 8 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento8.jpg" class="card-img-top" alt="Evento 8" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">Super Macotas</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Girasoles 323<strong><br>Fecha:</strong> 12-05-2024 <br><strong>Hora:</strong> 12:00 pm</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                  <!-- Card 9 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento9.png" class="card-img-top" alt="Evento 9" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">Pet Fest</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Loma Umbrosa 515<strong><br>Fecha:</strong> 27-04-2024 <br><strong>Hora:</strong> 11:00 am</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                  <!-- Card 10 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento10.png" class="card-img-top" alt="Evento 10" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">PawJam</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Los Sauces 1956<strong><br>Fecha:</strong> 16-10-2024 <br><strong>Hora:</strong> 11:30 am</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                  <!-- Card 11-->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento2.jpeg" class="card-img-top" alt="Evento 11" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">Peluditos Unidos</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Artes Norte 154 <strong><br>Fecha:</strong> 14-02-2024 <br><strong>Hora:</strong> 8:00 am</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                              
-                                  <!-- Card 12 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento3.jpg" class="card-img-top" alt="Evento 12" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">Caminata Purr</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Ejército 458 <strong><br>Fecha:</strong> 03-11-2024 <br><strong>Hora:</strong> 3:00 pm</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                  <!-- Card 13 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento4.jpg" class="card-img-top" alt="Evento 13" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">Divertipatas</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Calle Frutales 781<strong><br>Fecha:</strong> 25-08-2024 <br><strong>Hora:</strong> 3:30 pm</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  
-                                  <!-- Card 14 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento5.jpg" class="card-img-top" alt="Evento 14" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">FurFun</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Jr. de la Unión 254<strong><br>Fecha:</strong> 31-07-2024 <br><strong>Hora:</strong> 4:30 pm</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                  <!-- Card 15 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento6.jpg" class="card-img-top" alt="Evento 15" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">Rincón de Mascotas</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Los Sauces 652<strong><br>Fecha:</strong> 17-07-2024 <br><strong>Hora:</strong> 5:00 pm</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                  <!-- Card 16 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento7.png" class="card-img-top" alt="Evento 16" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">Latin Pet</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Guardia Civil 840<strong><br>Fecha:</strong> 24-09-2024 <br><strong>Hora:</strong> 12:00 pm</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                  <!-- Card 17 -->
-                                  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                    <div class="card h-100">
-                                      <img src="/common/img/eventos/evento8.jpg" class="card-img-top" alt="Evento 17" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                      <div class="card-body">
-                                            <h4 class="card-title text-center">Pata Fest</h4>
-                                            <hr>
-                                            <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Girasoles 323<strong><br>Fecha:</strong> 12-05-2024 <br><strong>Hora:</strong> 12:00 pm</p>
-                                            <div style="display: flex; justify-content: center;">
-                                                <a href="albergueVisEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                                <a href="albergueEdEvento.jsp"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                                <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button> 
-                                            </div>
-                                      </div>
-                                    </div>
-                                  </div>
-
+                                    <%
+                                        }
+                                    %>
                                 </div> 
                             </div>
 
