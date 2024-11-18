@@ -123,7 +123,7 @@
                                         <button class="btn" type="button" aria-label="Close" style="background-color: #4D0E0E; cursor: default;">
                                             <span class="fi-rr-search" style="font-size: 20px; color: rgb(255, 255, 255);"></span>
                                         </button>
-                                        <input type="text" id="searchInput" class="form-control" placeholder="Busque por nombre del albergue" maxlength="60">
+                                        <input type="text" id="searchInput" class="form-control" placeholder="Busque por nombreMascota del albergue" maxlength="60">
                                     </div>
                                 </div>
                             </div>

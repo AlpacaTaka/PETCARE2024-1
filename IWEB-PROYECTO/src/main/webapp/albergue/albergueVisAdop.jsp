@@ -78,7 +78,7 @@
                                 
                                 <div class="col-md-6 p-1">
                                     <label for="">Nombre</label>
-                                    <input type="text" class="form-control" placeholder="Can" disabled> <!--placeholder="Ingrese el nombre de la mascota"-->
+                                    <input type="text" class="form-control" placeholder="Can" disabled> <!--placeholder="Ingrese el nombreMascota de la mascota"-->
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="">Especie</label>

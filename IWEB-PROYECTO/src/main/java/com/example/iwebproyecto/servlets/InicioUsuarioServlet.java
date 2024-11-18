@@ -3,7 +3,10 @@ package com.example.iwebproyecto.servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.example.iwebproyecto.beans.EventoBenefico;
 import com.example.iwebproyecto.beans.MascotasAdopcion;
+import com.example.iwebproyecto.beans.PublicacionMascotaPerdida;
+import com.example.iwebproyecto.daos.EventoDao;
 import com.example.iwebproyecto.daos.MascotasDao;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -29,8 +32,16 @@ public class InicioUsuarioServlet extends HttpServlet {
 
 
                 MascotasDao mascotasDao = new MascotasDao();
+                EventoDao eventoDao = new EventoDao();
+
+                ArrayList<EventoBenefico> listaEventos =eventoDao.listarEventosFuturosAleatorios3() ;
                 ArrayList<MascotasAdopcion> listaMascotasAdopcion= mascotasDao.listarMascotasActivasAdopcion8();
+                ArrayList<PublicacionMascotaPerdida> listaPerdidos = mascotasDao.listarNoEncontradasYAprobadasMasDiasPerdido5();
                 System.out.println("Lista de Adopciones: " + listaMascotasAdopcion.size() + " elementos.");
+                System.out.println("Lista de Perdidos: " + listaPerdidos.size()+ " elementos.");
+                System.out.println("Lista de Eventos: " + listaEventos.size()+ " elementos.");
+                request.setAttribute("listaMascotas", listaMascotasAdopcion);
+                request.setAttribute("mascotasPerdidas", listaMascotasAdopcion);
                 request.setAttribute("listaAdopcion", listaMascotasAdopcion);
 
                 // Obtiene el RequestDispatcher para la página JSP

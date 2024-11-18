@@ -145,7 +145,7 @@
                              <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
                                     <label for="Nombre-maltratador">Nombres y apellidos del maltratador</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese el nombre completo de la persona" id="Nombre-maltratador" name="Nombre-maltratador" maxlength="70" required>      
+                                    <input type="text" class="form-control" placeholder="Ingrese el nombreMascota completo de la persona" id="Nombre-maltratador" name="Nombre-maltratador" maxlength="70" required>
                                 </div>
                              </div>
                              <!--Quints columna de selección (1 columna)-->

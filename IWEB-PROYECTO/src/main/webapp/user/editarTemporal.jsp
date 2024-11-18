@@ -290,7 +290,7 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-8 p-1">                         
                                     <label for="Nombre-referncia">Nombre completo de la persona de referencia</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese el nombre completo" id="Nombre-referncia" name="Nombre-referncia" maxlength="70" required>      
+                                    <input type="text" class="form-control" placeholder="Ingrese el nombreMascota completo" id="Nombre-referncia" name="Nombre-referncia" maxlength="70" required>
                                 </div>
                                 <div class="col-md-4 p-1">
                                     <label for="celular-referencia">Celular</label>

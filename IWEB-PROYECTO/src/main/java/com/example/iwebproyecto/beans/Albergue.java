@@ -40,7 +40,7 @@ public class Albergue {
     // Constructor con todos los campos
 
 
-    public Albergue(int albergueID, String nombreAlbergue, String nombreEncargado, String apellidoEncargado, int espaciosDisponibles, String fechaCreacion, String correoElectronico, String contrasenia, int cantidadAnimales, String urlFacebook, String urlInstagram, String direccion, Distrito distrito, String puntoAcopioDonaciones, String direccionDonaciones, String nombreContactoDonaciones, String numeroContactoDonaciones, String numeroYape, String numeroPlin, String codigoQR, boolean aprobado, Foto foto, String mensaje, boolean eliminado) {
+    public Albergue(int albergueID, String nombreAlbergue, String nombreEncargado, String apellidoEncargado, int espaciosDisponibles, String fechaCreacion, String correoElectronico, int cantidadAnimales, String urlFacebook, String urlInstagram, String direccion, Distrito distrito, String puntoAcopioDonaciones, String direccionDonaciones, String nombreContactoDonaciones, String numeroContactoDonaciones, String numeroYape, String numeroPlin, String codigoQR, boolean aprobado, Foto foto, String mensaje, boolean eliminado) {
 
         this.albergueID = albergueID;
         this.nombreAlbergue = nombreAlbergue;
@@ -48,8 +48,7 @@ public class Albergue {
         this.apellidoEncargado = apellidoEncargado;
         this.espaciosDisponibles = espaciosDisponibles;
         this.fechaCreacion = fechaCreacion;
-        this.correoElectronico = correoElectronico;
-        this.contrasenia = contrasenia;
+        this.correoElectronico = correoElectronico;;
         this.cantidadAnimales = cantidadAnimales;
         this.urlFacebook = urlFacebook;
         this.urlInstagram = urlInstagram;

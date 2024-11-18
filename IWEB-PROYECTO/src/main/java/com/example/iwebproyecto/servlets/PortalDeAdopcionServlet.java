@@ -1,7 +1,5 @@
 package com.example.iwebproyecto.servlets;
-import com.example.iwebproyecto.beans.Albergue;
 import com.example.iwebproyecto.beans.MascotasAdopcion;
-import com.example.iwebproyecto.daos.AlbergueDao;
 import com.example.iwebproyecto.daos.MascotasDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

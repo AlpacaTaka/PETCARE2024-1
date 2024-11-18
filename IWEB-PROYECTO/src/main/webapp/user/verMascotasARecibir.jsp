@@ -146,15 +146,15 @@
                             <div class="row justify-content-center p-1">
                                 
                                 <div class="col-md-4 p-1">
-                                    <label for="nombre"><strong>Especie</strong></label>
+                                    <label for="nombreMascota"><strong>Especie</strong></label>
                                     <p class="form-control">Perro</p>
                                 </div>
                                 <div class="col-md-4 p-1">
-                                    <label for="nombre"><strong>Raza</strong></label>
+                                    <label for="nombreMascota"><strong>Raza</strong></label>
                                     <p class="form-control">No sabe</p>
                                 </div>
                                 <div class="col-md-4 p-1">
-                                    <label for="nombre"><strong>Sexo</strong></label>
+                                    <label for="nombreMascota"><strong>Sexo</strong></label>
                                     <p class="form-control">Macho</p>
                                 </div>
                                 
@@ -163,15 +163,15 @@
                             <div class="row justify-content-center p-1">
                                 
                                 <div class="col-md-4 p-1">
-                                    <label for="nombre"><strong>Tamaño (cm)</strong></label>
+                                    <label for="nombreMascota"><strong>Tamaño (cm)</strong></label>
                                     <p class="form-control">95</p>
                                 </div>
                                 <div class="col-md-4 p-1">
-                                    <label for="nombre"><strong>Peso (kg)</strong></label>
+                                    <label for="nombreMascota"><strong>Peso (kg)</strong></label>
                                     <p class="form-control">3.8</p>
                                 </div>
                                 <div class="col-md-4 p-1">
-                                    <label for="nombre"><strong>Edad (años)</strong></label>
+                                    <label for="nombreMascota"><strong>Edad (años)</strong></label>
                                     <p class="form-control">2</p>
                                 </div>
                                 
@@ -180,7 +180,7 @@
                             <div class="row justify-content-center p-1">
                                 
                                 <div class="col-md-12 p-1">
-                                    <label for="nombre"><strong>Discapacidad de la Mascota</strong></label>
+                                    <label for="nombreMascota"><strong>Discapacidad de la Mascota</strong></label>
                                     <p class="form-control">95</p>
                                 </div>
                                 

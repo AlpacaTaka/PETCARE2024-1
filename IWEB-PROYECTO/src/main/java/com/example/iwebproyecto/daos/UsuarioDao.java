@@ -18,7 +18,7 @@ public class UsuarioDao extends BaseDao {
             while (rs.next()) {
                 Usuario usuario = new Usuario();
                 usuario.setUsuarioID(rs.getInt(1));
-                usuario.setNombre(rs.getString(2));
+                usuario.setNombreMascota(rs.getString(2));
                 usuario.setApellido(rs.getString(3));
 
                 listaUsuarios.add(usuario);
@@ -38,7 +38,7 @@ public class UsuarioDao extends BaseDao {
         try (Connection conn = this.getConnection();
              PreparedStatement statement = conn.prepareStatement("INSERT INTO usuario (nombre, apellido, dni, direccion, correoelectronico, contrasenia, estado, distritoID, fotos_fotoID, flag) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-            statement.setString(1, usuario.getNombre());
+            statement.setString(1, usuario.getNombreMascota());
             statement.setString(2, usuario.getApellido());
             statement.setString(3, usuario.getDni());
             statement.setString(4, usuario.getDireccion());
@@ -79,10 +79,8 @@ public class UsuarioDao extends BaseDao {
         usuario.setDni(resultSet.getString("dni"));
         usuario.setDireccion(resultSet.getString("direccion"));
         usuario.setCorreoElectronico(resultSet.getString("correoelectronico"));
-        usuario.setContrasenia(resultSet.getString("contrasenia"));
         usuario.setActivo(resultSet.getBoolean("activo"));
         usuario.setEliminado(resultSet.getBoolean("eliminado"));
-
 
         FotoDao fotoDao = new FotoDao();
         DistritoDao distritoDao = new DistritoDao();
@@ -106,7 +104,7 @@ public class UsuarioDao extends BaseDao {
                 "estado = ?, distritoID = ?, fotos_fotoID = ?, flag = ? WHERE usuarioID = ?";
         try (Connection conn = this.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
-            pstmt.setString(1, usuario.getNombre());
+            pstmt.setString(1, usuario.getNombreMascota());
             pstmt.setString(2, usuario.getApellido());
             pstmt.setString(3, usuario.getDni());
             pstmt.setString(4, usuario.getDireccion());

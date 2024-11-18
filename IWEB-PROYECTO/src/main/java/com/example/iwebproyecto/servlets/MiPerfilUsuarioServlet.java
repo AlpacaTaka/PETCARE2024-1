@@ -26,7 +26,7 @@ public class MiPerfilUsuarioServlet  extends HttpServlet {
             throws ServletException, IOException {
 
 
-        String idParam ="1";
+        String idParam ="7";
 
         int id = Integer.parseInt(idParam);
 

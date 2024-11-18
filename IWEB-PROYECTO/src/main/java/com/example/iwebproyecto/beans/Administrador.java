@@ -3,16 +3,17 @@ package com.example.iwebproyecto.beans;
 public class Administrador {
     private int administradorID;
     private String nombreUsuario;
-    private String contrasenia;
 
+    // Constructor vacío
     public Administrador() {}
 
-    public Administrador(int administradorID, String nombreUsuario, String contrasenia) {
+    // Constructor con parámetros
+    public Administrador(int administradorID, String nombreUsuario) {
         this.administradorID = administradorID;
         this.nombreUsuario = nombreUsuario;
-        this.contrasenia = contrasenia;
     }
 
+    // Getters y setters
     public int getAdministradorID() {
         return administradorID;
     }
@@ -27,13 +28,5 @@ public class Administrador {
 
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
     }
 }

@@ -7,7 +7,6 @@ public class Usuario {
     private String dni;
     private String direccion;
     private String correoElectronico;
-    private String contrasenia;
     private boolean activo;
 
     private Distrito distrito;
@@ -22,7 +21,6 @@ public class Usuario {
         this.dni = dni;
         this.direccion = direccion;
         this.correoElectronico = correoElectronico;
-        this.contrasenia = contrasenia;
         this.activo = activo;
 
         this.distrito = distrito;
@@ -83,13 +81,7 @@ public class Usuario {
         this.correoElectronico = correoElectronico;
     }
 
-    public String getContrasenia() {
-        return contrasenia;
-    }
 
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
-    }
 
     public boolean isActivo() {
         return activo;

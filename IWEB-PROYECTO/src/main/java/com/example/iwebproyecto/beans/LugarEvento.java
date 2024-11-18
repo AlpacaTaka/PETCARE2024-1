@@ -5,24 +5,26 @@ public class LugarEvento {
     private String nombreLugar;
     private String direccionLugar;
     private int aforoMax;
-
     private Administrador administrador;
-    private Foto foto;
+    private Foto foto;  // Asumiendo que Foto es otro bean
+    private boolean eliminado;
 
+    // Constructor vacío
     public LugarEvento() {}
 
-    public LugarEvento(int lugarID, String nombreLugar, String direccionLugar, int aforoMax, Administrador administrador, Foto foto) {
-
+    // Constructor con parámetros
+    public LugarEvento(int lugarID, String nombreLugar, String direccionLugar, int aforoMax,
+                       Administrador administrador, Foto foto, boolean eliminado) {
         this.lugarID = lugarID;
         this.nombreLugar = nombreLugar;
         this.direccionLugar = direccionLugar;
         this.aforoMax = aforoMax;
-
         this.administrador = administrador;
         this.foto = foto;
-
+        this.eliminado = eliminado;
     }
 
+    // Getters y setters
     public int getLugarID() {
         return lugarID;
     }
@@ -31,9 +33,9 @@ public class LugarEvento {
         this.lugarID = lugarID;
     }
 
-
-    public String getNombreLugar() {return nombreLugar;}
-
+    public String getNombreLugar() {
+        return nombreLugar;
+    }
 
     public void setNombreLugar(String nombreLugar) {
         this.nombreLugar = nombreLugar;
@@ -55,8 +57,6 @@ public class LugarEvento {
         this.aforoMax = aforoMax;
     }
 
-
-
     public Administrador getAdministrador() {
         return administrador;
     }
@@ -73,4 +73,11 @@ public class LugarEvento {
         this.foto = foto;
     }
 
+    public boolean isEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
+    }
 }

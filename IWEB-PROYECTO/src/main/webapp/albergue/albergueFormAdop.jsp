@@ -78,7 +78,7 @@
                         <div class="row justify-content-center p-1">
                             <div class="col-md-6 p-1">
                                 <label for="nombreMascota">Nombre</label>
-                                <input id="nombreMascota" name="nombreMascota" type="text" class="form-control" placeholder="Ingrese el nombre de la mascota" maxlength="21" required>
+                                <input id="nombreMascota" name="nombreMascota" type="text" class="form-control" placeholder="Ingrese el nombreMascota de la mascota" maxlength="21" required>
                             </div>
                             <div class="col-md-6 p-1">
                                 <label for="Especies">Especie</label>

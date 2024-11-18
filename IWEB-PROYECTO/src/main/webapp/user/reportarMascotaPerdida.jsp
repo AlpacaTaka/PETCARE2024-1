@@ -100,8 +100,8 @@
                             <!--Segunda columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-5 p-1"> 
-                                    <label for="nombre-mascota">Nombre</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese el nombre de su mascota" id="nombre-mascota" name="nombre-mascota" maxlength="24" required>
+                                    <label for="nombreMascota-mascota">Nombre</label>
+                                    <input type="text" class="form-control" placeholder="Ingrese el nombreMascota de su mascota" id="nombreMascota-mascota" name="nombreMascota-mascota" maxlength="24" required>
                                 </div>
                                 <div class="col-md-5 p-1"> 
                                     <label for="distintivo">Distintivo</label>
@@ -177,8 +177,8 @@
                             <!--Octava columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-8 p-1"> 
-                                    <label for="nombre-contacto">Nombre de contacto</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese su nombre completo para contactarlo" id="nombre-contacto" name="nombre-contacto" maxlength="70" required>
+                                    <label for="nombreMascota-contacto">Nombre de contacto</label>
+                                    <input type="text" class="form-control" placeholder="Ingrese su nombreMascota completo para contactarlo" id="nombreMascota-contacto" name="nombreMascota-contacto" maxlength="70" required>
                                 </div>
                                 <div class="col-md-4 p-1">
                                     <label for="celular-contacto">Teléfono de contacto</label>
@@ -241,13 +241,13 @@
         <script src="/common/script/neonavbar.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script>
-            const nombreMascotaInput = document.getElementById('nombre-mascota');
+            const nombreMascotaInput = document.getElementById('nombreMascota-mascota');
             const select1 = document.getElementById('Especies');
             const select2 = document.getElementById('Razas');
             const otraRazaInput = document.getElementById('otra-raza');
             const recompensaInput =  document.querySelectorAll('input[name="recompensa"]');
             const montoRecompensaInput = document.getElementById('monto-recompensa');
-            const nombreContactoInput = document.getElementById('nombre-contacto');
+            const nombreContactoInput = document.getElementById('nombreMascota-contacto');
             const celularContactoInput = document.getElementById('celular-contacto');
             const fechaPerdidaInput = document.getElementById('fechaPerdida');
 

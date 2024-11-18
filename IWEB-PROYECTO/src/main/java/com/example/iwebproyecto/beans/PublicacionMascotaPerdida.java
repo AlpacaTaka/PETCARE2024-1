@@ -1,74 +1,69 @@
 package com.example.iwebproyecto.beans;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class PublicacionMascotaPerdida {
-    private int publicacionID;
-
-    private Usuario usuario;
-
+    private int publicacionMascotaPerdidaID;
     private String descripcion;
-    private String nombreContacto;
-    private int edad;
-    private String raza;
-    private String tamanio; /*'Pequeño', 'Mediano', 'Grande'*/
+    private String nombreMascota;
     private String distintivo;
+    private int edadMascota;
+    private String tamanio;
+    private String especie;
+    private String raza;
     private String descripcionAdicional;
     private String lugarPerdida;
-    private String horaPerdida;
+    private LocalDate fechaPerdida;
+    private LocalTime horaPerdida;
+    private String nombreContacto;
     private String telefonoContacto;
-    private int recompensa;
-    private String estado;/*'Pendiente', 'Aceptado', 'Rechazado'*/
+    private Foto foto; // Relación con la clase Foto
+    private boolean aniadirRecompensa;
+    private Integer montoRecompensa; // Puede ser null
+    private Usuario usuario;
+    private Boolean aprobadoCoordinador; // Puede ser null
+    private boolean mascotaEncontrada;
+    private LocalDate fechaFormulario;
 
-    private Foto foto;/*Fotos_fotoID*/
+    public PublicacionMascotaPerdida() {}
 
-    private String fechaPerdida;
-    private String especie;
-    private String fecha;
-    private String nombre;
-    private String estadoMascota;
-    private String comentario;
-
-    // Constructor vacío
-    public PublicacionMascotaPerdida() {
-    }
-
-    // Constructor con todos los campos
-
-
-    public PublicacionMascotaPerdida(int publicacionID, Usuario usuario, String descripcion, String nombreContacto, int edad, String raza, String tamanio, String distintivo, String descripcionAdicional, String lugarPerdida, String horaPerdida, String telefonoContacto, int recompensa, String estado, Foto foto, String fechaPerdida, String especie, String fecha, String nombre, String estadoMascota, String comentario) {
-        this.publicacionID = publicacionID;
-        this.usuario = usuario;
-
+    public PublicacionMascotaPerdida(int publicacionMascotaPerdidaID, String descripcion, String nombreMascota,
+                                     String distintivo, int edadMascota, String tamanio, String especie, String raza,
+                                     String descripcionAdicional, String lugarPerdida, LocalDate fechaPerdida,
+                                     LocalTime horaPerdida, String nombreContacto, String telefonoContacto, Foto foto,
+                                     boolean aniadirRecompensa, Integer montoRecompensa, Usuario usuario,
+                                     Boolean aprobadoCoordinador, boolean mascotaEncontrada, LocalDate fechaFormulario) {
+        this.publicacionMascotaPerdidaID = publicacionMascotaPerdidaID;
         this.descripcion = descripcion;
-        this.nombreContacto = nombreContacto;
-        this.edad = edad;
-        this.raza = raza;
-        this.tamanio = tamanio;
+        this.nombreMascota = nombreMascota;
         this.distintivo = distintivo;
+        this.edadMascota = edadMascota;
+        this.tamanio = tamanio;
+        this.especie = especie;
+        this.raza = raza;
         this.descripcionAdicional = descripcionAdicional;
         this.lugarPerdida = lugarPerdida;
-        this.horaPerdida = horaPerdida;
-        this.telefonoContacto = telefonoContacto;
-        this.recompensa = recompensa;
-        this.estado = estado;
-
-        this.foto = foto;
-
         this.fechaPerdida = fechaPerdida;
-        this.especie = especie;
-        this.fecha = fecha;
-        this.nombre = nombre;
-        this.estadoMascota = estadoMascota;
-        this.comentario = comentario;
+        this.horaPerdida = horaPerdida;
+        this.nombreContacto = nombreContacto;
+        this.telefonoContacto = telefonoContacto;
+        this.foto = foto; // Relación con Foto
+        this.aniadirRecompensa = aniadirRecompensa;
+        this.montoRecompensa = montoRecompensa;
+        this.usuario = usuario; // Relación con Usuario
+        this.aprobadoCoordinador = aprobadoCoordinador;
+        this.mascotaEncontrada = mascotaEncontrada;
+        this.fechaFormulario = fechaFormulario;
     }
 
-    public int getPublicacionID() {
-        return publicacionID;
+    public int getPublicacionMascotaPerdidaID() {
+        return publicacionMascotaPerdidaID;
     }
 
-    public void setPublicacionID(int publicacionID) {
-        this.publicacionID = publicacionID;
+    public void setPublicacionMascotaPerdidaID(int publicacionMascotaPerdidaID) {
+        this.publicacionMascotaPerdidaID = publicacionMascotaPerdidaID;
     }
-
 
     public String getDescripcion() {
         return descripcion;
@@ -78,28 +73,28 @@ public class PublicacionMascotaPerdida {
         this.descripcion = descripcion;
     }
 
-    public String getNombreContacto() {
-        return nombreContacto;
+    public String getNombreMascota() {
+        return nombreMascota;
     }
 
-    public void setNombreContacto(String nombreContacto) {
-        this.nombreContacto = nombreContacto;
+    public void setNombreMascota(String nombreMascota) {
+        this.nombreMascota = nombreMascota;
     }
 
-    public int getEdad() {
-        return edad;
+    public String getDistintivo() {
+        return distintivo;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setDistintivo(String distintivo) {
+        this.distintivo = distintivo;
     }
 
-    public String getRaza() {
-        return raza;
+    public int getEdadMascota() {
+        return edadMascota;
     }
 
-    public void setRaza(String raza) {
-        this.raza = raza;
+    public void setEdadMascota(int edadMascota) {
+        this.edadMascota = edadMascota;
     }
 
     public String getTamanio() {
@@ -110,12 +105,20 @@ public class PublicacionMascotaPerdida {
         this.tamanio = tamanio;
     }
 
-    public String getDistintivo() {
-        return distintivo;
+    public String getEspecie() {
+        return especie;
     }
 
-    public void setDistintivo(String distintivo) {
-        this.distintivo = distintivo;
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+
+    public String getRaza() {
+        return raza;
+    }
+
+    public void setRaza(String raza) {
+        this.raza = raza;
     }
 
     public String getDescripcionAdicional() {
@@ -134,94 +137,36 @@ public class PublicacionMascotaPerdida {
         this.lugarPerdida = lugarPerdida;
     }
 
+    public LocalDate getFechaPerdida() {
+        return fechaPerdida;
+    }
+
+    public void setFechaPerdida(LocalDate fechaPerdida) {
+        this.fechaPerdida = fechaPerdida;
+    }
+
+    public LocalTime getHoraPerdida() {
+        return horaPerdida;
+    }
+
+    public void setHoraPerdida(LocalTime horaPerdida) {
+        this.horaPerdida = horaPerdida;
+    }
+
+    public String getNombreContacto() {
+        return nombreContacto;
+    }
+
+    public void setNombreContacto(String nombreContacto) {
+        this.nombreContacto = nombreContacto;
+    }
+
     public String getTelefonoContacto() {
         return telefonoContacto;
     }
 
     public void setTelefonoContacto(String telefonoContacto) {
         this.telefonoContacto = telefonoContacto;
-    }
-
-    public String getHoraPerdida() {
-        return horaPerdida;
-    }
-
-    public void setHoraPerdida(String horaPerdida) {
-        this.horaPerdida = horaPerdida;
-    }
-
-    public int getRecompensa() {
-        return recompensa;
-    }
-
-    public void setRecompensa(int recompensa) {
-        this.recompensa = recompensa;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getFechaPerdida() {
-        return fechaPerdida;
-    }
-
-    public void setFechaPerdida(String fechaPerdida) {
-        this.fechaPerdida = fechaPerdida;
-    }
-
-    public String getEspecie() {
-        return especie;
-    }
-
-    public void setEspecie(String especie) {
-        this.especie = especie;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getEstadoMascota() {
-        return estadoMascota;
-    }
-
-    public void setEstadoMascota(String estadoMascota) {
-        this.estadoMascota = estadoMascota;
-    }
-
-    public String getComentario() {
-        return comentario;
-    }
-
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
-
-
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public Foto getFoto() {
@@ -232,4 +177,51 @@ public class PublicacionMascotaPerdida {
         this.foto = foto;
     }
 
+    public boolean isAniadirRecompensa() {
+        return aniadirRecompensa;
+    }
+
+    public void setAniadirRecompensa(boolean aniadirRecompensa) {
+        this.aniadirRecompensa = aniadirRecompensa;
+    }
+
+    public Integer getMontoRecompensa() {
+        return montoRecompensa;
+    }
+
+    public void setMontoRecompensa(Integer montoRecompensa) {
+        this.montoRecompensa = montoRecompensa;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Boolean getAprobadoCoordinador() {
+        return aprobadoCoordinador;
+    }
+
+    public void setAprobadoCoordinador(Boolean aprobadoCoordinador) {
+        this.aprobadoCoordinador = aprobadoCoordinador;
+    }
+
+    public boolean isMascotaEncontrada() {
+        return mascotaEncontrada;
+    }
+
+    public void setMascotaEncontrada(boolean mascotaEncontrada) {
+        this.mascotaEncontrada = mascotaEncontrada;
+    }
+
+    public LocalDate getFechaFormulario() {
+        return fechaFormulario;
+    }
+
+    public void setFechaFormulario(LocalDate fechaFormulario) {
+        this.fechaFormulario = fechaFormulario;
+    }
 }

@@ -89,7 +89,7 @@
                                         <button class="btn" type="button" aria-label="Close" style="background-color: #4D0E0E; cursor: default;">
                                             <span class="fi-rr-search" style="font-size: 20px; color: rgb(255, 255, 255);"></span>
                                         </button>
-                                        <input type="text" id="searchInput" class="form-control" placeholder="Busque por nombre del evento" maxlength="60">
+                                        <input type="text" id="searchInput" class="form-control" placeholder="Busque por nombreMascota del evento" maxlength="60">
                                     </div>
                                 </div>
                                 <div class="col-sm-8 d-flex justify-content-start" style="padding-right: 10px;">

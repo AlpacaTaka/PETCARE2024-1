@@ -66,8 +66,8 @@
                             <div class="row justify-content-center p-1">
                                 
                                 <div class="col-md-6 p-1">
-                                    <label for="nombre">Nombre</label>
-                                    <input type="text" id="nombre" class="form-control" placeholder="Ingrese el nombre de la mascota" required>
+                                    <label for="nombreMascota">Nombre</label>
+                                    <input type="text" id="nombreMascota" class="form-control" placeholder="Ingrese el nombreMascota de la mascota" required>
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="Especies">Especie</label>

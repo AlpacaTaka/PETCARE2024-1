@@ -3,7 +3,6 @@ package com.example.iwebproyecto.daos;
 import com.example.iwebproyecto.beans.Albergue;
 import com.example.iwebproyecto.beans.Distrito;
 import com.example.iwebproyecto.beans.Foto;
-import com.example.iwebproyecto.beans.Zona;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -29,6 +28,7 @@ public class AlbergueDao extends BaseDao {
         return listaAlbergues;
     }
 
+    /*
     // Método para insertar un nuevo albergue
     public void insertarAlbergue(Albergue albergue) {
         String sql = "INSERT INTO albergue (nombreAlbergue, nombreEncargado, apellidoEncargado, espaciosDisponibles, anioCreacion, " +
@@ -67,6 +67,8 @@ public class AlbergueDao extends BaseDao {
         }
     }
 
+     */
+
     // Método para obtener un albergue por ID
     public Albergue obtenerAlberguePorID(int albergueID) {
         String sql = "select * from albergue where albergueId=?;";
@@ -96,7 +98,6 @@ public class AlbergueDao extends BaseDao {
         albergue.setEspaciosDisponibles(rs.getInt("espaciosDisponibles"));
         albergue.setFechaCreacion(rs.getString("fechaCreacion"));
         albergue.setCorreoElectronico(rs.getString("correoElectronico"));
-        albergue.setContrasenia(rs.getString("contrasenia"));
         albergue.setCantidadAnimales(rs.getInt("cantidadAnimales"));
         albergue.setUrlFacebook(rs.getString("urlFacebook"));
         albergue.setUrlInstagram(rs.getString("urlInstagram"));

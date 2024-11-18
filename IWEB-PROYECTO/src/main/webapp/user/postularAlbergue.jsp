@@ -111,7 +111,7 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">                         
                                     <label for="Nombre-user-albergue">Nombre de la organización</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese el nombre del albergue" id="Nombre-user-albergue" name="Nombre-user-albergue" maxlength="100" required>      
+                                    <input type="text" class="form-control" placeholder="Ingrese el nombreMascota del albergue" id="Nombre-user-albergue" name="Nombre-user-albergue" maxlength="100" required>
                                 </div>
                                
                             </div>

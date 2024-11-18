@@ -77,7 +77,7 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
                                     <label for="nombre_evento">Nombre del evento a realizar</label>
-                                    <input type="text" id="nombre_evento" class="form-control" placeholder="Ingrese el nombre del evento" required>
+                                    <input type="text" id="nombre_evento" class="form-control" placeholder="Ingrese el nombreMascota del evento" required>
                                 </div>
                                 
                             </div>

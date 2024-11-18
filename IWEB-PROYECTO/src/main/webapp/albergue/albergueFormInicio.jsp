@@ -155,7 +155,7 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
                                     <label for="nombre_contacto">Nombre del contacto para donaciones</label>
-                                    <input type="text" class="form-control" id="nombre_contacto" placeholder="Ingrese el nombre completo" required>
+                                    <input type="text" class="form-control" id="nombre_contacto" placeholder="Ingrese el nombreMascota completo" required>
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="num_contacto">Número del contacto para donaciones</label>
