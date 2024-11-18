@@ -1,8 +1,17 @@
 <%@ page import="com.example.iwebproyecto.beans.MascotasAdopcion" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.iwebproyecto.beans.EventoBenefico" %>
+<%@ page import="java.util.Locale" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.LocalTime" %>
+<%@ page import="com.example.iwebproyecto.beans.PublicacionMascotaPerdida" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
     ArrayList<MascotasAdopcion> listaAdopcion = (ArrayList) request.getAttribute("listaAdopcion");
+    ArrayList<PublicacionMascotaPerdida> listaPerdidos = (ArrayList) request.getAttribute("mascotasPerdidas");
+    DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd MMM.").withLocale(new Locale("es", "ES"));
+    DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a").withLocale(new Locale("es", "ES"));
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -93,91 +102,46 @@
 
                         <!-- Carrusel de Eventos-->
                         <div id="carouselEvento" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                            <div class="carousel-inner" >
+                            <div class="carousel-inner">
+                                <%
+                                    ArrayList<EventoBenefico> eventos = (ArrayList<EventoBenefico>) request.getAttribute("eventos");
+                                    for (int i = 0; i < eventos.size(); i++) {
 
-                                <!-- Primera tarjeta -->
-                                <div class="carousel-item active">
+                                        EventoBenefico evento = eventos.get(i);
+                                        LocalDate fechaEvento = evento.getFechaEvento();  // Obtener la fecha del evento
+                                        LocalTime horaEvento = evento.getHoraInicio();    // Obtener la hora del evento
+
+                                        // Formatear la fecha y la hora
+                                        String fechaFormateada = fechaEvento.format(formatoFecha);
+                                        String horaFormateada = horaEvento.format(formatoHora);
+                                %>
+                                <div class="carousel-item <%= (i == 0 ? "active" : "") %>">
                                     <div class="d-flex justify-content-center">
                                         <div class="card" style="width: 100%;">
                                             <div class="row g-0">
                                                 <div class="col-md-8">
-                                                    <img src="${pageContext.request.contextPath}/common/img/eventos/evento1.jpg" class="card-img-eve" alt="Imagen">
+                                                    <img src="${pageContext.request.contextPath}/<%=evento.getFoto().getRutaFoto()%>"
+                                                         class="card-img-eve" alt="<%= evento.getNombre() %>">
                                                 </div>
                                                 <div class="col-md-4 d-flex align-items-center">
                                                     <div class="card-body">
-                                                        <h4 class="card-title">CANinaton 5K</h4>
-                                                        <div class="badge text-bg-primary text-wrap" style="width: 7rem;">
-                                                            25 Sep. 09:00am
+                                                        <h4 class="card-title"><%= evento.getNombre() %></h4>
+                                                        <div class="badge text-bg-primary text-wrap" style="width: 8rem;">
+                                                            <%= fechaFormateada + " " + horaFormateada %>
                                                         </div>
-                                                        <p class="card-text">Animate a caminar con tu amigo de 4 patas. Tendremos grandes premios y artistas invitados.</p>
-                                                        <a href="evento.jsp" class="btn btn-personal"
-                                                        >
-                                                            Ver Evento</a>
+                                                        <p class="card-text"><%= evento.getDescripcionEvento() %></p>
+                                                        <a href="evento.jsp?id=<%= evento.getEventoAlbergueID() %>" class="btn btn-personal" style="margin-bottom: 10px">Ver Evento</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- Segunda tarjeta -->
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="card" style="width: 100%;">
-                                            <div class="row g-0">
-                                                <div class="col-md-8">
-                                                    <img src="${pageContext.request.contextPath}/common/img/eventos/evento2.jpeg" class="card-img-eve" alt="Imagen">
-                                                </div>
-                                                <div class="col-md-4 d-flex align-items-center">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">Gran campaña de Vacunacion!</h4>
-                                                        <div class="badge text-bg-primary text-wrap" style="width: 7rem;">
-                                                            25 Sep. 09:00am
-                                                        </div>
-                                                        <p class="card-text">La Municipalidad Provincial del Callao y el albergue patitas felices organizan este gran evento</p>
-                                                        <a href="evento.jsp" class="btn btn-personal"
-                                                        >Ver Evento</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Tercera tarjeta -->
-                                <div class="carousel-item">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="card" style="width: 100%;">
-                                            <div class="row g-0">
-                                                <div class="col-md-8">
-                                                    <img src="/common/img/eventos/evento3.jpg" class="card-img-eve" alt="Imagen">
-                                                </div>
-                                                <div class="col-md-4 d-flex align-items-center">
-                                                    <div class="card-body">
-                                                        <h4 class="card-title">Concurso de Disfraces</h4>
-                                                        <div class="badge text-bg-primary text-wrap" style="width: 7rem;">
-                                                            25 Sep. 09:00am
-                                                        </div>
-                                                        <p class="card-text">Se acerca Halloween! Ven con tu peludito disfrazado y podras ganar grandes premios.</p>
-                                                        <a href="evento.jsp" class="btn btn-personal" id="btn-crd-cr">Ver Evento</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                <%
+                                    }
+                                %>
                             </div>
 
-                            <!-- Controles -->
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselEvento" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselEvento" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
 
                             <!-- Indicadores -->
                             <div class="carousel-indicators">
@@ -820,43 +784,27 @@
                         <h1> Mascotas perdidas</h1>
                         <div class="grid-container" id="grilla-perdidos">
                             <!-- Card 1 -->
+
+                            <%
+                                LocalDate hoy = LocalDate.now();
+                                for (PublicacionMascotaPerdida perdido : listaPerdidos) {
+                                    LocalDate fechaPerdida = perdido.getFechaPerdida();
+                                    long diasPerdidos = java.time.temporal.ChronoUnit.DAYS.between(fechaPerdida, hoy);
+                            %>
                             <div class="card .perdido">
                                 <img src="/common/img/perdidos/perdido1.jpg" class="card-img-top card-img-don" alt="Canela">
                                 <div class="card-body">
                                     <h5 class="card-title text-center">Canela</h5>
-                                    <p class="card-text"><strong>Lugar de extravío:</strong> Parque Condesa</p>
-                                    <p class="card-text"><strong>Días perdido:</strong> 2</p>
+                                    <p class="card-text"><strong>Lugar de extravío: </strong><%= perdido.getLugarPerdida() %></p>
+                                    <p class="card-text"><strong>Días perdido: </strong><%= diasPerdidos %></p>
                                 </div>
                             </div>
+                            <%
+                                }
+                            %>
 
-                            <!-- Card 2 -->
-                            <div class="card .perdido">
-                                <img src="/common/img/perdidos/perdido2.jpg" class="card-img-top card-img-don" alt="Thor">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Thor</h5>
-                                    <p class="card-text"><strong>Lugar de extravío:</strong> Puente Azul Santa Anita</p>
-                                    <p class="card-text"><strong>Días perdido:</strong> 8</p>
-                                </div>
-                            </div>
 
-                            <!-- Card 3 -->
-                            <div class="card .perdido">
-                                <img src="/common/img/perdidos/perdido3.jpg" class="card-img-top card-img-don" alt="Sam">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Sam</h5>
-                                    <p class="card-text"><strong>Lugar de extravío:</strong> Calle Flor Tristán La Molina</p>
-                                    <p class="card-text"><strong>Días perdido:</strong> 1</p>
-                                </div>
-                            </div>
-                            <!-- Card 4 -->
-                            <div class="card .perdido">
-                                <img src="/common/img/perdidos/perdido4.jpg" class="card-img-top card-img-don" alt="Sam">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Sam</h5>
-                                    <p class="card-text"><strong>Lugar de extravío:</strong> Calle Flor Tristán La Molina</p>
-                                    <p class="card-text"><strong>Días perdido:</strong> 1</p>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <a href="/user/mascotasPerdidas.jsp" class="btn btn-personal m-2" id="btn-crd-cr">Ver más</a>
