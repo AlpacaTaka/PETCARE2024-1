@@ -3,6 +3,9 @@ package com.example.iwebproyecto.servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.example.iwebproyecto.beans.Albergue;
+import com.example.iwebproyecto.beans.Distrito;
+import com.example.iwebproyecto.beans.Foto;
 import com.example.iwebproyecto.beans.MascotasAdopcion;
 import com.example.iwebproyecto.daos.AlbergueDaoRevenge;
 import jakarta.servlet.RequestDispatcher;
@@ -34,7 +37,7 @@ public class InicioAdoptionTableServlet extends HttpServlet {
                 rd.forward(request, response);
                 break;
             case "create":
-                int idAlbergue= 1;
+                int idAlbergue= 6;
                 request.setAttribute("idAlbergue", idAlbergue);
                 request.getRequestDispatcher("albergue/albergueFormAdop.jsp").forward(request,response);
                 break;
@@ -55,38 +58,49 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         switch (action) {
 
             case "create":
-                /*String nombreMascota=request.getParameter("nombreMascota");
-                String especieMascota=request.getParameter("especie");
-                String raza=request.getParameter("raza");
-                String otraRaza=request.getParameter("otraRaza");
-                int distritoID=Integer.parseInt(request.getParameter("distritoID"));
-                int fotoID=147;
-
-                String distritoID=request.getParameter("distritoID");
-                String direccionHallazgo=request.getParameter("direccionHallazgo");
-                String edadAprox=request.getParameter("edadAprox");
-                String sexo=request.getParameter("sexo");
-                String descripcionGeneral=request.getParameter("descripcionGeneral");
-                String fotoID=request.getParameter("fotoID");
-                String seEncuentraTemporal=request.getParameter("seEncuentraTemporal");
-
-                int idAlbergue= Integer.parseInt(request.getParameter("id"));
-                int idActor = actorDao.ultimoID()+1;
-                String nombre = request.getParameter("nombre");
-                String apellido = request.getParameter("apellido");
-                int anoNacimiento = Integer.parseInt(request.getParameter("anoNacimiento"));
-                int premioOscar = Integer.parseInt(request.getParameter("premioOscar"));
-
-                Actor actor = new Actor();
-                actor.setIdActor(idActor);
-                actor.setNombre(nombre);
-                actor.setApellido(apellido);
-                actor.setAnoNacimiento(anoNacimiento);
-                actor.setPremioOscar(premioOscar);
-
-                actorDao.crearActor(actor,idPelicula);
-                response.sendRedirect(request.getContextPath()+"/ActorServlet?action=read&id="+idPelicula);
-                break;*/
+                String nombreMascota = request.getParameter("nombreMascota");
+                String especie = request.getParameter("especie");
+                String raza = request.getParameter("raza");
+                String otraRaza = request.getParameter("otraRaza");
+                if (raza.equals("otraRaza")) {
+                    raza=otraRaza;
+                }
+                if (raza.equals("")){
+                    raza="Fermosa";
+                }
+                int idDistrito = Integer.parseInt(request.getParameter("idDistrito"));
+                String direccion = request.getParameter("direccionHallazgo");
+                int edad = Integer.parseInt(request.getParameter("edad"));
+                String sexo = request.getParameter("sexoMascota");
+                String descripcion = request.getParameter("breveDescripcion");
+                int idFoto = 30;/*request.getParameter("rutaFoto");*/
+                boolean seEnvuentraTemporal= Boolean.parseBoolean(request.getParameter("hogarTemp"));
+                String condicionesAdopcion = request.getParameter("condiciones");
+                int albergueID = 6;/*Integer.parseInt(request.getParameter("idAlbergue"));*/
+                boolean eliminado = false;
+                MascotasAdopcion mascota = new MascotasAdopcion();
+                mascota.setNombreMascota(nombreMascota);
+                mascota.setEspecie(especie);
+                mascota.setRaza(raza);
+                Distrito distrito = new Distrito();
+                distrito.setDistritoID(idDistrito);
+                mascota.setDistrito(distrito);
+                mascota.setDireccionHallazgo(direccion);
+                mascota.setEdadAprox(edad);
+                mascota.setSexo(sexo);
+                mascota.setDescripcionGeneral(descripcion);
+                Foto foto = new Foto();
+                foto.setFotoID(idFoto);
+                mascota.setFoto(foto);
+                mascota.setSeEncuentraTemporal(seEnvuentraTemporal);
+                mascota.setCondicionesAdopcion(condicionesAdopcion);
+                Albergue albergue = new Albergue();
+                albergue.setAlbergueID(albergueID);
+                mascota.setAlbergue(albergue);
+                mascota.setEliminado(eliminado);
+                albergueDaoRevenge.crearMascotaAdopcion(mascota);
+                response.sendRedirect(request.getContextPath()+"/PortalAdopciones");
+                break;
         }
     }
 }

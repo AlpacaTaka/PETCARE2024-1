@@ -19,7 +19,7 @@ public class AlbergueServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtener el albergueID del parámetro de la solicitud, usar predeterminado de 1 si no se proporciona
         String idParam = request.getParameter("albergueID");
-        int albergueID = 2;
+        int albergueID = 6;
 
         if (idParam != null && !idParam.isEmpty()) {
             try {

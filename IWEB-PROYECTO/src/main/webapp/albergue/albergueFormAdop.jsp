@@ -2,6 +2,7 @@
 <%
     int albergueID = (int) request.getAttribute("idAlbergue");
 %>
+<%--jsp:useBean id=""/--%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -112,7 +113,7 @@
                         <div class="row justify-content-center p-1">
                             <div class="col-md-4 p-1" >
                                 <label for="distrito">Distrito</label>
-                                <select class="form-select" name="distrito" id="distrito" required>
+                                <select class="form-select" name="idDistrito" id="distrito" required>
                                     <option value="">Selecciona un distrito</option>
                                     <optgroup label="Lima Norte">
                                         <option value="1">Ancon</option>
@@ -198,7 +199,7 @@
                         <div class="row justify-content-center p-1">
                             <div class="col-md-12 p-1">
                                 <label for="breve_descrip"> Breve Descripción de la Mascota</label>
-                                <textarea name="breve_descrip" id="breve_descrip" class="form-control" placeholder="Ingrese la breve descripcion de la mascota" maxlength="300" required></textarea>
+                                <textarea name="breveDescripcion" id="breve_descrip" class="form-control" placeholder="Ingrese la breve descripcion de la mascota" maxlength="300" required></textarea>
                             </div>
                         </div>
                         <div class="row justify-content-center p-1">

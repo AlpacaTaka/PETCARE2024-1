@@ -216,7 +216,7 @@ public class AlbergueDaoRevenge extends BaseDao {
         ArrayList<MascotasAdopcion> listaMascotasAdopcion = new ArrayList<>();
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            int albergueID = 1;
+            int albergueID = 6;
             pstmt.setInt(1, albergueID);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -240,8 +240,8 @@ public class AlbergueDaoRevenge extends BaseDao {
                 mascotasAdopcion.setCondicionesAdopcion(rs.getString(12));
                 albergue.setAlbergueID(rs.getInt(13));
                 mascotasAdopcion.setAlbergue(albergue);
-                mascotasAdopcion.setFechaAdoptado(rs.getString(14));
-                mascotasAdopcion.setEliminado(rs.getBoolean(15));
+                /*mascotasAdopcion.setFechaAdoptado(rs.getString(14));*/
+                mascotasAdopcion.setEliminado(rs.getBoolean(14));
                 listaMascotasAdopcion.add(mascotasAdopcion);
             }
         } catch (SQLException e) {
@@ -250,7 +250,28 @@ public class AlbergueDaoRevenge extends BaseDao {
         return listaMascotasAdopcion;
     }
 
-
+    public void crearMascotaAdopcion(MascotasAdopcion mascotasAdopcion) {
+        String sql = "INSERT INTO mascotasadopcion (nombreMascota, especieMascota, raza, distritoID, direccionHallazgo, edadAprox, sexo, descripcionGeneral, fotoID, seEncuentraTemporal, condicionesAdopcion, albergueID, eliminado) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, mascotasAdopcion.getNombreMascota());
+            pstmt.setString(2,mascotasAdopcion.getEspecie());
+            pstmt.setString(3,mascotasAdopcion.getRaza());
+            pstmt.setInt(4,mascotasAdopcion.getDistrito().getDistritoID());
+            pstmt.setString(5,mascotasAdopcion.getDireccionHallazgo());
+            pstmt.setInt(6,mascotasAdopcion.getEdadAprox());
+            pstmt.setString(7,mascotasAdopcion.getSexo());
+            pstmt.setString(8,mascotasAdopcion.getDescripcionGeneral());
+            pstmt.setInt(9,mascotasAdopcion.getFoto().getFotoID());
+            pstmt.setBoolean(10,mascotasAdopcion.isSeEncuentraTemporal());
+            pstmt.setString(11,mascotasAdopcion.getCondicionesAdopcion());
+            pstmt.setInt(12,mascotasAdopcion.getAlbergue().getAlbergueID());
+            pstmt.setBoolean(13,mascotasAdopcion.isEliminado());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }
