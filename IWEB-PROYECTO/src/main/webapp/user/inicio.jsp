@@ -1,14 +1,15 @@
 <%@ page import="com.example.iwebproyecto.beans.MascotasAdopcion" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.iwebproyecto.beans.EventoBenefico" %>
-<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.LocalTime" %>
+<%@ page import="com.example.iwebproyecto.beans.PublicacionMascotaPerdida" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
     ArrayList<MascotasAdopcion> listaAdopcion = (ArrayList) request.getAttribute("listaAdopcion");
+    ArrayList<PublicacionMascotaPerdida> listaPerdidos = (ArrayList) request.getAttribute("mascotasPerdidas");
     DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd MMM.").withLocale(new Locale("es", "ES"));
     DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a").withLocale(new Locale("es", "ES"));
 %>
@@ -783,43 +784,27 @@
                         <h1> Mascotas perdidas</h1>
                         <div class="grid-container" id="grilla-perdidos">
                             <!-- Card 1 -->
+
+                            <%
+                                LocalDate hoy = LocalDate.now();
+                                for (PublicacionMascotaPerdida perdido : listaPerdidos) {
+                                    LocalDate fechaPerdida = perdido.getFechaPerdida();
+                                    long diasPerdidos = java.time.temporal.ChronoUnit.DAYS.between(fechaPerdida, hoy);
+                            %>
                             <div class="card .perdido">
                                 <img src="/common/img/perdidos/perdido1.jpg" class="card-img-top card-img-don" alt="Canela">
                                 <div class="card-body">
                                     <h5 class="card-title text-center">Canela</h5>
-                                    <p class="card-text"><strong>Lugar de extravío:</strong> Parque Condesa</p>
-                                    <p class="card-text"><strong>Días perdido:</strong> 2</p>
+                                    <p class="card-text"><strong>Lugar de extravío: </strong><%= perdido.getLugarPerdida() %></p>
+                                    <p class="card-text"><strong>Días perdido: </strong><%= diasPerdidos %></p>
                                 </div>
                             </div>
+                            <%
+                                }
+                            %>
 
-                            <!-- Card 2 -->
-                            <div class="card .perdido">
-                                <img src="/common/img/perdidos/perdido2.jpg" class="card-img-top card-img-don" alt="Thor">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Thor</h5>
-                                    <p class="card-text"><strong>Lugar de extravío:</strong> Puente Azul Santa Anita</p>
-                                    <p class="card-text"><strong>Días perdido:</strong> 8</p>
-                                </div>
-                            </div>
 
-                            <!-- Card 3 -->
-                            <div class="card .perdido">
-                                <img src="/common/img/perdidos/perdido3.jpg" class="card-img-top card-img-don" alt="Sam">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Sam</h5>
-                                    <p class="card-text"><strong>Lugar de extravío:</strong> Calle Flor Tristán La Molina</p>
-                                    <p class="card-text"><strong>Días perdido:</strong> 1</p>
-                                </div>
-                            </div>
-                            <!-- Card 4 -->
-                            <div class="card .perdido">
-                                <img src="/common/img/perdidos/perdido4.jpg" class="card-img-top card-img-don" alt="Sam">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Sam</h5>
-                                    <p class="card-text"><strong>Lugar de extravío:</strong> Calle Flor Tristán La Molina</p>
-                                    <p class="card-text"><strong>Días perdido:</strong> 1</p>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <a href="/user/mascotasPerdidas.jsp" class="btn btn-personal m-2" id="btn-crd-cr">Ver más</a>
