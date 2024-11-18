@@ -40,7 +40,7 @@ public class InicioUsuarioServlet extends HttpServlet {
                 System.out.println("Lista de Adopciones: " + listaMascotasAdopcion.size() + " elementos.");
                 System.out.println("Lista de Perdidos: " + listaPerdidos.size()+ " elementos.");
                 System.out.println("Lista de Eventos: " + listaEventos.size()+ " elementos.");
-                request.setAttribute("listaMascotas", listaMascotasAdopcion);
+                request.setAttribute("eventos", listaEventos) ;
                 request.setAttribute("mascotasPerdidas", listaMascotasAdopcion);
                 request.setAttribute("listaAdopcion", listaMascotasAdopcion);
 
