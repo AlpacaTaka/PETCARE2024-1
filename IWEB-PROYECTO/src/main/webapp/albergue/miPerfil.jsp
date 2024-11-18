@@ -95,7 +95,7 @@
                             <a href="${pageContext.request.contextPath}/PortalAdopciones"><button type="button" class="btn btn-personal2">Regresar   </button></a>
                         </div>
                         <div class="container md-8" style="width: 100%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                            <form id="uploadForm" style="padding:10px" method="post" action="miPerfil">
+                            <form id="uploadForm" style="padding:10px" method="post" action="<%= request.getContextPath() %>/miPerfilAlbergue">
                                 <input type="hidden" name="albergueID" value="<%= albergue.getAlbergueID() %>">
                                 <h1 style="margin-top: 10px;" class="text-center">Perfil de Albergue</h1>
 
@@ -145,11 +145,11 @@
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1" >
-                                        <label for="direccion">Cantidad de animales albergados</label>
+                                        <label for="cantidad_animales">Cantidad de animales albergados</label>
                                         <input type="number" class="form-control" value="<%= albergue.getCantidadAnimales() %>" required disabled>
                                     </div>
                                     <div class="col-md-6 p-1" >
-                                        <label for="direccion">Cantidad de espacios para nuevos animales</label>
+                                        <label for="espacios_disponibles">Cantidad de espacios para nuevos animales</label>
                                         <input type="number" class="form-control" value="<%= albergue.getEspaciosDisponibles() %>" required disabled>
                                     </div>
 
@@ -241,20 +241,28 @@
                                 </div>
 
                                 <hr>
+                                <input type="hidden" id="modoEdicion" name="modoEdicion" value="false">
+                                <%
+                                    boolean modoEdicion = Boolean.parseBoolean(request.getParameter("modoEdicion"));
+                                    // Si no se ha enviado el parámetro, por defecto es false
+                                    if (request.getParameter("modoEdicion") == null) {
+                                        modoEdicion = false;
+                                    }
+                                %>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1">
                                         <label for="cantidad_animales">Cantidad de animales albergados</label>
-                                        <input type="number" id="cantidad_animales" name="cantidad_animales" class="form-control" value="<%= albergue.getCantidadAnimales() %>" required disabled>
+                                        <input type="number" id="cantidad_animales" name="cantidad_animales" class="form-control" value="<%= albergue.getCantidadAnimales() %>" required <%= modoEdicion ? "" : "disabled" %>>
                                     </div>
                                     <div class="col-md-6 p-1">
                                         <label for="espacios_disponibles">Cantidad de espacios para nuevos animales</label>
-                                        <input type="number" id="espacios_disponibles" name="espacios_disponibles" class="form-control" value="<%= albergue.getEspaciosDisponibles() %>" required disabled>
+                                        <input type="number" id="espacios_disponibles" name="espacios_disponibles" class="form-control" value="<%= albergue.getEspaciosDisponibles() %>" required <%= modoEdicion ? "" : "disabled" %>>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1">
                                         <label for="punto_acopio">Punto de acopio de donaciones</label>
-                                        <input type="text" id="punto_acopio" name="punto_acopio" class="form-control" maxlength="100" value="<%= albergue.getPuntoAcopioDonaciones() %>" required disabled>
+                                        <input type="text" id="punto_acopio" name="punto_acopio" class="form-control" maxlength="100" value="<%= albergue.getPuntoAcopioDonaciones() %>" required <%= modoEdicion ? "" : "disabled" %>>
                                     </div>
                                 </div>
 
@@ -306,13 +314,13 @@
         // Evento de clic para alternar entre editar y guardar
         editarBtn.addEventListener('click', () => {
             modoEdicion = !modoEdicion; // Alterna el modo
+            document.getElementById('modoEdicion').value = modoEdicion;
 
             if (modoEdicion) {
                 editarBtn.textContent = 'Guardar'; // Cambia el texto a "Guardar"
                 inputs.forEach(input => input.disabled = false); // Habilita los inputs
             } else {
                 editarBtn.textContent = 'Editar datos'; // Cambia el texto a "Editar datos"
-                inputs.forEach(input => input.disabled = true); // Deshabilita los inputs
                 // Envía el formulario
                 document.getElementById('uploadForm').submit();
             }

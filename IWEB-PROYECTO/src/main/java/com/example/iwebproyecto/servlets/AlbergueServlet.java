@@ -65,7 +65,9 @@ public class AlbergueServlet extends HttpServlet {
             albergueDao.actualizarAlbergue(albergue);
 
             // Redirige después de la actualización
-            response.sendRedirect("miPerfil");
+            request.setAttribute("albergue", albergue); // Vuelve a establecer el atributo con el albergue actualizado
+            RequestDispatcher dispatcher = request.getRequestDispatcher("albergue/miPerfil.jsp");
+            dispatcher.forward(request, response);
         } else {
             response.sendRedirect("error.jsp");
         }

@@ -24,7 +24,7 @@ public class Albergue {
     private String numeroYape;
     private String numeroPlin;
     private String codigoQR;
-    private boolean aprobado; /*Estado:'Aprobado', 'Desaprobado'*/
+    private boolean aprobado;
 
     private Foto foto;
     private String mensaje;
