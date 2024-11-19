@@ -273,8 +273,8 @@ public class AlbergueDaoRevenge extends BaseDao {
         }
     }
 
-    public void borrarMascotaAdopción(int idMascota) {
-        String sql="UPDATE mascotasadopcion set eliminado=1 where idMascota=?;";
+    public void borrarMascotaAdopcion(int idMascota) {
+        String sql="UPDATE mascotasadopcion set eliminado=1 where idAdopcion=?;";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, idMascota);
@@ -283,7 +283,6 @@ public class AlbergueDaoRevenge extends BaseDao {
             e.printStackTrace();
         }
     }
-
 
 
 }

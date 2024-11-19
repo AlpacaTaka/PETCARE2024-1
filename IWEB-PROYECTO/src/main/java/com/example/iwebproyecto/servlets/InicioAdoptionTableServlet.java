@@ -41,6 +41,19 @@ public class InicioAdoptionTableServlet extends HttpServlet {
                 request.setAttribute("idAlbergue", idAlbergue);
                 request.getRequestDispatcher("albergue/albergueFormAdop.jsp").forward(request,response);
                 break;
+            case "delete":
+                int idd = Integer.parseInt(request.getParameter("id"));
+                /*MascotasAdopcion mascotasAdopcion = albergueDaoRevenge.buscarPorId(idd);
+                if(pell != null){
+                    try {
+                        albergueDaoRevenge.borrarMascotaAdopcion(idd);
+                    } catch (SQLException e) {
+                        System.out.println("Log: excepcion: " + e.getMessage());
+                    }
+                }*/
+                albergueDaoRevenge.borrarMascotaAdopcion(idd);
+                response.sendRedirect(request.getContextPath() + "/PortalAdopciones");
+                break;
         }
 
 

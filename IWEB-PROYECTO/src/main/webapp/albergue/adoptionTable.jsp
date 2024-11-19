@@ -95,7 +95,7 @@
         </div>
 
 
-        <div class="container-fluid d-flex" id="contenido-principal" >
+        <div class="container-fluid d-flex" id="contenido-principal" <%--style="background-image: url('<%=request.getContextPath()%>/common/img/backgrounds/paw_bck.jpg');"--%>>
             <div class="row d-flex flex-column" id="contenido-nofooter" style="flex-grow: 1; justify-content: center;">
                 <div class="container md-8" style="width: 100%;max-width: 1200px;">
                     <!--Nombre Tabla-->
@@ -146,7 +146,7 @@
                                         <div style="display: flex; justify-content: center;">
                                             <a href="albergueVisAdop.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
                                             <a href="albergueEdAdop.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></span></button>
+                                            <a onclick="abrirPopup()" href="<%=request.getContextPath()%>/PortalAdopciones?action=delete&id=<%=mascota.getIdAdopcion()%>"><button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar"><span class="fi fi-rr-trash"></span></button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -188,8 +188,8 @@
     <div class="popup-content">
         <h2>¿Seguro que desea eliminar este evento?</h2>
         <div class="popup-buttons">
-            <button class="btn-confirmar" onclick="confirmarAccion()">Confirmar</button>
-            <button class="btn-cancelar" onclick="cerrarPopup()">Cancelar</button>
+            <button class="btn-confirmar" onclick="confirmarAccion() ">Confirmar</button>
+            <button class="btn-cancelar" onclick="cerrarPopup()" >Cancelar</button>
         </div>
     </div>
 </div>
