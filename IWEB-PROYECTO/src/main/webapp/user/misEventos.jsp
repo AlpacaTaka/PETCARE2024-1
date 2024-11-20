@@ -151,8 +151,15 @@
                                             <p class="card-text"><strong>Lugar:</strong> <%= evento.getLugar().getNombreLugar() %> </p>
                                             <p class="card-text"><strong>Dirección:</strong> <%= evento.getLugar().getDireccionLugar() %></p>
                                             <div class="d-flex gap-2 justify-content-around">
-                                                <button type="button" class="btn btn-danger" onclick="abrirConfirmacionCancelar()">Cancelar</button>
-                                                <button type="button" class="btn btn-primary" onclick="window.open('https://www.google.com/maps?q=<%=evento.getLugar().getDireccionLugar()%>,<%=evento.getDistrito().getNombreDistrito()%>', '_blank')">Ver ubicación</button>
+                                                <form method="POST" action="MisEventosUsuario" >
+                                                    <input type="hidden" name="action" value="cancelar">
+                                                    <input type="hidden" name="idEvento" id="eventoIDInput" value="<%= evento.getEventoAlbergueID()%>">
+                                                    <div class="popup-buttons">
+                                                        <button type="submit" class="btn btn-danger">Cancelar</button>
+                                                        <button type="button" class="btn btn-primary" onclick="window.open('https://www.google.com/maps?q=<%=evento.getLugar().getDireccionLugar()%>,<%=evento.getDistrito().getNombreDistrito()%>', '_blank')">Ver ubicación</button>
+                                                    </div>
+                                                </form>
+
                                             </div>
                                         </div>
                                     </div>
@@ -174,104 +181,40 @@
                              </div>
                              -->
                         </div>
-                        <!--Anuncios de donaciones-->
+
+                        <%
+                            ArrayList<EventoBenefico> eventospasados = (ArrayList<EventoBenefico>) request.getAttribute("eventospasados");
+                            for (EventoBenefico eventopasado : eventospasados) {
+                        %>
+                        <!--Anuncios de donaciones pasadas-->
                         <div class="container card-container">
                             <div class="card h-100 mb-3">
                                 <div class="row g-0">
                                     <!-- Imagen del evento -->
                                     <div class="col-md-4">
-                                        <img src="https://www.comfacauca.com/wp-content/uploads/Festival-canino.jpeg" class="img-fluid rounded-start" alt="Imagen del evento">
+                                        <img src="${pageContext.request.contextPath}/<%= eventopasado.getFoto().getRutaFoto() %>" class="img-fluid rounded-start" alt="Imagen del evento">
                                     </div>
                                     <!-- Detalles del evento -->
                                     <div class="col-md-8 d-flex align-self-center">
                                         <div class="card-body">
-                                            <h3 class="card-title">Show de Talentos Perruno!</h3>
-                                            <p class="card-text"><strong>Fecha:</strong> 15/10/2024</p>
-                                            <p class="card-text"><strong>Hora:</strong> 8:00 pm</p>
-                                            <p class="card-text"><strong>Lugar:</strong> Parque Central - Lince</p>
+                                            <h3 class="card-title"><%= eventopasado.getNombre() %></h3>
+                                            <p class="card-text"><strong>Fecha:</strong> <%= eventopasado.getFechaEvento() %></p>
+                                            <p class="card-text"><strong>Hora:</strong> <%= eventopasado.getHoraInicio() %></p>
+                                            <p class="card-text"><strong>Lugar:</strong> <%= eventopasado.getLugar().getNombreLugar() %> </p>
+                                            <p class="card-text"><strong>Dirección:</strong> <%= eventopasado.getLugar().getDireccionLugar() %></p>
                                             <div class="d-flex gap-2 justify-content-around">
-                                                <button type="button" class="btn btn-danger" onclick="abrirConfirmacionCancelar()">Cancelar</button>
-                                                <button type="button" class="btn btn-primary" onclick="window.open('https://maps.app.goo.gl/6swgZC6paQKStweG9', '_blank')">Ver ubicación</button>
+                                                <button type="button" class="btn btn-primary" onclick="window.open('https://www.google.com/maps?q=<%=eventopasado.getLugar().getDireccionLugar()%>,<%=eventopasado.getDistrito().getNombreDistrito()%>', '_blank')">Ver ubicación</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="container card-container">
-                            <div class="card h-100 mb-3">
-                                <div class="row g-0">
-                                    <!-- Imagen del evento -->
-                                    <div class="col-md-4">
-                                        <img src="/common/img/eventos/evento7.png" class="img-fluid rounded-start" alt="Imagen del evento">
-                                    </div>
-                                    <!-- Detalles del evento -->
-                                    <div class="col-md-8 d-flex align-self-center">
-                                        <div class="card-body ">
-                                            <h3 class="card-title">Concurso de acrobacias de perritos</h3>
-                                            <p class="card-text"><strong>Fecha:</strong> 15/10/2024</p>
-                                            <p class="card-text"><strong>Hora:</strong> 8:00 pm</p>
-                                            <p class="card-text"><strong>Lugar:</strong> Parque Central - Lince</p>
-                                            <div class="d-flex gap-2 justify-content-around">
-                                                <button type="button" class="btn btn-danger" onclick="abrirConfirmacionCancelar()">Cancelar</button>
-                                                <button type="button" class="btn btn-primary" onclick="window.open('https://maps.app.goo.gl/6swgZC6paQKStweG9', '_blank')">Ver ubicación</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                        </div>
-                        <div class="container card-container">
-                            <div class="card mb-3">
-                                <div class="row g-0">
-                                    <!-- Imagen del evento -->
-                                    <div class="col-md-4">
-                                        <img src="/common/img/eventos/evento6.jpg" class="img-fluid rounded-start" alt="Imagen del evento">
-                                    </div>
-                                    <!-- Detalles del evento -->
-                                    <div class="col-md-8 d-flex align-self-center">
-                                        <div class="card-body">
-                                            <h3 class="card-title">LATINPET</h3>
-                                            <p class="card-text"><strong>Fecha:</strong> 15/10/2024</p>
-                                            <p class="card-text"><strong>Hora:</strong> 8:00 pm</p>
-                                            <p class="card-text"><strong>Lugar:</strong> Parque Central - Lince</p>
-                                            <div class="d-flex gap-2 justify-content-around">
-                                                <button type="button" class="btn btn-danger" onclick="abrirConfirmacionCancelar()">Cancelar</button>
-                                                <button type="button" class="btn btn-primary" onclick="window.open('https://maps.app.goo.gl/6swgZC6paQKStweG9', '_blank')">Ver ubicación</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                        </div>
-                        <div class="container card-container">
-                            <div class="card mb-3">
-                                <div class="row g-0">
-                                    <!-- Imagen del evento -->
-                                    <div class="col-md-4">
-                                        <img src="/common/img/eventos/evento5.jpg" class="img-fluid rounded-start" alt="Imagen del evento">
-                                    </div>
-                                    <!-- Detalles del evento -->
-                                    <div class="col-md-8 d-flex align-self-center">
-                                        <div class="card-body">
-                                            <h3 class="card-title">HALLOWEEN PET 2024</h3>
-                                            <p class="card-text"><strong>Fecha:</strong> 15/10/2024</p>
-                                            <p class="card-text"><strong>Hora:</strong> 8:00 pm</p>
-                                            <p class="card-text"><strong>Lugar:</strong> Parque Central - Lince</p>
-                                            <div class="d-flex gap-2 justify-content-around">
-                                                <button type="button" class="btn btn-danger" onclick="abrirConfirmacionCancelar()">Cancelar</button>
-                                                <button type="button" class="btn btn-primary" onclick="window.open('https://maps.app.goo.gl/6swgZC6paQKStweG9', '_blank')">Ver ubicación</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        
-                        
+                        <%
+                            }
+                        %>
 
                         
                          
@@ -293,13 +236,19 @@
 
         </div>
     </div>
-    <div id="popup" class="popup-overlay">
+
+
+    <div id="popup" class="popup-overlay" style="display: none;">
         <div class="popup-content">
-        <h2>¿Está seguro de cancelar su asistencia al evento?</h2>
-        <div class="popup-buttons">
-            <button class="btn-confirmar" onclick="confirmarAccion()">Confirmar</button>
-            <button class="btn-cancelar" onclick="cerrarConfirmacionCancelar()">Cancelar</button>
-        </div>
+            <h2>¿Está seguro de cancelar su asistencia al evento?</h2>
+            <form method="POST" action="MisEventosUsuario" id="cancelar">
+                <input type="hidden" name="action" value="cancelar">
+                <input type="hidden" name="idEvento" id="eventoIDInput" value="">
+                <div class="popup-buttons">
+                    <button type="submit" class="btn btn-danger">Confirmar</button>
+                    <button type="button" class="btn btn-secondary" onclick="cerrarConfirmacionCancelar()">Cancelar</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -319,23 +268,21 @@
 </html>
 
 <script>
-    // Función para abrir el popup
-    function abrirConfirmacionCancelar() {
-    document.getElementById('popup').style.display = 'block';
+    let eventoIDSeleccionado = null;
+
+    function abrirConfirmacionCancelar(eventoID) {
+        eventoIDSeleccionado = eventoID;
+        document.getElementById('eventoIDInput').value = eventoIDSeleccionado;
+        document.getElementById('popup').style.display = 'block';
     }
 
-    // Función para cerrar el popup
     function cerrarConfirmacionCancelar() {
-    document.getElementById('popup').style.display = 'none';
+        eventoIDSeleccionado = null;
+        document.getElementById('popup').style.display = 'none';
     }
 
-    // Función de confirmación (puedes agregar la lógica de eliminación aquí)
-    function confirmarAccion() {
-    cerrarConfirmacionCancelar(); // Cerrar el popup de confirmación
-    showCancelarDialog(); // Mostrar el diálogo de cancelación
-    }
 
-    
+
 
 
 </script>

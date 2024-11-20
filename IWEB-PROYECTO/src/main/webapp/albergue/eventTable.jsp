@@ -58,26 +58,29 @@
                 <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
                 <div class="barside">
                     <ul class="navlinks">
-                        <li><a href="miPerfil.jsp" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
-                        <li><a href="adoptionTable.jsp" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                        <li><a href="eventTable.html" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
-                        <li><a href="donationTable.jsp" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
-                        <li><a href="contactarTemporal.jsp" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
-                        <li><a href="solicitudesAdopcion.jsp" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+                        <li><a href="<%=request.getContextPath()%>/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
+                        <li><a href="<%=request.getContextPath()%>/PortalAdopciones" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                        <li><a href="albergue/eventTable.jsp" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
+                        <li><a href="albergue/donationTable.jsp" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
+                        <li><a href="albergue/contactarTemporal.jsp" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
+                        <li><a href="albergue/solicitudesAdopcion.jsp" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+                        <li><a href="albergue/verDenunciasMaltrato.jsp" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
                         <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
-                        <li id="cerrar-sesion"><a href="/login/signin.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                        <li id="cerrar-sesion"><a href="/login/login.jsp" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                     </ul>
                 </div>
 
                 <div id="menu" class="menu">
-                    <a href="miPerfil.jsp">Mi Perfil</a>
-                    <a href="adoptionTable.jsp">Portal de Adopciones</a>
-                    <a href="eventTable.html">Mis Eventos Benéficos</a>
-                    <a href="donationTable.jsp">Mis Eventos de Donación</a>
-                    <a href="contactarTemporal.jsp">Hogares Temporales</a>
-                    <a href="solicitudesAdopcion.jsp">Solicitudes de Adopción</a>
+                    <a href="<%=request.getContextPath()%>/miPerfilAlbergue">Mi Perfil</a>
+                    <a href="<%=request.getContextPath()%>/PortalAdopciones">Portal de Adopciones</a>
+                    <a href="albergue/eventTable.jsp">Mis Eventos Benéficos</a>
+                    <a href="albergue/donationTable.jsp">Mis Eventos de Donación</a>
+                    <a href="albergue/contactarTemporal.jsp">Hogares Temporales</a>
+                    <a href="albergue/solicitudesAdopcion.jsp">Solicitudes de Adopción</a>
+                    <a href="albergue/verDenunciasMaltrato.jsp">Denuncias de maltrato</a>
+                    <!--<a href="#">Solicitudes de Adopción</a>-->
                     <hr>
-                    <a href="/login/signin.html">Cerrar Sesión</a>
+                    <a href="/login/login.html">Cerrar Sesión</a>
                 </div>
 
 
@@ -144,7 +147,7 @@
                                                             <span class="fi fi-rr-eye"></span>
                                                         </button>
                                                     </a>
-                                                    <a href="/eventos?action=editar&id=<%= evento.getEventoAlbergueID() %>"">
+                                                    <a href="/eventos?action=editar&id=<%= evento.getEventoAlbergueID() %>">
                                                         <button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar">
                                                             <span class="fi fi-rr-edit"></span>
                                                         </button>
@@ -412,18 +415,18 @@
 
                     // Botón anterior (se desactiva si estamos en la primera página)
                     let prevClass = currentPage === 1 ? 'disabled' : '';
-                    pagination.innerHTML += `<li class="page-item ${prevClass}"><a class="page-link" data-page="${currentPage - 1}" href="#">Anterior</a></li>`;
+                    pagination.innerHTML += `<li class="page-item <%="${prevClass}"%>"><a class="page-link" data-page="<%="${currentPage - 1}"%>" href="#">Anterior</a></li>`;
 
                     // Números de página
                     for (let i = 1; i <= totalPages; i++) {
                         let activeClass = currentPage === i ? 'active' : '';
                         let pageClass = activeClass ? 'bg-brown text-white' : 'bg-white text-brown'; // Añadir clases de color marrón para la página activa
-                        pagination.innerHTML += `<li class="page-item ${activeClass} ${pageClass}"><a class="page-link" data-page="${i}" href="#">${i}</a></li>`;
+                        pagination.innerHTML += `<li class="page-item <%="${activeClass} ${pageClass}"%>"><a class="page-link" data-page="<%="${i}"%>" href="#"><%="${i}"%></a></li>`;
                     }
 
                     // Botón siguiente (se desactiva si estamos en la última página)
                     let nextClass = currentPage === totalPages ? 'disabled' : '';
-                    pagination.innerHTML += `<li class="page-item ${nextClass}"><a class="page-link" data-page="${currentPage + 1}" href="#">Siguiente</a></li>`;
+                    pagination.innerHTML += `<li class="page-item <%="${nextClass}"%>"><a class="page-link" data-page="<%="${currentPage + 1}"%>" href="#">Siguiente</a></li>`;
 
                     // Añadir un evento a los enlaces de la paginación para que llamen a showPage()
                     const paginationLinks = document.querySelectorAll('.page-link');

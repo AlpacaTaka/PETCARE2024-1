@@ -21,6 +21,15 @@ public class DonacionSuministros {
     private Foto foto;
 
     private String mensajeParaDonantes;
+    private boolean eliminado;
+
+    public boolean isEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
+    }
 
     public DonacionSuministros() {}
 
