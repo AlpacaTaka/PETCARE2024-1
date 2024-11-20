@@ -1,16 +1,27 @@
+
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.util.Locale" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.LocalTime" %>
+<%@ page import="com.example.iwebproyecto.beans.PublicacionMascotaPerdida" %>
+<%@ page import="com.example.iwebproyecto.beans.EventoBenefico" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    ArrayList<PublicacionMascotaPerdida> listaPerdidos = (ArrayList) request.getAttribute("mascotasPerdidas");
+%>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
+    <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
-    <link rel="stylesheet" href="css/inicio.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/user/css/inicio.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
     <title>Mis Eventos</title>
     <style>
@@ -20,7 +31,7 @@
         justify-content: space-between;
         }
         .img-fluid{
-            height: 250px;
+            height: 270px;
             background: cover;
             object-fit: cover;
             width: 250px;
@@ -34,7 +45,7 @@
         @media (max-width: 768px) {
     
             .img-fluid{
-                height: 300px; /* Asegura que la imagen ocupe toda la altura del contenedor */
+                height: 250px; /* Asegura que la imagen ocupe toda la altura del contenedor */
                 width: 100%;
                 object-fit: cover; /* Ajuste perfecto sin deformar la imagen */
             }
@@ -103,11 +114,13 @@
                         <button type="button"  class="btn btn-personal2" onclick="location.href='inicio.jsp'">  Regresar   </button>
                     </div>
                     <div class="container md-8" style="width: 85%;max-width: 900px; background-color:#eb903b76; border-radius: 30px; padding:  20px;">
-                        
+                        <h1 style="margin-top: 30px; margin-left:20px; font-size: 50px; text-align: center;" >Mis Eventos</h1>
+                        <hr>
+                        <br>
                         <div class="row justify-content-center ">
                             <div class="col-md-12 ">
-                              <h1 style="margin-top: 30px; margin-left:20px; font-size: 50px; text-align: center;" >Mis Eventos</h1>
-                              <hr>
+                              <h4 style="margin-top: 30px; margin-left:20px; font-size: 30px; text-align: center;" >Por Venir</h4>
+
                               <br>  
                             </div>
                            <!--Boton de ver desde 
@@ -115,6 +128,51 @@
                                 <button type="button" class="btn btn-personal">Ver desde</button>
                             </div>
                             -->
+                        </div>
+                        <!--Anuncios de donaciones-->
+                        <%
+                            ArrayList<EventoBenefico> eventosfuturos = (ArrayList<EventoBenefico>) request.getAttribute("eventosfututos");
+                            for (EventoBenefico evento : eventosfuturos) {
+
+                        %>
+                        <div class="container card-container">
+                            <div class="card h-100 mb-3">
+                                <div class="row g-0">
+                                    <!-- Imagen del evento -->
+                                    <div class="col-md-4">
+                                        <img src="${pageContext.request.contextPath}/<%= evento.getFoto().getRutaFoto() %>" class="img-fluid rounded-start" alt="Imagen del evento">
+                                    </div>
+                                    <!-- Detalles del evento -->
+                                    <div class="col-md-8 d-flex align-self-center">
+                                        <div class="card-body">
+                                            <h3 class="card-title"><%= evento.getNombre() %></h3>
+                                            <p class="card-text"><strong>Fecha:</strong> <%= evento.getFechaEvento() %></p>
+                                            <p class="card-text"><strong>Hora:</strong> <%= evento.getHoraInicio() %></p>
+                                            <p class="card-text"><strong>Lugar:</strong> <%= evento.getLugar().getNombreLugar() %> </p>
+                                            <p class="card-text"><strong>Dirección:</strong> <%= evento.getLugar().getDireccionLugar() %></p>
+                                            <div class="d-flex gap-2 justify-content-around">
+                                                <button type="button" class="btn btn-danger" onclick="abrirConfirmacionCancelar()">Cancelar</button>
+                                                <button type="button" class="btn btn-primary" onclick="window.open('https://www.google.com/maps?q=<%=evento.getLugar().getDireccionLugar()%>,<%=evento.getDistrito().getNombreDistrito()%>', '_blank')">Ver ubicación</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%
+                            }
+                        %>
+                        <div class="row justify-content-center ">
+                            <div class="col-md-12 ">
+                                <h4 style="margin-top: 30px; margin-left:20px; font-size: 30px; text-align: center;" >Pasados</h4>
+                                <hr>
+                                <br>
+                            </div>
+                            <!--Boton de ver desde
+                            <div class="col-md-4 p-1" style="margin-top: 50px;">
+                                 <button type="button" class="btn btn-personal">Ver desde</button>
+                             </div>
+                             -->
                         </div>
                         <!--Anuncios de donaciones-->
                         <div class="container card-container">
@@ -139,7 +197,6 @@
                                     </div>
                                 </div>
                             </div>
-    
                         </div>
                         <div class="container card-container">
                             <div class="card h-100 mb-3">
@@ -163,7 +220,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                         </div>
                         <div class="container card-container">
                             <div class="card mb-3">
@@ -187,7 +244,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                         </div>
                         <div class="container card-container">
                             <div class="card mb-3">
@@ -211,7 +268,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                         </div>
                         
                         
@@ -256,7 +313,7 @@
         </div>
     </dialog>
 
-    <script src="/common/script/neonavbar.js"></script>
+    <script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

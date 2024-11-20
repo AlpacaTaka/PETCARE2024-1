@@ -79,6 +79,32 @@ public class AllEventosUsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        int idUsuario = 7;
+
+        int idEvento = Integer.parseInt(request.getParameter("idEvento"));
+
+        EventosUsuarioDao eventosUsuarioDao = new EventosUsuarioDao();
+        EventoDao eventoDao = new EventoDao();
+        MascotasDao mascotasDao = new MascotasDao();
+
+
+
+        boolean hayTraslape= eventosUsuarioDao.verificarSolapamiento(idUsuario,idEvento);
+        boolean hayCupo= eventosUsuarioDao.verificarAforo(idEvento);
+        boolean yaInscrito = eventosUsuarioDao.isAlreadyRegistered(idUsuario, idEvento);
+
+        if(!hayCupo) {
+            response.sendRedirect("TodosLosEventos?action=visualizar&id="+idEvento);
+        }
+        else if(yaInscrito) {
+            response.sendRedirect("TodosLosEventos?action=visualizar&id="+idEvento);
+        } else{
+
+            eventosUsuarioDao.registerToEvent(idUsuario, idEvento);
+            response.sendRedirect("TodosLosEventos?action=visualizar&id="+idEvento);
+        }
+
+
     }
 }
 
