@@ -354,7 +354,7 @@
 
             cards.forEach(function(card) {
                 var cardTitle = card.querySelector('.card-title').textContent.toLowerCase(); // Obtener título
-                
+
                 if (cardTitle.includes(inputValue)) {
                     if (inputValue.length > 0 || visibleCards < 9) { // Mostrar solo 6 como máximo cuando no hay búsqueda
                         card.classList.add('d-block'); // Mostrar la card si coincide

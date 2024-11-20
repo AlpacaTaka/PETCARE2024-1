@@ -1,18 +1,32 @@
+
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.util.Locale" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.LocalTime" %>
+<%@ page import="com.example.iwebproyecto.beans.PublicacionMascotaPerdida" %>
+<%@ page import="com.example.iwebproyecto.beans.EventoBenefico" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd MMM.").withLocale(new Locale("es", "ES"));
+    DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a").withLocale(new Locale("es", "ES"));
+    ArrayList<PublicacionMascotaPerdida> listaPerdidos = (ArrayList) request.getAttribute("mascotasPerdidas");
+%>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
+    <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
     <!-- CSS de Bootstrap Datepicker -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
-    <link rel="stylesheet" href="css/eventos.css">
-    <link rel="stylesheet" href="css/inicio.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/user/css/eventos.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/user/css/inicio.css">
     <title>Eventos</title>
     <style>
         .card-body{
@@ -41,7 +55,7 @@
                 </div>
                 <div class="welcome-text">Hola, Juan</div>
             </div>
-            <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="/user/inicio.html"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
 
         
@@ -56,14 +70,14 @@
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="/user/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="/user/allEventos.html" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
-                    <li><a href="/user/postularTemporal.jsp" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
-                    <li><a href="/user/solicitudesDonacionSuministros.jsp" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
-                    <li><a href="/user/donacionMonetaria.jsp" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
-                    <li><a href="/user/solicitudesAdopcion.jsp" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                    <li><a href="/user/reportarMascotaPerdida.jsp" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
-                    <li><a href="/user/reportarMaltrato.jsp" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
+                    <li><a href="/user/miPerfil.html" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="TodosLosEventos" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
+                    <li><a href="/user/postularTemporal.html" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
+                    <li><a href="/user/solicitudesDonacionSuministros.html" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
+                    <li><a href="/user/donacionMonetaria.html" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
+                    <li><a href="/user/solicitudesAdopcion.html" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                    <li><a href="/user/reportarMascotaPerdida.html" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
+                    <li><a href="/user/reportarMaltrato.html" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
                     <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
                 
@@ -73,19 +87,20 @@
 
             </div>
             <div id="menu" class="menu">
-                <a href="/user/miPerfil.jsp">Mi Perfil</a>
-                <a href="/user/misEventos.jsp">Mis Eventos</a>
-                <a href="/user/misDonaciones.jsp" id="Sep">Mis Donaciones</a>
+                <a href="/user/miPerfil.html">Mi Perfil</a>
+                <a href="/user/misEventos.html">Mis Eventos</a>
+                <a href="/user/misDonaciones.html" id="Sep">Mis Donaciones</a>
                 <hr>
-                <a href="/user/allEventos.html">Eventos</a>
-                <a href="/user/postularAlbergue.jsp">Postular a Albergue</a>
-                <a href="/user/postularTemporal.jsp">Hogar Temporal</a>
-                <a href="/user/solicitudesDonacionSuministros.jsp">Donaciones de Suministros</a>
-                <a href="/user/donacionMonetaria.jsp">Donaciones Monetarias</a>
-                <a href="/user/solicitudesAdopcion.jsp">Portal de Adopciones</a>
-                <a href="/user/mascotasPerdidas.jsp">Portal de Mascotas Perdidas</a>
-                <a href="/user/reportarMascotaPerdida.jsp">Reportar Mascota Perdida</a>
-                <a href="/user/reportarMaltrato.jsp" id="Sep">Reportar Maltrato</a>
+                <a href="TodosLosEventos">Eventos</a>
+                <a href="/user/postularAlbergue.html">Postular a Albergue</a>
+                <a href="/user/postularTemporal.html">Hogar Temporal</a>
+                <a href="/user/solicitudesDonacionSuministros.html">Donaciones de Suministros</a>
+                <a href="/user/donacionMonetaria.html">Donaciones Monetarias</a>
+                <a href="/user/solicitudesAdopcion.html">Portal de Adopciones</a>
+                <a href="/user/mascotasPerdidas.html">Portal de Mascotas Perdidas</a>
+                <a href="/user/avistamientoPerdidos.html">Portal Avistamiento Perdidos</a>
+                <a href="/user/reportarMascotaPerdida.html">Reportar Mascota Perdida</a>
+                <a href="/user/reportarMaltrato.html" id="Sep">Reportar Maltrato</a>
                 <hr>
                 <a href="/login/login.html">Cerrar Sesión</a>
 
@@ -100,223 +115,74 @@
                     
                     <div class="col-md-9" id="contenidoIzquierda">
                         <div class="container" id="Eventos">
-                            <h1>Eventos Benéficos</h1>
+                            <!--Nombre Página-->
+                            <h1 style="margin-top: 10px;" class="text-align-left">Eventos Benéficos</h1>
+
                             <hr>
-                            <!--Botónes de busqueda y filtrado--
-                            <div class="row mb-3 g-3 mt-2">
-                                <div class="col-md-6 d-flex align-items-center justify-content-center">
-                                    <div class="d-flex align-items-center">
-                                        <label class="me-2">Mostrar</label>
-                                        <select class="form-select form-select-sm me-2" style="width: auto;">
-                                            <option value="5">5</option>
-                                            <option value="10">10</option>
-                                            <option value="25">25</option>
-                                            <option value="50">50</option>
-                                        </select>
-                                        <label>elementos</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-6">
-                                    <div class="input-group ">
-                                        <button class="btn btn-outline-secondary btn-personal" type="button" id="button-addon1"><span class="fi-rr-search" style="font-size: 20px;"></span></button>
-                                        <input type="text" class="form-control" placeholder=>
+
+                            <div class="row justify-content-between pt-3 mb-4">
+                                <div class="col-sm-5" style="min-width: 300px;">
+                                    <div class="input-group">
+                                        <button class="btn" type="button" aria-label="Close" style="background-color: #4D0E0E; cursor: default;">
+                                            <span class="fi-rr-search" style="font-size: 20px; color: rgb(255, 255, 255);"></span>
+                                        </button>
+                                        <input type="text" id="searchInput" class="form-control" placeholder="Busque por nombre del evento" maxlength="60">
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mb-3 g-3">
-                                <div class="col-md-6 d-flex align-items-center justify-content-center">
-                                    <div class="d-flex align-items-center">
-                                        <div class="d-flex align-items-center">
-                                            <label class="me-">Ver desde:</label>
-                                            <input type="text" class="form-control" id="datepicker" readonly>
+                            
+                            <!--Cards-->
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="cardContainer" style="width: 100%;">
+                                <%
+                                    // Recuperar la lista de eventos
+                                    ArrayList<EventoBenefico> eventos = (ArrayList<EventoBenefico>) request.getAttribute("eventos");
+                                    if (eventos != null && !eventos.isEmpty()) {
+                                        for (EventoBenefico evento : eventos) {
+                                            LocalDate fechaEvento = evento.getFechaEvento();  // Obtener la fecha del evento
+                                            LocalTime horaEvento = evento.getHoraInicio();    // Obtener la hora del evento
+
+                                            // Formatear la fecha y la hora
+                                            String fechaFormateada = fechaEvento.format(formatoFecha);
+                                            String horaFormateada = horaEvento.format(formatoHora);
+                                %>
+                                <!-- Card para un evento -->
+                                <div class="col-12 col-md-6 col-lg-4 mb-4 card-item">
+                                    <div class="card h-100">
+                                        <img src="${pageContext.request.contextPath}/<%= evento.getFoto().getRutaFoto() %>" class="card-img-top" alt="<%= evento.getNombre() %>">
+                                        <div class="card-body">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="badge text-bg-primary text-wrap" style="max-width: 70%; margin-bottom: 10px">
+                                                    <%= fechaFormateada + " " + horaFormateada %>
+                                                </div>
+                                                <h5 class="card-title text-center"><%= evento.getNombre() %></h5>
+                                            </div>
+                                            <p class="card-text"><%= evento.getDescripcionEvento() %></p>
+                                            <a href="TodosLosEventos?action=visualizar&id=<%= evento.getEventoAlbergueID() %>" class="btn btn-personal">Ver Evento</a>
                                         </div>
                                     </div>
                                 </div>
+                                <%
+                                    }
+                                } else {
+                                %>
+                                <p>No hay eventos disponibles.</p>
+                                <%
+                                    }
+                                %>
                                 
-                                <div class="col-md-6 d-flex justify-content-center">
-                                    <button class="btn btn-personal2 dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Filtrar
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="filterDropdown">
-                                        <li>
-                                            <label class="dropdown-item">
-                                                <input type="checkbox" class="filter-checkbox" value="card1"> Mostrar eventos más próximos
-                                            </label>
-                                        </li>
-                                        <hr>
-                                        <li>
-                                            <label class="dropdown-item">
-                                                <input type="checkbox" class="filter-checkbox" value="card2"> Mostrar eventos Activos
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="dropdown-item">
-                                                <input type="checkbox" class="filter-checkbox" value="card3"> Mostrar eventos Pasados
-                                            </label>
-                                        </li>
-                                        <!-- Añade más checkboxes según tus necesidades 
-                                    </ul>
-                                </div>
-                            </div>
-                            Botónes de busqueda y filtrado-->
-                            <div class="row">
-                                <!-- Card 1 -->
-                                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                                    <div class="card h-100">
-                                        <img src="/common/img/eventos/evento1.jpg" class="card-img-top" alt="Card 1">
-                                        <div class="card-body">
-                                            <div class="row d-flex justify-content-center">
-                                                <div class="badge text-bg-primary text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                    25 Sep. 08:00am
-                                                  </div>
-                                                  <h5 class="card-title text-center">CANinaton 5K</h5>
-                                            </div>
-                                            
-
-                                              <p class="card-text">Animate a caminar con tu amigo de 4 patas. Tendremos grandes premios y artistas invitados.</p>
-                                            <a href="evento.jsp" class="btn btn-personal">Ver Evento</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card 2 -->
-                                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                                    <div class="card h-100">
-                                        <img src="/common/img/eventos/evento3.jpg" class="card-img-top" alt="Card 1">
-                                        <div class="card-body">
-                                            <div class="row d-flex justify-content-center">
-                                                <div class="badge text-bg-primary text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                    25 Sep. 08:00am
-                                                  </div>
-                                                  <h5 class="card-title text-center">Concurso de Disfraces en La Molina</h5>
-                                            </div>
-                                            
-
-                                              <p class="card-text">Se acerca Halloween! Ven con tu peludito disfrazado y podras ganar grandes premios.</p>
-                                            <a href="evento.jsp" class="btn btn-personal">Ver Evento</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card 3 -->
-                                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                                    <div class="card h-100">
-                                        <img src="/common/img/eventos/evento2.jpeg" class="card-img-top" alt="Card 1">
-                                        <div class="card-body">
-                                            <div class="row d-flex justify-content-center">
-                                                <div class="badge text-bg-primary text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                    25 Sep. 08:00am
-                                                  </div>
-                                                  <h5 class="card-title text-center">Gran Evento de Vacunación!</h5>
-                                            </div>
-                                            
-
-                                              <p class="card-text">Se acerca Halloween! Ven con tu peludito disfrazado y podras ganar grandes premios.</p>
-                                            <a href="eventoTraslape.jsp" class="btn btn-personal">Ver Evento</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card 4 -->
-                                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                                    <div class="card h-100">
-                                        <img src="/common/img/eventos/evento4.jpg" class="card-img-top" alt="Card 1">
-                                        <div class="card-body">
-                                            <div class="row d-flex justify-content-center">
-                                                <div class="badge text-bg-primary text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                    25 Sep. 08:00am
-                                                  </div>
-                                                  <h5 class="card-title text-center">Fiesta PERRRRUNA</h5>
-                                            </div>
-                                            
-
-                                              <p class="card-text">Ven al parque el faro en San Isidro para la fiesta de nuestros perritos albergados en Huellitas Felices</p>
-                                            <a href="evento.jsp" class="btn btn-personal">Ver Evento</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Card 5 -->
-                                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                                    <div class="card h-100">
-                                        <img src="/common/img/eventos/evento5.jpg" class="card-img-top" alt="Card 1">
-                                        <div class="card-body">
-                                            <div class="row d-flex justify-content-center">
-                                                <div class="badge text-bg-primary text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                    25 Sep. 08:00am
-                                                  </div>
-                                                  <h5 class="card-title text-center">Tenencia Responsable</h5>
-                                            </div>
-                                            
-
-                                              <p class="card-text">La Municipalidad Distrital de Surco y el Albergue Rayito de Sol-Surco los invita a este  evento de gran importancia para la comunidad</p>
-
-                                            <a href="evento.jsp" class="btn btn-personal">Ver Evento</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card 6 -->
-                                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                                    <div class="card h-100">
-                                        <img src="/common/img/eventos/evento6.jpg" class="card-img-top" alt="Card 1">
-                                        <div class="card-body">
-                                            <div class="row d-flex justify-content-center">
-                                                <div class="badge text-bg-secondary text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                    25 Sep. 08:00am
-                                                  </div>
-                                                  <h5 class="card-title text-center">EXPOMASCOTAS</h5>
-                                            </div>
-                                            
-
-                                              <p class="card-text">Unete a esta fiesta! Trae a tu mascota</p>
-                                            <a href="eventoCompleto.jsp" class="btn btn-personal">Ver Evento</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card 7 -->
-                                <div class="col-12 col-md-6 col-lg-4 mb-4">
-                                    <div class="card h-100">
-                                        <img src="/common/img/eventos/evento7.png" class="card-img-top" alt="Card 1">
-                                        <div class="card-body">
-                                            <div class="row d-flex justify-content-center">
-                                                <div class="badge text-bg-secondary text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                    25 Sep. 08:00am
-                                                  </div>
-                                                  <h5 class="card-title text-center">LATINPET</h5>
-                                            </div>
-                                            
-
-                                              <p class="card-text">Unete a esta fiesta! Trae a tu mascota</p>
-                                            <a href="evento.jsp" class="btn btn-personal">Ver Evento</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                
-                        
-                                
-
                             </div>
                             
                         
                             
                         </div>
+                        <!-- Pagination -->
                         <div class="container d-flex justify-content-center mt-5">
                             <div class="row">
                                 <nav aria-label="...">
-                                    <ul class="pagination">
-                                      <li class="page-item disabled">
-                                        <span class="page-link active">Anterior</span>
-                                      </li>
-                                      <li class="page-item active" aria-current="page">
-                                        <span class="page-link">1</span>
-                                      </li>
-                                      <li class="page-item"><a class="page-link" href="allEventos2.jsp">2</a></li>
-                                      
-                                      <li class="page-item"><a class="page-link" href="allEventos3.jsp">3</a></li>
-                                      <li class="page-item">
-                                        <a class="page-link" href="allEventos2.jsp">Siguiente</a>
-                                      </li>
+                                    <ul class="pagination" id="pagination">
+                                    <!-- Pagos dinámicos -->
                                     </ul>
-                                  </nav>
+                                </nav>
                             </div>
                         </div>
                     </div>
@@ -325,46 +191,29 @@
                             <h1> Mascotas perdidas</h1>
                             <div class="grid-container" id="grilla-perdidos">
                                 <!-- Card 1 -->
+                                <%
+                                    LocalDate hoy = LocalDate.now();
+                                    for (PublicacionMascotaPerdida perdido : listaPerdidos) {
+                                        LocalDate fechaPerdida = perdido.getFechaPerdida();
+                                        long diasPerdidos = java.time.temporal.ChronoUnit.DAYS.between(fechaPerdida, hoy);
+                                %>
                                 <div class="card .perdido">
                                     <img src="/common/img/perdidos/perdido1.jpg" class="card-img-top card-img-don" alt="Canela">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Canela</h5>
-                                        <p class="card-text"><strong>Lugar de extravío:</strong> Parque Condesa</p>
-                                        <p class="card-text"><strong>Días perdido:</strong> 2</p>
+                                        <p class="card-text"><strong>Lugar de extravío: </strong><%= perdido.getLugarPerdida() %></p>
+                                        <p class="card-text"><strong>Días perdido: </strong><%= diasPerdidos %></p>
                                     </div>
                                 </div>
-                        
-                                <!-- Card 2 -->
-                                <div class="card .perdido">
-                                    <img src="/common/img/perdidos/perdido2.jpg" class="card-img-top card-img-don" alt="Thor">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center">Thor</h5>
-                                        <p class="card-text"><strong>Lugar de extravío:</strong> Puente Azul Santa Anita</p>
-                                        <p class="card-text"><strong>Días perdido:</strong> 8</p>
-                                    </div>
-                                </div>
-                        
-                                <!-- Card 3 -->
-                                <div class="card .perdido">
-                                    <img src="/common/img/perdidos/perdido3.jpg" class="card-img-top card-img-don" alt="Sam">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center">Sam</h5>
-                                        <p class="card-text"><strong>Lugar de extravío:</strong> Calle Flor Tristán La Molina</p>
-                                        <p class="card-text"><strong>Días perdido:</strong> 1</p>
-                                    </div>
-                                </div>
-                                <!-- Card 4 -->
-                                <div class="card .perdido">
-                                    <img src="/common/img/perdidos/perdido4.jpg" class="card-img-top card-img-don" alt="Sam">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center">Sam</h5>
-                                        <p class="card-text"><strong>Lugar de extravío:</strong> Calle Flor Tristán La Molina</p>
-                                        <p class="card-text"><strong>Días perdido:</strong> 1</p>
-                                    </div>
-                                </div>
+                                <%
+                                    }
+                                %>
+
+
+
                             </div>
                         </div>
-                        <a href="/user/mascotasPerdidas.jsp" class="btn btn-personal m-2" id="btn-crd-cr">Ver más</a>
+                        <a href="/user/mascotasPerdidas.html" class="btn btn-personal m-2"  id="btn-crd-cr">Ver más</a>
 
                         
 
@@ -386,7 +235,7 @@
         </div>
     </div>
 
-    <script src="/common/script/neonavbar.js"></script>
+    <script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- jQuery necesario para el Datepicker -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -401,7 +250,140 @@
         });
     });
     </script>
-    
+
+    <!--Barra de busqueda y creacion de nuevo archivo-->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Capturamos el campo de búsqueda
+            var searchInput = document.querySelector('.form-control');
+            var pagination = document.getElementById('pagination'); // Referencia a la paginación
+
+            // Evento 'keyup' para filtrar las cards cuando se escribe
+            searchInput.addEventListener('keyup', function() {
+                var inputValue = searchInput.value.toLowerCase(); // Convertir el texto a minúsculas
+                var cards = document.querySelectorAll('.card-item'); // Seleccionar todas las cards
+
+                let visibleCards = 0; // Contador para cards visibles
+
+                cards.forEach(function(card) {
+                    var cardTitle = card.querySelector('.card-title').textContent.toLowerCase(); // Obtener título
+
+                    if (cardTitle.includes(inputValue)) {
+                        if (inputValue.length > 0 || visibleCards < 8) { // Mostrar solo 6 como máximo cuando no hay búsqueda
+                            card.classList.add('d-block'); // Mostrar la card si coincide
+                            card.classList.remove('d-none'); // Asegurarse de que no esté oculta
+                            visibleCards++; // Aumentar el contador de cards visibles
+                        } else {
+                            card.classList.remove('d-block'); // Ocultar si excede 6 cards
+                            card.classList.add('d-none'); // Asegurarse de que esté oculta
+                        }
+                    } else {
+                        card.classList.remove('d-block'); // Ocultar la card si no coincide
+                        card.classList.add('d-none'); // Asegurarse de que esté oculta
+                    }
+                });
+
+                // Si el input está vacío, asegúrate de que no se muestren más de 8 cards
+                if (inputValue.length === 0) {
+                    visibleCards = 0;
+                    cards.forEach(function(card) {
+                        if (visibleCards < 8) {
+                            card.classList.add('d-block');
+                            card.classList.remove('d-none');
+                            visibleCards++;
+                        } else {
+                            card.classList.remove('d-block');
+                            card.classList.add('d-none');
+                        }
+                    });
+                }
+
+                // Si se está buscando, ocultar la paginación
+                if (inputValue.length > 0) {
+                    pagination.style.display = 'none'; // Ocultar la paginación
+                } else {
+                    pagination.style.display = ''; // Mostrar la paginación si no hay búsqueda
+                    showPage(1); // Mostrar la primera página cuando no hay búsqueda
+                }
+            });
+
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const itemsPerPage = 8;
+            let currentPage = 1;
+            const cardItems = document.querySelectorAll('.card-item');
+            const totalPages = Math.ceil(cardItems.length / itemsPerPage);
+            const pagination = document.getElementById('pagination');
+
+            function showPage(page) {
+                if (page < 1 || page > totalPages) {
+                    return;
+                }
+
+                currentPage = page; // Actualiza la página actual
+                let start = (currentPage - 1) * itemsPerPage;
+                let end = start + itemsPerPage;
+
+                // Mostrar solo los elementos de la página actual
+                cardItems.forEach((card, index) => {
+                    if (index >= start && index < end) {
+                        card.classList.add('d-block'); // Mostrar la card
+                        card.classList.remove('d-none'); // Asegurarse de que no esté oculta
+                    } else {
+                        card.classList.remove('d-block'); // Ocultar la card
+                        card.classList.add('d-none'); // Asegurarse de que esté oculta
+                    }
+                });
+
+                renderPagination(); // Re-renderizar la paginación
+            }
+
+            function renderPagination() {
+                pagination.innerHTML = '';
+
+                // Botón anterior (se desactiva si estamos en la primera página)
+                let prevClass = currentPage === 1 ? 'disabled' : '';
+                pagination.innerHTML += `<li class="page-item <%="${prevClass}"%>"><a class="page-link" data-page="<%="${currentPage - 1}"%>" href="#">Anterior</a></li>`;
+
+                // Números de página
+                for (let i = 1; i <= totalPages; i++) {
+                    let activeClass = currentPage === i ? 'active' : '';
+                    let pageClass = activeClass ? 'bg-brown text-white' : 'bg-white text-brown'; // Añadir clases de color marrón para la página activa
+                    pagination.innerHTML += `<li class="page-item <%="${activeClass} ${pageClass}"%>"><a class="page-link" data-page="<%="${i}"%>" href="#"><%="${i}"%></a></li>`;
+                }
+
+                // Botón siguiente (se desactiva si estamos en la última página)
+                let nextClass = currentPage === totalPages ? 'disabled' : '';
+                pagination.innerHTML += `<li class="page-item <%="${nextClass}"%>"><a class="page-link" data-page="<%="${currentPage + 1}"%>" href="#">Siguiente</a></li>`;
+
+                // Añadir un evento a los enlaces de la paginación para que llamen a showPage()
+                const paginationLinks = document.querySelectorAll('.page-link');
+                paginationLinks.forEach(link => {
+                    link.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        const page = parseInt(this.getAttribute('data-page'));
+                        showPage(page);
+                    });
+                });
+            }
+
+            // Reiniciar a la primera página cuando se borre el texto en la barra de búsqueda
+            searchInput.addEventListener('keyup', function() {
+                var inputValue = searchInput.value.toLowerCase();
+
+                if (inputValue.length === 0) {
+                    currentPage = 1; // Restablecer a la página 1 cuando no haya búsqueda
+                    pagination.style.display = ''; // Mostrar la paginación
+                    showPage(1); // Mostrar la primera página
+                } else {
+                    pagination.style.display = 'none'; // Ocultar la paginación cuando haya búsqueda
+                }
+            });
+
+            showPage(currentPage); // Inicialmente mostrar la primera página
+        });
+    </script>
     
 </body>
 </html>

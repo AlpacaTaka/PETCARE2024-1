@@ -60,11 +60,11 @@
             <div class="barside">
                 <ul class="navlinks">
                     <li><a href="MiPerfilUsuario" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="/user/allEventos.jsp" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
+                    <li><a href="TodosLosEventos" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
                     <li><a href="/user/postularTemporal.jsp" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
                     <li><a href="/user/solicitudesDonacionSuministros.jsp" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
-                    <li><a href="/user/donacionMonetaria.jsp" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
-                    <li><a href="/user/solicitudesAdopcion.jsp" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                    <li><a href="TodosLosAlbergues" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
+                    <li><a href="PortalDeAdopcion" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
                     <li><a href="/user/reportarMascotaPerdida.jsp" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
                     <li><a href="/user/reportarMaltrato.jsp" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
                     <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
@@ -77,12 +77,12 @@
                 <a href="/user/misEventos.jsp">Mis Eventos</a>
                 <a href="/user/misDonaciones.jsp" id="Sep">Mis Donaciones</a>
                 <hr>
-                <a href="/user/allEventos.jsp">Eventos</a>
+                <a href="TodosLosEventos">Eventos</a>
                 <a href="/user/postularAlbergue.jsp">Postular a Albergue</a>
                 <a href="/user/postularTemporal.jsp">Hogar Temporal</a>
                 <a href="/user/solicitudesDonacionSuministros.jsp">Donaciones de Suministros</a>
-                <a href="/user/donacionMonetaria.jsp">Donaciones Monetarias</a>
-                <a href="/user/solicitudesAdopcion.jsp">Portal de Adopciones</a>
+                <a href="TodosLosAlbergues">Donaciones Monetarias</a>
+                <a href="PortalDeAdopcion">Portal de Adopciones</a>
                 <a href="/user/mascotasPerdidas.jsp">Portal de Mascotas Perdidas</a>
                 <a href="/user/reportarMascotaPerdida.jsp">Reportar Mascota Perdida</a>
                 <a href="/user/reportarMaltrato.jsp" id="Sep">Reportar Maltrato</a>
