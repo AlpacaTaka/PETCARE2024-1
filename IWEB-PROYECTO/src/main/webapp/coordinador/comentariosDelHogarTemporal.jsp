@@ -34,7 +34,7 @@
                 </div>
                 <div class="welcome-text">Hola, Coordinador Zona Norte</div>
             </div>
-            <div class="logo"><img src="/common/img/logos/logo_navbar.png" alt="logo"></div>
+            <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
         </header>
 
         <div class="main">

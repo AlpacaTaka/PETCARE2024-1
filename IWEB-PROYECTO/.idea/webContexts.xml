@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/albergue/albergueFormAdop.jsp" value="file://$PROJECT_DIR$/src/main/webapp/albergue" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/coordinador/comentariosDelHogarTemporal.jsp" value="file://$PROJECT_DIR$/src/main/webapp/coordinador" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/coordinador/listaHogaresTemporales.jsp" value="file://$PROJECT_DIR$/src/main/webapp/coordinador" />
       </map>
     </option>
   </component>
