@@ -286,7 +286,7 @@
                 // Agregar las nuevas opciones
                 opciones[seleccion].forEach(function(opcion) {
                     const nuevaOpcion = document.createElement('option');
-                    nuevaOpcion.value = opcion.toLowerCase();
+                    nuevaOpcion.value = opcion;/*.toLowerCase();*/
                     nuevaOpcion.textContent = opcion;
                     select2.appendChild(nuevaOpcion);
                 });
@@ -295,7 +295,7 @@
 
         // Habilitar/deshabilitar el campo de texto "otra raza"
         select2.addEventListener('change', function() {
-            if (this.value === 'otro') {  // El valor se convierte a minúsculas, por eso se usa "otro"
+            if (this.value === 'Otro') {  // El valor se convierte a minúsculas, por eso se usa "otro"
                 otraRazaInput.disabled = false;
             } else {
                 otraRazaInput.disabled = true;

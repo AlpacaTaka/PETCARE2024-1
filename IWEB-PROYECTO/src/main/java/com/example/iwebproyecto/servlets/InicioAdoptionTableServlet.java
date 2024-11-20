@@ -85,7 +85,7 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         String raza = request.getParameter("raza");
         raza=raza.toUpperCase().charAt(0)+raza.substring(1,raza.length());
         String otraRaza = request.getParameter("otraRaza");
-        if (raza.equals("otraRaza")) {
+        if (raza.equals("Otro")) {
             raza=otraRaza;
         }
         if (raza.isEmpty()){
