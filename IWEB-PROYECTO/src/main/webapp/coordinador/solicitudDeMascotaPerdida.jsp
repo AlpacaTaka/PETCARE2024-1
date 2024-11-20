@@ -1,14 +1,19 @@
+<%@ page import="com.example.iwebproyecto.beans.SolicitudTemporal" %>
+<%@ page import="com.example.iwebproyecto.beans.PublicacionMascotaPerdida" %>
+<%@ page import="java.util.Objects" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
-    
+    <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
-    <link rel="stylesheet" href="CSSDELAPAGINA.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSSDELAPAGINA.css">
     <title>Marcus - Solicitud de mascota perdida</title>
     <style>
         
@@ -42,7 +47,7 @@
                     <li><a href="miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                     <li><a href="listaSolicitudesDeHogarTemporal1.jsp" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
                     <li><a href="listaHogaresTemporales.jsp" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                    <li><a href="listaSolicitudesDeMascotaPerdida.html" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                    <li><a href="listaSolicitudesDeMascotaPerdida.jsp" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
                     <li><a href="listaPublicacionesDeMascotaPerdida.html" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
                     
                     <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
@@ -56,7 +61,7 @@
                 <a href="listaSolicitudesDeHogarTemporal1.jsp">Solicitudes de hogar temporal</a>
                 <a href="listaHogaresTemporales.jsp">Comentarios de hogares temporales</a>
                 <hr>
-                <a href="listaSolicitudesDeMascotaPerdida.html">Solicitudes de mascota perdida</a>
+                <a href="listaSolicitudesDeMascotaPerdida.jsp">Solicitudes de mascota perdida</a>
                 <a href="listaPublicacionesDeMascotaPerdida.html">Publicaciones de mascota perdida</a>
                 <hr>
                 <a href="#">Cerrar Sesión</a>
@@ -70,14 +75,18 @@
             
 
                 <div class="col" id="contenido-nofooter" style="flex-grow: 1;align-content:center">
+                    <%
+                        PublicacionMascotaPerdida sol = (PublicacionMascotaPerdida) request.getSession().getAttribute("VerSolicitudMascotaPerdida");
+
+                    %>
                     <div class="container md-8" style="width: 85%; max-width: 800px; margin-bottom: 20px; padding: 0;">
-                        <a href="listaSolicitudesDeMascotaPerdida.html" style="color: black;"><button type="button" class="btn btn-personal2"> Regresar </button></a>
+                        <a href="listaSolicitudesDeMascotaPerdida.jsp" style="color: black;"><button type="button" class="btn btn-personal2"> Regresar </button></a>
                     </div>
 
                     <h1 class="card-title" style="margin-top: 10px; margin-bottom: 10px; text-align: center;margin-bottom: 20px;">Solicitud de mascota perdida</h1>
                     <div class="container md-8" style="width: 85%; max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px; display: flex; justify-content: center; align-items: center;">
                         <div class="card-body" style="width: 100%; text-align: center;">
-                            <h2 class="card-title" style="margin-top: 10px;">Marcus</h2>
+                            <h2 class="card-title" style="margin-top: 10px;"><%=sol.getNombreMascota()%></h2>
 
                             <div class="col">
                                 <div id="carouselEvento" class="carousel carousel-dark slide" data-bs-ride="carousel">
@@ -96,55 +105,45 @@
                                 </div>
                             </div>
                                                        
-                            <p class="card-text" style="margin-top: 30px;">Solicitud enviada el 04/09/2024</p>
+                            <p class="card-text" style="margin-top: 30px;">Solicitud enviada el <%=sol.getFechaFormulario()%></p>
                             <hr>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">                         
                                     <label for="Descripcion">Descripción</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese una breve descripción" id="Descripcion" name="Descripcion" maxlength="300" required disabled value="Perro blanco, pequeño y muy amigable.">
+                                    <input type="text" class="form-control" placeholder="Ingrese una breve descripción" id="Descripcion" name="Descripcion" maxlength="300" required disabled value="<%=sol.getDescripcion()%>">
                                 </div>
                             </div>
                             <!--Segunda columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-5 p-1"> 
                                     <label for="nombre-mascota">Nombre</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese el nombre de su mascota" id="nombre-mascota" name="nombre-mascota" maxlength="24" required disabled value="Max">
+                                    <input type="text" class="form-control" placeholder="Ingrese el nombre de su mascota" id="nombre-mascota" name="nombre-mascota" maxlength="24" required disabled value="<%=sol.getNombreMascota()%>">
                                 </div>
                                 <div class="col-md-5 p-1"> 
                                     <label for="distintivo">Distintivo</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese el distintivo de su mascota" id="distintivo" name="distintivo" maxlength="30" required disabled value="Collar rojo con placa.">
+                                    <input type="text" class="form-control" placeholder="Ingrese el distintivo de su mascota" id="distintivo" name="distintivo" maxlength="30" required disabled value="<%=sol.getDistintivo()%>">
                                 </div>
                                 <div class="col-md-2 p-1">
                                     <label for="edad-mascota">Edad (años)</label>
-                                    <input type="number" class="form-control" id="edad-mascota" min="1" max="20" placeholder="En años" required disabled value="2">
+                                    <input type="number" class="form-control" id="edad-mascota" min="1" max="20" placeholder="En años" required disabled value="<%=sol.getEdadMascota()%>">
                                 </div>
                             </div>
                             
                             <!--Tercera columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
-                                    <label for="">Tamaño</label>
+                                    <label >Tamaño</label>
                                     <select class="form-select" id="Tamaño" aria-label="Floating label select example" required disabled>
                                         <option value="" disabled>Seleccione una opción</option>
-                                        <option value="Pequeño">Pequeño</option>
-                                        <option value="Mediano" selected>Mediano</option>
-                                        <option value="Grande">Grande</option>
+                                        <option selected><%=sol.getTamanio()%></option>
+
                                     </select>
                                     
                                 </div>
                                 <div class="col-md-6 p-1">
-                                    <label for="">Especie</label>
+                                    <label >Especie</label>
                                     <select class="form-select" id="Especies" aria-label="Floating label select example" required disabled>
-                                        <option value="" disabled>Seleccione una opción</option>
-                                        <option value="Perro" selected>Perro</option>
-                                        <option value="Gato">Gato</option>
-                                        <option value="Ave">Ave</option>
-                                        <option value="Hamster">Hamster</option>
-                                        <option value="Conejo">Conejo</option>
-                                        <option value="Tortuga">Tortuga</option>
-                                        <option value="Huron">Hurón</option>
-                                        <option value="Chinchilla">Chinchilla</option>
-                                        <option value="MiniPig">MiniPig</option>
+                                        <option  selected><%=sol.getEspecie()%></option>
                                     </select>
                                 </div>
                                 
@@ -152,43 +151,40 @@
                             <!--Cuarta columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
-                                    <label for="">Raza</label>
+                                    <label >Raza</label>
                                     <select class="form-select" id="Razas" aria-label="Floating label select example" required disabled>
-                                    <option value="">No sabe</option>
+                                    <option value=""><%=sol.getRaza()%></option>
                                   </select>
                                 </div>
-                                <div class="col-md-6 p-1">
-                                    <label for="otra raza"> Si colocó otra raza,  escribala aquí</label>
-                                    <input type="text" class="form-control"  id="otra-raza" placeholder="-" idplaceholder="Otra raza" maxlength="30" disabled disabled>
-                                </div>
+
                             </div>
                             <!--Sexta columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">                         
                                     <label for="Descripcion-mascota">Descripción adicional</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese la descripción de su mascota" id="Descripcion-mascota" name="Descripcion-mascota" maxlength="300" required disabled value="Cachorro pequeño, pelaje blanco y ojos oscuros. Muy amigable.">
+                                    <input type="text" class="form-control" placeholder="Ingrese la descripción de su mascota" id="Descripcion-mascota" name="Descripcion-mascota" maxlength="300" required disabled value="<%=sol.getDescripcionAdicional()%>">
                                 </div>
                             </div>
                             <!--Septima columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-8 p-1">
-                                    <label for="Direccion-perdida">Lugar de pérdida</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese la dirección o lugar de perdida" maxlength="100" id="Direccion" name="Direccion-perdida" required disabled value="Parque Central, Ciudad">
+                                    <label>Lugar de pérdida</label>
+                                    <input type="text" class="form-control" placeholder="Ingrese la dirección o lugar de perdida" maxlength="100" id="Direccion" name="Direccion-perdida" required disabled value="<%=sol.getLugarPerdida()%>">
                                 </div>
                                 <div class="col-md-4 p-1">
                                     <label for="hora-perdida">Hora aproximada de perdida</label>
-                                    <input type="time" class="form-control" id="hora-perdida" required disabled value="14:30">
+                                    <input type="time" class="form-control" id="hora-perdida" required disabled value="<%=sol.getHoraPerdida()%>">
                                 </div>
                             </div>
                             <!--Octava columna de selección-->
                             <div class="row justify-content-center p-1" >
                                 <div class="col-6 p-1"> 
                                     <label for="nombre-contacto">Nombre de contacto</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese su nombre completo para contactarlo" id="nombre-contacto" name="nombre-contacto" maxlength="70" required disabled value="Juan Pérez Gonzales">
+                                    <input type="text" class="form-control" placeholder="Ingrese su nombre completo para contactarlo" id="nombre-contacto" name="nombre-contacto" maxlength="70" required disabled value="<%=sol.getNombreContacto()%>">
                                 </div>
                                 <div class="col-4 p-1">
                                     <label for="monto-recompensa">Indique el monto (soles)</label>
-                                    <input type="number" class="form-control"  id="monto-recompensa" min="50" max="800" placeholder="Ingrese un número" required disabled value="300">
+                                    <input type="number" class="form-control"  id="monto-recompensa" min="50" max="800" placeholder="Ingrese un número" required disabled value="<%=sol.getMontoRecompensa()%>">
                                 </div>
                             </div>
 
