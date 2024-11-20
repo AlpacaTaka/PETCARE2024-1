@@ -10,6 +10,21 @@ import java.util.ArrayList;
 
 public class EventosUsuarioDao extends BaseDao{
 
+    public void borrarInscripcion(int usuarioID, int eventoID){
+        String sql = "DELETE FROM inscripcionevento WHERE usuarioID = ? AND eventoID = ?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, usuarioID);
+            pstmt.setInt(2, eventoID);
+
+            pstmt.executeUpdate(); // Ejecuta la eliminación
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public boolean isAlreadyRegistered(int userId, int eventoId) {
         String query = "SELECT COUNT(*) FROM inscripcionevento WHERE usuarioID = ? AND eventoID = ?";
         try (Connection conn = this.getConnection();
