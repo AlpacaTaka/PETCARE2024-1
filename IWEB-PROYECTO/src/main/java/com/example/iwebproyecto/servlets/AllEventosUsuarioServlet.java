@@ -79,6 +79,14 @@ public class AllEventosUsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        int idUsuario = 7;
+
+        int idEvento = Integer.parseInt(request.getParameter("idEvento"));
+
+        EventosUsuarioDao eventosUsuarioDao = new EventosUsuarioDao();
+
+        eventosUsuarioDao.registerToEvent(idUsuario, idEvento);
+        response.sendRedirect("TodosLosEventos?action=visualizar&id="+idEvento);
     }
 }
 

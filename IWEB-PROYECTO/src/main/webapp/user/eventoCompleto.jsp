@@ -136,7 +136,7 @@
             <h2 style="color: #721313;"> Inscrito </h2>
             <span class="fi-rr-badge-check" style="font-size: 70px;"></span>
             <p> Tu inscripción al evento ha sido exitosa, puedes visualizarla en la página de "Mis eventos"</p>
-            <button onclick="closeInscripcionDialog()" class="btn btn-personal"> Cerrar </button>
+            <button type="submit" class="btn btn-personal"> Cerrar </button>
         </div>
     </dialog>
 

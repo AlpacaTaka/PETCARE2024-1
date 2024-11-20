@@ -117,10 +117,11 @@
                             <hr>
                             <p class="card-text" style="margin-top: 10px;">La gestión de su donación como entrada será usada para la finalidad con la que se creo el evento. Ayudanos a seguir ayudando.</p>
 
-                            <div class="row justify-content-center p-1">
-                                <div class="col-md-12 p-1 d-flex justify-content-center">
-                                    <button onclick="showDonarSumDialog()" class="btn btn-personal d-flex"  style="font-size: 19px;">Inscribirse</button>
-                                </div>
+                            <div class="col-md-12 p-1 d-flex justify-content-center">
+                                <form action="TodosLosEventos" method="post">
+                                    <input type="hidden" name="idEvento" value="<%= evento.getEventoAlbergueID()%>"/>
+                                    <button type="submit" class="btn btn-personal d-flex"  style="font-size: 19px;">Inscribirse</button>
+                                </form>
 
                             </div>
                         </div>
@@ -150,7 +151,7 @@
             <h2 style="color: #721313;"> Inscrito </h2>
             <span class="fi-rr-badge-check" style="font-size: 70px;"></span>
             <p> Tu inscripción al evento ha sido exitosa, puedes visualizarla en la página de "Mis eventos"</p>
-            <button onclick="closeInscripcionDialog()" class="btn btn-personal"> Cerrar </button>
+            <button type="submit" class="btn btn-personal"> Cerrar </button>
         </div>
     </dialog>
 

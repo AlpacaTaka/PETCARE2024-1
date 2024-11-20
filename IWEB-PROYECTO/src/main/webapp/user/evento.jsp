@@ -118,7 +118,11 @@ String horaFormateada = horaEvento.format(formatoHora);
                                                        
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1 d-flex justify-content-center">
-                                    <button onclick="showDonarSumDialog()" class="btn btn-personal d-flex"  style="font-size: 19px;">Inscribirse</button>
+                                    <form action="TodosLosEventos" method="post">
+                                        <input type="hidden" name="idEvento" value="<%= evento.getEventoAlbergueID()%>"/>
+                                        <button type="submit" class="btn btn-personal d-flex"  style="font-size: 19px;">Inscribirse</button>
+                                    </form>
+
                                 </div>
 
                             </div>  
@@ -154,11 +158,11 @@ String horaFormateada = horaEvento.format(formatoHora);
                 <div class="row justify-content-center p-2">
                     <div class="col-md-7 p-1">                         
                         <label for="tipo-donacion" style="font-size: 14px; font-weight: bold;">Tipo de sumnistro</label>
-                        <input type="text" class="form-control" placeholder="Ingrese la donación a realizar" value="Camas" id="tipo-donacion" name="tipo-donacion" maxlength="20" disabled>      
+                        <input type="text" class="form-control" placeholder="Ingrese la donación a realizar" value="<%=evento.getDetalleSuministro()%>" id="tipo-donacion" name="tipo-donacion" maxlength="20" disabled>
                     </div>
                     <div class="col-md-4 p-1">
                         <label for="cantidad" style="font-size: 14px; font-weight: bold;">Cantidad</label>
-                        <input type="number" class="form-control" placeholder="Cantidad" value="5" id="cantidad" name="cantidad" maxlength="2" disabled> 
+                        <input type="number" class="form-control" placeholder="Cantidad" value="5" id="cantidad" name="cantidad" maxlength="2" >
                     </div>
                 </div>
                 <!--Segunda columna de selección-->
@@ -167,7 +171,7 @@ String horaFormateada = horaEvento.format(formatoHora);
                         <label for="punto-acopio" style="font-size: 14px; font-weight: bold;">Lugar de entrega</label>
                         <select class="form-select" id="punto-acopio" aria-label="Floating label select example" disabled>
                             <option value="" disabled >Seleccione un lugar</option>
-                            <option value="1" disabled selected>Av. Nunca Jamas 565</option>
+                            <option value="1" disabled selected><%=evento.getLugar().getDireccionLugar()%></option>
                             <option value="2" disabled>2</option>
                             <option value="3" disabled>3</option>
                           </select>

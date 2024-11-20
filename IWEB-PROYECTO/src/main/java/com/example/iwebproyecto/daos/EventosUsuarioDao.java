@@ -25,7 +25,7 @@ public class EventosUsuarioDao extends BaseDao{
     }
 
     public boolean registerToEvent(int userId, int eventoId){
-        String query = "INSERT INTO inscripciones (usuarioID, eventoID) VALUES (?, ?)";
+        String query = "INSERT INTO inscripcionevento (usuarioID, eventoID) VALUES (?, ?)";
         try (Connection conn = this.getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, userId);
