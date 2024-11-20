@@ -290,4 +290,37 @@ public class EventoDao extends BaseDao {
     }
 
 
+    //Esto es para verificar la inscripcion
+    public ArrayList<EventoBenefico> listarEventosFuturosPorFechaUsuarioID(int usuarioID) {
+        ArrayList<EventoBenefico> eventos = new ArrayList<>();
+
+        String sql = """
+        SELECT eb.*
+        FROM eventobenefico eb
+        INNER JOIN inscripcionevento ie ON eb.eventoAlbergueID = ie.eventoID
+        WHERE ie.usuarioID = ?
+          AND eb.fechaEvento > CURRENT_DATE()
+          AND eb.eliminado = 0
+        ORDER BY eb.fechaEvento ASC, eb.horaInicio ASC;
+    """; // Ordenar por fecha y hora de inicio
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, usuarioID);
+            ResultSet resultSet = stmt.executeQuery();
+
+            while (resultSet.next()) {
+                EventoBenefico evento = mapearEvento(resultSet);
+                eventos.add(evento);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return eventos;
+    }
+
+
+
 }

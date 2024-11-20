@@ -84,9 +84,27 @@ public class AllEventosUsuarioServlet extends HttpServlet {
         int idEvento = Integer.parseInt(request.getParameter("idEvento"));
 
         EventosUsuarioDao eventosUsuarioDao = new EventosUsuarioDao();
+        EventoDao eventoDao = new EventoDao();
+        MascotasDao mascotasDao = new MascotasDao();
 
-        eventosUsuarioDao.registerToEvent(idUsuario, idEvento);
-        response.sendRedirect("TodosLosEventos?action=visualizar&id="+idEvento);
+
+
+        boolean hayTraslape= eventosUsuarioDao.verificarSolapamiento(idUsuario,idEvento);
+        boolean hayCupo= eventosUsuarioDao.verificarAforo(idEvento);
+        boolean yaInscrito = eventosUsuarioDao.isAlreadyRegistered(idUsuario, idEvento);
+
+        if(!hayCupo) {
+            response.sendRedirect("TodosLosEventos?action=visualizar&id="+idEvento);
+        }
+        else if(yaInscrito) {
+            response.sendRedirect("TodosLosEventos?action=visualizar&id="+idEvento);
+        } else{
+
+            eventosUsuarioDao.registerToEvent(idUsuario, idEvento);
+            response.sendRedirect("TodosLosEventos?action=visualizar&id="+idEvento);
+        }
+
+
     }
 }
 
