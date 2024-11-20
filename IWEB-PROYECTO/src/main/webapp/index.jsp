@@ -11,6 +11,11 @@
 <br/>
 <a href="Inicio">Usuario</a>
 <a href="PortalAdopciones">Albergue</a>
+<form action="MiPerfilCoodinadorServlet" method="GET">
+    <input type="hidden" name="action" value="vista">
+    <button type="submit">Coordinador</button>
+</form>
+
 
 </body>
 </html>
