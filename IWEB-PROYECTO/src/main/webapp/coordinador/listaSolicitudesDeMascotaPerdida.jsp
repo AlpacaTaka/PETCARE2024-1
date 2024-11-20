@@ -1,14 +1,17 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.iwebproyecto.beans.PublicacionMascotaPerdida" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
-    
+    <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
-    <link rel="stylesheet" href="CSSDELAPAGINA.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSSDELAPAGINA.css">
     <title>Solicitudes de mascota perdida</title>
     <style>
         
@@ -55,12 +58,11 @@
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="listaSolicitudesDeHogarTemporal1.jsp" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
-                    <li><a href="listaHogaresTemporales.jsp" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                    <li><a href="listaSolicitudesDeMascotaPerdida.html" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
-                    <li><a href="listaPublicacionesDeMascotaPerdida.html" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
-                    
+                    <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/listaSolicitudesDeMascotaPerdida.jsp" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/listaPublicacionesDeMascotaPerdida.html" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
                     <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
                 
@@ -121,64 +123,30 @@
                         <div class="container d-flex justify-content-center mt-4" style="margin-bottom: 30px;">
                             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="cardContainer" style="width: 100%;">
                                 <!-- Aquí se insertan todas las cards, las cuales se manejarán con paginación -->
-                                <div class="col-12 col-md-6 col-lg-4 mb-4 card-item">
-                                    <div class="card h-100">
-                                        <div class="card-body text-center">
-                                            <h4 class="card-title">Marcus</h4>
-                                            <img src="/common/img/perdidos/perdido1.jpg" class="card-img-top" alt="..." style="max-width: 300px; height: 260px; object-fit: cover;">
-                                            <p class="card-text" style="margin-top: 10px; text-align: center;">Solicitud enviada el 25/08/2024.</p>
-                                            <a href="solicitudDeMascotaPerdida.html" class="btn btn-personal" id="btn-crd-cr">Ver solicitud</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card 1 -->
-                                <div class="col-12 col-md-6 col-lg-4 mb-4 card-item">
-                                    <div class="card h-100">
-                                        <div class="card-body text-center">
-                                            <h4 class="card-title">Logan</h4>
-                                            <img src="/common/img/perdidos/perdido8.jpg" class="card-img-top" alt="..." style="max-width: 300px; height: 260px; object-fit: cover;">
-                                            <p class="card-text" style="margin-top: 10px; text-align: center;">Solicitud enviada el 25/08/2024.</p>
-                                            <a href="solicitudDeMascotaPerdida.html" class="btn btn-personal" id="btn-crd-cr">Ver solicitud</a>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                
 
+                                <%
+                                    List<PublicacionMascotaPerdida> lista = (List<PublicacionMascotaPerdida>) request.getSession().getAttribute("listaMascotaPerdida");
+                                    if (lista != null) {
+                                        for (PublicacionMascotaPerdida so : lista) {
+                                %>
                                 <div class="col-12 col-md-6 col-lg-4 mb-4 card-item">
                                     <div class="card h-100">
                                         <div class="card-body text-center">
-                                            <h4 class="card-title">Roscoe</h4>
+                                            <h4 class="card-title"><%=so.getNombreMascota()%></h4>
                                             <img src="/common/img/perdidos/perdido6.jpg" class="card-img-top" alt="..." style="max-width: 300px; height: 260px; object-fit: cover;">
-                                            <p class="card-text" style="margin-top: 10px; text-align: center;">Solicitud enviada el 25/08/2024.</p>
-                                            <a href="solicitudDeHogarTemporal.jsp" class="btn btn-personal" id="btn-crd-cr">Ver solicitud</a>
+                                            <p class="card-text" style="margin-top: 10px; text-align: center;">Solicitud enviada el <%=so.getFechaFormulario()%>.</p>
+                                            <a href="VerSolicitudMascotaPerdida?id=<%=so.getPublicacionMascotaPerdidaID()%>" class="btn btn-personal" id="btn-crd-cr">Ver solicitud</a>
                                         </div>
                                     </div>
                                 </div>
+                                <%
+                                    }
+                                } else {
+                                %>
+                                <p>No hay solicitudes disponibles.</p>
+                                <% } %>
 
-                                <!-- Card 3 -->
-                                <div class="col-12 col-md-6 col-lg-4 mb-4 card-item">
-                                    <div class="card h-100">
-                                        <div class="card-body text-center">
-                                            <h4 class="card-title">Oscar</h4>
-                                            <img src="/common/img/perdidos/perdido5.jpg" class="card-img-top" alt="..." style="max-width: 300px; height: 260px; object-fit: cover;">
-                                            <p class="card-text" style="margin-top: 10px; text-align: center;">Solicitud enviada el 25/08/2024.</p>
-                                            <a href="solicitudDeMascotaPerdida.html" class="btn btn-personal" id="btn-crd-cr">Ver solicitud</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Card 1 -->
-                                <div class="col-12 col-md-6 col-lg-4 mb-4 card-item">
-                                    <div class="card h-100">
-                                        <div class="card-body text-center">
-                                            <h4 class="card-title">Birdie</h4>
-                                            <img src="/common/img/perdidos/perdido4.jpg" class="card-img-top" alt="..." style="max-width: 300px; height:260px; object-fit: cover;">
-                                            <p class="card-text" style="margin-top: 10px; text-align: center;">Solicitud enviada el 25/08/2024.</p>
-                                            <a href="solicitudDeMascotaPerdida.html" class="btn btn-personal" id="btn-crd-cr">Ver solicitud</a>
-                                        </div>
-                                    </div>
-                                </div>
                         
                                 <!-- Card 2 -->
                                 
@@ -312,18 +280,18 @@
 
             // Botón anterior (se desactiva si estamos en la primera página)
             let prevClass = currentPage === 1 ? 'disabled' : '';
-            pagination.innerHTML += `<li class="page-item ${prevClass}"><a class="page-link" data-page="${currentPage - 1}" href="#">Anterior</a></li>`;
+            pagination.innerHTML += `<li class="page-item <%="${prevClass}"%>"><a class="page-link" data-page="<%="${currentPage - 1}"%>" href="#">Anterior</a></li>`;
 
             // Números de página
             for (let i = 1; i <= totalPages; i++) {
                 let activeClass = currentPage === i ? 'active' : '';
                 let pageClass = activeClass ? 'bg-brown text-white' : 'bg-white text-brown'; // Añadir clases de color marrón para la página activa
-                pagination.innerHTML += `<li class="page-item ${activeClass} ${pageClass}"><a class="page-link" data-page="${i}" href="#">${i}</a></li>`;
+                pagination.innerHTML += `<li class="page-item <%="${activeClass} ${pageClass}"%>"><a class="page-link" data-page="<%="${i}"%>" href="#"><%="${i}"%></a></li>`;
             }
 
             // Botón siguiente (se desactiva si estamos en la última página)
             let nextClass = currentPage === totalPages ? 'disabled' : '';
-            pagination.innerHTML += `<li class="page-item ${nextClass}"><a class="page-link" data-page="${currentPage + 1}" href="#">Siguiente</a></li>`;
+            pagination.innerHTML += `<li class="page-item <%="${nextClass}"%>"><a class="page-link" data-page="<%="${currentPage + 1}"%>" href="#">Siguiente</a></li>`;
 
             // Añadir un evento a los enlaces de la paginación para que llamen a showPage()
             const paginationLinks = document.querySelectorAll('.page-link');
