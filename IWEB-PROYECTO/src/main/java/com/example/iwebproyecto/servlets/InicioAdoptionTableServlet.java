@@ -27,7 +27,7 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         response.setContentType("text/html");
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
-
+        int idAlbergue= 6;
 
         switch (action) {
             case "lista":
@@ -37,9 +37,22 @@ public class InicioAdoptionTableServlet extends HttpServlet {
                 rd.forward(request, response);
                 break;
             case "create":
-                int idAlbergue= 6;
                 request.setAttribute("idAlbergue", idAlbergue);
                 request.getRequestDispatcher("albergue/albergueFormAdop.jsp").forward(request,response);
+                break;
+            case "edit":
+                String id = request.getParameter("id");
+                /*Pelicula pelicula = peliculaDao.buscarPorId(Integer.parseInt(id));
+
+                if(pelicula != null){
+                    request.setAttribute("pelicula",pelicula);
+                    request.getRequestDispatcher("viewPelicula.jsp").forward(request,response);
+                }else{
+                    response.sendRedirect(request.getContextPath() + "/PeliculasServlet");DetallesServlet
+                }*/
+                MascotasAdopcion mascotasAdopcion = albergueDaoRevenge.obtenerMascotasAdopcionPorID(Integer.parseInt(id));
+                request.setAttribute("mascota",mascotasAdopcion);
+                request.getRequestDispatcher("albergue/albergueEdAdop.jsp").forward(request,response);
                 break;
             case "delete":
                 int idd = Integer.parseInt(request.getParameter("id"));
@@ -67,51 +80,55 @@ public class InicioAdoptionTableServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
-
+        String nombreMascota = request.getParameter("nombreMascota");
+        String especie = request.getParameter("especie");
+        String raza = request.getParameter("raza");
+        raza=raza.toUpperCase().charAt(0)+raza.substring(1,raza.length());
+        String otraRaza = request.getParameter("otraRaza");
+        if (raza.equals("otraRaza")) {
+            raza=otraRaza;
+        }
+        if (raza.isEmpty()){
+            raza="Fermosa";
+        }
+        int idDistrito = Integer.parseInt(request.getParameter("idDistrito"));
+        String direccion = request.getParameter("direccionHallazgo");
+        int edad = Integer.parseInt(request.getParameter("edad"));
+        String sexo = request.getParameter("sexoMascota");
+        String descripcion = request.getParameter("breveDescripcion");
+        int idFoto = 30;/*request.getParameter("rutaFoto");*/
+        boolean seEnvuentraTemporal= Boolean.parseBoolean(request.getParameter("hogarTemp"));
+        String condicionesAdopcion = request.getParameter("condiciones");
+        int albergueID = 6;/*Integer.parseInt(request.getParameter("idAlbergue"));*/
+        boolean eliminado = false;
+        MascotasAdopcion mascota = new MascotasAdopcion();
+        mascota.setNombreMascota(nombreMascota);
+        mascota.setEspecie(especie);
+        mascota.setRaza(raza);
+        Distrito distrito = new Distrito();
+        distrito.setDistritoID(idDistrito);
+        mascota.setDistrito(distrito);
+        mascota.setDireccionHallazgo(direccion);
+        mascota.setEdadAprox(edad);
+        mascota.setSexo(sexo);
+        mascota.setDescripcionGeneral(descripcion);
+        Foto foto = new Foto();
+        foto.setFotoID(idFoto);
+        mascota.setFoto(foto);
+        mascota.setSeEncuentraTemporal(seEnvuentraTemporal);
+        mascota.setCondicionesAdopcion(condicionesAdopcion);
+        Albergue albergue = new Albergue();
+        albergue.setAlbergueID(albergueID);
+        mascota.setAlbergue(albergue);
+        mascota.setEliminado(eliminado);
         switch (action) {
-
             case "create":
-                String nombreMascota = request.getParameter("nombreMascota");
-                String especie = request.getParameter("especie");
-                String raza = request.getParameter("raza");
-                String otraRaza = request.getParameter("otraRaza");
-                if (raza.equals("otraRaza")) {
-                    raza=otraRaza;
-                }
-                if (raza.equals("")){
-                    raza="Fermosa";
-                }
-                int idDistrito = Integer.parseInt(request.getParameter("idDistrito"));
-                String direccion = request.getParameter("direccionHallazgo");
-                int edad = Integer.parseInt(request.getParameter("edad"));
-                String sexo = request.getParameter("sexoMascota");
-                String descripcion = request.getParameter("breveDescripcion");
-                int idFoto = 30;/*request.getParameter("rutaFoto");*/
-                boolean seEnvuentraTemporal= Boolean.parseBoolean(request.getParameter("hogarTemp"));
-                String condicionesAdopcion = request.getParameter("condiciones");
-                int albergueID = 6;/*Integer.parseInt(request.getParameter("idAlbergue"));*/
-                boolean eliminado = false;
-                MascotasAdopcion mascota = new MascotasAdopcion();
-                mascota.setNombreMascota(nombreMascota);
-                mascota.setEspecie(especie);
-                mascota.setRaza(raza);
-                Distrito distrito = new Distrito();
-                distrito.setDistritoID(idDistrito);
-                mascota.setDistrito(distrito);
-                mascota.setDireccionHallazgo(direccion);
-                mascota.setEdadAprox(edad);
-                mascota.setSexo(sexo);
-                mascota.setDescripcionGeneral(descripcion);
-                Foto foto = new Foto();
-                foto.setFotoID(idFoto);
-                mascota.setFoto(foto);
-                mascota.setSeEncuentraTemporal(seEnvuentraTemporal);
-                mascota.setCondicionesAdopcion(condicionesAdopcion);
-                Albergue albergue = new Albergue();
-                albergue.setAlbergueID(albergueID);
-                mascota.setAlbergue(albergue);
-                mascota.setEliminado(eliminado);
                 albergueDaoRevenge.crearMascotaAdopcion(mascota);
+                response.sendRedirect(request.getContextPath()+"/PortalAdopciones");
+                break;
+            case "edit":
+                mascota.setIdAdopcion(Integer.parseInt(request.getParameter("id")));
+                albergueDaoRevenge.editarMascotaAdopcion(mascota);
                 response.sendRedirect(request.getContextPath()+"/PortalAdopciones");
                 break;
         }

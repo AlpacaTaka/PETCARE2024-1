@@ -144,8 +144,8 @@
                                         <h4 class="card-title text-center"><%=mascota.getNombreMascota()%></h4>
                                         <hr>
                                         <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisAdop.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
-                                            <a href="albergueEdAdop.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
+                                            <a href="<%=request.getContextPath()%>/PortalAdopciones?action=edit&id=<%=mascota.getIdAdopcion()%>"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
+                                            <a href="<%=request.getContextPath()%>/PortalAdopciones?action=edit&id=<%=mascota.getIdAdopcion()%>"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
                                             <a onclick="abrirPopup()" href="<%=request.getContextPath()%>/PortalAdopciones?action=delete&id=<%=mascota.getIdAdopcion()%>"><button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar"><span class="fi fi-rr-trash"></span></button></a>
                                         </div>
                                     </div>

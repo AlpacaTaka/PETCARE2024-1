@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="<%=request.getContextPath()%>/common/img/logos/paw.ico">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
@@ -48,7 +47,7 @@
                 <li><a href="solicitudesAdopcion.html" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
                 <li><a href="verDenunciasMaltrato.html" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
                 <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
-                <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
             </ul>
         </div>
         <div id="menu" class="menu">
@@ -71,9 +70,7 @@
                 </div>
                 <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
                     <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/PortalAdopciones?action=create">
-
                         <input type="hidden" name="id" value="<%=albergueID%>">
-
                         <h1 style="margin-top: 10px;" class="text-center">Creación de perfil de Mascota para Adopción</h1>
                         <div class="row justify-content-center p-1">
                             <div class="col-md-6 p-1">
@@ -107,7 +104,7 @@
                             <div class="col-md-6 p-1">
                                 <label for="otra-raza"> Si colocó otra raza,  escribala aquí
                                 </label>
-                                <input type="text" class="form-control" name="otraRaza" id="otra-raza"  idplaceholder="Otra raza" disabled>
+                                <input type="text" class="form-control" name="otraRaza" id="otra-raza"  <%--placeholder="Otra raza"--%> disabled>
                             </div>
                         </div>
                         <div class="row justify-content-center p-1">
@@ -195,11 +192,10 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row justify-content-center p-1">
                             <div class="col-md-12 p-1">
-                                <label for="breve_descrip"> Breve Descripción de la Mascota</label>
-                                <textarea name="breveDescripcion" id="breve_descrip" class="form-control" placeholder="Ingrese la breve descripcion de la mascota" maxlength="300" required></textarea>
+                                <label for="breve"> Breve Descripción de la Mascota</label>
+                                <textarea name="breveDescripcion" id="breve" class="form-control" placeholder="Ingrese la breve descripcion de la mascota" maxlength="300" required></textarea>
                             </div>
                         </div>
                         <div class="row justify-content-center p-1">
@@ -208,9 +204,7 @@
                                 <input class="form-control" type="file" id="formFile" accept=".png" required>
                             </div>
                             <div id="fileError" class="text-danger mt-2" style="display: none;">El archivo debe ser una imagen PNG.</div>
-
                         </div>
-
                         <div class="row justify-content-center p-1">
                             <div class="col-md-5 p-1 ">
                                 <label><strong>¿Se encuentra en un hogar temporal?</strong></label>
@@ -229,14 +223,11 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-md-7 p-1">
                                 <label for="condiciones">Condiciones de adopción</label>
                                 <input type="text" id="condiciones" class="form-control" placeholder="Maximo 100 caracteres" maxlength="100" name="condiciones">
                             </div>
-
                         </div>
-
                         <div class="row justify-content-center p-1">
                             <div class="col-md-12 p-1 d-flex justify-content-center">
                                 <button type="submit" class="btn btn-personal">Crear</button>
@@ -260,112 +251,124 @@
     </div>
 </div>
 
-<script src="<%=request.getContextPath()%>/common/script/neonavbar.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script>
-    const select1 = document.getElementById('Especies');
-    const select2 = document.getElementById('Razas');
-    const otraRazaInput = document.getElementById('otra-raza');
-    const nombreMascotaInput = document.getElementById('nombreMascota')
+    <script src="<%=request.getContextPath()%>/common/script/neonavbar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        const select1 = document.getElementById('Especies');
+        const select2 = document.getElementById('Razas');
+        const otraRazaInput = document.getElementById('otra-raza');
 
-    const opciones = {
-        Perro: ['Galgo', 'Shitzu', 'Chihuhua','No sabe','Otro'],
-        Gato: ['Persa', 'Angora', 'Meinkoon','No sabe','Otro'],
-        Ave: ['Ave1', 'Ave2', 'Ave3','Ave4','Otro'],
-        Hamster: ['Hamster1', 'Hamster2', 'Hamster3','No sabe','Otro'],
-        Conejo: ['Conejo1', 'Conejo2', 'Conejo3','No sabe','Otro'],
-        Tortuga: ['T1', 'T2', 'T3','No sabe','Otro'],
-        Huron: ['Manzana', 'Banana', 'Naranja','No sabe','Otro'],
-        Chinchilla: ['Chinchilla1', 'Chinchilla1', 'Chinchilla3','No sabe','Otro'],
-        MiniPig: ['No sabe']
-    };
+        const opciones = {
+            Perro: ['Galgo', 'Shitzu', 'Chihuhua','No sabe','Otro'],
+            Gato: ['Persa', 'Angora', 'Meinkoon','No sabe','Otro'],
+            Ave: ['Ave1', 'Ave2', 'Ave3','Ave4','Otro'],
+            Hamster: ['Hamster1', 'Hamster2', 'Hamster3','No sabe','Otro'],
+            Conejo: ['Conejo1', 'Conejo2', 'Conejo3','No sabe','Otro'],
+            Tortuga: ['T1', 'T2', 'T3','No sabe','Otro'],
+            Huron: ['Manzana', 'Banana', 'Naranja','No sabe','Otro'],
+            Chinchilla: ['Chinchilla1', 'Chinchilla1', 'Chinchilla3','No sabe','Otro'],
+            MiniPig: ['No sabe']
+        };
 
-    select1.addEventListener('change', function() {
-        const seleccion = this.value;
+        select1.addEventListener('change', function() {
+            const seleccion = this.value;
 
-        // Limpiar las opciones anteriores
-        select2.innerHTML = '<option value="">--Selecciona una opción--</option>';
+            // Limpiar las opciones anteriores
+            select2.innerHTML = '<option value="">--Selecciona una opción--</option>';
 
-        if (seleccion) {
-            // Agregar las nuevas opciones
-            opciones[seleccion].forEach(function(opcion) {
-                const nuevaOpcion = document.createElement('option');
-                nuevaOpcion.value = opcion.toLowerCase();
-                nuevaOpcion.textContent = opcion;
-                select2.appendChild(nuevaOpcion);
-            });
+            if (seleccion) {
+                // Agregar las nuevas opciones
+                opciones[seleccion].forEach(function(opcion) {
+                    const nuevaOpcion = document.createElement('option');
+                    nuevaOpcion.value = opcion.toLowerCase();
+                    nuevaOpcion.textContent = opcion;
+                    select2.appendChild(nuevaOpcion);
+                });
+            }
+        });
+
+        // Habilitar/deshabilitar el campo de texto "otra raza"
+        select2.addEventListener('change', function() {
+            if (this.value === 'otro') {  // El valor se convierte a minúsculas, por eso se usa "otro"
+                otraRazaInput.disabled = false;
+            } else {
+                otraRazaInput.disabled = true;
+                otraRazaInput.value = ''; // Limpiar el campo si se deshabilita
+            }
+        });
+    </script>
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            const fileInput = document.getElementById('formFile');
+            const file = fileInput.files[0];
+            const fileError = document.getElementById('fileError');
+
+            // Verifica si el archivo tiene el tipo MIME de PNG
+            if (file && file.type !== 'image/png') {
+                event.preventDefault(); // Evita que el formulario se envíe
+                fileError.style.display = 'block'; // Muestra el mensaje de error
+            } else {
+                fileError.style.display = 'none'; // Oculta el mensaje de error si
+            }
+        });
+    </script>
+    <script>
+        //Limita la cant digitos de números
+        const numeroInput = document.getElementById('edad')
+        numeroInput.addEventListener('input', function(){
+            this.value = this.value.replace(/[^0-9]/g, '');
+            if(this.value.length > 2){
+                this.value = this.value.slice(0,2);
+            }
+        })
+    </script>
+    <script>
+        const direccionInput = document.getElementById('Direccion')
+        direccionInput.addEventListener('input', function(){
+            this.value = this.value.replace(/[^a-zA-Z0-9.áéíóú\s]/g, '');
+        })
+    </script>
+    <script>
+        const nombreMascotaInput = document.getElementById('nombreMascota')
+        nombreMascotaInput.addEventListener('input', function(){
+            this.value = this.value.replace(/[^a-zA-Z0-9áéíóú\s]/g, '');
+        })
+    </script>
+    <script>
+        const condicionesInput = document.getElementById('condiciones')
+        condicionesInput.addEventListener('input', function(){
+            this.value = this.value.replace(/[^a-zA-Z0-9,.áéíóú\s]/g, '');
+        })
+    </script>
+    <script>
+        const breveInput = document.getElementById('breve')
+        breveInput.addEventListener('input', function(){
+            this.value = this.value.replace(/[^a-zA-Z0-9,;.áéíóú\s]/g, '');
+        })
+    </script>
+    <script>
+        const razaInput = document.getElementById('otra-raza')
+        razaInput.addEventListener('input', function(){
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+        })
+    </script>
+    <script>
+        // Función para validar que solo se ingresen letras y espacios
+        function validarSoloLetras(input) {
+            input.value = input.value.replace(/[^a-zA-Z\s]/g, ''); // Elimina caracteres no permitidos
         }
-    });
-
-    // Habilitar/deshabilitar el campo de texto "otra raza"
-    select2.addEventListener('change', function() {
-        if (this.value === 'otro') {  // El valor se convierte a minúsculas, por eso se usa "otro"
-            otraRazaInput.disabled = false;
-        } else {
-            otraRazaInput.disabled = true;
-            otraRazaInput.value = ''; // Limpiar el campo si se deshabilita
+    </script>
+    <script>
+        // Función para validar que solo se ingresen letras, números y espacios
+        function validarDireccion(input) {
+            input.value = input.value.replace(/[^a-zA-Z0-9\s]/g, ''); // Elimina caracteres no permitidos
         }
-    });
-
-    //Nombre y apellidos mascota//
-    // Validar que solo se ingresen letras
-    nombreMascotaInput.addEventListener('input', function() {
-        this.value = this.value.replace(/[^a-zA-Z\s]/g, ''); // Solo permite letras y espacios
-    });
-</script>
-<script>
-    document.getElementById('uploadForm').addEventListener('submit', function(event) {
-        const fileInput = document.getElementById('formFile');
-        const file = fileInput.files[0];
-        const fileError = document.getElementById('fileError');
-
-        // Verifica si el archivo tiene el tipo MIME de PNG
-        if (file && file.type !== 'image/png') {
-            event.preventDefault(); // Evita que el formulario se envíe
-            fileError.style.display = 'block'; // Muestra el mensaje de error
-        } else {
-            fileError.style.display = 'none'; // Oculta el mensaje de error si está todo bien
+    </script>
+    <script>
+        // Función para permitir solo números (enteros o decimales)
+        function validarSoloNumeros(input) {
+            input.value = input.value.replace(/[^0-9]/g, ''); // Elimina caracteres no numéricos
         }
-    });
-</script>
-<script>
-    //Limita la cant digitos de números
-    const numeroInput = document.getElementById('edad')
-    numeroInput.addEventListener('input', function(){
-        if(this.value.length > 2){
-            this.value = this.value.slice(0,2);
-        }
-
-        // Validar el rango
-        const numValue = Number(numeroInput.value);
-        if (numValue < 1 || numValue > 25) {
-            numeroInput.setCustomValidity('El número debe estar entre 1 y 25.');
-        } else {
-            numeroInput.setCustomValidity(''); // Restablecer el mensaje de error
-        }
-    })
-
-</script>
-
-<script>
-    // Función para validar que solo se ingresen letras y espacios
-    function validarSoloLetras(input) {
-        input.value = input.value.replace(/[^a-zA-Z\s]/g, ''); // Elimina caracteres no permitidos
-    }
-</script>
-<script>
-    // Función para validar que solo se ingresen letras, números y espacios
-    function validarDireccion(input) {
-        input.value = input.value.replace(/[^a-zA-Z0-9\s]/g, ''); // Elimina caracteres no permitidos
-    }
-</script>
-<script>
-    // Función para permitir solo números (enteros o decimales)
-    function validarSoloNumeros(input) {
-        input.value = input.value.replace(/[^0-9]/g, ''); // Elimina caracteres no numéricos
-    }
-</script>
-
-
+    </script>
 </body>
 </html>
