@@ -289,5 +289,33 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
         }
     }
 
+        public void ARTemporalPorID(int id,int aprobado) {
+        SolicitudTemporal sol = new SolicitudTemporal();
+
+        String sql = "UPDATE solicitudtemporal\n" +
+                "SET aprobadoCoordinador = "+aprobado+"\n" +
+                ", desactivadoAdministrador =0 \n"+
+                "WHERE solicitudID = "+id+";";
+        try(Connection conn = this.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);) {
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public void ARComentarioTemporalPorID(int id,String comentario) {
+        SolicitudTemporal sol = new SolicitudTemporal();
+
+        String sql = "UPDATE solicitudtemporal\n" +
+                "SET comentarioCoordinador = "+" ' " + comentario+" ' " +"\n" +
+                "WHERE solicitudID = "+id+";";
+        try(Connection conn = this.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);) {
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
