@@ -6,14 +6,14 @@
 <%@ page import="java.time.LocalDate" %>
 <jsp:useBean id="evento" class="com.example.iwebproyecto.beans.EventoBenefico" scope="request" />
 <%
-    DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd MMM.").withLocale(new Locale("es", "ES"));
-    DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a").withLocale(new Locale("es", "ES"));
-    LocalDate fechaEvento = evento.getFechaEvento();  // Obtener la fecha del evento
-    LocalTime horaEvento = evento.getHoraInicio();    // Obtener la hora del evento
+DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd MMM.").withLocale(new Locale("es", "ES"));
+DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a").withLocale(new Locale("es", "ES"));
+LocalDate fechaEvento = evento.getFechaEvento();  // Obtener la fecha del evento
+LocalTime horaEvento = evento.getHoraInicio();    // Obtener la hora del evento
 
-    // Formatear la fecha y la hora
-    String fechaFormateada = fechaEvento.format(formatoFecha);
-    String horaFormateada = horaEvento.format(formatoHora);
+// Formatear la fecha y la hora
+String fechaFormateada = fechaEvento.format(formatoFecha);
+String horaFormateada = horaEvento.format(formatoHora);
 %>
 
 <!DOCTYPE html>
@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="welcome-text">Hola, Juan</div>
             </div>
-            <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="/user/inicio.html"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
 
         <div class="main">
@@ -48,33 +48,34 @@
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="/user/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="/user/allEventos.jsp" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
-                    <li><a href="/user/postularTemporal.jsp" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
-                    <li><a href="/user/solicitudesDonacionSuministros.jsp" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
-                    <li><a href="/user/donacionMonetaria.jsp" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
-                    <li><a href="/user/solicitudesAdopcion.jsp" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                    <li><a href="/user/reportarMascotaPerdida.jsp" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
-                    <li><a href="/user/reportarMaltrato.jsp" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
+                    <li><a href="/user/miPerfil.html" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="/user/allEventos.html" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
+                    <li><a href="/user/postularTemporal.html" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
+                    <li><a href="/user/solicitudesDonacionSuministros.html" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
+                    <li><a href="/user/donacionMonetaria.html" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
+                    <li><a href="/user/solicitudesAdopcion.html" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                    <li><a href="/user/reportarMascotaPerdida.html" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
+                    <li><a href="/user/reportarMaltrato.html" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
                     <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
                 
             </div>
 
             <div id="menu" class="menu">
-                <a href="/user/miPerfil.jsp">Mi Perfil</a>
-                <a href="/user/misEventos.jsp">Mis Eventos</a>
-                <a href="/user/misDonaciones.jsp" id="Sep">Mis Donaciones</a>
+                <a href="/user/miPerfil.html">Mi Perfil</a>
+                <a href="/user/misEventos.html">Mis Eventos</a>
+                <a href="/user/misDonaciones.html" id="Sep">Mis Donaciones</a>
                 <hr>
-                <a href="/user/allEventos.jsp">Eventos</a>
-                <a href="/user/postularAlbergue.jsp">Postular a Albergue</a>
-                <a href="/user/postularTemporal.jsp">Hogar Temporal</a>
-                <a href="/user/solicitudesDonacionSuministros.jsp">Donaciones de Suministros</a>
-                <a href="/user/donacionMonetaria.jsp">Donaciones Monetarias</a>
-                <a href="/user/solicitudesAdopcion.jsp">Portal de Adopciones</a>
-                <a href="/user/mascotasPerdidas.jsp">Portal de Mascotas Perdidas</a>
-                <a href="/user/reportarMascotaPerdida.jsp">Reportar Mascota Perdida</a>
-                <a href="/user/reportarMaltrato.jsp" id="Sep">Reportar Maltrato</a>
+                <a href="/user/allEventos.html">Eventos</a>
+                <a href="/user/postularAlbergue.html">Postular a Albergue</a>
+                <a href="/user/postularTemporal.html">Hogar Temporal</a>
+                <a href="/user/solicitudesDonacionSuministros.html">Donaciones de Suministros</a>
+                <a href="/user/donacionMonetaria.html">Donaciones Monetarias</a>
+                <a href="/user/solicitudesAdopcion.html">Portal de Adopciones</a>
+                <a href="/user/mascotasPerdidas.html">Portal de Mascotas Perdidas</a>
+                <a href="/user/avistamientoPerdidos.html">Portal Avistamiento Perdidos</a>
+                <a href="/user/reportarMascotaPerdida.html">Reportar Mascota Perdida</a>
+                <a href="/user/reportarMaltrato.html" id="Sep">Reportar Maltrato</a>
                 <hr>
                 <a href="/login/login.html">Cerrar Sesión</a>
 
@@ -86,41 +87,38 @@
 
                 <div class="col" id="contenido-nofooter">
                     <div class="container md-8" style="width: 85%; max-width: 800px; margin-bottom: 20px; padding: 0;">
-                        <button type="button" class="btn btn-personal2" onclick="location.href='allEventos.jsp'"> Regresar </button>
+                        <button type="button" class="btn btn-personal2" onclick="location.href='/user/allEventos.html'"> Regresar </button>
                     </div>
                     <div class="container md-8" style="width: 85%; max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px; display: flex; justify-content: center; align-items: center;">
                         <div class="card-body" style="width: 100%; text-align: center; padding: 10px 50px;">
-                            <h2 class="card-title" style="margin-top: 10px;"><%= evento.getNombre()%></h2>
+                            <h2 class="card-title" style="margin-top: 10px;"><%=evento.getNombre()%></h2>
                             <div style="display: flex; justify-content: center; margin-top: 10px; ">
-                                <img src="${pageContext.request.contextPath}/<%= evento.getFoto().getRutaFoto()%>" class="card-img-eve" alt="Imagen" style="width: 100%; max-width: 100%; height: auto; border-radius: 15px;">
+                                <img src="${pageContext.request.contextPath}/<%=evento.getFoto().getRutaFoto()%>" class="card-img-eve" alt="Imagen" style="width: 100%; max-width: 100%; height: auto; border-radius: 15px;">
                             </div>
                             <div class="badge text-bg-primary text-wrap" style="margin-top: 10px; font-size: 1.5rem; padding: 10px 20px;">
                                 <%= fechaFormateada + " " + horaFormateada %>
                             </div>                            
-                            <p class="card-text" style="margin-top: 10px;">¡Prepárate para el evento más emocionante del año para ti y tu mascota! El CANinaton 5K es una maratón especialmente diseñada para que disfrutes junto a tu compañero de cuatro patas. Tendremos sorpresas, premios, artistas invitados y muchas actividades para que tú y tu mascota pasen un día inolvidable.</p>
+                            <p class="card-text" style="margin-top: 10px;"><%= evento.getDescripcionEvento()%></p>
                             <p class="card-text" style="text-align: left;"><strong>Artistas e Invitados Especiales:</strong></p>
-                            <p class="card-text" style="margin-top: 10px;">Carlos Torres - DJ Luna Beats - Alejandra Paws - Maxi el Labrador Influencer</p>
-                            <p class="card-text" style="text-align: left;"><strong>Descripción del Evento:</strong></p>
-                            <p class="card-text" style="margin-top: 10px;">El CANinaton 5K es un evento familiar y amigable con mascotas, donde podrás correr, trotar o caminar junto a tu perro. No importa la raza o tamaño, todos son bienvenidos. La idea es disfrutar de un día de actividad física, diversión y compartir con otros amantes de los animales. </p>
-                            <p class="card-text" style="margin-top: 10px;">Además, tendremos stands de comida, bebidas, artículos para mascotas, y servicios de veterinaria y grooming gratuitos durante el evento. También se realizará una subasta de productos, y parte de los fondos recaudados se donarán a una fundación que apoya la adopción de mascotas abandonadas. </p>
-                            <p class="card-text" style="text-align: left;"><strong>Cronograma del Evento:</strong></p>
-                            <p class="card-text" style="margin-top: 10px; text-align: left;">08:00 am - Registro y entrega de kits de bienvenida</p>
-                            <p class="card-text" style="margin-top: 10px; text-align: left;">08:30 am - Calentamiento con el entrenador profesional David Morales</p>
-                            <p class="card-text" style="margin-top: 10px; text-align: left;">09:00 am - Inicio de la maratón</p>
-                            <p class="card-text" style="margin-top: 10px; text-align: left;">10:30 am - Exhibición de adiestramiento y habilidades caninas</p>
-                            <p class="card-text" style="margin-top: 10px; text-align: left;">12:00 pm - Sorteo y entrega de premios a los ganadores de la carrera</p>
-                            <p class="card-text" style="margin-top: 10px; text-align: left;">01:00 pm - Charlas sobre cuidado y bienestar de mascotas con Alejandra Paws</p>
-                            <p class="card-text" style="margin-top: 10px; text-align: left;">02:00 pm - Despedida y cierre del evento</p>
-                            <p class="card-text" style="text-align: left;"><strong>Precio de la Entrada:</strong></p>
-                            <p class="card-text" style="margin-top: 10px; text-align: left;">Entrada General: S/ 50 (Incluye kit de bienvenida con camiseta, gorra y pañuelo para tu mascota)</p>
-                            <p class="card-text" style="margin-top: 10px; text-align: left;">Entrada VIP: S/ 80 (Incluye kit de bienvenida + acceso a la zona de snacks para mascotas y fotos con los invitados especiales)</p>
-                            <p class="card-text" style="margin-top: 10px; text-align: left;">Nota: Los menores de 12 años ingresan gratis acompañados de un adulto con entrada pagada.</p>
+                            <p class="card-text" style="margin-top: 10px;"><%= evento.getInvitados()%></p>
+                            <p class="card-text" style="text-align: left;"><strong>Donación para la entrada al Evento:</strong></p>
+                            <% if ("Monetario".equals(evento.getTipoDonacion())) { %>
+                            <p class="card-text" style="text-align: left;"><strong>Valor de Entrada:</strong> S/ <%= evento.getDetalleMonetario() %></p>
+                            <p class="card-text" style="text-align: left;">Recuerde que debe de cancelar su entrada al llegar al evento o a través del contacto directo con el Albergue</p>
+
+                            <p class="card-text" style="text-align: left;"><strong>Contacto:</strong> <%= evento.getAlbergue().getNumeroContactoDonaciones() %></p>
+                            <% } else if ("Suministros".equals(evento.getTipoDonacion())) { %>
+                            <p><strong>Donación Solicitada:</strong> <%= evento.getDetalleSuministro() %></p>
+                            <% } %>
+                            <p class="card-text" style="margin-top: 10px; text-align: left;"> </p>
                             <p class="card-text" style="text-align: left;"><strong>Finalidad del Evento:</strong></p>
-                            <p class="card-text" style="margin-top: 10px;">El CANinaton 5K busca fomentar la actividad física y el cuidado de nuestras mascotas, así como promover la adopción y tenencia responsable. Parte de los fondos recaudados se destinarán a la fundación "Huellas de Amor", que trabaja en la adopción de perros y gatos abandonados. ¡Ven y corre con tu mejor amigo, diviértete y contribuye a una buena causa!</p>
+                            <p class="card-text" style="margin-top: 10px;"><%= evento.getRazonEvento()%></p>
+                            <hr>
+                            <p class="card-text" style="margin-top: 10px;">La gestión de su donación como entrada será usada para la finalidad con la que se creo el evento. Ayudanos a seguir ayudando.</p>
                                                        
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1 d-flex justify-content-center">
-                                    <button onclick="showInscribirseDialog()" class="btn btn-personal">Inscribirse</button>
+                                    <button onclick="showDonarSumDialog()" class="btn btn-personal d-flex"  style="font-size: 19px;">Inscribirse</button>
                                 </div>
 
                             </div>  
@@ -146,38 +144,122 @@
     </div>
 
     <!--Pop up-->
-    <dialog id="confirm-inscripcion" style="max-width: 400px;border-radius: 20px;background-color: #fca651e1;border: none;justify-content: center;backdrop-filter: blur(200px);">
-        <div class="pop-up-content" style="text-align: center;padding: 0px 15px;">
-            <h2 style="color: #721313;"> Inscrito </h2>
-            <span class="fi-rr-badge-check" style="font-size: 70px;"></span>
-            <p> Tu inscripción al evento ha sido exitosa, puedes visualizarla en la página de "Mis eventos"</p>
-            <button onclick="closeInscripcionDialog()" class="btn btn-personal"> Cerrar </button>
+    <dialog id="confirm-donacion" style="max-width: 400px;border-radius: 20px;background-color: #fca651e1;border: none; justify-content: center;">
+        <div class="pop-up-content" style="text-align: center;padding: 0px 15px;border-style:dashed; border-radius: 20px;border-color: black;padding: 10px;border-width: 2px;">
+            <h2 style="color: #721313;"><italic>Confirma tu entrada</italic></h2>
+            <span class="fi-rr-form" style="font-size: 70px;"></span>
+            <p> Esta es la información sobre lo que el albergue organizador estableció como requerimiento para la entrada al evento, de no entregar esto en la puerta del evento no se permitirá su ingreso</p>
+            <form id="suministroForm" onsubmit="handleFormSubmit(event)">
+                <!--Primera columna de selección-->
+                <div class="row justify-content-center p-2">
+                    <div class="col-md-7 p-1">                         
+                        <label for="tipo-donacion" style="font-size: 14px; font-weight: bold;">Tipo de sumnistro</label>
+                        <input type="text" class="form-control" placeholder="Ingrese la donación a realizar" value="Camas" id="tipo-donacion" name="tipo-donacion" maxlength="20" disabled>      
+                    </div>
+                    <div class="col-md-4 p-1">
+                        <label for="cantidad" style="font-size: 14px; font-weight: bold;">Cantidad</label>
+                        <input type="number" class="form-control" placeholder="Cantidad" value="5" id="cantidad" name="cantidad" maxlength="2" disabled> 
+                    </div>
+                </div>
+                <!--Segunda columna de selección-->
+                <div class="row justify-content-center p-2">
+                    <div class="col-md-11 p-1">
+                        <label for="punto-acopio" style="font-size: 14px; font-weight: bold;">Lugar de entrega</label>
+                        <select class="form-select" id="punto-acopio" aria-label="Floating label select example" disabled>
+                            <option value="" disabled >Seleccione un lugar</option>
+                            <option value="1" disabled selected>Av. Nunca Jamas 565</option>
+                            <option value="2" disabled>2</option>
+                            <option value="3" disabled>3</option>
+                          </select>
+                    </div>
+                </div>
+                    <button type="submit" class="btn btn-personal"> Enviar </button>
+            </form>
         </div>
     </dialog>
 
-    <script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-    
+    <!-- Pop-up de confirmación -->
+    <dialog id="confirm-envio" style="max-width: 400px; border-radius: 20px; background-color: #fca651e1; border: none; justify-content: center;">
+        <div class="pop-up-content" style="text-align: center; padding: 0px 15px;padding: 10px;">
+            <h2 style="color: #721313;">¡Confirmación de entrada!</h2>
+            <span class="fi-rr-badge-check" style="font-size: 70px;"></span>
+            <p>Tu entrada ha sido recibida con éxito. ¡Gracias por tu colaboración!</p>
+            <button onclick="closeEnvioDialog()" class="btn btn-personal">Cerrar</button>
+        </div>
+    </dialog>
     
 </body>
 </html>
 
+<script src="/common/script/neonavbar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 <script>
-    const inscripcionDialog = document.getElementById("confirm-inscripcion");
+    const donacionDialog = document.getElementById("confirm-donacion");
     const contenidoPopDialog = document.querySelector(".pop-up-content");
+    const confirmEnvioDialog = document.getElementById("confirm-envio");
+    const contenidoEnvio = confirmEnvioDialog.querySelector(".pop-up-content");
 
-    function showInscribirseDialog(){
-        inscripcionDialog.showModal();
+    function showDonarSumDialog(){
+        donacionDialog.showModal();
     }
 
-    function closeInscripcionDialog(){
-        inscripcionDialog.close();
+    function closeDonacionDialog(){
+        donacionDialog.close();
     }
 
-    inscripcionDialog.addEventListener("click", (e)=> {
-        if(!contenidoPopDialog.contains(e.target)){
-            inscripcionDialog.close();
+    function closeEnvioDialog() {
+        confirmEnvioDialog.close(); // Cierra el diálogo de confirmación
+    }
+
+   // Cerrar el pop-up de confirmación al hacer clic fuera del contenido
+   confirmEnvioDialog.addEventListener("click", (e) => {
+        if (!contenidoEnvio.contains(e.target)) {
+            closeEnvioDialog();
         }
-    })
+    });
+
+    // Cerrar el diálogo de donación al hacer clic fuera del contenido
+    donacionDialog.addEventListener("click", (e) => {
+        if (!contenidoPopDialog.contains(e.target)) {
+            closeDonacionDialog();
+        }
+    });
+
+    function handleFormSubmit(event) {
+        event.preventDefault(); // Previene el comportamiento por defecto del formulario
+        closeDonacionDialog(); // Cierra el diálogo de donación
+
+        // Muestra el diálogo de confirmación
+        confirmEnvioDialog.showModal();        
+
+        return false; // Asegúrate de no enviar el formulario de manera tradicional
+    }
+
+</script>
+
+<script>
+    const tipoDonacionInput = document.getElementById('tipo-donacion');
+    const fechaEntregaInput = document.getElementById('fechaEntrega');
+    const cantidadInput = document.getElementById('cantidad')
+
+    // Validar que solo se ingresen letras
+    tipoDonacionInput.addEventListener('input', function() {
+                this.value = this.value.replace(/[^a-zA-Z\s]/g, ''); // Solo permite letras y espacios
+    });
+
+    // Deshabilitar la entrada manual de texto
+    fechaEntregaInput.addEventListener('keydown', function(event) {
+                event.preventDefault();
+    });
+
+    cantidadInput.addEventListener('input', function() {
+        // Convertir el valor a string para verificar la longitud
+        const value = cantidadInput.value;
+
+        // Validar que no se exceda la longitud de 1 cifras
+        if (value.length > 2) {
+            cantidadInput.value = value.slice(0, 2); // Limitar a dos cifras
+        }
+    });
 </script>

@@ -324,7 +324,7 @@
                                                         
             
                                                           <p class="card-text">Animate a caminar con tu amigo de 4 patas. Tendremos grandes premios y artistas invitados.</p>
-                                                        <a href="evento.html" class="btn btn-personal">Ver Evento</a>
+                                                        <a href="evento.jsp" class="btn btn-personal">Ver Evento</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -342,7 +342,7 @@
                                                         
             
                                                           <p class="card-text">Se acerca Halloween! Ven con tu peludito disfrazado y podras ganar grandes premios.</p>
-                                                        <a href="evento.html" class="btn btn-personal">Ver Evento</a>
+                                                        <a href="evento.jsp" class="btn btn-personal">Ver Evento</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -378,7 +378,7 @@
                                                         
             
                                                           <p class="card-text">Ven al parque el faro en San Isidro para la fiesta de nuestros perritos albergados en Huellitas Felices</p>
-                                                        <a href="evento.html" class="btn btn-personal">Ver Evento</a>
+                                                        <a href="evento.jsp" class="btn btn-personal">Ver Evento</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -398,7 +398,7 @@
             
                                                           <p class="card-text">La Municipalidad Distrital de Surco y el Albergue Rayito de Sol-Surco los invita a este  evento de gran importancia para la comunidad</p>
             
-                                                        <a href="evento.html" class="btn btn-personal">Ver Evento</a>
+                                                        <a href="evento.jsp" class="btn btn-personal">Ver Evento</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -434,7 +434,7 @@
                                                         
             
                                                           <p class="card-text">Unete a esta fiesta! Trae a tu mascota</p>
-                                                        <a href="evento.html" class="btn btn-personal">Ver Evento</a>
+                                                        <a href="evento.jsp" class="btn btn-personal">Ver Evento</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -547,7 +547,7 @@
                         
             
                                                           <p class="card-text"> Animate a donar, ayudanos a ayudar</p>
-                                                        <a href="evento.html" class="btn btn-personal">Ver Solicitud</a>
+                                                        <a href="evento.jsp" class="btn btn-personal">Ver Solicitud</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -565,7 +565,7 @@
                                                         
             
                                                           <p class="card-text">Animate a donar, ayudanos a ayudar</p>
-                                                        <a href="evento.html" class="btn btn-personal">Ver Solicitud</a>
+                                                        <a href="evento.jsp" class="btn btn-personal">Ver Solicitud</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -601,7 +601,7 @@
                                                         
             
                                                           <p class="card-text">Animate a donar, ayudanos a ayudar</p>
-                                                        <a href="evento.html" class="btn btn-personal">Ver Solicitud</a>
+                                                        <a href="evento.jsp" class="btn btn-personal">Ver Solicitud</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -622,7 +622,7 @@
             
                                                           <p class="card-text">Animate a donar, ayudanos a ayudar</p>
             
-                                                        <a href="evento.html" class="btn btn-personal">Ver Solicitud</a>
+                                                        <a href="evento.jsp" class="btn btn-personal">Ver Solicitud</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -658,7 +658,7 @@
                                                         
             
                                                           <p class="card-text">Animate a donar, ayudanos a ayudar</p>
-                                                        <a href="evento.html" class="btn btn-personal">Ver Solicitud</a>
+                                                        <a href="evento.jsp" class="btn btn-personal">Ver Solicitud</a>
                                                     </div>
                                                 </div>
                                             </div>
