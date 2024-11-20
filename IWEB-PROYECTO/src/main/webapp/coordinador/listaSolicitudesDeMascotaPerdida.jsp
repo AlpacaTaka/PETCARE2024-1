@@ -62,7 +62,7 @@
                     <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/listaPublicacionesDeMascotaPerdida.html" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/coordinador/listaPublicacionesDeMascotaPerdida.jsp" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
 
                     <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
@@ -76,7 +76,7 @@
                 <a href="listaHogaresTemporales.jsp">Comentarios de hogares temporales</a>
                 <hr>
                 <a href="listaSolicitudesDeMascotaPerdida.html">Solicitudes de mascota perdida</a>
-                <a href="listaPublicacionesDeMascotaPerdida.html">Publicaciones de mascota perdida</a>
+                <a href="listaPublicacionesDeMascotaPerdida.jsp">Publicaciones de mascota perdida</a>
                 <hr>
                 <a href="/login/signin.html">Cerrar Sesión</a>
 

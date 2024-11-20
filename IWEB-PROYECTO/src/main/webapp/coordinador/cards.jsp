@@ -74,7 +74,7 @@
                 <a href="listaHogaresTemporales.jsp">Comentarios de hogares temporales</a>
                 <hr>
                 <a href="listaSolicitudesDeMascotaPerdida.jsp">Solicitudes de mascota perdida</a>
-                <a href="listaPublicacionesDeMascotaPerdida.html">Publicaciones de mascota perdida</a>
+                <a href="listaPublicacionesDeMascotaPerdida.jsp">Publicaciones de mascota perdida</a>
                 <hr>
                 <a href="#">Cerrar Sesión</a>
 
