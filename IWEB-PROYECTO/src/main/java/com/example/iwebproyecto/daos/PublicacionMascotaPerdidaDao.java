@@ -147,6 +147,7 @@ public class PublicacionMascotaPerdidaDao extends BaseDao {
 
                 sol.setUsuario(usuario);
 
+
                 sol.setAprobadoCoordinador(rs.getBoolean("aprobadoCoordinador"));
                 sol.setMascotaEncontrada(rs.getBoolean("mascotaEncontrada"));
                 sol.setFechaFormulario(LocalDate.parse(rs.getString("fechaFormulario")));
@@ -155,6 +156,19 @@ public class PublicacionMascotaPerdidaDao extends BaseDao {
             e.printStackTrace();
         }
         return sol;
+    }
+    public void ARSolicitudnMascotaPerdidaPorID(int id, int aprobado) {
+        PublicacionMascotaPerdida sol = new PublicacionMascotaPerdida();
+
+        String sql = "UPDATE publicacionmascotaperdida\n" +
+                "SET aprobadoCoordinador = "+aprobado+"\n" +
+                "WHERE publicacionMascotaPerdidaID = "+id+";";
+        try(Connection conn = this.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);) {
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

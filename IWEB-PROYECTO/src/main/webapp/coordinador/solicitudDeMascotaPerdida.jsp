@@ -36,7 +36,7 @@
                 </div>
                 <div class="welcome-text">Hola, Coordinador Zona Norte</div>
             </div>
-            <div class="logo"><img src="/common/img/logos/logo_navbar.png" alt="logo"></div>
+            <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
         </header>
 
         <div class="main">
@@ -44,12 +44,12 @@
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="listaSolicitudesDeHogarTemporal1.jsp" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
-                    <li><a href="listaHogaresTemporales.jsp" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                    <li><a href="listaSolicitudesDeMascotaPerdida.jsp" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
-                    <li><a href="listaPublicacionesDeMascotaPerdida.html" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
-                    
+                    <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/listaPublicacionesDeMascotaPerdida.html" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
+
                     <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
                 
@@ -188,14 +188,18 @@
                                 </div>
                             </div>
 
-                            <div class="row justify-content-center p-1" style="margin-bottom: 10px;">
-                                <div class="col-md-6 p-1 d-flex justify-content-center">
-                                    <button type="button" class="btn btn-personal" onclick="aceptar()">ACEPTAR</button>
+                            <form action="AceptarSolicitudMascotaPerdida" method="POST">
+                                <input id="id" type="hidden" name="id" value="<%=sol.getPublicacionMascotaPerdidaID()%>">
+                                <input type="hidden" id="accion" name="accion" value="">
+                                <div class="row justify-content-center p-1">
+                                    <div class="col-md-6 p-1 d-flex justify-content-center">
+                                        <button type="button" class="btn btn-personal" onclick="abrirPopup('popup', '¿Seguro que desea aceptar esta solicitud?', 'aceptar')">ACEPTAR</button>
+                                    </div>
+                                    <div class="col-md-6 p-1 d-flex justify-content-center">
+                                        <button type="button" class="btn btn-personal" onclick="abrirPopup('popup', '¿Seguro que desea rechazar esta solicitud?', 'rechazar')">RECHAZAR</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-6 p-1 d-flex justify-content-center">
-                                    <button type="button" class="btn btn-personal" onclick="abrirPopup()">RECHAZAR</button>
-                                </div>
-                            </div>
+                            </form>
                             
                             <div class="row justify-content-center p-1" id="razonDiv" style="display: none;">
                                 <div class="col-md-12 p-1">
@@ -224,13 +228,13 @@
         </div>
     </div>
 
-    <div id="popup" class="popup-overlay">
+    <div id="popup" class="popup-overlay" style="display: none;">
         <div class="popup-content">
-        <h2>¿Seguro que desea rechazar esta solicitud?</h2>
-        <div class="popup-buttons">
-            <button class="btn-confirmar" onclick="confirmarAccion()">Confirmar</button>
-            <button class="btn-cancelar" onclick="cerrarPopup()">Cancelar</button>
-        </div>
+            <h2 id="mensaje-popup"></h2>
+            <div class="popup-buttons">
+                <button class="btn-confirmar" onclick="enviarFormulario()">Confirmar</button>
+                <button class="btn-cancelar" onclick="cerrarPopup('popup')">Cancelar</button>
+            </div>
         </div>
     </div>
 
@@ -238,30 +242,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script>
-        function aceptar() {
-            // Lógica para aceptar (si la necesitas)
-            alert("Has aceptado la solicitud.");
+        let accionSeleccionada = '';
+
+        function abrirPopup(popupId, mensaje, accion) {
+            accionSeleccionada = accion; // Guardar la acción
+            document.getElementById('mensaje-popup').textContent = mensaje;
+            document.getElementById(popupId).style.display = 'block';
         }
 
-    </script>
-
-    <script>
-        // Función para abrir el popup
-        function abrirPopup() {
-        document.getElementById('popup').style.display = 'block';
+        function cerrarPopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
         }
 
-        // Función para cerrar el popup
-        function cerrarPopup() {
-        document.getElementById('popup').style.display = 'none';
-        }
-
-        // Función de confirmación (puedes agregar la lógica de eliminación aquí)
-        function confirmarAccion() {
-        alert('Has rechazado la solicitud.');
-        cerrarPopup();
+        function enviarFormulario() {
+            document.getElementById('accion').value = accionSeleccionada; // Establecer la acción seleccionada
+            document.querySelector('form').submit(); // Enviar el formulario
         }
     </script>
+
+
     
 </body>
 </html>
