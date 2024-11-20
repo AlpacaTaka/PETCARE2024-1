@@ -56,12 +56,12 @@
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="listaSolicitudesDeHogarTemporal1.jsp" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
-                    <li><a href="listaHogaresTemporales.jsp" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                    <li><a href="listaSolicitudesDeMascotaPerdida.html" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
-                    <li><a href="listaPublicacionesDeMascotaPerdida.html" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
-                    
+                    <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/listaSolicitudesDeMascotaPerdida.html" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/listaPublicacionesDeMascotaPerdida.html" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
+
                     <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
                 
@@ -130,7 +130,7 @@
                                             <h4 class="card-title">Pablo David<br>Martínez Flores</h4>
                                             <img src="/common/img/solTemporales/st2.jpg" class="card-img-top" alt="..." style="max-width: 300px; height: 260px; object-fit: cover;">
                                             <p class="card-text" style="margin-top: 10px; text-align: center;">Solicitud enviada el 25/08/2024.</p>
-                                            <a href="solicitudDeHogarTemporal.html" class="btn btn-personal" id="btn-crd-cr">Ver solicitud</a>
+                                            <a href="solicitudDeHogarTemporal.jsp" class="btn btn-personal" id="btn-crd-cr">Ver solicitud</a>
                                         </div>
                                     </div>
                                 </div>

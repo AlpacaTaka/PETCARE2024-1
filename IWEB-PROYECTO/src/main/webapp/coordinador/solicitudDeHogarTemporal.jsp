@@ -1,13 +1,15 @@
+<%@ page import="com.example.iwebproyecto.beans.SolicitudTemporal" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
-    
+    <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
     <title>Solicitud de hogar temporal</title>
     <style>
@@ -41,12 +43,11 @@
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="listaSolicitudesDeHogarTemporal1.jsp" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
-                    <li><a href="listaHogaresTemporales.jsp" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                    <li><a href="listaSolicitudesDeMascotaPerdida.html" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
-                    <li><a href="listaPublicacionesDeMascotaPerdida.html" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
-                    
+                    <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/listaSolicitudesDeMascotaPerdida.html" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/listaPublicacionesDeMascotaPerdida.html" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
                     <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
                 
@@ -73,6 +74,11 @@
                         <a href="listaSolicitudesDeHogarTemporal1.jsp" style="color: black;"><button type="button" class="btn btn-personal2"> Regresar </button></a>
                     </div>
 
+                    <%
+                        SolicitudTemporal sol = (SolicitudTemporal) request.getSession().getAttribute("VerSolicitudTemporal");
+
+                    %>
+
                     <div class="container">
                         <div>
                             <h1 class="text-center">Revisar solicitud de hogar temporal</h1>
@@ -82,7 +88,7 @@
                             
                             <form id="uploadForm" style="padding:10px" >
                                 
-                                <h4 style="margin-top: 10px;" class="text-center">Pablo David Martínez Flores</h4>
+                                <h4 style="margin-top: 10px;" class="text-center"><%=sol.getUsuario().getNombre()%> <%=sol.getUsuario().getApellido()%></h4>
                                 <div class="row">
                                     <div class="col">
                                         <div id="carouselEvento" class="carousel carousel-dark slide" data-bs-ride="carousel">
@@ -154,63 +160,105 @@
                                 <div class="row justify-content-center p-1">
                                     
                                     <div class="col-md-6 p-1">
-                                        <label for="">Edad:</label>
-                                        <input type="number" class="form-control" placeholder="35" disabled>
+                                        <label >Edad:</label>
+                                        <input type="number" class="form-control" placeholder="<%=sol.getEdad()%>" disabled>
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <label for="">Género:</label>
-                                        <input type="text" class="form-control" placeholder="No binario" disabled>
+                                        <label>Género:</label>
+                                        <input type="text" class="form-control" placeholder="<%=sol.getGenero()%>" disabled>
                                     </div>
                                     
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1">
-                                        <label for="">Celular:</label>
-                                        <input type="number" class="form-control" placeholder="966555444" disabled>
+                                        <label >Celular:</label>
+                                        <input type="number" class="form-control" placeholder="<%=sol.getCelular()%>" disabled>
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <label for="">Distrito:</label>
-                                        <input type="text" class="form-control" placeholder="Independencia" disabled>
+                                        <label >Distrito:</label>
+                                        <input type="text" class="form-control" placeholder="<%=sol.getUsuario().getDistrito().getNombreDistrito()%>" disabled>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1">
-                                        <label for="">Dirección:</label>
-                                        <input type="text" class="form-control" placeholder="Calle Av. Tupac Amaru 81592" disabled>
+                                        <label >Dirección:</label>
+                                        <input type="text" class="form-control" placeholder="<%=sol.getUsuario().getDireccion()%>" disabled>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1">
-                                        <label for="">Cantidad de cuartos:</label>
-                                        <input type="number" class="form-control" placeholder="6" disabled>
+                                        <label >Cantidad de cuartos:</label>
+                                        <input type="number" class="form-control" placeholder="<%=sol.getCantidadCuartos()%>" disabled>
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <label for="">Metraje de vivienda (en m²):</label>
-                                        <input type="number" class="form-control" placeholder="120" disabled>
+                                        <label >Metraje de vivienda (en m²):</label>
+                                        <input type="number" class="form-control" placeholder="<%=sol.getMetrajeVivienda()%>" disabled>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1">
-                                        <label for="mascotas">¿Tiene mascotas?</label>
+                                        <label>¿Tiene mascotas?</label>
+                                        <% if (sol.getTieneMascotas()==1){
+
+                                         %>
                                         <div class="col-md-12 d-flex justify-content-around align-self-center">
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" name="mascotas" id="mascotasSi" checked disabled>
-                                                <label class="form-check-label" for="mascotasSi">Sí</label>
+                                                <input class="form-check-input" type="checkbox" name="mascotas"  checked disabled>
+                                                <label class="form-check-label" >Sí</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" name="mascotas" id="mascotasNo" disabled>
-                                                <label class="form-check-label" for="mascotasNo">No</label>
+                                                <input class="form-check-input" type="checkbox" name="mascotas"  disabled>
+                                                <label class="form-check-label" >No</label>
                                             </div>
                                         </div>
+                                        <%
+
+                                        } %>
+                                        <% if (sol.getTieneMascotas()==0){
+
+                                        %>
+                                        <div class="col-md-12 d-flex justify-content-around align-self-center">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="mascotas" disabled>
+                                                <label class="form-check-label" >Sí</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="mascotas" checked disabled>
+                                                <label class="form-check-label" >No</label>
+                                            </div>
+                                        </div>
+                                        <%
+
+                                            } %>
                                     </div>
+
+                                    <% if (sol.getTieneMascotas()==1){
+
+                                     %>
                                     <div class="col-md-6 p-1">
-                                        <label for="cantidadMascotas">Cantidad de mascotas</label>
-                                        <input type="number" class="form-control" id="cantidadMascotas" placeholder="2" disabled>
+                                        <label >Cantidad de mascotas</label>
+                                        <input type="number" class="form-control" placeholder="<%=sol.getCantidadMascota()%>" disabled>
                                     </div>
+                                    <%
+                                    } %>
+
+                                    <% if (sol.getTieneMascotas()==0){
+
+                                    %>
+                                    <div class="col-md-6 p-1">
+                                        <label >Cantidad de mascotas</label>
+                                        <input type="number" class="form-control" placeholder="" disabled>
+                                    </div>
+                                    <%
+                                        } %>
+
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1">
-                                        <label for="hijos">¿Tiene hijos?</label>
+                                        <label >¿Tiene hijos?</label>
+                                        <% if (sol.getTieneHijos()==1){
+
+                                        %>
                                         <div class="col-md-12 d-flex justify-content-around align-self-center">
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" name="hijos" id="hijosSi" checked disabled>
@@ -221,9 +269,31 @@
                                                 <label class="form-check-label" for="hijosNo">No</label>
                                             </div>
                                         </div>
+                                        <%
+                                        }
+                                        %>
+                                        <% if (sol.getTieneHijos()==0){
+
+                                        %>
+                                        <div class="col-md-12 d-flex justify-content-around align-self-center">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="hijos"  disabled>
+                                                <label class="form-check-label" for="hijosSi">Sí</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="hijos" checked  disabled>
+                                                <label class="form-check-label" for="hijosNo">No</label>
+                                            </div>
+                                        </div>
+                                        <%
+                                            }
+                                        %>
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <label for="dependientes">¿Vive solo o con dependientes?</label>
+                                        <label >¿Vive solo o con dependientes?</label>
+                                        <% if (sol.getViveSolo()==1){
+
+                                        %>
                                         <div class="col-md-12 d-flex justify-content-around align-self-center">
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" name="dependientes" id="solo" checked disabled>
@@ -234,53 +304,95 @@
                                                 <label class="form-check-label" for="conDependientes">Con dependientes</label>
                                             </div>
                                         </div>
+                                        <%
+                                        }
+                                        %>
+                                        <% if (sol.getViveSolo()==0){
+
+                                        %>
+                                        <div class="col-md-12 d-flex justify-content-around align-self-center">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="dependientes" disabled>
+                                                <label class="form-check-label" for="solo">Solo</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="dependientes"  checked disabled>
+                                                <label class="form-check-label" for="conDependientes">Con dependientes</label>
+                                            </div>
+                                        </div>
+                                        <%
+                                            }
+                                        %>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1">
-                                        <label for="dependientes">¿Modalidad de trabajo?</label>
+                                        <label >¿Modalidad de trabajo?</label>
+                                        <% if (sol.getTrabajaRemoto()==1){
+
+                                        %>
                                         <div class="col-md-12 d-flex justify-content-around align-self-center">
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" name="dependientes" id="solo" checked disabled>
+                                                <input class="form-check-input" type="checkbox" name="dependientes"  checked disabled>
                                                 <label class="form-check-label" for="solo">Remoto</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" name="dependientes" id="conDependientes" disabled>
+                                                <input class="form-check-input" type="checkbox" name="dependientes" disabled>
                                                 <label class="form-check-label" for="conDependientes">Presencial</label>
                                             </div>
                                         </div>
+                                        <%
+                                            }
+                                        %>
+                                        <% if (sol.getTrabajaRemoto()==0){
+
+                                        %>
+                                        <div class="col-md-12 d-flex justify-content-around align-self-center">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="dependientes"   disabled>
+                                                <label class="form-check-label" for="solo">Remoto</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" name="dependientes" checked disabled>
+                                                <label class="form-check-label" for="conDependientes">Presencial</label>
+                                            </div>
+                                        </div>
+                                        <%
+                                            }
+                                        %>
+
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <label for="">Persona de referencia:</label>
-                                        <input type="text" class="form-control" placeholder="Juana Zapata" disabled>
+                                        <label >Persona de referencia:</label>
+                                        <input type="text" class="form-control" placeholder="<%=sol.getNombrePersonaReferencia()%>" disabled>
                                     </div>
                                 </div> 
 
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1">
-                                        <label for="">Celular de la persona de referencia:</label>
-                                        <input type="number" class="form-control" placeholder="999555777" disabled>
+                                        <label >Celular de la persona de referencia:</label>
+                                        <input type="number" class="form-control" placeholder="<%=sol.getNumeroContactoPR()%>" disabled>
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <label for="">Tiempo de temporal (en meses):</label>
-                                        <input type="number" class="form-control" placeholder="12" disabled>
+                                        <label >Tiempo de temporal (en meses):</label>
+                                        <input type="number" class="form-control" placeholder="<%=sol.getTiempoTemporal()%>" disabled>
                                     </div>
                                 </div> 
 
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1">
-                                        <label for="inicio">Rango de fechas:</label>
-                                        <input type="date" class="form-control" value="2024-09-15" disabled>
+                                        <label >Rango de fechas:</label>
+                                        <input type="date" class="form-control" value="<%=sol.getInicioTemporal()%>" disabled>
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <label for="fin"></label>
-                                        <input type="date" class="form-control" value="2024-11-11" disabled>
+                                        <label ></label>
+                                        <input type="date" class="form-control" value="<%=sol.getFinTemporal()%>" disabled>
                                         
                                     </div>
                                 </div>
                                 <hr>
                                 
-                                <label for="inicio" style="margin-bottom: 10px;" ><strong>Indique si se ha comunicado por teléfono con el postulante y si ha realizado una visita inopinada (indicando el día y la hora):</strong></label>
+                                <label  style="margin-bottom: 10px;" ><strong>Indique si se ha comunicado por teléfono con el postulante y si ha realizado una visita inopinada (indicando el día y la hora):</strong></label>
                                 <textarea id="comunicacion" class="form-control" maxlength="300" placeholder="Escriba aquí..." rows="4" required></textarea>
                                 
     
