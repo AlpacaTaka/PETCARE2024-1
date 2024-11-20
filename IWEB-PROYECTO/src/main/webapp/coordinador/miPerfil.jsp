@@ -57,11 +57,11 @@
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="miPerfil.html" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="listaSolicitudesDeHogarTemporal1.html" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
-                    <li><a href="listaHogaresTemporales.html" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                    <li><a href="listaSolicitudesDeMascotaPerdida.html" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
-                    <li><a href="listaPublicacionesDeMascotaPerdida.html" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/listaSolicitudesDeMascotaPerdida.html" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/listaPublicacionesDeMascotaPerdida.html" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
                     
                     <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
@@ -71,8 +71,8 @@
             <div id="menu" class="menu">
                 <a href="miPerfil.html">Mi Perfil</a>
                 <hr>
-                <a href="listaSolicitudesDeHogarTemporal1.html">Solicitudes de hogar temporal</a>
-                <a href="listaHogaresTemporales.html">Comentarios de hogares temporales</a>
+                <a href="listaSolicitudesDeHogarTemporal1.jsp">Solicitudes de hogar temporal</a>
+                <a href="listaHogaresTemporales.jsp">Comentarios de hogares temporales</a>
                 <hr>
                 <a href="listaSolicitudesDeMascotaPerdida.html">Solicitudes de mascota perdida</a>
                 <a href="listaPublicacionesDeMascotaPerdida.html">Publicaciones de mascota perdida</a>
@@ -181,7 +181,6 @@
     <script src="/common/script/neonavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-    
     
 </body>
 </html>
