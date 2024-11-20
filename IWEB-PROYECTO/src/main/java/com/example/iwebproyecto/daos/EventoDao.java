@@ -251,6 +251,27 @@ public class EventoDao extends BaseDao {
 
         return eventos;
     }
+    public ArrayList<EventoBenefico> listarEventosPorFecha() {
+        ArrayList<EventoBenefico> eventos = new ArrayList<>();
+
+        String sql = "SELECT * FROM eventobenefico " +
+                "WHERE eliminado = 0 " +
+                "ORDER BY fechaEvento ASC, horaInicio ASC"; // Ordenar por fecha y hora de inicio
+
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet resultSet = stmt.executeQuery(sql)) {
+
+            while (resultSet.next()) {
+                EventoBenefico evento = mapearEvento(resultSet);
+                eventos.add(evento);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return eventos;
+    }
 
     public boolean eliminarEvento(int eventoId) {
         String sql = "UPDATE eventobenefico SET eliminado = 1 WHERE eventoAlbergueID = ?"; // Soft delete con la columna correcta

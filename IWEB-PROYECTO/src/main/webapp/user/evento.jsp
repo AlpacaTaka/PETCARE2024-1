@@ -1,14 +1,31 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.example.iwebproyecto.beans.EventoBenefico" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.util.Locale" %>
+<%@ page import="java.time.LocalTime" %>
+<%@ page import="java.time.LocalDate" %>
+<jsp:useBean id="evento" class="com.example.iwebproyecto.beans.EventoBenefico" scope="request" />
+<%
+    DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd MMM.").withLocale(new Locale("es", "ES"));
+    DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a").withLocale(new Locale("es", "ES"));
+    LocalDate fechaEvento = evento.getFechaEvento();  // Obtener la fecha del evento
+    LocalTime horaEvento = evento.getHoraInicio();    // Obtener la hora del evento
+
+    // Formatear la fecha y la hora
+    String fechaFormateada = fechaEvento.format(formatoFecha);
+    String horaFormateada = horaEvento.format(formatoHora);
+%>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
+    <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
     <title>Evento CANinaton 5K</title>
 </head>
@@ -73,12 +90,12 @@
                     </div>
                     <div class="container md-8" style="width: 85%; max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px; display: flex; justify-content: center; align-items: center;">
                         <div class="card-body" style="width: 100%; text-align: center; padding: 10px 50px;">
-                            <h2 class="card-title" style="margin-top: 10px;">CANinaton 5K</h2>
+                            <h2 class="card-title" style="margin-top: 10px;"><%= evento.getNombre()%></h2>
                             <div style="display: flex; justify-content: center; margin-top: 10px; ">
-                                <img src="/common/img/eventos/evento1.jpg" class="card-img-eve" alt="Imagen" style="width: 100%; max-width: 100%; height: auto; border-radius: 15px;">
+                                <img src="${pageContext.request.contextPath}/<%= evento.getFoto().getRutaFoto()%>" class="card-img-eve" alt="Imagen" style="width: 100%; max-width: 100%; height: auto; border-radius: 15px;">
                             </div>
                             <div class="badge text-bg-primary text-wrap" style="margin-top: 10px; font-size: 1.5rem; padding: 10px 20px;">
-                                25 Sep. 08:00am
+                                <%= fechaFormateada + " " + horaFormateada %>
                             </div>                            
                             <p class="card-text" style="margin-top: 10px;">¡Prepárate para el evento más emocionante del año para ti y tu mascota! El CANinaton 5K es una maratón especialmente diseñada para que disfrutes junto a tu compañero de cuatro patas. Tendremos sorpresas, premios, artistas invitados y muchas actividades para que tú y tu mascota pasen un día inolvidable.</p>
                             <p class="card-text" style="text-align: left;"><strong>Artistas e Invitados Especiales:</strong></p>
@@ -138,7 +155,7 @@
         </div>
     </dialog>
 
-    <script src="/common/script/neonavbar.js"></script>
+    <script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     
