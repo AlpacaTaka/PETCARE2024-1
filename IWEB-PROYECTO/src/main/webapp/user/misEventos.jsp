@@ -151,14 +151,12 @@
                                             <p class="card-text"><strong>Lugar:</strong> <%= evento.getLugar().getNombreLugar() %> </p>
                                             <p class="card-text"><strong>Dirección:</strong> <%= evento.getLugar().getDireccionLugar() %></p>
                                             <div class="d-flex gap-2 justify-content-around">
-                                                <form method="POST" action="MisEventosUsuario" >
+
                                                     <input type="hidden" name="action" value="cancelar">
-                                                    <input type="hidden" name="idEvento" id="eventoIDInput" value="<%= evento.getEventoAlbergueID()%>">
                                                     <div class="popup-buttons">
-                                                        <button type="submit" class="btn btn-danger">Cancelar</button>
+                                                        <button type="button" onclick="abrirConfirmacionCancelar('<%= evento.getEventoAlbergueID()%>')" class="btn btn-danger">Cancelar</button>
                                                         <button type="button" class="btn btn-primary" onclick="window.open('https://www.google.com/maps?q=<%=evento.getLugar().getDireccionLugar()%>,<%=evento.getDistrito().getNombreDistrito()%>', '_blank')">Ver ubicación</button>
                                                     </div>
-                                                </form>
 
                                             </div>
                                         </div>

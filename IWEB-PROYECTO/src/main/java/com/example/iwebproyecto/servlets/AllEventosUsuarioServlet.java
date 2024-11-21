@@ -79,7 +79,7 @@ public class AllEventosUsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int idUsuario = 7;
+        int idUsuario = 8;
 
         int idEvento = Integer.parseInt(request.getParameter("idEvento"));
 

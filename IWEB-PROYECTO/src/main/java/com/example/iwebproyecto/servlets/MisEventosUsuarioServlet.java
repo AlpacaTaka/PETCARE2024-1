@@ -41,10 +41,13 @@ public class MisEventosUsuarioServlet extends HttpServlet {
 
 
                 int idUsuario = 7;
-                int eventoId = Integer.parseInt(request.getParameter("eventoIDInput"));
-                System.out.println(eventoId);
-                eventosUsuarioDao.borrarInscripcion(idUsuario, eventoId);
+                String idEventoStr = request.getParameter("idEvento");
 
+                System.out.println(idEventoStr);
+
+                int idEvento = Integer.parseInt(idEventoStr);
+
+                eventosUsuarioDao.borrarInscripcion(idUsuario, idEvento);
                 response.sendRedirect("MisEventosUsuario");
 
 
