@@ -1,4 +1,6 @@
+<%@ page import="com.example.iwebproyecto.beans.DonacionSuministros" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="lista" type="java.util.ArrayList<com.example.iwebproyecto.beans.DonacionSuministros>" scope="request"/>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -44,7 +46,7 @@
             </div>
             <div class="welcome-text">Hola, Patitas Felices</div>
         </div>
-        <div class="logo"><a href="/user/inicio.html"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+        <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
     </header>
 
     <div class="main">
@@ -52,26 +54,26 @@
         <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
         <div class="barside">
             <ul class="navlinks">
-                <li><a href="miPerfil.html" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
-                <li><a href="adoptionTable.html" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                <li><a href="eventTable.html" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
-                <li><a href="donationTable.html" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
-                <li><a href="contactarTemporal.html" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
-                <li><a href="solicitudesAdopcion.html" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
-                <li><a href="verDenunciasMaltrato.html" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/PortalAdopciones" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                <li><a href="albergue/eventTable.jsp" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/DonacionSuministros" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
+                <li><a href="albergue/contactarTemporal.jsp" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
+                <li><a href="albergue/solicitudesAdopcion.jsp" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+                <li><a href="albergue/verDenunciasMaltrato.jsp" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
                 <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
-                <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                <li id="cerrar-sesion"><a href="/login/login.jsp" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
             </ul>
         </div>
 
         <div id="menu" class="menu">
-            <a href="miPerfil.html">Mi Perfil</a>
-            <a href="adoptionTable.html">Portal de Adopciones</a>
-            <a href="eventTable.html">Mis Eventos Benéficos</a>
-            <a href="donationTable.html">Mis Eventos de Donación</a>
-            <a href="contactarTemporal.html">Hogares Temporales</a>
-            <a href="solicitudesAdopcion.html">Solicitudes de Adopción</a>
-            <a href="verDenunciasMaltrato.html">Denuncias de maltrato</a>
+            <a href="<%=request.getContextPath()%>/miPerfilAlbergue">Mi Perfil</a>
+            <a href="<%=request.getContextPath()%>/PortalAdopciones">Portal de Adopciones</a>
+            <a href="albergue/eventTable.jsp">Mis Eventos Benéficos</a>
+            <a href="<%=request.getContextPath()%>/DonacionSuministros">Mis Eventos de Donación</a>
+            <a href="albergue/contactarTemporal.jsp">Hogares Temporales</a>
+            <a href="albergue/solicitudesAdopcion.jsp">Solicitudes de Adopción</a>
+            <a href="albergue/verDenunciasMaltrato.jsp">Denuncias de maltrato</a>
             <!--<a href="#">Solicitudes de Adopción</a>-->
             <hr>
             <a href="/login/login.html">Cerrar Sesión</a>
@@ -95,7 +97,7 @@
                             </div>
                         </div>
                         <div class="col-sm-8 d-flex justify-content-start" style="padding-right: 10px;">
-                            <a href="albergueFormDonac.html">
+                            <a href="<%=request.getContextPath()%>/DonacionSuministros?action=create">
                                 <button type="button" class="btn btn-personal">
                                     <span class="fi fi-rr-add">&nbsp;Nuevo</span>
                                 </button>
@@ -106,394 +108,29 @@
 
                     <div class="container d-flex justify-content-center mt-4" style="margin-bottom: 30px;">
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="cardContainer" style="width: 100%;">
+                            <%for (DonacionSuministros donacionSuministros: lista) {%>
                             <!-- Card 1 -->
                             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
                                 <div class="card h-100">
-                                    <img src="/common/img/donaciones/donacion1.png" class="card-img-top" alt="Donacion 1" style="max-width: 300px; height: 260px;object-fit: cover;">
+                                    <img src="<%=request.getContextPath()%>/common/img/donaciones/donacion1.png" class="card-img-top" alt="Donacion 1" style="max-width: 300px; height: 260px;object-fit: cover;">
                                     <div class="card-body">
                                         <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Se necesitan camas</h4>
+                                            <h4 class="card-title text-center"><%=donacionSuministros.getTituloAvisoDonacion()%></h4>
                                             <div class="badge text-bg-success text-wrap" style="max-width: 70%; margin-bottom: 10px">
                                                 Activo
                                             </div>
                                         </div>
                                         <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Jr. Las Lilas 1324 <strong><br>Fecha:</strong> 19-10-2024 <br><strong>Hora recepción:</strong> 8:30 am - 15:30 pm</p>
+                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> <%=donacionSuministros.getDistrito().getNombreDistrito()+" "+donacionSuministros.getAlbergue().getDireccionDonaciones()%><strong><br>Fecha:</strong><%=donacionSuministros.getFechaInicioRecepcion()+" "+donacionSuministros.getFechaFinRecepcion()%><br><strong>Horario de recepción:</strong><%=donacionSuministros.getHoraInicioRecepcion()+" "+donacionSuministros.getHoraFinRecepcion()%></p>
                                         <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisDonac.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdDonac.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
+                                            <a href="<%=request.getContextPath()%>/DonacionSuministros?action=edit&id=<%=donacionSuministros.getDonacionSuministrosID()%>"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
+                                            <a href="<%=request.getContextPath()%>/DonacionSuministros?action=edit&id=<%=donacionSuministros.getDonacionSuministrosID()%>"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
+                                            <a href="<%=request.getContextPath()%>/DonacionSuministros?action=delete&id=<%=donacionSuministros.getDonacionSuministrosID()%>"><button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></span></button></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Card 2 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/donaciones/donacion2.png" class="card-img-top" alt="Evento 2" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Necesitamos vacunas</h4>
-                                            <div class="badge text-bg-success text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                Activo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Artes Norte 154 <strong><br>Fecha:</strong> 14-02-2024 <br><strong>Hora:</strong> 8:00 am</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 3 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/donaciones/donacion3.png" class="card-img-top" alt="Evento 3" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Recolección de juguetes</h4>
-                                            <div class="badge text-bg-success text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                Activo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Ejército 458 <strong><br>Fecha:</strong> 03-11-2024 <br><strong>Hora:</strong> 3:00 pm</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 4 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/donaciones/donacion4.jpg" class="card-img-top" alt="Evento 4" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Recolección de camas para perros</h4>
-                                            <div class="badge bg-secondary" style="max-width: 70%; margin-bottom: 10px">
-                                                Inactivo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Calle Frutales 781<strong><br>Fecha:</strong> 25-08-2024 <br><strong>Hora:</strong> 3:30 pm</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 5 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/donaciones/donacion5.jpg" class="card-img-top" alt="Evento 5" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Necesitamos comida de gato</h4>
-                                            <div class="badge text-bg-success text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                Activo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Jr. de la Unión 254<strong><br>Fecha:</strong> 31-07-2024 <br><strong>Hora:</strong> 4:30 pm</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 6 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/donaciones/donacion6.jpg" class="card-img-top" alt="Evento 6" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Donación de frazadas</h4>
-                                            <div class="badge text-bg-success text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                Activo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Los Sauces 652<strong><br>Fecha:</strong> 17-07-2024 <br><strong>Hora:</strong> 5:00 pm</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 7 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/donaciones/donacion7.png" class="card-img-top" alt="Evento 7" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Recolección de collares</h4>
-                                            <div class="badge text-bg-success text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                Activo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Guardia Civil 840<strong><br>Fecha:</strong> 24-09-2024 <br><strong>Hora:</strong> 12:00 pm</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 8 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/donaciones/donacion8.png" class="card-img-top" alt="Evento 8" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Necesitamos cepillos de pelo</h4>
-                                            <div class="badge text-bg-success text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                Activo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Girasoles 323<strong><br>Fecha:</strong> 12-05-2024 <br><strong>Hora:</strong> 12:00 pm</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 9 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/donaciones/donacion9.png" class="card-img-top" alt="Evento 9" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Donación de ropita</h4>
-                                            <div class="badge text-bg-success text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                Activo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Loma Umbrosa 515<strong><br>Fecha:</strong> 27-04-2024 <br><strong>Hora:</strong> 11:00 am</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 10 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/donaciones/donacion2.png" class="card-img-top" alt="Evento 10" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Recolección de juguetes</h4>
-                                            <div class="badge text-bg-success text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                Activo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Los Sauces 1956<strong><br>Fecha:</strong> 16-10-2024 <br><strong>Hora:</strong> 11:30 am</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 11-->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/donaciones/donacion5.jpg" class="card-img-top" alt="Evento 11" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Necesitamos bolsas</h4>
-                                            <div class="badge text-bg-success text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                Activo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Artes Norte 154 <strong><br>Fecha:</strong> 14-02-2024 <br><strong>Hora:</strong> 8:00 am</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 12 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/donaciones/donacion8.png" class="card-img-top" alt="Evento 12" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Necesitamos frazadas</h4>
-                                            <div class="badge bg-secondary" style="max-width: 70%; margin-bottom: 10px">
-                                                Inactivo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Ejército 458 <strong><br>Fecha:</strong> 03-11-2024 <br><strong>Hora:</strong> 3:00 pm</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 13 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/donaciones/donacion4.jpg" class="card-img-top" alt="Evento 13" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Recolección de juguetes</h4>
-                                            <div class="badge bg-secondary" style="max-width: 70%; margin-bottom: 10px">
-                                                Inactivo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Calle Frutales 781<strong><br>Fecha:</strong> 25-08-2024 <br><strong>Hora:</strong> 3:30 pm</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 14 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/eventos/evento5.jpg" class="card-img-top" alt="Evento 14" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">FurFun</h4>
-                                            <div class="badge bg-secondary" style="max-width: 70%; margin-bottom: 10px">
-                                                Inactivo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Jr. de la Unión 254<strong><br>Fecha:</strong> 31-07-2024 <br><strong>Hora:</strong> 4:30 pm</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 15 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/eventos/evento6.jpg" class="card-img-top" alt="Evento 15" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Rincón de Mascotas</h4>
-                                            <div class="badge text-bg-success text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                Activo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Los Sauces 652<strong><br>Fecha:</strong> 17-07-2024 <br><strong>Hora:</strong> 5:00 pm</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 16 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/eventos/evento7.png" class="card-img-top" alt="Evento 16" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Latin Pet</h4>
-                                            <div class="badge bg-secondary" style="max-width: 70%; margin-bottom: 10px">
-                                                Inactivo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Guardia Civil 840<strong><br>Fecha:</strong> 24-09-2024 <br><strong>Hora:</strong> 12:00 pm</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card 17 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="/common/img/donaciones/donacion2.png" class="card-img-top" alt="Evento 17" style="max-width: 300px; height: 260px;object-fit: cover;">
-                                    <div class="card-body">
-
-                                        <div class="row d-flex justify-content-center">
-                                            <h4 class="card-title text-center">Recolección de croquetas</h4>
-                                            <div class="badge bg-secondary" style="max-width: 70%; margin-bottom: 10px">
-                                                Inactivo
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> Av. Girasoles 323<strong><br>Fecha:</strong> 12-05-2024 <br><strong>Hora:</strong> 12:00 pm</p>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                                            <a href="albergueEdEvento.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <%}%>
                         </div>
                     </div>
 
@@ -536,7 +173,7 @@
     </div>
 </div>
 
-<script src="/common/script/neonavbar.js"></script>
+<script src="<%=request.getContextPath()%>/common/script/neonavbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
     const select1 = document.getElementById('Especies');
@@ -676,18 +313,18 @@
 
             // Botón anterior (se desactiva si estamos en la primera página)
             let prevClass = currentPage === 1 ? 'disabled' : '';
-            pagination.innerHTML += `<li class="page-item ${prevClass}"><a class="page-link" data-page="${currentPage - 1}" href="#">Anterior</a></li>`;
+            pagination.innerHTML += `<li class="page-item <%="${prevClass}"%>"><a class="page-link" data-page="<%="${currentPage - 1}"%>" href="#">Anterior</a></li>`;
 
             // Números de página
             for (let i = 1; i <= totalPages; i++) {
                 let activeClass = currentPage === i ? 'active' : '';
                 let pageClass = activeClass ? 'bg-brown text-white' : 'bg-white text-brown'; // Añadir clases de color marrón para la página activa
-                pagination.innerHTML += `<li class="page-item ${activeClass} ${pageClass}"><a class="page-link" data-page="${i}" href="#">${i}</a></li>`;
+                pagination.innerHTML += `<li class="page-item <%="${activeClass} ${pageClass}"%>"><a class="page-link" data-page="<%="${i}"%>" href="#"><%="${i}"%></a></li>`;
             }
 
             // Botón siguiente (se desactiva si estamos en la última página)
             let nextClass = currentPage === totalPages ? 'disabled' : '';
-            pagination.innerHTML += `<li class="page-item ${nextClass}"><a class="page-link" data-page="${currentPage + 1}" href="#">Siguiente</a></li>`;
+            pagination.innerHTML += `<li class="page-item <%="${nextClass}"%>"><a class="page-link" data-page="<%="${currentPage + 1}"%>" href="#">Siguiente</a></li>`;
 
             // Añadir un evento a los enlaces de la paginación para que llamen a showPage()
             const paginationLinks = document.querySelectorAll('.page-link');

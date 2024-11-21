@@ -72,7 +72,7 @@
                 <li><a href="<%=request.getContextPath()%>/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
                 <li><a href="<%=request.getContextPath()%>/PortalAdopciones" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
                 <li><a href="albergue/eventTable.jsp" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
-                <li><a href="albergue/donationTable.jsp" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/DonacionSuministros" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
                 <li><a href="albergue/contactarTemporal.jsp" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
                 <li><a href="albergue/solicitudesAdopcion.jsp" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
                 <li><a href="albergue/verDenunciasMaltrato.jsp" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
@@ -85,7 +85,7 @@
             <a href="<%=request.getContextPath()%>/miPerfilAlbergue">Mi Perfil</a>
             <a href="<%=request.getContextPath()%>/PortalAdopciones">Portal de Adopciones</a>
             <a href="albergue/eventTable.jsp">Mis Eventos Benéficos</a>
-            <a href="albergue/donationTable.jsp">Mis Eventos de Donación</a>
+            <a href="<%=request.getContextPath()%>/DonacionSuministros">Mis Eventos de Donación</a>
             <a href="albergue/contactarTemporal.jsp">Hogares Temporales</a>
             <a href="albergue/solicitudesAdopcion.jsp">Solicitudes de Adopción</a>
             <a href="albergue/verDenunciasMaltrato.jsp">Denuncias de maltrato</a>
@@ -120,22 +120,6 @@
 
                     <div class="container d-flex justify-content-center mt-4" style="margin-bottom: 30px;">
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="cardContainer" style="width: 100%;">
-                            <!-- Card 1 -->
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
-                                <div class="card h-100">
-                                    <img src="<%=request.getContextPath()%>/common/img/perdidos/perdido1.jpg" class="card-img-top" alt="Evento 1">
-                                    <div class="card-body">
-                                        <h4 class="card-title text-center">Canela</h4>
-                                        <hr>
-                                        <div style="display: flex; justify-content: center;">
-                                            <a href="albergueVisAdop.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
-                                            <a href="albergueEdAdop.html"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
-                                            <button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></span></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <%for (MascotasAdopcion mascota : lista) {%>
                             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
                                 <div class="card h-100">

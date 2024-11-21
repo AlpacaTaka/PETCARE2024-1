@@ -1,14 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    int albergueID = (int) request.getAttribute("idAlbergue");
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
+    <link rel="icon" href="<%=request.getContextPath()%>/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
     <title>Formulario de donación</title>
     <style>
@@ -29,7 +32,7 @@
             </div>
             <div class="welcome-text">Hola, Patitas Felices</div>
         </div>
-        <div class="logo"><a href="/user/inicio.html"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+        <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
     </header>
 
     <div class="main">
@@ -37,29 +40,29 @@
         <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
         <div class="barside">
             <ul class="navlinks">
-                <li><a href="miPerfil.html" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
-                <li><a href="adoptionTable.html" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                <li><a href="eventTable.html" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
-                <li><a href="donationTable.html" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
-                <li><a href="contactarTemporal.html" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
-                <li><a href="solicitudesAdopcion.html" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/PortalAdopciones" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                <li><a href="albergue/eventTable.jsp" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/DonacionSuministros" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
+                <li><a href="albergue/contactarTemporal.jsp" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
+                <li><a href="albergue/solicitudesAdopcion.jsp" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+                <li><a href="albergue/verDenunciasMaltrato.jsp" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
                 <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
-                <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                <li id="cerrar-sesion"><a href="/login/login.jsp" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
             </ul>
-
         </div>
 
         <div id="menu" class="menu">
-            <a href="miPerfil.html">Mi Perfil</a>
-            <a href="adoptionTable.html">Portal de Adopciones</a>
-            <a href="eventTable.html">Mis Eventos Benéficos</a>
-            <a href="donationTable.html">Mis Eventos de Donación</a>
-            <a href="contactarTemporal.html">Hogares Temporales</a>
-            <a href="solicitudesAdopcion.html">Solicitudes de Adopción</a>
+            <a href="<%=request.getContextPath()%>/miPerfilAlbergue">Mi Perfil</a>
+            <a href="<%=request.getContextPath()%>/PortalAdopciones">Portal de Adopciones</a>
+            <a href="albergue/eventTable.jsp">Mis Eventos Benéficos</a>
+            <a href="<%=request.getContextPath()%>/DonacionSuministros">Mis Eventos de Donación</a>
+            <a href="albergue/contactarTemporal.jsp">Hogares Temporales</a>
+            <a href="albergue/solicitudesAdopcion.jsp">Solicitudes de Adopción</a>
+            <a href="albergue/verDenunciasMaltrato.jsp">Denuncias de maltrato</a>
             <!--<a href="#">Solicitudes de Adopción</a>-->
             <hr>
             <a href="/login/login.html">Cerrar Sesión</a>
-
         </div>
 
 

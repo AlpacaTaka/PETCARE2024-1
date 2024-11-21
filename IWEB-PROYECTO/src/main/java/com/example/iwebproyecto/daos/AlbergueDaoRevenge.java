@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class AlbergueDaoRevenge extends BaseDao {
     /*
-    // Método para obtener todos los albergues
+    // Mtodo para obtener todos los albergues
     public ArrayList<Albergue> listarAlbergues() {
         ArrayList<Albergue> listaAlbergues = new ArrayList<>();
         String sql = "select * from albergue where estado='Aprobado';";
@@ -26,7 +26,7 @@ public class AlbergueDaoRevenge extends BaseDao {
         return listaAlbergues;
     }
 
-    // Método para insertar un nuevo albergue
+    // Mtodo para insertar un nuevo albergue
     public void insertarAlbergue(Albergue albergue) {
         String sql = "INSERT INTO albergue (albergueID, nombreAlbergue, nombreEncargado, apellidoEncargado, espaciosDisponibles, fechaCreacion, " +
                 "correoElectronico, contrasenia, cantidadAnimales, urlFacebook, urlInstagram, direccion, distritoID, " +
@@ -247,7 +247,7 @@ public class AlbergueDaoRevenge extends BaseDao {
     }
 
     public ArrayList<MascotasAdopcion> listarMascotasAdopcion() {
-        String sql = "select * from mascotasadopcion where albergueID=? and eliminado=0;";
+        String sql = "select * from mascotasadopcion where albergueID=? and eliminado=0 order by idAdopcion desc;";
         ArrayList<MascotasAdopcion> listaMascotasAdopcion = new ArrayList<>();
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -379,7 +379,7 @@ public class AlbergueDaoRevenge extends BaseDao {
     }
 
     public ArrayList<DonacionSuministros> listarDonacionSuministros() {
-        String sql = "select * from donacionsuministros where albergueID=? and eliminado=0;";
+        String sql = "select d.*,i.nombreDistrito,a.direccionDonaciones from donacionsuministros d, distrito i,albergue a where i.distritoID=d.distritoID and a.albergueID=d.albergueID and a.albergueID=? and d.eliminado=0 order by d.donacionSuministrosID desc;";
         ArrayList<DonacionSuministros> listaDonacionSuministros = new ArrayList<>();
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -397,17 +397,21 @@ public class AlbergueDaoRevenge extends BaseDao {
                 donacionSuministros.setMarcaSuministro(rs.getString(7));
                 Distrito distrito = new Distrito();
                 distrito.setDistritoID(rs.getInt(8));
+                distrito.setNombreDistrito(rs.getString(18));
                 donacionSuministros.setDistrito(distrito);
                 Albergue albergue = new Albergue();
                 albergue.setAlbergueID(rs.getInt(9));
+                albergue.setDireccionDonaciones(rs.getString(19));
                 donacionSuministros.setAlbergue(albergue);
                 donacionSuministros.setFechaInicioRecepcion(rs.getString(10));
                 donacionSuministros.setFechaFinRecepcion(rs.getString(11));
-                donacionSuministros.setMensajeParaDonantes(rs.getString(12));
+                donacionSuministros.setHoraInicioRecepcion(rs.getString(12));
+                donacionSuministros.setHoraFinRecepcion(rs.getString(13));
+                donacionSuministros.setMensajeParaDonantes(rs.getString(14));
                 Foto foto = new Foto();
-                foto.setFotoID(rs.getInt(13));
+                foto.setFotoID(rs.getInt(15));
                 donacionSuministros.setFoto(foto);
-                donacionSuministros.setEliminado(rs.getBoolean(14));
+                donacionSuministros.setEliminado(rs.getBoolean(16));
                 listaDonacionSuministros.add(donacionSuministros);
             }
         } catch (SQLException e) {

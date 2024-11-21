@@ -331,7 +331,7 @@
     <script>
         const nombreMascotaInput = document.getElementById('nombreMascota')
         nombreMascotaInput.addEventListener('input', function(){
-            this.value = this.value.replace(/[^a-zA-Z0-9áéíóú\s]/g, '');
+            this.value = this.value.replace(/[^a-zA-Záéíóú\s]/g, '');
         })
     </script>
     <script>
