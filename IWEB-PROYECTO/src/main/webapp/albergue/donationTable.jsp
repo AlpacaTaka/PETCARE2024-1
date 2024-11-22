@@ -125,7 +125,7 @@
                                         <div style="display: flex; justify-content: center;">
                                             <a href="<%=request.getContextPath()%>/DonacionSuministros?action=edit&id=<%=donacionSuministros.getDonacionSuministrosID()%>"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
                                             <a href="<%=request.getContextPath()%>/DonacionSuministros?action=edit&id=<%=donacionSuministros.getDonacionSuministrosID()%>"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
-                                            <a onclick="abrirPopup()" href="<%=request.getContextPath()%>/DonacionSuministros?action=delete&id=<%=donacionSuministros.getDonacionSuministrosID()%>"><button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></span></button></a>
+                                            <a <%--onclick="abrirPopup()"--%> href="<%=request.getContextPath()%>/DonacionSuministros?action=delete&id=<%=donacionSuministros.getDonacionSuministrosID()%>"><button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></span></button></a>
                                         </div>
                                     </div>
                                 </div>

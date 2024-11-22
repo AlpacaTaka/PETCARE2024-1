@@ -21,14 +21,12 @@ public class InicioAdoptionTableServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-
         // Establece el tipo de contenido de la respuesta
         response.setContentType("text/html");
+
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
         int idAlbergue= 6;
-
         switch (action) {
             case "lista":
                 ArrayList<MascotasAdopcion> list = albergueDaoRevenge.listarMascotasAdopcion();
@@ -77,7 +75,6 @@ public class InicioAdoptionTableServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String action = request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
         String nombreMascota = request.getParameter("nombreMascota");
@@ -97,7 +94,7 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         String sexo = request.getParameter("sexoMascota");
         String descripcion = request.getParameter("breveDescripcion");
         int idFoto = 30;/*request.getParameter("rutaFoto");*/
-        boolean seEnvuentraTemporal= Boolean.parseBoolean(request.getParameter("hogarTemp"));
+        boolean seEncuentraTemporal= Boolean.parseBoolean(request.getParameter("hogarTemp"));
         String condicionesAdopcion = request.getParameter("condiciones");
         int albergueID = 6;/*Integer.parseInt(request.getParameter("idAlbergue"));*/
         boolean eliminado = false;
@@ -115,7 +112,7 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         Foto foto = new Foto();
         foto.setFotoID(idFoto);
         mascota.setFoto(foto);
-        mascota.setSeEncuentraTemporal(seEnvuentraTemporal);
+        mascota.setSeEncuentraTemporal(seEncuentraTemporal);
         mascota.setCondicionesAdopcion(condicionesAdopcion);
         Albergue albergue = new Albergue();
         albergue.setAlbergueID(albergueID);

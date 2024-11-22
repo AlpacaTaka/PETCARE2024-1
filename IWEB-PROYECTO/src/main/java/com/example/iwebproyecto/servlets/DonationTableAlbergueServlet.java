@@ -47,8 +47,8 @@ public class DonationTableAlbergueServlet extends HttpServlet {
                 }else{
                     response.sendRedirect(request.getContextPath() + "/PeliculasServlet");DetallesServlet
                 }*/
-                MascotasAdopcion mascotasAdopcion = albergueDaoRevenge.obtenerMascotasAdopcionPorID(Integer.parseInt(id));
-                request.setAttribute("mascota",mascotasAdopcion);
+                DonacionSuministros donacionSuministros = albergueDaoRevenge.obtenerDonacionSuministrosPorID(Integer.parseInt(id));
+                request.setAttribute("donacionSuministros",donacionSuministros);
                 request.getRequestDispatcher("albergue/albergueEdDonac.jsp").forward(request,response);
                 break;
             case "delete":
@@ -61,7 +61,7 @@ public class DonationTableAlbergueServlet extends HttpServlet {
                         System.out.println("Log: excepcion: " + e.getMessage());
                     }
                 }*/
-                albergueDaoRevenge.borrarMascotaAdopcion(idd);
+                albergueDaoRevenge.borrarDonacionSuministros(idd);
                 response.sendRedirect(request.getContextPath() + "/DonacionSuministros");
                 break;
         }
@@ -77,55 +77,52 @@ public class DonationTableAlbergueServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
-        String nombreMascota = request.getParameter("nombreMascota");
-        String especie = request.getParameter("especie");
-        String raza = request.getParameter("raza");
-        raza=raza.toUpperCase().charAt(0)+raza.substring(1,raza.length());
-        String otraRaza = request.getParameter("otraRaza");
-        if (raza.equals("Otro")) {
-            raza=otraRaza;
-        }
-        if (raza.isEmpty()){
-            raza="Fermosa";
-        }
-        int idDistrito = Integer.parseInt(request.getParameter("idDistrito"));
-        String direccion = request.getParameter("direccionHallazgo");
-        int edad = Integer.parseInt(request.getParameter("edad"));
-        String sexo = request.getParameter("sexoMascota");
-        String descripcion = request.getParameter("breveDescripcion");
+        int albergueID = 6;/*Integer.parseInt(request.getParameter("id"));*/
+        int distritoID = Integer.parseInt(request.getParameter("distritoID"));
+        String titulo = request.getParameter("titulo");
+        String correo = request.getParameter("correo");
+        String tipo = request.getParameter("tipo");
+        String nombreSuministro = request.getParameter("nombreSuministro");
+        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+        String marca = request.getParameter("marca");
+        String fechaini = request.getParameter("fechaini");
+        String fechafin = request.getParameter("fechafin");
+        String horaini = request.getParameter("horaini");
+        String horafin = request.getParameter("horafin");
+        String breve = request.getParameter("breve");
         int idFoto = 30;/*request.getParameter("rutaFoto");*/
-        boolean seEnvuentraTemporal= Boolean.parseBoolean(request.getParameter("hogarTemp"));
-        String condicionesAdopcion = request.getParameter("condiciones");
-        int albergueID = 6;/*Integer.parseInt(request.getParameter("idAlbergue"));*/
         boolean eliminado = false;
-        MascotasAdopcion mascota = new MascotasAdopcion();
-        mascota.setNombreMascota(nombreMascota);
-        mascota.setEspecie(especie);
-        mascota.setRaza(raza);
+        DonacionSuministros donacionSuministros = new DonacionSuministros();
+        donacionSuministros.setTituloAvisoDonacion(titulo);
+        donacionSuministros.setCorreoElectronicoDonacion(correo);
+        donacionSuministros.setTipoSuministro(tipo);
+        donacionSuministros.setNombreSuministro(nombreSuministro);
+        donacionSuministros.setCantidadDonacionesTotales(cantidad);
+        String marca1=marca.isEmpty() ? "Any" : marca;
+        donacionSuministros.setMarcaSuministro(marca1);
         Distrito distrito = new Distrito();
-        distrito.setDistritoID(idDistrito);
-        mascota.setDistrito(distrito);
-        mascota.setDireccionHallazgo(direccion);
-        mascota.setEdadAprox(edad);
-        mascota.setSexo(sexo);
-        mascota.setDescripcionGeneral(descripcion);
-        Foto foto = new Foto();
-        foto.setFotoID(idFoto);
-        mascota.setFoto(foto);
-        mascota.setSeEncuentraTemporal(seEnvuentraTemporal);
-        mascota.setCondicionesAdopcion(condicionesAdopcion);
+        distrito.setDistritoID(distritoID);
+        donacionSuministros.setDistrito(distrito);
         Albergue albergue = new Albergue();
         albergue.setAlbergueID(albergueID);
-        mascota.setAlbergue(albergue);
-        mascota.setEliminado(eliminado);
+        donacionSuministros.setAlbergue(albergue);
+        donacionSuministros.setFechaInicioRecepcion(fechaini);
+        donacionSuministros.setFechaFinRecepcion(fechafin);
+        donacionSuministros.setHoraInicioRecepcion(horaini);
+        donacionSuministros.setHoraFinRecepcion(horafin);
+        donacionSuministros.setMensajeParaDonantes(breve);
+        Foto foto = new Foto();
+        foto.setFotoID(idFoto);
+        donacionSuministros.setFoto(foto);
+        donacionSuministros.setEliminado(eliminado);
         switch (action) {
             case "create":
-                albergueDaoRevenge.crearMascotaAdopcion(mascota);
+                albergueDaoRevenge.crearDonacionSuministros(donacionSuministros);
                 response.sendRedirect(request.getContextPath()+"/DonacionSuministros");
                 break;
             case "edit":
-                mascota.setIdAdopcion(Integer.parseInt(request.getParameter("id")));
-                albergueDaoRevenge.editarMascotaAdopcion(mascota);
+                donacionSuministros.setDonacionSuministrosID(Integer.parseInt(request.getParameter("id")));
+                albergueDaoRevenge.editarDonacionSuministros(donacionSuministros);
                 response.sendRedirect(request.getContextPath()+"/DonacionSuministros");
                 break;
         }

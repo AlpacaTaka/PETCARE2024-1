@@ -75,8 +75,9 @@
                         <a href="<%=request.getContextPath()%>/PortalAdopciones"><button type="button" class="btn btn-personal2">Regresar</button></a>
                     </div>
                     <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                        <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/PortalAdopciones?action=edit&id=<%=mascota.getIdAdopcion()%>">
-                            <input type="hidden" name="id" value="<%=albergueID%>">
+                        <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/PortalAdopciones?action=edit">
+                            <input type="hidden" name="id" value="<%=mascota.getIdAdopcion()%>">
+                            <input type="hidden" name="idA" value="<%=albergueID%>">
                             <h1 style="margin-top: 10px;" class="text-center">Edición de perfil de Mascota para Adopción</h1>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
