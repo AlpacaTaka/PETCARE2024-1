@@ -3,6 +3,8 @@ package com.example.iwebproyecto.daos;
 import com.example.iwebproyecto.beans.*;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class AlbergueDaoRevenge extends BaseDao {
@@ -196,7 +198,7 @@ public class AlbergueDaoRevenge extends BaseDao {
         }
     }
 
-    // Método para eliminar un albergue
+    // M
     public void eliminarAlbergue(int albergueID) {
         String sql = "DELETE FROM albergue WHERE albergueID = ?";
 
@@ -505,5 +507,37 @@ public class AlbergueDaoRevenge extends BaseDao {
             e.printStackTrace();
         }
         return distrito;
+    }
+
+    public ArrayList<SolicitudTemporal> listaDeHogaresTemporales() {
+        String sql = "select * from solicitudtemporal where aprobadoCoordinador=1 and desactivadoAdministrador=0;";
+        ArrayList<SolicitudTemporal> listaHogaresTemporales = new ArrayList<>();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                SolicitudTemporal solicitudTemporal = new SolicitudTemporal();
+                solicitudTemporal.setSolicitudID(rs.getInt(1));
+                Usuario usuario = usuarioDao.obtenerUsuarioPorID(rs.getInt(2));
+                Distrito distrito=obtenerDistritoPorID(usuario.getDistrito().getDistritoID());
+                usuario.setDistrito(distrito);
+                solicitudTemporal.setUsuario(usuario);
+                solicitudTemporal.setCelular(rs.getString(5));
+                solicitudTemporal.setTiempoTemporal(rs.getInt(16));
+                String ini = rs.getString(17);
+                String fin = rs.getString(18);
+                LocalDate localDate = LocalDate.now();
+                boolean flag = localDate.isAfter(LocalDate.parse(ini)) && localDate.isBefore(LocalDate.parse(fin));
+                if(flag){
+                    solicitudTemporal.setInicioTemporal(ini);
+                    solicitudTemporal.setFinTemporal(fin);
+                    listaHogaresTemporales.add(solicitudTemporal);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaHogaresTemporales;
     }
 }
