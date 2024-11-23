@@ -26,7 +26,7 @@ public class SolicitudesAdopcionAlbergue extends HttpServlet {
         int idAlbergue= 6;
         switch (action) {
             case "lista":
-                ArrayList<SolicitudTemporal> list = albergueDaoRevenge.listaDeHogaresTemporales();
+                ArrayList<UsuarioAdopcion> list = albergueDaoRevenge.listaUsuarioAdopcion(idAlbergue);
                 request.setAttribute("lista", list);
                 RequestDispatcher rd = request.getRequestDispatcher("albergue/solicitudesAdopcion.jsp");
                 rd.forward(request, response);

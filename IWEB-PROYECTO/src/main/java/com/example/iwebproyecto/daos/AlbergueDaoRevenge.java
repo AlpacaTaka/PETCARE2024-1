@@ -540,4 +540,30 @@ public class AlbergueDaoRevenge extends BaseDao {
         }
         return listaHogaresTemporales;
     }
+
+    public ArrayList<UsuarioAdopcion> listaUsuarioAdopcion(int albergueID) {
+        String sql = "select u.*,a.albergueID from usuarioadopcion u, mascotasadopcion m, albergue a where m.idAdopcion=u.idAdopcion and a.albergueID=m.albergueID and m.albergueID=?;";
+        ArrayList<UsuarioAdopcion> listaUsuarioAdopcion = new ArrayList<>();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, albergueID);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                UsuarioAdopcion usuarioAdopcion = new UsuarioAdopcion();
+                usuarioAdopcion.setUsuarioAdopcionID(rs.getInt(1));
+                Usuario usuario = usuarioDao.obtenerUsuarioPorID(rs.getInt(2));
+                usuarioAdopcion.setUsuario(usuario);
+                MascotasAdopcion mascotasAdopcion = albergueDaoRevenge.obtenerMascotasAdopcionPorID(rs.getInt(3));
+                usuarioAdopcion.setMascotasAdopcion(mascotasAdopcion);
+                usuarioAdopcion.setAprobado(rs.getBoolean(4));
+                usuarioAdopcion.setFechaAdoptado(rs.getString(5));
+                listaUsuarioAdopcion.add(usuarioAdopcion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaUsuarioAdopcion;
+    }
 }
