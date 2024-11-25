@@ -6,24 +6,33 @@ import java.sql.*;
 
 public class DenunciaMaltratoDao extends BaseDao {
 
-    public void RegistrarDenunciaMaltrato(DenunciaMaltrato DenunciaMaltrato) {
+    public void RegistrarDenunciaMaltrato(DenunciaMaltrato denuncia) {
 
-        String sql = "INSERT INTO denunciaMaltrato ( usuarioID, tamanio, raza, tipoMaltrato, nombreApellidoMaltratador, direccion, realizoDenuncia, especie, fecha, fotos_fotoID) \n" +
-                "VALUES (1, ?, ?, ? , ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO denunciamaltrato (usuarioID, tamanio, especie, raza, tipoMaltrato, " +
+                "nombreApellidoMaltratador, direccion, fotoID, realizoDenuncia, eliminado, fechaFormulario) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         try(Connection conn = this.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql);) {
-            stmt.setString(1, DenunciaMaltrato.getTamanio());
-            stmt.setString(2,DenunciaMaltrato.getRaza());
-            stmt.setString(3, DenunciaMaltrato.getTipoMaltrato());
-            stmt.setString(4, DenunciaMaltrato.getNombreApellidoMaltratador());
-            stmt.setString(5, DenunciaMaltrato.getDireccion());
-            stmt.setInt(6, DenunciaMaltrato.getRealizoDenuncia());
-            stmt.setString(7, DenunciaMaltrato.getEspecie());
-            stmt.setString(8, DenunciaMaltrato.getFecha());
-            stmt.setInt(9, DenunciaMaltrato.getFoto().getFotoID());
 
 
-            stmt.executeUpdate();
+            PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+
+            pstmt.setInt(1, denuncia.getUsuario().getUsuarioID()); // Obtenemos el ID del Usuario
+            pstmt.setString(2, denuncia.getTamanio());
+            pstmt.setString(3, denuncia.getEspecie());
+            pstmt.setString(4, denuncia.getRaza());
+            pstmt.setString(5, denuncia.getTipoMaltrato());
+            pstmt.setString(6, denuncia.getNombreApellidoMaltratador()); // Puede ser null
+            pstmt.setString(7, denuncia.getDireccion());
+            pstmt.setInt(8, denuncia.getFoto().getFotoID()); // Obtenemos el ID de la Foto
+            pstmt.setBoolean(9, denuncia.isRealizoDenuncia());
+            pstmt.setBoolean(10, denuncia.isEliminado());
+            pstmt.setDate(11, java.sql.Date.valueOf(denuncia.getFechaFormulario())); // LocalDate a java.sql.Date
+
+
+
+            pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

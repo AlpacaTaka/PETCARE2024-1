@@ -2,34 +2,19 @@ package com.example.iwebproyecto.daos;
 
 import com.example.iwebproyecto.beans.Foto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import java.sql.*;
 
 
 public class FotoDao extends BaseDao {
     public void GuadarFoto(Foto foto) {
         String sql = "insert into fotos (rutaFoto) values (?);";
         try(Connection conn = this.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, foto.getRutaFoto());
             stmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        String sql1 = "SELECT fotoID FROM fotos WHERE rutaFoto=?";
-        try (Connection conn = this.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql1)
-             ) {
-
-            stmt.setString(1, foto.getRutaFoto());
-            ResultSet rs = stmt.executeQuery();
-            // Ejecutar la consulta y obtener el ID de la foto
-            if (rs.next()) {
-                int fotoID = rs.getInt("fotoID");
-                foto.setFotoID(fotoID);
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                foto.setFotoID(generatedKeys.getInt(1)); // Obtener el ID generado
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

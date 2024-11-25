@@ -1,52 +1,56 @@
 package com.example.iwebproyecto.beans;
 
+import java.time.LocalDate;
+
 public class DenunciaMaltrato {
     private int denunciaID;
-
     private Usuario usuario;
-
-    private String tamanio;
+    private String tamanio; // Pequenio, Mediano, Grande
+    private String especie;
     private String raza;
     private String tipoMaltrato;
-    private String nombreApellidoMaltratador;
+    private String nombreApellidoMaltratador; // Puede ser null
     private String direccion;
-    private int realizoDenuncia;
-    private String especie;
-    private String fecha;
-
     private Foto foto;
+    private boolean realizoDenuncia;
+    private boolean eliminado;
+    private LocalDate fechaFormulario;
 
-    // Constructor vacío
     public DenunciaMaltrato() {}
 
-    // Constructor con todos los campos
-
-
-
-    public DenunciaMaltrato(int denunciaID, Usuario usuario, String tamanio, String raza, String tipoMaltrato, String nombreApellidoMaltratador, String direccion, int realizoDenuncia, String especie, String fecha, Foto foto) {
+    // Constructor con parámetros
+    public DenunciaMaltrato(int denunciaID, Usuario usuario, String tamanio, String especie, String raza,
+                            String tipoMaltrato, String nombreApellidoMaltratador, String direccion, Foto foto,
+                            boolean realizoDenuncia, boolean eliminado, LocalDate fechaFormulario) {
         this.denunciaID = denunciaID;
         this.usuario = usuario;
-
         this.tamanio = tamanio;
+        this.especie = especie;
         this.raza = raza;
         this.tipoMaltrato = tipoMaltrato;
         this.nombreApellidoMaltratador = nombreApellidoMaltratador;
         this.direccion = direccion;
-        this.realizoDenuncia = realizoDenuncia;
-        this.especie = especie;
-        this.fecha = fecha;
-
         this.foto = foto;
+        this.realizoDenuncia = realizoDenuncia;
+        this.eliminado = eliminado;
+        this.fechaFormulario = fechaFormulario;
     }
 
 
-    //Getter and Setter
     public int getDenunciaID() {
         return denunciaID;
     }
 
     public void setDenunciaID(int denunciaID) {
         this.denunciaID = denunciaID;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getTamanio() {
@@ -57,7 +61,13 @@ public class DenunciaMaltrato {
         this.tamanio = tamanio;
     }
 
+    public String getEspecie() {
+        return especie;
+    }
 
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
 
     public String getRaza() {
         return raza;
@@ -91,44 +101,35 @@ public class DenunciaMaltrato {
         this.direccion = direccion;
     }
 
-    public int getRealizoDenuncia() {
-        return realizoDenuncia;
-    }
-
-    public void setRealizoDenuncia(int realizoDenuncia) {
-        this.realizoDenuncia = realizoDenuncia;
-    }
-
-    public String getEspecie() {
-        return especie;
-    }
-
-    public void setEspecie(String especie) {
-        this.especie = especie;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     public Foto getFoto() {
         return foto;
     }
 
     public void setFoto(Foto foto) {
         this.foto = foto;
+    }
+
+    public boolean isRealizoDenuncia() {
+        return realizoDenuncia;
+    }
+
+    public void setRealizoDenuncia(boolean realizoDenuncia) {
+        this.realizoDenuncia = realizoDenuncia;
+    }
+
+    public boolean isEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
+    }
+
+    public LocalDate getFechaFormulario() {
+        return fechaFormulario;
+    }
+
+    public void setFechaFormulario(LocalDate fechaFormulario) {
+        this.fechaFormulario = fechaFormulario;
     }
 }
