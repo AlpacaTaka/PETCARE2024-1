@@ -3,6 +3,8 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue/adoptionTable.jsp" value="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue" />
+        <entry key="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue/albergueVisAdop.jsp" value="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue" />
         <entry key="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue/donationTable.jsp" value="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue" />
         <entry key="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue/eventTable.jsp" value="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue" />
         <entry key="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue/miPerfil.jsp" value="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue" />

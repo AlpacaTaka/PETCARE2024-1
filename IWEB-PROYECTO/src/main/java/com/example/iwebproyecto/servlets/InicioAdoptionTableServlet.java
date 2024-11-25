@@ -65,6 +65,12 @@ public class InicioAdoptionTableServlet extends HttpServlet {
                 albergueDaoRevenge.borrarMascotaAdopcion(idd);
                 response.sendRedirect(request.getContextPath() + "/PortalAdopciones");
                 break;
+
+            case "view":
+                request.setAttribute("idAlbergue", idAlbergue);
+                request.getRequestDispatcher("albergue/albergueVisAdop.jsp").forward(request,response);
+                break;
+
         }
 
 
