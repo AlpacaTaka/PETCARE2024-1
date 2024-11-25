@@ -3,6 +3,8 @@ package com.example.iwebproyecto.daos;
 import com.example.iwebproyecto.beans.*;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class AlbergueDaoRevenge extends BaseDao {
@@ -196,7 +198,7 @@ public class AlbergueDaoRevenge extends BaseDao {
         }
     }
 
-    // Método para eliminar un albergue
+    // M
     public void eliminarAlbergue(int albergueID) {
         String sql = "DELETE FROM albergue WHERE albergueID = ?";
 
@@ -358,19 +360,21 @@ public class AlbergueDaoRevenge extends BaseDao {
                 donacionSuministros.setNombreSuministro(rs.getString(5));
                 donacionSuministros.setCantidadDonacionesTotales(rs.getInt(6));
                 donacionSuministros.setMarcaSuministro(rs.getString(7));
-                Distrito distrito = new Distrito();
-                distrito.setDistritoID(rs.getInt(8));
+                AlbergueDaoRevenge albergueDaoRevenge =new AlbergueDaoRevenge();
+                Distrito distrito = albergueDaoRevenge.obtenerDistritoPorID(rs.getInt(8));
                 donacionSuministros.setDistrito(distrito);
-                Albergue albergue = new Albergue();
-                albergue.setAlbergueID(rs.getInt(9));
+                AlbergueDao albergueDao = new AlbergueDao();
+                Albergue albergue = albergueDao.obtenerAlberguePorID(rs.getInt(9));
                 donacionSuministros.setAlbergue(albergue);
                 donacionSuministros.setFechaInicioRecepcion(rs.getString(10));
                 donacionSuministros.setFechaFinRecepcion(rs.getString(11));
-                donacionSuministros.setMensajeParaDonantes(rs.getString(12));
+                donacionSuministros.setHoraInicioRecepcion(rs.getString(12));
+                donacionSuministros.setHoraFinRecepcion(rs.getString(13));
+                donacionSuministros.setMensajeParaDonantes(rs.getString(14));
                 Foto foto = new Foto();
-                foto.setFotoID(rs.getInt(13));
+                foto.setFotoID(rs.getInt(15));
                 donacionSuministros.setFoto(foto);
-                donacionSuministros.setEliminado(rs.getBoolean(14));
+                donacionSuministros.setEliminado(rs.getBoolean(16));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -438,7 +442,7 @@ public class AlbergueDaoRevenge extends BaseDao {
             pstmt.setString(12, donacionSuministros.getHoraFinRecepcion());
             pstmt.setString(13, donacionSuministros.getMensajeParaDonantes());
             pstmt.setInt(14, donacionSuministros.getFoto().getFotoID());
-            pstmt.setBoolean(15, true);
+            pstmt.setBoolean(15, donacionSuministros.isEliminado());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -446,7 +450,7 @@ public class AlbergueDaoRevenge extends BaseDao {
     }
 
     public void borrarDonacionSuministros(int idDonacion) {
-        String sql="UPDATE donacionsuministros set eliminado=1 where donacionSuministros=?;";
+        String sql="UPDATE donacionsuministros set eliminado=1 where donacionSuministrosID=?;";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, idDonacion);
@@ -457,7 +461,10 @@ public class AlbergueDaoRevenge extends BaseDao {
     }
 
     public void editarDonacionSuministros(DonacionSuministros donacionSuministros){
-        String sql="UPDATE donacionsuministros set tituloAvisoDonacion=?, correoElectronicoDonacion=?, tipoSuministro=?, nombreSuministro=?, cantidadDonacionesTotales=?, marcaSuministro=?, distritoID=?, albergueID=?, fechaInicioRecepcion=?, fechaFinRecepcion=?, horaInicioRecepcion=?, horaFinRecepcion=?, mensajeParaDonantes=?, fotoID=?, eliminado=?, eventoAlbergueID=? where donacionSuministrosID=?;";
+        String sql="UPDATE donacionsuministros set tituloAvisoDonacion=?, correoElectronicoDonacion=?, tipoSuministro=?, nombreSuministro=?,"+
+                " cantidadDonacionesTotales=?, marcaSuministro=?, distritoID=?, albergueID=?, fechaInicioRecepcion=?,"+
+                " fechaFinRecepcion=?, horaInicioRecepcion=?, horaFinRecepcion=?, mensajeParaDonantes=?, fotoID=?, eliminado=?,"+
+                " eventoAlbergueID=null where donacionSuministrosID=?;";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, donacionSuministros.getTituloAvisoDonacion());
@@ -474,9 +481,89 @@ public class AlbergueDaoRevenge extends BaseDao {
             pstmt.setString(12, donacionSuministros.getHoraFinRecepcion());
             pstmt.setString(13, donacionSuministros.getMensajeParaDonantes());
             pstmt.setInt(14, donacionSuministros.getFoto().getFotoID());
-            pstmt.setBoolean(15, true);
+            pstmt.setBoolean(15, donacionSuministros.isEliminado());
+            pstmt.setInt(16, donacionSuministros.getDonacionSuministrosID());
+            pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public Distrito obtenerDistritoPorID(int id) {
+        String sql = "select * from distrito where distritoID=?;";
+        Distrito distrito = new Distrito();
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+
+                Zona zona = new Zona();
+                distrito.setDistritoID(id);
+                distrito.setNombreDistrito(rs.getString(2));
+                zona.setZonaID(rs.getInt(3));
+                distrito.setZona(zona);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return distrito;
+    }
+
+    public ArrayList<SolicitudTemporal> listaDeHogaresTemporales() {
+        String sql = "select * from solicitudtemporal where aprobadoCoordinador=1 and desactivadoAdministrador=0;";
+        ArrayList<SolicitudTemporal> listaHogaresTemporales = new ArrayList<>();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                SolicitudTemporal solicitudTemporal = new SolicitudTemporal();
+                solicitudTemporal.setSolicitudID(rs.getInt(1));
+                Usuario usuario = usuarioDao.obtenerUsuarioPorID(rs.getInt(2));
+                Distrito distrito=obtenerDistritoPorID(usuario.getDistrito().getDistritoID());
+                usuario.setDistrito(distrito);
+                solicitudTemporal.setUsuario(usuario);
+                solicitudTemporal.setCelular(rs.getString(5));
+                solicitudTemporal.setTiempoTemporal(rs.getInt(16));
+                String ini = rs.getString(17);
+                String fin = rs.getString(18);
+                LocalDate localDate = LocalDate.now();
+                boolean flag = localDate.isAfter(LocalDate.parse(ini)) && localDate.isBefore(LocalDate.parse(fin));
+                if(flag){
+                    solicitudTemporal.setInicioTemporal(ini);
+                    solicitudTemporal.setFinTemporal(fin);
+                    listaHogaresTemporales.add(solicitudTemporal);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaHogaresTemporales;
+    }
+
+    public ArrayList<UsuarioAdopcion> listaUsuarioAdopcion(int albergueID) {
+        String sql = "select u.*,a.albergueID from usuarioadopcion u, mascotasadopcion m, albergue a where m.idAdopcion=u.idAdopcion and a.albergueID=m.albergueID and m.albergueID=?;";
+        ArrayList<UsuarioAdopcion> listaUsuarioAdopcion = new ArrayList<>();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, albergueID);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                UsuarioAdopcion usuarioAdopcion = new UsuarioAdopcion();
+                usuarioAdopcion.setUsuarioAdopcionID(rs.getInt(1));
+                Usuario usuario = usuarioDao.obtenerUsuarioPorID(rs.getInt(2));
+                usuarioAdopcion.setUsuario(usuario);
+                MascotasAdopcion mascotasAdopcion = albergueDaoRevenge.obtenerMascotasAdopcionPorID(rs.getInt(3));
+                usuarioAdopcion.setMascotasAdopcion(mascotasAdopcion);
+                usuarioAdopcion.setAprobado(rs.getBoolean(4));
+                usuarioAdopcion.setFechaAdoptado(rs.getString(5));
+                listaUsuarioAdopcion.add(usuarioAdopcion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaUsuarioAdopcion;
     }
 }

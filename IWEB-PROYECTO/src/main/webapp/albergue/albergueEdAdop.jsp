@@ -47,23 +47,24 @@
                 <ul class="navlinks">
                     <li><a href="<%=request.getContextPath()%>/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
                     <li><a href="<%=request.getContextPath()%>/PortalAdopciones" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                    <li><a href="eventTable.html" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
-                    <li><a href="donationTable.html" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
-                    <li><a href="contactarTemporal.html" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
-                    <li><a href="solicitudesAdopcion.html" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
-                    <li><a href="verDenunciasMaltrato.html" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
+                    <li><a href="albergue/eventTable.jsp" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/DonacionSuministros" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
+                    <li><a href="albergue/contactarTemporal.jsp" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
+                    <li><a href="albergue/solicitudesAdopcion.jsp" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+                    <li><a href="albergue/verDenunciasMaltrato.jsp" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
                     <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
-                    <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                    <li id="cerrar-sesion"><a href="/login/login.jsp" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
             </div>
+
             <div id="menu" class="menu">
                 <a href="<%=request.getContextPath()%>/miPerfilAlbergue">Mi Perfil</a>
                 <a href="<%=request.getContextPath()%>/PortalAdopciones">Portal de Adopciones</a>
-                <a href="eventTable.html">Mis Eventos Benéficos</a>
-                <a href="donationTable.html">Mis Eventos de Donación</a>
-                <a href="contactarTemporal.html">Hogares Temporales</a>
-                <a href="solicitudesAdopcion.html">Solicitudes de Adopción</a>
-                <a href="verDenunciasMaltrato.html">Denuncias de maltrato</a>
+                <a href="albergue/eventTable.jsp">Mis Eventos Benéficos</a>
+                <a href="<%=request.getContextPath()%>/DonacionSuministros">Mis Eventos de Donación</a>
+                <a href="albergue/contactarTemporal.jsp">Hogares Temporales</a>
+                <a href="albergue/solicitudesAdopcion.jsp">Solicitudes de Adopción</a>
+                <a href="albergue/verDenunciasMaltrato.jsp">Denuncias de maltrato</a>
                 <!--<a href="#">Solicitudes de Adopción</a>-->
                 <hr>
                 <a href="/login/login.html">Cerrar Sesión</a>
@@ -75,8 +76,9 @@
                         <a href="<%=request.getContextPath()%>/PortalAdopciones"><button type="button" class="btn btn-personal2">Regresar</button></a>
                     </div>
                     <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                        <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/PortalAdopciones?action=edit&id=<%=mascota.getIdAdopcion()%>">
-                            <input type="hidden" name="id" value="<%=albergueID%>">
+                        <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/PortalAdopciones?action=edit">
+                            <input type="hidden" name="id" value="<%=mascota.getIdAdopcion()%>">
+                            <input type="hidden" name="idA" value="<%=albergueID%>">
                             <h1 style="margin-top: 10px;" class="text-center">Edición de perfil de Mascota para Adopción</h1>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">

@@ -1,4 +1,6 @@
+<%@ page import="com.example.iwebproyecto.beans.UsuarioAdopcion" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="lista" scope="request" type="java.util.ArrayList<com.example.iwebproyecto.beans.UsuarioAdopcion>"/>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -88,6 +90,7 @@
                                     <thead>
                                         <tr>
                                             <th> Solicitante </th><!--<th> Nombre del solicitante</th>-->
+                                            <th> Mascota </th>
                                             <th> Distrito </th>
                                             <th> Dirección </th><!--Dirección del solicitante-->
                                             <th> Correo </th>
@@ -95,102 +98,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <%for (UsuarioAdopcion usuarioAdopcion : lista){%>
+                                        <%if (usuarioAdopcion.isAprobado()){continue;}%>
                                         <tr>
-                                            <td>Jeanpier Gutierrez</td>
-                                            <td>Ancon</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
+                                            <td><%=usuarioAdopcion.getUsuario().getNombre()+" "+usuarioAdopcion.getUsuario().getApellido()%></td>
+                                            <td><%=usuarioAdopcion.getMascotasAdopcion().getNombreMascota()%></td>
+                                            <td><%=usuarioAdopcion.getUsuario().getDistrito().getNombreDistrito()%></td>
+                                            <td><%=usuarioAdopcion.getUsuario().getDireccion()%></td>
+                                            <td><%=usuarioAdopcion.getUsuario().getCorreoElectronico()%></td>
                                             <td>
                                                 <div style="display: flex; justify-content: center;">
-                                                    <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></button>
-                                                    <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></button> 
+                                                    <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
+                                                    <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Jeanpier Gutierrez</td>
-                                            <td>Ancon</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
-                                            <td>
-                                                <div style="display: flex; justify-content: center;">
-                                                    <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></button>
-                                                    <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></button> 
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jeanpier Gutierrez</td>
-                                            <td>Ancon</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
-                                            <td>
-                                                <div style="display: flex; justify-content: center;">
-                                                    <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></button>
-                                                    <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></button> 
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jeanpier Gutierrez</td>
-                                            <td>Ancon</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
-                                            <td>
-                                                <div style="display: flex; justify-content: center;">
-                                                    <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></button>
-                                                    <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></button> 
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jeanpier Gutierrez</td>
-                                            <td>Ancon</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
-                                            <td>
-                                                <div style="display: flex; justify-content: center;">
-                                                    <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></button>
-                                                    <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></button> 
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jeanpier Gutierrez</td>
-                                            <td>Ancon</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
-                                            <td>
-                                                <div style="display: flex; justify-content: center;">
-                                                    <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></button>
-                                                    <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></button> 
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jeanpier Gutierrez</td>
-                                            <td>Ancon</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
-                                            <td>
-                                                <div style="display: flex; justify-content: center;">
-                                                    <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></button>
-                                                    <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></button> 
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Jeanpier Gutierrez</td>
-                                            <td>Ancon</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
-                                            <td>
-                                                <div style="display: flex; justify-content: center;">
-                                                    <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></button>
-                                                    <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></button> 
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    <%}%>
                                     </tbody>                                     
                                 </table>
                             </div>    
@@ -250,7 +173,7 @@
                         }
                     },
                     columnDefs: [
-                        { orderable: false, targets: [4] } // Cambia 0 por el índice de la columna que quieres deshabilitar
+                        { orderable: false, targets: [5] } // Cambia 0 por el índice de la columna que quieres deshabilitar
                     ]
                     
                 });
@@ -258,7 +181,7 @@
         </script>    
 
 
-        <script src="/common/script/neonavbar.js"></script>
+        <script src="<%=request.getContextPath()%>/common/script/neonavbar.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script>
             const select1 = document.getElementById('Especies');

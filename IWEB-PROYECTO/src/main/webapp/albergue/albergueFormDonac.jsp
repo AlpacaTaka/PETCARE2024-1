@@ -1,7 +1,17 @@
+<%@ page import="com.example.iwebproyecto.beans.Albergue" %>
+<%@ page import="com.example.iwebproyecto.daos.AlbergueDao" %>
+<%@ page import="com.example.iwebproyecto.beans.DonacionSuministros" %>
+<%@ page import="com.example.iwebproyecto.beans.Distrito" %>
+<%@ page import="com.example.iwebproyecto.daos.AlbergueDaoRevenge" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
     int albergueID = (int) request.getAttribute("idAlbergue");
+    AlbergueDao albergueDao = new AlbergueDao();
+    AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
+    Albergue albergue = albergueDao.obtenerAlberguePorID(albergueID);
+    Distrito distrito = albergueDaoRevenge.obtenerDistritoPorID(albergueID);
 %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,7 +40,7 @@
                 <div>Menu</div>
                 <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
             </div>
-            <div class="welcome-text">Hola, Patitas Felices</div>
+            <div class="welcome-text"><%=albergueID%>Hola, Patitas Felices</div>
         </div>
         <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
     </header>
@@ -48,7 +58,7 @@
                 <li><a href="albergue/solicitudesAdopcion.jsp" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
                 <li><a href="albergue/verDenunciasMaltrato.jsp" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
                 <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
-                <li id="cerrar-sesion"><a href="/login/login.jsp" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
             </ul>
         </div>
 
@@ -62,7 +72,7 @@
             <a href="albergue/verDenunciasMaltrato.jsp">Denuncias de maltrato</a>
             <!--<a href="#">Solicitudes de Adopción</a>-->
             <hr>
-            <a href="/login/login.html">Cerrar Sesión</a>
+            <a href="<%=request.getContextPath()%>">Cerrar Sesión</a>
         </div>
 
 
@@ -75,26 +85,28 @@
                     <a href="<%=request.getContextPath()%>/DonacionSuministros"><button type="button" class="btn btn-personal2">Regresar</button></a>
                 </div>
                 <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                    <form id="uploadForm" style="padding:10px" >
+                    <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/DonacionSuministros?action=create">
+                        <input type="hidden" name="id" value="<%=albergueID%>">
+                        <input type="hidden" name="distritoID" value="<%=distrito.getDistritoID()%>">
                         <h1 style="margin-top: 10px;" class="text-center">Creación de Avisos de Donación</h1>
                         <div class="row justify-content-center p-1">
 
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
                                     <label for="titulo_donacion">Nombre del evento de donación</label>
-                                    <input type="text" class="form-control" id="titulo_donacion" placeholder="Ingrese el número de contacto"  maxlength="50" required>
+                                    <input name="titulo" type="text" class="form-control" id="titulo_donacion" placeholder="Ingrese el título"  maxlength="50" required>
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="correo">Correo Electrónico del albergue</label>
-                                    <input type="email" class="form-control" id="correo" placeholder="Ingrese su correo electrónico" required>
+                                    <input name="correo" type="email" class="form-control" id="correo" placeholder="Ingrese su correo de contacto para donaciones" required>
                                     <span id="errorMessage" style="color: red; display: none;">Error: correo inválido.</span>
                                 </div>
                             </div>
 
                             <div class="col-md-6 p-1">
                                 <label for="tipo_donacion">Tipo de Suministro</label>
-                                <select class="form-select" id="tipo_donacion" aria-label="Floating label select example" required onchange="toggleInput()">
-                                    <option selected value="">Seleccione el tipo de donación necesitada</option>
+                                <select name="tipo" class="form-select" id="tipo_donacion" aria-label="Floating label select example" required onchange="toggleInput()">
+                                    <option value="">Seleccione el tipo de donación necesitada</option>
                                     <option value="Alimenticios">Alimenticios</option>
                                     <option value="Higiene">Higiene</option>
                                     <option value="Confort">Confort</option>
@@ -103,7 +115,7 @@
                             </div>
                             <div class="col-md-6 p-1">
                                 <label for="otra-donacion">Especifique el nombre del suministro</label>
-                                <input type="text" class="form-control" id="otra-donacion" maxlength="50" required disabled>
+                                <input name="nombreSuministro" type="text" class="form-control" id="otra-donacion" maxlength="50" required>
                             </div>
 
                         </div>
@@ -111,18 +123,19 @@
                         <div class="row justify-content-center p-1">
                             <div class="col-md-6 p-1">
                                 <label for="cant_donacion">Cantidad de donaciones</label>
-                                <input type="number" class="form-control" id="cant_donacion" oninput="validarNumero()" placeholder="Ingrese la cantidad requerida" required>
+                                <input name="cantidad" type="number" class="form-control" id="cant_donacion" oninput="validarNumero()" placeholder="Ingrese la cantidad requerida" required>
                             </div>
                             <div class="col-md-6 p-1">
                                 <label for="marca_donacion">Especifique la marca (opcional)</label>
-                                <input type="text" class="form-control" id="marca_donacion" placeholder="Ingrese la marca o marcas (use comas)">
+                                <input name="marca" type="text" class="form-control" id="marca_donacion" placeholder="Ingrese la marca o marcas (use comas)">
                             </div>
                         </div>
 
                         <div class="row justify-content-center p-1">
                             <div class="col-md-4 p-1" >
-                                <label for="distrito">Distrito</label>
-                                <select class="form-select" name="idDistrito" id="distrito" required>
+                                <label for="distritoNombre">Distrito</label>
+                                <input name="nombreDistrito" value="<%=distrito.getNombreDistrito()%>" type="text" class="form-control" id="distritoNombre" readonly>
+                            <%--select-- class="form-select" name="idDistrito" id="distrito" required>
                                     <option value="">Selecciona un distrito</option>
                                     <optgroup label="Lima Norte">
                                         <option value="1">Ancon</option>
@@ -174,51 +187,51 @@
                                         <option value="41">San Luis</option>
                                         <option value="42">Miraflores</option>
                                     </optgroup>
-                                </select>
+                                </select--%>
                             </div>
                             <div class="col-md-8 p-1">
                                 <label for="Direccion">Dirección de recepción</label>
-                                <input type="text" class="form-control" placeholder="Maximo 100 caracteres" maxlength="100" id="Direccion" name="Direccion">
+                                <input value="<%=albergue.getPuntoAcopioDonaciones()%>" type="text" class="form-control" placeholder="Maximo 100 caracteres" maxlength="100" id="Direccion" readonly>
                             </div>
                         </div>
 
                         <div class="row justify-content-center p-1">
                             <div class="col-md-6 p-1">
                                 <label for="fecha_inicio_donacion">Fecha inicio</label>
-                                <input type="date" class="form-control" id="fecha_inicio_donacion" required>
+                                <input name="fechaini" type="date" class="form-control" id="fecha_inicio_donacion" required>
                             </div>
                             <div class="col-md-6 p-1">
                                 <label for="fecha_fin_donacion">Fecha fin</label>
-                                <input type="date" class="form-control" id="fecha_fin_donacion" required>
+                                <input name="fechafin" type="date" class="form-control" id="fecha_fin_donacion" required>
                             </div>
                         </div>
 
                         <div class="row justify-content-center p-1">
                             <div class="col-md-6 p-1">
                                 <label for="inicio">Hora Inicio</label>
-                                <input type="time" class="form-control" id="inicio" placeholder="Ingrese la hora de inicio" required onchange="validarHoras()">
+                                <input name="horaini" type="time" class="form-control" id="inicio" placeholder="Ingrese la hora de inicio" required onchange="validarHoras()">
                             </div>
                             <div class="col-md-6 p-1">
                                 <label for="fin">Hora Fin</label>
-                                <input type="time" class="form-control" id="fin" placeholder="Ingrese la hora de fin" required onchange="validarHoras()">
+                                <input name="horafin" type="time" class="form-control" id="fin" placeholder="Ingrese la hora de fin" required onchange="validarHoras()">
                             </div>
                         </div>
 
                         <div class="row justify-content-center p-1">
                             <div class="col-md-6 p-1">
                                 <label for="nombre_contacto">Nombre de contacto del albergue</label>
-                                <input type="text" class="form-control" id="nombre_contacto" placeholder="Ingrese el nombre de la persona" maxlength="80" required>
+                                <input value="<%=albergue.getNombreContactoDonaciones()%>" type="text" class="form-control" id="nombre_contacto" placeholder="Ingrese el nombre de la persona" maxlength="80" readonly>
                             </div>
                             <div class="col-md-6 p-1">
                                 <label for="num_contacto">Número de contacto para la donación</label>
-                                <input type="number" class="form-control" id="num_contacto" oninput="validarNumero()" placeholder="Ingrese el número de contacto" required>
+                                <input value="<%=albergue.getNumeroContactoDonaciones()%>" type="number" class="form-control" id="num_contacto" oninput="validarNumero()" placeholder="Ingrese el número de contacto" readonly>
                             </div>
                         </div>
 
                         <div class="row justify-content-center p-1">
                             <div class="col-md-12 p-1">
                                 <label for="mensaje"> Breve Mensaje a los Donantes (200 caracteres maximo)</label>
-                                <textarea name="" id="mensaje" maxlength="200" class="form-control" placeholder="Ingrese un mensaje para los donantes"></textarea>
+                                <textarea name="breve" id="mensaje" maxlength="200" class="form-control" placeholder="Ingrese un mensaje para los donantes"></textarea>
                             </div>
                         </div>
                         <div class="row justify-content-center p-1">
@@ -232,7 +245,7 @@
 
                         <div class="row justify-content-center p-1">
                             <div class="col-md-12 p-1 d-flex justify-content-center">
-                                <a href="donationTable.html"><button type="submit" class="btn btn-personal">Crear</button></a>
+                                <button type="submit" class="btn btn-personal">Crear</button>
                             </div>
 
                         </div>
@@ -273,22 +286,7 @@
         }
     });
 </script>
-<script>
-    function toggleInput() {
-        const tipoDonacion = document.getElementById("tipo_donacion").value;
-        const otraDonacionInput = document.getElementById("otra-donacion");
-
-        // Habilita el campo solo si se ha seleccionado alguna opción distinta al valor por defecto
-        if (tipoDonacion) {
-            otraDonacionInput.disabled = false;
-        } else {
-            otraDonacionInput.disabled = true;
-            otraDonacionInput.value = ""; // Limpia el campo si no hay selección
-        }
-    }
-</script>
-
-<script>
+<%--script>
     function toggleInputs() {
         const tipoDonacion = document.getElementById("tipo_donacion").value;
         const otraDonacionInput = document.getElementById("otra-donacion");
@@ -300,7 +298,18 @@
             otraDonacionInput.value = ""; // Limpia el campo si no es "Otra"
         }
     }
-</script>
+    function toggleInputs() {
+        const tipoDonacion = document.getElementById("tipo_donacion").value;
+        const otraDonacionInput = document.getElementById("otra-donacion");
+
+        if (tipoDonacion) {
+            otraDonacionInput.disabled = false;
+        } else {
+            otraDonacionInput.disabled = true;
+            otraDonacionInput.value = ""; // Limpia el campo si no es "Otra"
+        }
+    }
+</script--%>
 
 <script>
     const nombreDonacionInput = document.getElementById('titulo_donacion');
@@ -328,7 +337,7 @@
         if(this.value.length > 4){
             this.value = this.value.slice(0,3);
         }
-
+        this.value = this.value.replace(/[^0-9]/g, '');
         // Validar el rango
         const numValue = Number(cantDonacionInput.value);
         if (numValue < 1 || numValue > 999) {
@@ -339,7 +348,7 @@
     })
 
 </script>
-<script>
+<%--script-->
     const correoAlbergueInput = document.getElementById('correo');
 
     //Validar correo electronico//
@@ -358,10 +367,9 @@
             errorMessage.style.display = 'none'; // Ocultar mensaje de error
 
         }
-
     });
 
-</script>
+</script--%>
 
 <script>
 

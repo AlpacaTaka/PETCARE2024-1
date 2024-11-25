@@ -1,4 +1,7 @@
+<%@ page import="com.example.iwebproyecto.beans.SolicitudTemporal" %>
+<%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="lista" type="java.util.ArrayList<com.example.iwebproyecto.beans.SolicitudTemporal>" scope="request"/>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -44,7 +47,7 @@
                     </div>
                     <div class="welcome-text">Hola, Patitas Felices</div>
                 </div>
-                <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+                <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
             </header>
 
             <div class="main">
@@ -52,24 +55,26 @@
                 <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
                 <div class="barside">
                     <ul class="navlinks">
-                        <li><a href="miPerfil.jsp" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
-                        <li><a href="adoptionTable.jsp" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                        <li><a href="eventTable.jsp" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
-                        <li><a href="donationTable.jsp" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
-                        <li><a href="contactarTemporal.html" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
-                        <li><a href="solicitudesAdopcion.jsp" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+                        <li><a href="<%=request.getContextPath()%>/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
+                        <li><a href="<%=request.getContextPath()%>/PortalAdopciones" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                        <li><a href="albergue/eventTable.jsp" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
+                        <li><a href="<%=request.getContextPath()%>/DonacionSuministros" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
+                        <li><a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
+                        <li><a href="albergue/solicitudesAdopcion.jsp" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+                        <li><a href="albergue/verDenunciasMaltrato.jsp" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
                         <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
-                        <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                        <li id="cerrar-sesion"><a href="/login/login.jsp" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                     </ul>
                 </div>
 
                 <div id="menu" class="menu">
-                    <a href="miPerfil.jsp">Mi Perfil</a>
-                    <a href="adoptionTable.jsp">Portal de Adopciones</a>
-                    <a href="eventTable.jsp">Mis Eventos Benéficos</a>
-                    <a href="donationTable.jsp">Mis Eventos de Donación</a>
-                    <a href="contactarTemporal.html">Hogares Temporales</a>
-                    <a href="solicitudesAdopcion.jsp">Solicitudes de Adopción</a>
+                    <a href="<%=request.getContextPath()%>/miPerfilAlbergue">Mi Perfil</a>
+                    <a href="<%=request.getContextPath()%>/PortalAdopciones">Portal de Adopciones</a>
+                    <a href="albergue/eventTable.jsp">Mis Eventos Benéficos</a>
+                    <a href="<%=request.getContextPath()%>/DonacionSuministros">Mis Eventos de Donación</a>
+                    <a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue">Hogares Temporales</a>
+                    <a href="albergue/solicitudesAdopcion.jsp">Solicitudes de Adopción</a>
+                    <a href="albergue/verDenunciasMaltrato.jsp">Denuncias de maltrato</a>
                     <!--<a href="#">Solicitudes de Adopción</a>-->
                     <hr>
                     <a href="/login/login.html">Cerrar Sesión</a>
@@ -95,86 +100,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <%for (SolicitudTemporal solicitudTemporal : lista){%>
                                         <tr>
-                                            <td>Lorem ipsum</td>
-                                            <td>2 semanas</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
-                                            <td>999999999</td>
+                                            <td><%=solicitudTemporal.getUsuario().getNombre()+": "+solicitudTemporal.getUsuario().getApellido()%></td>
+                                            <td><%=solicitudTemporal.getTiempoTemporal()%> semanas</td>
+                                            <td><%=solicitudTemporal.getUsuario().getDistrito().getNombreDistrito()+" "+solicitudTemporal.getUsuario().getDireccion()%></td>
+                                            <td><%=solicitudTemporal.getUsuario().getCorreoElectronico()%></td>
+                                            <td><%=solicitudTemporal.getCelular()%></td>
                                             <td>
-                                                <a href="albergueFormTemporal.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Consultar"><span class="fi fi-rr-paper-plane"></button></a>
+                                                <a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Consultar"><span class="fi fi-rr-paper-plane"></span></button></a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Lorem ipsum</td>
-                                            <td>2 semanas</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
-                                            <td>999999999</td>
-                                            <td>
-                                                <a href="albergueFormTemporal.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Consultar"><span class="fi fi-rr-paper-plane"></button></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lorem ipsum</td>
-                                            <td>2 semanas</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
-                                            <td>999999999</td>
-                                            <td>
-                                                <a href="albergueFormTemporal.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Consultar"><span class="fi fi-rr-paper-plane"></button></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lorem ipsum</td>
-                                            <td>2 semanas</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
-                                            <td>999999999</td>
-                                            <td>
-                                                <a href="albergueFormTemporal.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Consultar"><span class="fi fi-rr-paper-plane"></button></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lorem ipsum</td>
-                                            <td>2 semanas</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
-                                            <td>999999999</td>
-                                            <td>
-                                                <a href="albergueFormTemporal.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Consultar"><span class="fi fi-rr-paper-plane"></button></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lorem ipsum</td>
-                                            <td>2 semanas</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
-                                            <td>999999999</td>
-                                            <td>
-                                                <a href="albergueFormTemporal.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Consultar"><span class="fi fi-rr-paper-plane"></button></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lorem ipsum</td>
-                                            <td>2 semanas</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
-                                            <td>999999999</td>
-                                            <td>
-                                                <a href="albergueFormTemporal.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Consultar"><span class="fi fi-rr-paper-plane"></button></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lorem ipsum</td>
-                                            <td>2 semanas</td>
-                                            <td>Jr. Puente Terabithia</td>
-                                            <td>dolorsit@gmail.com</td>
-                                            <td>999999999</td>
-                                            <td>
-                                                <a href="albergueFormTemporal.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Consultar"><span class="fi fi-rr-paper-plane"></button></a>
-                                            </td>
-                                        </tr>
+                                        <%}%>
                                     </tbody>                                     
                                 </table>
                             </div>    
@@ -234,7 +171,7 @@
         </script>    
 
 
-        <script src="/common/script/neonavbar.js"></script>
+        <script src="<%=request.getContextPath()%>/common/script/neonavbar.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script>
             const select1 = document.getElementById('Especies');
