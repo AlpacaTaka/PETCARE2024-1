@@ -67,6 +67,9 @@ public class InicioAdoptionTableServlet extends HttpServlet {
                 break;
 
             case "view":
+                String idv = request.getParameter("id");
+                MascotasAdopcion mascotasAdopcionv = albergueDaoRevenge.obtenerMascotasAdopcionPorID(Integer.parseInt(idv));
+                request.setAttribute("mascota",mascotasAdopcionv);
                 request.setAttribute("idAlbergue", idAlbergue);
                 request.getRequestDispatcher("albergue/albergueVisAdop.jsp").forward(request,response);
                 break;

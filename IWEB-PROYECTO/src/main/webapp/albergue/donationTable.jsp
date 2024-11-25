@@ -123,9 +123,10 @@
                                         <hr>
                                         <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> <%=donacionSuministros.getDistrito().getNombreDistrito()+" "+donacionSuministros.getAlbergue().getDireccionDonaciones()%><strong><br>Fecha:</strong><%=donacionSuministros.getFechaInicioRecepcion()+" "+donacionSuministros.getFechaFinRecepcion()%><br><strong>Horario de recepción:</strong><%=donacionSuministros.getHoraInicioRecepcion()+" "+donacionSuministros.getHoraFinRecepcion()%></p>
                                         <div style="display: flex; justify-content: center;">
-                                            <a href="<%=request.getContextPath()%>/DonacionSuministros?action=edit&id=<%=donacionSuministros.getDonacionSuministrosID()%>"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
+                                            <a href="<%=request.getContextPath()%>/DonacionSuministros?action=view&id=<%=donacionSuministros.getDonacionSuministrosID()%>"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
                                             <a href="<%=request.getContextPath()%>/DonacionSuministros?action=edit&id=<%=donacionSuministros.getDonacionSuministrosID()%>"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
-                                            <a <%--onclick="abrirPopup()"--%> href="<%=request.getContextPath()%>/DonacionSuministros?action=delete&id=<%=donacionSuministros.getDonacionSuministrosID()%>"><button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></span></button></a>
+                                            <%--a <onclick="abrirPopup()"> href="<%=request.getContextPath()%>/DonacionSuministros?action=delete&id=<%=donacionSuministros.getDonacionSuministrosID()%>"><button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar" onclick="abrirPopup()"><span class="fi fi-rr-trash"></span></button></a--%>
+                                            <button onclick="abrirPopup('<%=request.getContextPath()%>/DonacionSuministros?action=delete&id=<%=donacionSuministros.getDonacionSuministrosID()%>')" type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar"><span class="fi fi-rr-trash"></span></button>
                                         </div>
                                     </div>
                                 </div>
@@ -175,6 +176,7 @@
 
 <script src="<%=request.getContextPath()%>/common/script/neonavbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 <script>
     const select1 = document.getElementById('Especies');
     const select2 = document.getElementById('Razas');
@@ -371,18 +373,20 @@
 </script>
 <script>
     // Función para abrir el popup
-    function abrirPopup() {
+    function abrirPopup(redireccionamiento) {
         document.getElementById('popup').style.display = 'block';
+        document.getElementById('popup').href = redireccionamiento;
     }
-
     // Función para cerrar el popup
     function cerrarPopup() {
         document.getElementById('popup').style.display = 'none';
+        document.getElementById('popup').href = null;
     }
 
     // Función de confirmación (puedes agregar la lógica de eliminación aquí)
     function confirmarAccion() {
-        alert('Evento eliminado correctamente.');
+        alert('Evento eliminado correctamente.')
+        window.location.href = document.getElementById('popup').href;
         cerrarPopup();
     }
 </script>
