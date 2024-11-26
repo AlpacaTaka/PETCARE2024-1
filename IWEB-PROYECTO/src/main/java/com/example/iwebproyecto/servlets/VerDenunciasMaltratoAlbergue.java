@@ -1,6 +1,7 @@
 package com.example.iwebproyecto.servlets;
 
 import com.example.iwebproyecto.beans.*;
+import com.example.iwebproyecto.daos.AlbergueDao;
 import com.example.iwebproyecto.daos.AlbergueDaoRevenge;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -12,8 +13,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "SolicitudesAdopcionAlbergue", value = "/SolicitudesDeAdopcion")
-public class SolicitudesAdopcionAlbergue extends HttpServlet {
+@WebServlet(name = "VerDenunciasMaltratoAlbergue", value = "/DenunciasDeMaltrato")
+public class VerDenunciasMaltratoAlbergue extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -23,12 +24,14 @@ public class SolicitudesAdopcionAlbergue extends HttpServlet {
 
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
+        AlbergueDao albergueDao = new AlbergueDao();
         int idAlbergue= 6;
         switch (action) {
             case "lista":
-                ArrayList<UsuarioAdopcion> list = albergueDaoRevenge.listaUsuarioAdopcion(idAlbergue);
+                Albergue albergue = albergueDao.obtenerAlberguePorID(idAlbergue);
+                ArrayList<DenunciaMaltrato> list = albergueDaoRevenge.listaDenunciasMaltrato(albergue.getDistrito().getZona().getZonaID());
                 request.setAttribute("lista", list);
-                RequestDispatcher rd = request.getRequestDispatcher("albergue/solicitudesAdopcion.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("albergue/verDenunciasMaltrato.jsp");
                 rd.forward(request, response);
                 break;
             /*case "create":

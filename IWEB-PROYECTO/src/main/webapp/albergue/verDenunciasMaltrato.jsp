@@ -1,4 +1,6 @@
+<%@ page import="com.example.iwebproyecto.beans.DenunciaMaltrato" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="lista" type="java.util.ArrayList<com.example.iwebproyecto.beans.DenunciaMaltrato>" scope="request" />
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -46,7 +48,7 @@
       </div>
       <div class="welcome-text">Hola, Patitas Felices</div>
     </div>
-    <div class="logo"><a href="/user/inicio.html"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+    <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
   </header>
 
   <div class="main">
@@ -54,30 +56,29 @@
     <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
     <div class="barside">
       <ul class="navlinks">
-        <li><a href="miPerfil.html" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
-        <li><a href="adoptionTable.html" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-        <li><a href="eventTable.html" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
-        <li><a href="donationTable.html" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
-        <li><a href="contactarTemporal.html" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
-        <li><a href="solicitudesAdopcion.html" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
-        <li><a href="verDenunciasMaltrato.html" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
+        <li><a href="<%=request.getContextPath()%>/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
+        <li><a href="<%=request.getContextPath()%>/PortalAdopciones" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+        <li><a href="<%=request.getContextPath()%>/eventos" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
+        <li><a href="<%=request.getContextPath()%>/DonacionSuministros" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
+        <li><a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
+        <li><a href="<%=request.getContextPath()%>/SolicitudesDeAdopcion" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+        <li><a href="<%=request.getContextPath()%>/DenunciasDeMaltrato" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
         <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
-        <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+        <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
       </ul>
-
     </div>
 
     <div id="menu" class="menu">
-      <a href="miPerfil.html">Mi Perfil</a>
-      <a href="adoptionTable.html">Portal de Adopciones</a>
-      <a href="eventTable.html">Mis Eventos Benéficos</a>
-      <a href="donationTable.html">Mis Eventos de Donación</a>
-      <a href="contactarTemporal.html">Hogares Temporales</a>
-      <a href="solicitudesAdopcion.html">Solicitudes de Adopción</a>
-      <a href="verDenunciasMaltrato.html">Denuncias de maltrato</a>
+      <a href="<%=request.getContextPath()%>/miPerfilAlbergue">Mi Perfil</a>
+      <a href="<%=request.getContextPath()%>/PortalAdopciones">Portal de Adopciones</a>
+      <a href="<%=request.getContextPath()%>/eventos">Mis Eventos Benéficos</a>
+      <a href="<%=request.getContextPath()%>/DonacionSuministros">Mis Eventos de Donación</a>
+      <a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue">Hogares Temporales</a>
+      <a href="<%=request.getContextPath()%>/SolicitudesDeAdopcion">Solicitudes de Adopción</a>
+      <a href="<%=request.getContextPath()%>/DenunciasDeMaltrato">Denuncias de maltrato</a>
       <!--<a href="#">Solicitudes de Adopción</a>-->
       <hr>
-      <a href="/login/login.html">Cerrar Sesión</a>
+      <a href="<%=request.getContextPath()%>">Cerrar Sesión</a>
     </div>
 
 
@@ -108,118 +109,20 @@
                   </tr>
                   </thead>
                   <tbody>
+                  <%String desconocido = "";%>
+                  <%for(DenunciaMaltrato denunciaMaltrato : lista){%>
                   <tr>
-                    <td>Abandono</td>
-                    <td>Mathias Retto</td>
-                    <td>Av. Marte 588</td>
-                    <td>abcde@gmail.com</td>
+                    <td><%=denunciaMaltrato.getTipoMaltrato()%></td>
+                    <td><%desconocido = denunciaMaltrato.getNombreApellidoMaltratador()==null ? "Desconocido" : denunciaMaltrato.getNombreApellidoMaltratador();%><%=desconocido%></td>
+                    <td><%=denunciaMaltrato.getUsuario().getDistrito().getNombreDistrito()+" "+denunciaMaltrato.getDireccion()%></td>
+                    <td><%=denunciaMaltrato.getUsuario().getCorreoElectronico()%></td>
                     <td>
                       <div style="display: flex; justify-content: center;">
-                        <a href="verMascotaMaltrato.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
+                        <a href="<%=request.getContextPath()%>/DenunciasDeMaltrato?action=view&id=<%=denunciaMaltrato.getDenunciaID()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Abandono</td>
-                    <td>Gerardo Rabanal</td>
-                    <td>Av. Maravilla 221</td>
-                    <td>abcde@gmail.com</td>
-                    <td>
-                      <div style="display: flex; justify-content: center;">
-                        <a href="verMascotaMaltrato.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                      </div>
-                    </td>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Abandono</td>
-                    <td>Gerardo Rabanal</td>
-                    <td>Av. Maravilla 221</td>
-                    <td>abcde@gmail.com</td>
-                    <td>
-                      <div style="display: flex; justify-content: center;">
-                        <a href="/albergue/verMascotaMaltrato.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Abandono</td>
-                    <td>Gerardo Rabanal</td>
-                    <td>Av. Maravilla 221</td>
-                    <td>abcde@gmail.com</td>
-                    <td>
-                      <div style="display: flex; justify-content: center;">
-                        <a href="/albergue/verMascotaMaltrato.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Abandono</td>
-                    <td>Gerardo Rabanal</td>
-                    <td>Av. Maravilla 221</td>
-                    <td>abcde@gmail.com</td>
-                    <td>
-                      <div style="display: flex; justify-content: center;">
-                        <a href="/albergue/verMascotaMaltrato.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Abandono</td>
-                    <td>Gerardo Rabanal</td>
-                    <td>Av. Maravilla 221</td>
-                    <td>abcde@gmail.com</td>
-                    <td>
-                      <div style="display: flex; justify-content: center;">
-                        <a href="/albergue/verMascotaMaltrato.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Abandono</td>
-                    <td>Gerardo Rabanal</td>
-                    <td>Av. Maravilla 221</td>
-                    <td>abcde@gmail.com</td>
-                    <td>
-                      <div style="display: flex; justify-content: center;">
-                        <a href="/albergue/verMascotaMaltrato.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Abandono</td>
-                    <td>Gerardo Rabanal</td>
-                    <td>Av. Maravilla 221</td>
-                    <td>abcde@gmail.com</td>
-                    <td>
-                      <div style="display: flex; justify-content: center;">
-                        <a href="/albergue/verMascotaMaltrato.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Abandono</td>
-                    <td>Gerardo Rabanal</td>
-                    <td>Av. Maravilla 221</td>
-                    <td>abcde@gmail.com</td>
-                    <td>
-                      <div style="display: flex; justify-content: center;">
-                        <a href="/albergue/verMascotaMaltrato.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Abandono</td>
-                    <td>Gerardo Rabanal</td>
-                    <td>Av. Maravilla 221</td>
-                    <td>abcde@gmail.com</td>
-                    <td>
-                      <div style="display: flex; justify-content: center;">
-                        <a href="/albergue/verMascotaMaltrato.jsp"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></button></a>
-                      </div>
-                    </td>
-                  </tr>
-
+                  <%}%>
                   </tbody>
                 </table>
               </div>
@@ -403,7 +306,7 @@
     });
   });
 </script>
-<script src="/common/script/neonavbar.js"></script>
+<script src="<%=request.getContextPath()%>/common/script/neonavbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
   // Función para abrir el popup

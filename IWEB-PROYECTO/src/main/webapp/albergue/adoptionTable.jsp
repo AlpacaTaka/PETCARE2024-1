@@ -75,7 +75,7 @@
                 <li><a href="<%=request.getContextPath()%>/DonacionSuministros" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
                 <li><a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
                 <li><a href="<%=request.getContextPath()%>/SolicitudesDeAdopcion" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
-                <li><a href="albergue/verDenunciasMaltrato.jsp" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/DenunciasDeMaltrato" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
                 <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
                 <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
             </ul>
@@ -84,11 +84,11 @@
         <div id="menu" class="menu">
             <a href="<%=request.getContextPath()%>/miPerfilAlbergue">Mi Perfil</a>
             <a href="<%=request.getContextPath()%>/PortalAdopciones">Portal de Adopciones</a>
-            <a href="albergue/eventTable.jsp">Mis Eventos Benéficos</a>
+            <a href="<%=request.getContextPath()%>/eventos">Mis Eventos Benéficos</a>
             <a href="<%=request.getContextPath()%>/DonacionSuministros">Mis Eventos de Donación</a>
             <a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue">Hogares Temporales</a>
             <a href="<%=request.getContextPath()%>/SolicitudesDeAdopcion">Solicitudes de Adopción</a>
-            <a href="albergue/verDenunciasMaltrato.jsp">Denuncias de maltrato</a>
+            <a href="<%=request.getContextPath()%>/DenunciasDeMaltrato">Denuncias de maltrato</a>
             <!--<a href="#">Solicitudes de Adopción</a>-->
             <hr>
             <a href="<%=request.getContextPath()%>">Cerrar Sesión</a>
