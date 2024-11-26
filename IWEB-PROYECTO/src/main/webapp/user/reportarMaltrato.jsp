@@ -80,7 +80,7 @@
                     </div>
                     <!--Container del formulario-->
                     <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                        <form action="${pageContext.request.contextPath}/ReportarMaltratoServlet" method="post" id="uploadForm" style="padding:10px">
+                        <form action="${pageContext.request.contextPath}/ReportarMaltratoServlet" method="post" enctype="multipart/form-data" id="uploadForm" style="padding:10px" >
 
 
                         <h1 style="margin-top: 10px;" class="text-center">Formulario denuncia maltrato</h1>
@@ -167,13 +167,13 @@
                                     <label>Realizo una denuncia policial</label>
                                     <div class="col-md-12 d-flex justify-content-around align-self-center">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" value="si" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                             Si
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" value="no" id="flexRadioDefault2" checked>
                                             <label class="form-check-label" for="flexRadioDefault2">
                                             No
                                             </label>

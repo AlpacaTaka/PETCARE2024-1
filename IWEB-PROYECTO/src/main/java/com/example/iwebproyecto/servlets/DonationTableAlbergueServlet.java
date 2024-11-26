@@ -64,11 +64,14 @@ public class DonationTableAlbergueServlet extends HttpServlet {
                 albergueDaoRevenge.borrarDonacionSuministros(idd);
                 response.sendRedirect(request.getContextPath() + "/DonacionSuministros");
                 break;
+            case "view":
+                String idv = request.getParameter("id");
+                DonacionSuministros donacionSuministrosv = albergueDaoRevenge.obtenerDonacionSuministrosPorID(Integer.parseInt(idv));
+                request.setAttribute("donacionSuministros",donacionSuministrosv);
+                request.setAttribute("idAlbergue", idAlbergue);
+                request.getRequestDispatcher("albergue/albergueVisDonac.jsp").forward(request,response);
+                break;
         }
-
-
-
-
     }
 
     @Override

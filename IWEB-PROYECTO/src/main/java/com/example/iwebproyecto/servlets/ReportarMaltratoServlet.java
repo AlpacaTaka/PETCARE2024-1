@@ -2,6 +2,7 @@ package com.example.iwebproyecto.servlets;
 
 import com.example.iwebproyecto.beans.DenunciaMaltrato;
 import com.example.iwebproyecto.beans.Foto;
+import com.example.iwebproyecto.beans.Usuario;
 import com.example.iwebproyecto.daos.DenunciaMaltratoDao;
 import com.example.iwebproyecto.daos.FotoDao;
 import jakarta.servlet.ServletException;
@@ -10,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,15 +20,28 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
-@WebServlet(name = "ReportarMaltratoServlet", value = "/ReportarMaltratoServlet")
+@WebServlet(name = "ReportarMaltratoServlet", value = "/ReportarMaltrato")
 @MultipartConfig
 public class ReportarMaltratoServlet extends HttpServlet {
+
+
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+        int idUsuario = 7;
+
+
         DenunciaMaltrato denu = new DenunciaMaltrato();
+        Usuario usuario = new Usuario();
+        usuario.setUsuarioID(idUsuario);
+        denu.setUsuario(usuario);
         denu.setTamanio(request.getParameter("tamanio"));
         denu.setEspecie(request.getParameter("Especie"));
         if ("otro".equals(request.getParameter("Raza"))){
@@ -42,53 +57,58 @@ public class ReportarMaltratoServlet extends HttpServlet {
         denu.setNombreApellidoMaltratador(request.getParameter("Nombre-maltratador"));
         denu.setDireccion(request.getParameter("Direccion"));
         if ("si".equals(request.getParameter("flexRadioDefault"))) {
-            denu.setRealizoDenuncia(1);
+            denu.setRealizoDenuncia(true);
         } else if ("no".equals(request.getParameter("flexRadioDefault"))) {
-            denu.setRealizoDenuncia(0);
+            denu.setRealizoDenuncia(false);
         }
 
+
+        // Establece la fecha actual directamente como LocalDate
         LocalDate fechaActual = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String fechaFormateada = fechaActual.format(formatter);
-        denu.setFecha(fechaFormateada);
+        denu.setFechaFormulario(fechaActual); // Asigna directamente el objeto LocalDate
 
+/*
+        System.out.println(fechaActual);
+        System.out.println(request.getParameter("tamanio"));
+        System.out.println(request.getParameter("Especie"));
+        System.out.println(request.getParameter("Raza"));
+        System.out.println(request.getParameter("otra-raza"));
+        System.out.println(request.getParameter("tipo-maltrato"));
+        System.out.println(request.getParameter("otro-maltrato"));
+        System.out.println(request.getParameter("Nombre-maltratador"));
+        System.out.println(request.getParameter("Direccion"));
+        System.out.println(request.getParameter("flexRadioDefault"));
+*/
 
-
-        //System.out.println(request.getParameter("tamanio"));
-        //System.out.println(request.getParameter("Especie"));
-        //System.out.println(request.getParameter("Raza"));
-        //System.out.println(request.getParameter("otra-raza"));
-        //System.out.println(request.getParameter("tipo-maltrato"));
-        //System.out.println(request.getParameter("otro-maltrato"));
-        //System.out.println(request.getParameter("Nombre-maltratador"));
-        //System.out.println(request.getParameter("Direccion"));
-        //System.out.println(request.getParameter("flexRadioDefault"));
-
-
-
-        // Ruta de guardado en el servidor
-        String uploadPath = getServletContext().getRealPath("") + File.separator + "common" + File.separator + "img";
-
-        Foto foto = new Foto();
-        foto.setRutaFoto(uploadPath);
 
         FotoDao fotoDao = new FotoDao();
+        // Definir una ruta fija fuera de target
+        //Si van a probarlo alguno de ustedes deben de cambiar la ruta o les lanzará error.
+        String uploadPath = "D:/2024-2/PROYECTOOOOO/2024_IWEB_PETCARE/PETCARE2024-1/IWEB-PROYECTO/src/main/webapp/uploads/fotosMaltrato";  // Ruta fija en el sistema de archivos
+
+        // Crear directorio si no existe
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
+
+        // Obtener la imagen desde el formulario y generar un nombre único
+        Part filePart = request.getPart("imagen");
+        String originalFileName = filePart.getSubmittedFileName();
+        String uniqueFileName = System.currentTimeMillis() + "_" + originalFileName;
+        String filePath = uploadPath + File.separator + uniqueFileName;
+
+        // Guardar la foto en la base de datos con la ruta generada
+        Foto foto = new Foto();
+        foto.setRutaFoto("/uploads/fotosMaltrato/" + uniqueFileName);
         fotoDao.GuadarFoto(foto);
 
-        // Nombre del archivo
-        String fileName = "("+foto.getFotoID()+")"+request.getParameter("imagen");
-        String filePath = uploadPath + File.separator + fileName;
-
-        fotoDao.ActualizarFoto(foto,filePath);
-
-        // Leer el contenido de la solicitud manualmente
-        try (InputStream inputStream = request.getInputStream();
+// Guardar el archivo en el sistema de archivos
+        try (InputStream inputStream = filePart.getInputStream();
              FileOutputStream outputStream = new FileOutputStream(filePath)) {
 
             byte[] buffer = new byte[1024];
             int bytesRead;
-
-            // Escribir los datos de entrada en el archivo de salida
             while ((bytesRead = inputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, bytesRead);
             }
@@ -97,15 +117,25 @@ public class ReportarMaltratoServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        // Aquí puedes asociar la foto a la denuncia y guardarlo en la base de datos
         denu.setFoto(foto);
-
         DenunciaMaltratoDao dDao = new DenunciaMaltratoDao();
         dDao.RegistrarDenunciaMaltrato(denu);
+
+
 
         response.sendRedirect("Inicio");
 
 
 
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+        request.getRequestDispatcher("/user/reportarMaltrato.jsp").forward(request, response);
 
     }
 }

@@ -76,33 +76,25 @@
                             <h1 style="margin-top: 10px;" class="text-center">Estos son los detalles de tu evento</h1>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
-                                    <label for="nombre_evento">Nombre del evento a realizar</label>
-                                    <input type="text" id="nombre_evento" class="form-control" placeholder="Nombre evento número" readonly disabled>
+                                    <label for="nombre">Nombre del evento a realizar</label>
+                                    <input type="text" id="nombre" class="form-control" placeholder="Nombre evento número" readonly disabled>
                                 </div>
                                 
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
-                                    <label for="entrada">Entrada</label>
-                                    <select class="form-select" name="entrada" id="entrada" required onchange="toggleInput()" disabled>
+                                    <label for="tipoDonacion">Entrada</label>
+                                    <select class="form-select" name="tipoDonacion" id="tipoDonacion" required onchange="toggleInput()" disabled>
                                         <option value="">Selecciona una opción</option>
                                         <option value="monetario">Monetario</option>
                                         <option value="suministros">Suministros</option>
                                     </select>
                                 </div>
-                                
+
                                 <div class="col-md-6 p-1">
                                     <label for="detalle">Detalle</label>
-                                    <input 
-                                        type="text" 
-                                        class="form-control" 
-                                        id="detalle" 
-                                        name="detalle" 
-                                        disabled 
-                                        maxlength="3" 
-                                        placeholder="Ingrese valor"
-                                        oninput="validateInput()" 
-                                    />
+                                    <input id="detalle" name="detalleSuministro" class="form-control" type="text" placeholder="Seleccione una opción" disabled />
+                                    <input type="hidden" id="detalleMonetario" name="detalleMonetario" />
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
@@ -120,8 +112,8 @@
                                         </select>
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <label for="fecha_evento">Fecha del evento</label>
-                                        <input type="date" class="form-control" id="fecha_evento" readonly disabled>
+                                        <label for="fechaEvento">Fecha del evento</label>
+                                        <input type="date" class="form-control" id="fechaEvento" readonly disabled>
                                     </div>
                                 </div>
                             </div>
@@ -131,9 +123,9 @@
                                     <input type="number" class="form-control" id="aforo" placeholder="100" readonly disabled>
                                 </div>
                                 <div class="col-md-8 p-1">
-                                    <label for="locales">Locales disponibles</label>
-                                    <select class="form-select" name="locales" id="locales" disabled>
-                                        <option value="">El clásico local 1</option>
+                                    <label for="lugar">Locales disponibles</label>
+                                    <select class="form-select" name="lugar" id="lugar" disabled>
+                                        <option value="lugar">El clásico local 1</option>
                                     </select>
                                 </div>
                             </div>
@@ -145,34 +137,30 @@
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
-                                    <label for="inicio">Hora Inicio</label>
-                                    <input type="time" class="form-control" id="inicio" placeholder="Ingrese la hora de inicio" required onchange="validarHoras()" readonly disabled>
+                                    <label for="horaInicio">Hora Inicio</label>
+                                    <input type="time" class="form-control" id="horaInicio" placeholder="Ingrese la hora de inicio" required onchange="validarHoras()" readonly disabled>
                                 </div>
                                 <div class="col-md-6 p-1">
-                                    <label for="fin">Hora Fin</label>
-                                    <input type="time" class="form-control" id="fin" placeholder="Ingrese la hora de fin" required onchange="validarHoras()" readonly disabled>
+                                    <label for="horaFin">Hora Fin</label>
+                                    <input type="time" class="form-control" id="horaFin" placeholder="Ingrese la hora de fin" required onchange="validarHoras()" readonly disabled>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
-                                    <label for="motivo"> Motivo de la realización del evento</label>
-                                    <textarea name="" id="motivo" disabled class="form-control" maxlength="300" placeholder="Ingrese su motivo (max. 300 caracteres)"></textarea>
+                                    <label for="razon"> Motivo de la realización del evento</label>
+                                    <textarea name="" id="razon" disabled class="form-control" maxlength="300" placeholder="Ingrese su motivo (max. 300 caracteres)"></textarea>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
-                                    <label for="motivo"> Descripción de su evento</label>
-                                    <textarea name="" id="motivo" disabled class="form-control" maxlength="1000" placeholder="Ingrese su descripción (max. 1000 caracteres)"></textarea>
+                                    <label for="descripcion"> Descripción de su evento</label>
+                                    <textarea name="" id="descripcion" disabled class="form-control" maxlength="1000" placeholder="Ingrese su descripción (max. 1000 caracteres)"></textarea>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
-                                <div class="col-md-6 p-1">
-                                    <label for="invitado">Invitados al evento (opcional)</label>
-                                    <input type="text" id="invitado" class="form-control" placeholder="Ingrese el primer invitado" readonly disabled>
-                                </div>
-                                <div class="col-md-6 p-1">
-                                    <label for="invitado2"></label>
-                                    <input type="text" id="invitado2" class="form-control" placeholder="Ingrese el segundo invitado" readonly disabled>
+                                <div class="col-md-12 p-1">
+                                    <label for="invitados">Invitados al evento (opcional)</label>
+                                    <input type="text" id="invitados" class="form-control" placeholder="Ingrese el primer invitado" readonly disabled>
                                 </div>
                             </div> 
                             <div class="row justify-content-center p-1">
@@ -206,7 +194,14 @@
 
     <script src="/common/script/neonavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            console.log('Valor detalleSuministro:', document.getElementsByName('detalleSuministro')[0]?.value);
+            console.log('Valor detalleMonetario:', document.getElementsByName('detalleMonetario')[0]?.value);
+        });
+    </script>
+
     <script>
         document.getElementById('uploadForm').addEventListener('submit', function(event) {
             const fileInput = document.getElementById('formFile');
@@ -352,30 +347,58 @@
 </script>
 <script>
     function toggleInput() {
-        const select = document.getElementById('entrada');
-        const input = document.getElementById('detalle');
+        const select = document.getElementById('tipoDonacion');
+        const detalleInput = document.getElementById('detalle');
+        const detalleMonetarioHidden = document.getElementById('detalleMonetario');
 
-        input.value = ''; // Resetea el valor del input
-        input.disabled = false; // Habilita el input
+        // Resetear valores
+        detalleInput.value = '';
+        detalleMonetarioHidden.value = '';
+        detalleInput.disabled = false;
 
         if (select.value === 'monetario') {
-            input.type = 'text'; // Usamos 'text' para manejar longitud
-            input.placeholder = 'Ingrese un número (máx. 3 dígitos)';
-            input.oninput = function () {
-                // Permitir solo números y limitar a 3 caracteres
+            detalleInput.type = 'number';
+            detalleInput.placeholder = 'Ingrese el monto (máx. 3 dígitos)';
+            detalleInput.maxLength = 3;
+
+            // Para entrada monetaria
+            detalleInput.oninput = function() {
+                // Limitar a 3 dígitos y solo números
                 this.value = this.value.replace(/[^0-9]/g, '').slice(0, 3);
+                // Actualizar el campo hidden para detalleMonetario
+                detalleMonetarioHidden.value = this.value;
+                // Limpiar el name del input visible para que no se envíe como detalleSuministro
+                this.name = '';
             };
         } else if (select.value === 'suministros') {
-            input.type = 'text';
-            input.placeholder = 'Ingrese solo letras (máx. 60 caracteres)';
-            input.oninput = function () {
-                // Permitir solo letras y espacios, y limitar a 60 caracteres
+            detalleInput.type = 'text';
+            detalleInput.placeholder = 'Ingrese los suministros requeridos';
+            detalleInput.maxLength = 60;
+
+            // Para entrada de suministros
+            detalleInput.oninput = function() {
+                // Solo permitir letras y espacios
                 this.value = this.value.replace(/[^a-zA-Z\s]/g, '').slice(0, 60);
+                // Restablecer el name para enviar como detalleSuministro
+                this.name = 'detalleSuministro';
+                // Limpiar el campo hidden de detalleMonetario
+                detalleMonetarioHidden.value = '';
             };
         } else {
-            input.disabled = true; // Desactiva el input si no hay opción válida
+            detalleInput.disabled = true;
+            detalleInput.placeholder = 'Seleccione una opción';
         }
     }
+
+    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+        const tipoDonacion = document.getElementById('tipoDonacion').value;
+        const detalle = document.getElementById('detalle').value;
+
+        if (tipoDonacion && !detalle) {
+            event.preventDefault();
+            alert('Por favor complete el detalle de la donación');
+        }
+    });
 </script>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.example.iwebproyecto.daos;
 
 import com.example.iwebproyecto.beans.Administrador;
 import com.example.iwebproyecto.beans.Foto;
+import com.example.iwebproyecto.beans.Distrito;
 import com.example.iwebproyecto.beans.LugarEvento;
 
 import java.sql.Connection;
@@ -64,6 +65,7 @@ public class LugarEventoDao extends BaseDao{
         int administradorID = rs.getInt("administradorID");
         int fotoID = rs.getInt("fotoID");
         boolean eliminado = rs.getBoolean("eliminado");
+        int distritoID = rs.getInt("distritoID");
 
         LugarEvento lugar = new LugarEvento();
 
@@ -76,14 +78,38 @@ public class LugarEventoDao extends BaseDao{
 
         AdministradorDao administradorDAO = new AdministradorDao();
         FotoDao fotoDAO = new FotoDao();
+        DistritoDao distritoDao = new DistritoDao();
 
         Administrador administrador = administradorDAO.obtenerAdministradorPorID(administradorID);
         Foto foto = fotoDAO.obtenerFotoPorId(fotoID);
+        Distrito distrito = distritoDao.obtenerDistritoPorId(distritoID);
 
         lugar.setAdministrador(administrador);
         lugar.setFoto(foto);
+        lugar.setDistrito(distrito);
 
         return lugar;
+    }
+
+    public ArrayList<LugarEvento> obtenerLugaresPorDistrito(int distritoId) {
+        ArrayList<LugarEvento> lugares = new ArrayList<>();
+        String sql = "SELECT * FROM lugarevento WHERE distritoID = ? AND eliminado = 0";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, distritoId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    LugarEvento lugar = mapearLugar(rs);
+                    lugares.add(lugar);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return lugares;
     }
 
 

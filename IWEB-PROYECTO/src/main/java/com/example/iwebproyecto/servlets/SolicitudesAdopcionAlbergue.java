@@ -31,37 +31,37 @@ public class SolicitudesAdopcionAlbergue extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("albergue/solicitudesAdopcion.jsp");
                 rd.forward(request, response);
                 break;
-            case "create":
+            /*case "create":
                 request.setAttribute("idAlbergue", idAlbergue);
                 request.getRequestDispatcher("albergue/albergueFormAdop.jsp").forward(request,response);
                 break;
             case "edit":
                 String id = request.getParameter("id");
-                /*Pelicula pelicula = peliculaDao.buscarPorId(Integer.parseInt(id));
+                Pelicula pelicula = peliculaDao.buscarPorId(Integer.parseInt(id));
 
                 if(pelicula != null){
                     request.setAttribute("pelicula",pelicula);
                     request.getRequestDispatcher("viewPelicula.jsp").forward(request,response);
                 }else{
                     response.sendRedirect(request.getContextPath() + "/PeliculasServlet");DetallesServlet
-                }*/
+                }
                 MascotasAdopcion mascotasAdopcion = albergueDaoRevenge.obtenerMascotasAdopcionPorID(Integer.parseInt(id));
                 request.setAttribute("mascota",mascotasAdopcion);
                 request.getRequestDispatcher("albergue/albergueEdAdop.jsp").forward(request,response);
                 break;
             case "delete":
                 int idd = Integer.parseInt(request.getParameter("id"));
-                /*MascotasAdopcion mascotasAdopcion = albergueDaoRevenge.buscarPorId(idd);
+                MascotasAdopcion mascotasAdopcion = albergueDaoRevenge.buscarPorId(idd);
                 if(pell != null){
                     try {
                         albergueDaoRevenge.borrarMascotaAdopcion(idd);
                     } catch (SQLException e) {
                         System.out.println("Log: excepcion: " + e.getMessage());
                     }
-                }*/
+                }
                 albergueDaoRevenge.borrarMascotaAdopcion(idd);
                 response.sendRedirect(request.getContextPath() + "/PortalAdopciones");
-                break;
+                break;*/
         }
 
 

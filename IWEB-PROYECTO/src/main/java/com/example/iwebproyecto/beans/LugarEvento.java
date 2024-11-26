@@ -90,4 +90,5 @@ public class LugarEvento {
     public void setEliminado(boolean eliminado) {
         this.eliminado = eliminado;
     }
+
 }

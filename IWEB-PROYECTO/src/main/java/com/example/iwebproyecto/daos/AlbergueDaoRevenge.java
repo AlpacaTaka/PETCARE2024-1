@@ -566,4 +566,65 @@ public class AlbergueDaoRevenge extends BaseDao {
         }
         return listaUsuarioAdopcion;
     }
+    public ArrayList<DenunciaMaltrato> listaDenunciasMaltrato(int idZona){
+        String sql = "select d.*,u.distritoID,dz.zonaID from denunciamaltrato d, usuario u, distrito dz where u.usuarioID=d.usuarioID and dz.distritoID=u.distritoID and dz.zonaID=? and d.eliminado=0 order by d.fechaFormulario desc;";
+        ArrayList<DenunciaMaltrato> listaDenunciaMaltrato = new ArrayList<>();
+        AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, idZona);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                DenunciaMaltrato denunciaMaltrato = new DenunciaMaltrato();
+                denunciaMaltrato.setDenunciaID(rs.getInt(1));
+                Usuario usuario = usuarioDao.obtenerUsuarioPorID(rs.getInt(2));
+                denunciaMaltrato.setUsuario(usuario);
+                denunciaMaltrato.setTamanio(rs.getString(3));
+                denunciaMaltrato.setEspecie(rs.getString(4));
+                denunciaMaltrato.setRaza(rs.getString(5));
+                denunciaMaltrato.setTipoMaltrato(rs.getString(6));
+                denunciaMaltrato.setNombreApellidoMaltratador(rs.getString(7));
+                denunciaMaltrato.setDireccion(rs.getString(8));
+                Foto foto = new Foto();
+                foto.setFotoID(rs.getInt(9));
+                denunciaMaltrato.setFoto(foto);
+                denunciaMaltrato.setRealizoDenuncia(rs.getBoolean(10));
+                denunciaMaltrato.setFechaFormulario(LocalDate.parse(rs.getString(12)));
+                listaDenunciaMaltrato.add(denunciaMaltrato);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaDenunciaMaltrato;
+    }
+    public DenunciaMaltrato obtenerDenunciaMaltratoPorID(int id){
+        String sql = "select * from denunciamaltrato where denunciaID=?;";
+        DenunciaMaltrato denunciaMaltrato = new DenunciaMaltrato();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                denunciaMaltrato.setDenunciaID(rs.getInt(1));
+                Usuario usuario = usuarioDao.obtenerUsuarioPorID(rs.getInt(2));
+                denunciaMaltrato.setUsuario(usuario);
+                denunciaMaltrato.setTamanio(rs.getString(3));
+                denunciaMaltrato.setEspecie(rs.getString(4));
+                denunciaMaltrato.setRaza(rs.getString(5));
+                denunciaMaltrato.setTipoMaltrato(rs.getString(6));
+                denunciaMaltrato.setNombreApellidoMaltratador(rs.getString(7));
+                denunciaMaltrato.setDireccion(rs.getString(8));
+                Foto foto = new Foto();
+                foto.setFotoID(rs.getInt(9));
+                denunciaMaltrato.setFoto(foto);
+                denunciaMaltrato.setRealizoDenuncia(rs.getBoolean(10));
+                denunciaMaltrato.setFechaFormulario(LocalDate.parse(rs.getString(12)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return denunciaMaltrato;
+    }
 }
