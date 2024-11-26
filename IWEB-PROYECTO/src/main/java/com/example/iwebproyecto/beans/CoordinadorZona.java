@@ -11,9 +11,9 @@ public class CoordinadorZona {
     private String celular; /***Es un String cambiar la base de datos***/
     private String fechaNacimiento;
     private Foto foto;
-    private String estado;
+    private String estado; /***Estado activo o desactivo**/
     private Zona zona;
-    private boolean flag;
+    private boolean flag; /***Eliminado o no eliminado***/
 
     public CoordinadorZona() {}
 

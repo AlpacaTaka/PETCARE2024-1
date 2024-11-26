@@ -266,7 +266,8 @@ public class EventoServlet extends HttpServlet {
                 // Crea un objeto Foto y guarda la información en la base de datos
                 Foto foto = new Foto();
                 foto.setRutaFoto(relativePath);
-                int fotoId = fotoDao.guardarFoto(foto);
+                //int fotoId = fotoDao.guardarFoto(foto);
+                int fotoId = 1;
                 if (fotoId <= 0) { // Maneja el posible fallo en guardarFoto()
                     request.setAttribute("mensajeError", "Error al guardar la foto en la base de datos.");
                     request.getRequestDispatcher("/albergue/albergueFormEvento.jsp").forward(request, response);

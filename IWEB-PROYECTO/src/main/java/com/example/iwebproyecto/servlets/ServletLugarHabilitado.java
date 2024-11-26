@@ -35,7 +35,7 @@ public class ServletLugarHabilitado extends HttpServlet {
         LugarHabilitadoDao lugarHabilitadoDao = new LugarHabilitadoDao();
         String nombreLugar = request.getParameter("nombreLugar");
         String direccionLugar = request.getParameter("direccionLugar");
-        int aforoMaximo = Integer.parseInt(request.getParameter("aforoMaximo"));
+        int aforoMaximo = Integer.parseInt(request.getParameter("aforoLugar"));
         int administradorID = 4;
         int fotoID = 30;
         boolean eliminado = false;
@@ -57,7 +57,7 @@ public class ServletLugarHabilitado extends HttpServlet {
         switch (action) {
             case "create":
                 lugarHabilitadoDao.crearLugarHabilitado(lugarEvento);
-                response.sendRedirect(request.getContextPath()+"/LugarHabilitado?action=create");
+                response.sendRedirect(request.getContextPath()+"/LugarHabilitado");
                 break;
         }
     }
