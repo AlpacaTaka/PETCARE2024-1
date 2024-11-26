@@ -73,12 +73,7 @@ public class InicioAdoptionTableServlet extends HttpServlet {
                 request.setAttribute("idAlbergue", idAlbergue);
                 request.getRequestDispatcher("albergue/albergueVisAdop.jsp").forward(request,response);
                 break;
-
         }
-
-
-
-
     }
 
     @Override

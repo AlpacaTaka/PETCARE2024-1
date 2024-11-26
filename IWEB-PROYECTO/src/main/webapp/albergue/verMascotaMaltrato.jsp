@@ -1,4 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    int albergueID = 6; /*(int) request.getAttribute("idAlbergue");*/
+%>
+<jsp:useBean id="denuncia" scope="request" type="com.example.iwebproyecto.beans.DenunciaMaltrato"/>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -72,7 +76,7 @@
             </div>
             <div class="welcome-text">Hola, Patitas Felices</div>
         </div>
-        <div class="logo"><a href="/user/inicio.html"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+        <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
     </header>
 
     <div class="main">
@@ -80,37 +84,36 @@
         <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
         <div class="barside">
             <ul class="navlinks">
-                <li><a href="miPerfil.html" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
-                <li><a href="adoptionTable.html" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                <li><a href="eventTable.html" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
-                <li><a href="donationTable.html" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
-                <li><a href="contactarTemporal.html" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
-                <li><a href="solicitudesAdopcion.html" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
-                <li><a href="verDenunciasMaltrato.html" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/PortalAdopciones" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/eventos" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/DonacionSuministros" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/SolicitudesDeAdopcion" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/DenunciasDeMaltrato" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
                 <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
-                <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
             </ul>
-
         </div>
 
         <div id="menu" class="menu">
-            <a href="miPerfil.html">Mi Perfil</a>
-            <a href="adoptionTable.html">Portal de Adopciones</a>
-            <a href="eventTable.html">Mis Eventos Benéficos</a>
-            <a href="donationTable.html">Mis Eventos de Donación</a>
-            <a href="contactarTemporal.html">Hogares Temporales</a>
-            <a href="solicitudesAdopcion.html">Solicitudes de Adopción</a>
-            <a href="verDenunciasMaltrato.html">Denuncias de maltrato</a>
+            <a href="<%=request.getContextPath()%>/miPerfilAlbergue">Mi Perfil</a>
+            <a href="<%=request.getContextPath()%>/PortalAdopciones">Portal de Adopciones</a>
+            <a href="<%=request.getContextPath()%>/eventos">Mis Eventos Benéficos</a>
+            <a href="<%=request.getContextPath()%>/DonacionSuministros">Mis Eventos de Donación</a>
+            <a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue">Hogares Temporales</a>
+            <a href="<%=request.getContextPath()%>/SolicitudesDeAdopcion">Solicitudes de Adopción</a>
+            <a href="<%=request.getContextPath()%>/DenunciasDeMaltrato">Denuncias de maltrato</a>
             <!--<a href="#">Solicitudes de Adopción</a>-->
             <hr>
-            <a href="/login/login.html">Cerrar Sesión</a>
+            <a href="<%=request.getContextPath()%>">Cerrar Sesión</a>
         </div>
 
         <div class="container-fluid d-flex" id="contenido-principal">
             <!--Boton de regreso a la página principal-->
             <div class="col" id="contenido-nofooter">
                 <div class="container md-8 d-flex justify-content-between g-2" style="width: 90%;max-width: 800px; margin-bottom: 20px; padding: 0;">
-                    <button type="button"  class="btn btn-personal2" onclick="location.href='verDenunciasMaltrato.html'">  Regresar   </button>
+                    <button type="button"  class="btn btn-personal2" onclick="location.href='<%=request.getContextPath()%>/DenunciasDeMaltratog'">  Regresar   </button>
 
                 </div>
                 <div class="container md-12" style="width: 90%;max-width: 800px; background-color: #fca6519f; border-radius: 30px; margin-bottom: 20px; padding: 10px 20px;">
@@ -122,7 +125,7 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col d-flex justify-content-center">
                                     <div class="image-container">
-                                        <img src="/common/img/perdidos/perdido5.jpg" alt="Perfil de usuario">
+                                        <img src="<%=request.getContextPath()%>/common/img/perdidos/perdido5.jpg" alt="Perfil de usuario">
                                     </div>
                                 </div>
                             </div>
@@ -134,24 +137,24 @@
                     <form id="uploadForm" style="padding:10px" >
                         <div class="row justify-content-center p-1">
                             <div class="col-md-12 p-1">
-                                <label for="nombre"><strong>Nombre y apellido del maltratador</strong></label>
-                                <p class="form-control">Gerardo Rabanal</p>
+                                <label><strong>Nombre y apellido del maltratador</strong></label>
+                                <p class="form-control"><%=denuncia.getNombreApellidoMaltratador()%></p>
                             </div>
                         </div>
                         <hr style="margin:0;">
                         <div class="row justify-content-center p-1">
 
                             <div class="col-md-4 p-1">
-                                <label for="nombre"><strong>Especie</strong></label>
-                                <p class="form-control">Perro</p>
+                                <label><strong>Especie</strong></label>
+                                <p class="form-control"><%=denuncia.getEspecie()%></p>
                             </div>
                             <div class="col-md-4 p-1">
-                                <label for="nombre"><strong>Raza</strong></label>
-                                <p class="form-control">No sabe</p>
+                                <label><strong>Raza</strong></label>
+                                <p class="form-control"><%=denuncia.getRaza()%></p>
                             </div>
                             <div class="col-md-4 p-1">
-                                <label for="nombre"><strong>Tipo de Maltrato</strong></label>
-                                <p class="form-control">Abandono</p>
+                                <label><strong>Tipo de Maltrato</strong></label>
+                                <p class="form-control"><%=denuncia.getTipoMaltrato()%></p>
                             </div>
 
                         </div>
@@ -159,16 +162,16 @@
                         <div class="row justify-content-center p-1">
 
                             <div class="col-md-4 p-1">
-                                <label for="nombre"><strong>Tamaño</strong></label>
-                                <p class="form-control">Pequeño</p>
+                                <label><strong>Tamaño</strong></label>
+                                <p class="form-control"><%=denuncia.getTamanio()%></p>
                             </div>
                             <div class="col-md-4 p-1">
-                                <label for="nombre"><strong>Dirección de la mascota</strong></label>
-                                <p class="form-control">Avenida Maravilla 221</p>
+                                <label><strong>Dirección de la mascota</strong></label>
+                                <p class="form-control"><%=denuncia.getUsuario().getDistrito().getNombreDistrito()+"-"+denuncia.getDireccion()%></p>
                             </div>
                             <div class="col-md-4 p-1">
-                                <label for="nombre"><strong>Realizó una denuncia?</strong></label>
-                                <p class="form-control">Sí</p>
+                                <label><strong>Realizó una denuncia?</strong></label>
+                                <p class="form-control"><%String realiza= denuncia.isRealizoDenuncia() ? "Sí" : "No" ;%><%=realiza%></p>
                             </div>
 
                         </div>
@@ -196,7 +199,7 @@
 </div>
 
 </div>
-<script src="/common/script/neonavbar.js"></script>
+<script src="<%=request.getContextPath()%>/common/script/neonavbar.js"></script>
 <script src="js/perfilAlbergue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>

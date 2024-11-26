@@ -598,4 +598,33 @@ public class AlbergueDaoRevenge extends BaseDao {
         }
         return listaDenunciaMaltrato;
     }
+    public DenunciaMaltrato obtenerDenunciaMaltratoPorID(int id){
+        String sql = "select * from denunciamaltrato where denunciaID=?;";
+        DenunciaMaltrato denunciaMaltrato = new DenunciaMaltrato();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                denunciaMaltrato.setDenunciaID(rs.getInt(1));
+                Usuario usuario = usuarioDao.obtenerUsuarioPorID(rs.getInt(2));
+                denunciaMaltrato.setUsuario(usuario);
+                denunciaMaltrato.setTamanio(rs.getString(3));
+                denunciaMaltrato.setEspecie(rs.getString(4));
+                denunciaMaltrato.setRaza(rs.getString(5));
+                denunciaMaltrato.setTipoMaltrato(rs.getString(6));
+                denunciaMaltrato.setNombreApellidoMaltratador(rs.getString(7));
+                denunciaMaltrato.setDireccion(rs.getString(8));
+                Foto foto = new Foto();
+                foto.setFotoID(rs.getInt(9));
+                denunciaMaltrato.setFoto(foto);
+                denunciaMaltrato.setRealizoDenuncia(rs.getBoolean(10));
+                denunciaMaltrato.setFechaFormulario(LocalDate.parse(rs.getString(12)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return denunciaMaltrato;
+    }
 }

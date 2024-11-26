@@ -34,37 +34,13 @@ public class VerDenunciasMaltratoAlbergue extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("albergue/verDenunciasMaltrato.jsp");
                 rd.forward(request, response);
                 break;
-            /*case "create":
+            case "view":
+                String idv = request.getParameter("id");
+                DenunciaMaltrato denunciaMaltrato = albergueDaoRevenge.obtenerDenunciaMaltratoPorID(Integer.parseInt(idv));
+                request.setAttribute("denuncia",denunciaMaltrato);
                 request.setAttribute("idAlbergue", idAlbergue);
-                request.getRequestDispatcher("albergue/albergueFormAdop.jsp").forward(request,response);
+                request.getRequestDispatcher("albergue/verMascotaMaltrato.jsp").forward(request,response);
                 break;
-            case "edit":
-                String id = request.getParameter("id");
-                Pelicula pelicula = peliculaDao.buscarPorId(Integer.parseInt(id));
-
-                if(pelicula != null){
-                    request.setAttribute("pelicula",pelicula);
-                    request.getRequestDispatcher("viewPelicula.jsp").forward(request,response);
-                }else{
-                    response.sendRedirect(request.getContextPath() + "/PeliculasServlet");DetallesServlet
-                }
-                MascotasAdopcion mascotasAdopcion = albergueDaoRevenge.obtenerMascotasAdopcionPorID(Integer.parseInt(id));
-                request.setAttribute("mascota",mascotasAdopcion);
-                request.getRequestDispatcher("albergue/albergueEdAdop.jsp").forward(request,response);
-                break;
-            case "delete":
-                int idd = Integer.parseInt(request.getParameter("id"));
-                MascotasAdopcion mascotasAdopcion = albergueDaoRevenge.buscarPorId(idd);
-                if(pell != null){
-                    try {
-                        albergueDaoRevenge.borrarMascotaAdopcion(idd);
-                    } catch (SQLException e) {
-                        System.out.println("Log: excepcion: " + e.getMessage());
-                    }
-                }
-                albergueDaoRevenge.borrarMascotaAdopcion(idd);
-                response.sendRedirect(request.getContextPath() + "/PortalAdopciones");
-                break;*/
         }
 
 
@@ -75,7 +51,7 @@ public class VerDenunciasMaltratoAlbergue extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
+        /*String action = request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
         String nombreMascota = request.getParameter("nombreMascota");
         String especie = request.getParameter("especie");
@@ -93,10 +69,10 @@ public class VerDenunciasMaltratoAlbergue extends HttpServlet {
         int edad = Integer.parseInt(request.getParameter("edad"));
         String sexo = request.getParameter("sexoMascota");
         String descripcion = request.getParameter("breveDescripcion");
-        int idFoto = 30;/*request.getParameter("rutaFoto");*/
+        int idFoto = 30;request.getParameter("rutaFoto");
         boolean seEncuentraTemporal= Boolean.parseBoolean(request.getParameter("hogarTemp"));
         String condicionesAdopcion = request.getParameter("condiciones");
-        int albergueID = 6;/*Integer.parseInt(request.getParameter("idAlbergue"));*/
+        int albergueID = 6;Integer.parseInt(request.getParameter("idAlbergue"));
         boolean eliminado = false;
         MascotasAdopcion mascota = new MascotasAdopcion();
         mascota.setNombreMascota(nombreMascota);
@@ -128,6 +104,6 @@ public class VerDenunciasMaltratoAlbergue extends HttpServlet {
                 albergueDaoRevenge.editarMascotaAdopcion(mascota);
                 response.sendRedirect(request.getContextPath()+"/PortalAdopciones");
                 break;
-        }
+        }*/
     }
 }

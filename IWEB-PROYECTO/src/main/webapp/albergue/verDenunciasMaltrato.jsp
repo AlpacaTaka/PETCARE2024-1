@@ -98,7 +98,7 @@
               <hr>
 
               <div class="table-responsive" style="padding-bottom: 7px;">
-                <table id="lugar" class="table table-striped table-bordered dataTable" style="width:100%">
+                <table id="verDenunciasMaltrato" class="table table-striped table-bordered dataTable" style="width:100%">
                   <thead>
                   <tr>
                     <th> Tipo de maltrato </th>
@@ -114,7 +114,7 @@
                   <tr>
                     <td><%=denunciaMaltrato.getTipoMaltrato()%></td>
                     <td><%desconocido = denunciaMaltrato.getNombreApellidoMaltratador()==null ? "Desconocido" : denunciaMaltrato.getNombreApellidoMaltratador();%><%=desconocido%></td>
-                    <td><%=denunciaMaltrato.getUsuario().getDistrito().getNombreDistrito()+" "+denunciaMaltrato.getDireccion()%></td>
+                    <td><%=denunciaMaltrato.getUsuario().getDistrito().getNombreDistrito()+"-"+denunciaMaltrato.getDireccion()%></td>
                     <td><%=denunciaMaltrato.getUsuario().getCorreoElectronico()%></td>
                     <td>
                       <div style="display: flex; justify-content: center;">
@@ -277,7 +277,7 @@
         { "orderable": false, "targets": [5] } // Suponiendo que la columna de Acciones es la sexta columna (índice 5)
       ]
     });
-    $('#lugar').DataTable({
+    $('#verDenunciasMaltrato').DataTable({
       "paging": true,
       "lengthChange": true,
       "searching": true,
@@ -301,7 +301,7 @@
         }
       },
       "columnDefs": [
-        { "orderable": false, "targets": [3] } // Suponiendo que la columna de Acciones es la sexta columna (índice 5)
+        { "orderable": false, "targets": [0,1,2,3,4] } // Suponiendo que la columna de Acciones es la sexta columna (índice 5)
       ]
     });
   });
