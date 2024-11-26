@@ -1,22 +1,20 @@
 package com.example.iwebproyecto.servlets;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import com.example.iwebproyecto.beans.Albergue;
-import com.example.iwebproyecto.beans.Distrito;
-import com.example.iwebproyecto.beans.Foto;
-import com.example.iwebproyecto.beans.MascotasAdopcion;
+import com.example.iwebproyecto.beans.*;
+import com.example.iwebproyecto.daos.AlbergueDao;
 import com.example.iwebproyecto.daos.AlbergueDaoRevenge;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.annotation.WebServlet;
 
-@WebServlet(name = "InicioAlbergueServlet", value = "/PortalAdopciones")
-public class InicioAdoptionTableServlet extends HttpServlet {
+import java.io.IOException;
+import java.util.ArrayList;
+
+@WebServlet(name = "VerDenunciasMaltratoAlbergue", value = "/DenunciasDeMaltrato")
+public class VerDenunciasMaltratoAlbergue extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -26,54 +24,47 @@ public class InicioAdoptionTableServlet extends HttpServlet {
 
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
+        AlbergueDao albergueDao = new AlbergueDao();
         int idAlbergue= 6;
         switch (action) {
             case "lista":
-                ArrayList<MascotasAdopcion> list = albergueDaoRevenge.listarMascotasAdopcion();
+                Albergue albergue = albergueDao.obtenerAlberguePorID(idAlbergue);
+                ArrayList<DenunciaMaltrato> list = albergueDaoRevenge.listaDenunciasMaltrato(albergue.getDistrito().getZona().getZonaID());
                 request.setAttribute("lista", list);
-                RequestDispatcher rd = request.getRequestDispatcher("albergue/adoptionTable.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("albergue/verDenunciasMaltrato.jsp");
                 rd.forward(request, response);
                 break;
-            case "create":
+            /*case "create":
                 request.setAttribute("idAlbergue", idAlbergue);
                 request.getRequestDispatcher("albergue/albergueFormAdop.jsp").forward(request,response);
                 break;
             case "edit":
                 String id = request.getParameter("id");
-                /*Pelicula pelicula = peliculaDao.buscarPorId(Integer.parseInt(id));
+                Pelicula pelicula = peliculaDao.buscarPorId(Integer.parseInt(id));
 
                 if(pelicula != null){
                     request.setAttribute("pelicula",pelicula);
                     request.getRequestDispatcher("viewPelicula.jsp").forward(request,response);
                 }else{
                     response.sendRedirect(request.getContextPath() + "/PeliculasServlet");DetallesServlet
-                }*/
+                }
                 MascotasAdopcion mascotasAdopcion = albergueDaoRevenge.obtenerMascotasAdopcionPorID(Integer.parseInt(id));
                 request.setAttribute("mascota",mascotasAdopcion);
                 request.getRequestDispatcher("albergue/albergueEdAdop.jsp").forward(request,response);
                 break;
             case "delete":
                 int idd = Integer.parseInt(request.getParameter("id"));
-                /*MascotasAdopcion mascotasAdopcion = albergueDaoRevenge.buscarPorId(idd);
+                MascotasAdopcion mascotasAdopcion = albergueDaoRevenge.buscarPorId(idd);
                 if(pell != null){
                     try {
                         albergueDaoRevenge.borrarMascotaAdopcion(idd);
                     } catch (SQLException e) {
                         System.out.println("Log: excepcion: " + e.getMessage());
                     }
-                }*/
+                }
                 albergueDaoRevenge.borrarMascotaAdopcion(idd);
                 response.sendRedirect(request.getContextPath() + "/PortalAdopciones");
-                break;
-
-            case "view":
-                String idv = request.getParameter("id");
-                MascotasAdopcion mascotasAdopcionv = albergueDaoRevenge.obtenerMascotasAdopcionPorID(Integer.parseInt(idv));
-                request.setAttribute("mascota",mascotasAdopcionv);
-                request.setAttribute("idAlbergue", idAlbergue);
-                request.getRequestDispatcher("albergue/albergueVisAdop.jsp").forward(request,response);
-                break;
-
+                break;*/
         }
 
 

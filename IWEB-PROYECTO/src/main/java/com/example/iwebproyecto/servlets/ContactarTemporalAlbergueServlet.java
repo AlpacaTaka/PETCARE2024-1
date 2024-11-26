@@ -1,22 +1,19 @@
 package com.example.iwebproyecto.servlets;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import com.example.iwebproyecto.beans.Albergue;
-import com.example.iwebproyecto.beans.Distrito;
-import com.example.iwebproyecto.beans.Foto;
-import com.example.iwebproyecto.beans.MascotasAdopcion;
+import com.example.iwebproyecto.beans.*;
 import com.example.iwebproyecto.daos.AlbergueDaoRevenge;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.annotation.WebServlet;
 
-@WebServlet(name = "InicioAlbergueServlet", value = "/PortalAdopciones")
-public class InicioAdoptionTableServlet extends HttpServlet {
+import java.io.IOException;
+import java.util.ArrayList;
+
+@WebServlet(name = "ContactarTemporalAlbergueServlet", value = "/HogaresTemporalesAlbergue")
+public class ContactarTemporalAlbergueServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -29,9 +26,9 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         int idAlbergue= 6;
         switch (action) {
             case "lista":
-                ArrayList<MascotasAdopcion> list = albergueDaoRevenge.listarMascotasAdopcion();
+                ArrayList<SolicitudTemporal> list = albergueDaoRevenge.listaDeHogaresTemporales();
                 request.setAttribute("lista", list);
-                RequestDispatcher rd = request.getRequestDispatcher("albergue/adoptionTable.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("albergue/contactarTemporal.jsp");
                 rd.forward(request, response);
                 break;
             case "create":
@@ -65,15 +62,6 @@ public class InicioAdoptionTableServlet extends HttpServlet {
                 albergueDaoRevenge.borrarMascotaAdopcion(idd);
                 response.sendRedirect(request.getContextPath() + "/PortalAdopciones");
                 break;
-
-            case "view":
-                String idv = request.getParameter("id");
-                MascotasAdopcion mascotasAdopcionv = albergueDaoRevenge.obtenerMascotasAdopcionPorID(Integer.parseInt(idv));
-                request.setAttribute("mascota",mascotasAdopcionv);
-                request.setAttribute("idAlbergue", idAlbergue);
-                request.getRequestDispatcher("albergue/albergueVisAdop.jsp").forward(request,response);
-                break;
-
         }
 
 

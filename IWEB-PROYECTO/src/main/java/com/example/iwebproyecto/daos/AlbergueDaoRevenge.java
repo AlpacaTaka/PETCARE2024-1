@@ -3,6 +3,8 @@ package com.example.iwebproyecto.daos;
 import com.example.iwebproyecto.beans.*;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class AlbergueDaoRevenge extends BaseDao {
@@ -196,7 +198,7 @@ public class AlbergueDaoRevenge extends BaseDao {
         }
     }
 
-    // Método para eliminar un albergue
+    // M
     public void eliminarAlbergue(int albergueID) {
         String sql = "DELETE FROM albergue WHERE albergueID = ?";
 
@@ -505,5 +507,95 @@ public class AlbergueDaoRevenge extends BaseDao {
             e.printStackTrace();
         }
         return distrito;
+    }
+
+    public ArrayList<SolicitudTemporal> listaDeHogaresTemporales() {
+        String sql = "select * from solicitudtemporal where aprobadoCoordinador=1 and desactivadoAdministrador=0;";
+        ArrayList<SolicitudTemporal> listaHogaresTemporales = new ArrayList<>();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                SolicitudTemporal solicitudTemporal = new SolicitudTemporal();
+                solicitudTemporal.setSolicitudID(rs.getInt(1));
+                Usuario usuario = usuarioDao.obtenerUsuarioPorID(rs.getInt(2));
+                Distrito distrito=obtenerDistritoPorID(usuario.getDistrito().getDistritoID());
+                usuario.setDistrito(distrito);
+                solicitudTemporal.setUsuario(usuario);
+                solicitudTemporal.setCelular(rs.getString(5));
+                solicitudTemporal.setTiempoTemporal(rs.getInt(16));
+                String ini = rs.getString(17);
+                String fin = rs.getString(18);
+                LocalDate localDate = LocalDate.now();
+                boolean flag = localDate.isAfter(LocalDate.parse(ini)) && localDate.isBefore(LocalDate.parse(fin));
+                if(flag){
+                    solicitudTemporal.setInicioTemporal(ini);
+                    solicitudTemporal.setFinTemporal(fin);
+                    listaHogaresTemporales.add(solicitudTemporal);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaHogaresTemporales;
+    }
+
+    public ArrayList<UsuarioAdopcion> listaUsuarioAdopcion(int albergueID) {
+        String sql = "select u.*,a.albergueID from usuarioadopcion u, mascotasadopcion m, albergue a where m.idAdopcion=u.idAdopcion and a.albergueID=m.albergueID and m.albergueID=?;";
+        ArrayList<UsuarioAdopcion> listaUsuarioAdopcion = new ArrayList<>();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, albergueID);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                UsuarioAdopcion usuarioAdopcion = new UsuarioAdopcion();
+                usuarioAdopcion.setUsuarioAdopcionID(rs.getInt(1));
+                Usuario usuario = usuarioDao.obtenerUsuarioPorID(rs.getInt(2));
+                usuarioAdopcion.setUsuario(usuario);
+                MascotasAdopcion mascotasAdopcion = albergueDaoRevenge.obtenerMascotasAdopcionPorID(rs.getInt(3));
+                usuarioAdopcion.setMascotasAdopcion(mascotasAdopcion);
+                usuarioAdopcion.setAprobado(rs.getBoolean(4));
+                usuarioAdopcion.setFechaAdoptado(rs.getString(5));
+                listaUsuarioAdopcion.add(usuarioAdopcion);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaUsuarioAdopcion;
+    }
+    public ArrayList<DenunciaMaltrato> listaDenunciasMaltrato(int idZona){
+        String sql = "select d.*,u.distritoID,dz.zonaID from denunciamaltrato d, usuario u, distrito dz where u.usuarioID=d.usuarioID and dz.distritoID=u.distritoID and dz.zonaID=? and d.eliminado=0 order by d.fechaFormulario desc;";
+        ArrayList<DenunciaMaltrato> listaDenunciaMaltrato = new ArrayList<>();
+        AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
+        UsuarioDao usuarioDao = new UsuarioDao();
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, idZona);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                DenunciaMaltrato denunciaMaltrato = new DenunciaMaltrato();
+                denunciaMaltrato.setDenunciaID(rs.getInt(1));
+                Usuario usuario = usuarioDao.obtenerUsuarioPorID(rs.getInt(2));
+                denunciaMaltrato.setUsuario(usuario);
+                denunciaMaltrato.setTamanio(rs.getString(3));
+                denunciaMaltrato.setEspecie(rs.getString(4));
+                denunciaMaltrato.setRaza(rs.getString(5));
+                denunciaMaltrato.setTipoMaltrato(rs.getString(6));
+                denunciaMaltrato.setNombreApellidoMaltratador(rs.getString(7));
+                denunciaMaltrato.setDireccion(rs.getString(8));
+                Foto foto = new Foto();
+                foto.setFotoID(rs.getInt(9));
+                denunciaMaltrato.setFoto(foto);
+                denunciaMaltrato.setRealizoDenuncia(rs.getBoolean(10));
+                denunciaMaltrato.setFechaFormulario(LocalDate.parse(rs.getString(12)));
+                listaDenunciaMaltrato.add(denunciaMaltrato);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaDenunciaMaltrato;
     }
 }
