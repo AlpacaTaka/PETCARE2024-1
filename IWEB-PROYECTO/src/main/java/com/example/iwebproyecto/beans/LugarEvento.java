@@ -8,13 +8,22 @@ public class LugarEvento {
     private Administrador administrador;
     private Foto foto;  // Asumiendo que Foto es otro bean
     private boolean eliminado;
+    private Distrito distrito;
+
+    public Distrito getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(Distrito distrito) {
+        this.distrito = distrito;
+    }
 
     // Constructor vacío
     public LugarEvento() {}
 
     // Constructor con parámetros
     public LugarEvento(int lugarID, String nombreLugar, String direccionLugar, int aforoMax,
-                       Administrador administrador, Foto foto, boolean eliminado) {
+                       Administrador administrador, Foto foto, boolean eliminado, Distrito distrito) {
         this.lugarID = lugarID;
         this.nombreLugar = nombreLugar;
         this.direccionLugar = direccionLugar;
@@ -22,6 +31,7 @@ public class LugarEvento {
         this.administrador = administrador;
         this.foto = foto;
         this.eliminado = eliminado;
+        this.distrito = distrito;
     }
 
     // Getters y setters
