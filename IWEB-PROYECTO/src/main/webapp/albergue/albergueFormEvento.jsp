@@ -28,7 +28,7 @@
                 </div>
                 <div class="welcome-text">Hola, Patitas Felices</div>
             </div>
-            <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="/user/inicio.jsp"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
         <div class="main">
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
@@ -61,27 +61,29 @@
                         <a href="eventTable.jsp"><button type="button" class="btn btn-personal2">Regresar</button></a>
                     </div>
                     <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                            <form id="uploadForm" style="padding:10px">
+                            <form id="uploadForm" action="${pageContext.request.contextPath}/eventos" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+                                <input type="hidden" name="action" value="guardar">
                                 <h1 style="margin-top: 10px;" class="text-center">Completa los detalles requeridos para tu evento</h1>
                                 <div class="row justify-content-center p-1">   
                                     <div class="col-md-12 p-1">
-                                        <label for="nombre_evento">Nombre del evento a realizar</label>
-                                        <input type="text" id="nombre_evento" maxlength="30" class="form-control" placeholder="Ingrese el nombreMascota del evento" required>
+                                        <label for="nombre">Nombre del evento a realizar</label>
+                                        <input type="text" id="nombre" name = "nombre" maxlength="30" class="form-control" placeholder="Ingrese el nombre del evento" required>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1">
-                                        <label for="entrada">Entrada</label>
-                                        <select class="form-select" name="entrada" id="entrada" required onchange="toggleInput()">
+                                        <label for="tipoDonacion">Entrada</label>
+                                        <select class="form-select" name="tipoDonacion" id="tipoDonacion" required onchange="toggleInput()">
                                             <option value="">Selecciona una opción</option>
-                                            <option value="monetario">Monetario</option>
-                                            <option value="suministros">Suministros</option>
+                                            <option value="Monetario">Monetario</option>
+                                            <option value="Suministros">Suministros</option>
                                         </select>
                                     </div>
-                                    
+
                                     <div class="col-md-6 p-1">
                                         <label for="detalle">Detalle</label>
-                                        <input id="detalle" class="form-control" type="text" placeholder="Seleccione una opción" disabled />
+                                        <input id="detalle" name="detalleSuministro" class="form-control" type="text" placeholder="Seleccione una opción" disabled />
+                                        <input type="hidden" id="detalleMonetario" name="detalleMonetario" />
                                     </div>
                                 </div>
                                 <div class="row justify-content-center p-1">
@@ -91,16 +93,60 @@
                                             <select class="form-select" name="distrito" id="distrito" required>
                                                 <option value="">Selecciona un distrito</option>
                                                 <optgroup label="Lima Norte">
-                                                    <option value="ancon">Ancon</option>
-                                                    <option value="santa_rosa">Santa Rosa</option>
-                                                    <option value="carabayllo">Carabayllo</option>
-                                                    <option value="puente_piedra">Puente Piedra</option>
+                                                    <option value="1">Ancon</option>
+                                                    <option value="2">Santa Rosa</option>
+                                                    <option value="3">Carabayllo</option>
+                                                    <option value="4">Puente Piedra</option>
+                                                    <option value="5">Comas</option>
+                                                    <option value="6">Los Olivos</option>
+                                                    <option value="7">San Martín de Porres</option>
+                                                    <option value="8">Independencia</option>
+                                                </optgroup>
+                                                <optgroup label="Lima Sur">
+                                                    <option value="9">San Juan de Miraflores</option>
+                                                    <option value="10">Villa María del Triunfo</option>
+                                                    <option value="11">Villa El Salvador</option>
+                                                    <option value="12">Pachacamac</option>
+                                                    <option value="13">Lurin</option>
+                                                    <option value="14">Punta Hermosa</option>
+                                                    <option value="15">Punta Negra</option>
+                                                    <option value="16">San Bartolo</option>
+                                                    <option value="17">Santa María del Mar</option>
+                                                    <option value="18">Pucusana</option>
+                                                </optgroup>
+                                                <optgroup label="Lima Este">
+                                                    <option value="19">San Juan de Lurigancho</option>
+                                                    <option value="20">Lurigancho/Chosica</option>
+                                                    <option value="21">Ate</option>
+                                                    <option value="22">El Agustino</option>
+                                                    <option value="23">Santa Anita</option>
+                                                    <option value="24">La Molina</option>
+                                                    <option value="25">Cieneguilla</option>
+                                                </optgroup>
+                                                <optgroup label="Lima Oeste">
+                                                    <option value="26">Rimac</option>
+                                                    <option value="27">Cercado de Lima</option>
+                                                    <option value="28">Breña</option>
+                                                    <option value="29">Pueblo Libre</option>
+                                                    <option value="30">Magdalena</option>
+                                                    <option value="31">Jesus María</option>
+                                                    <option value="32">La Victoria</option>
+                                                    <option value="33">Lince</option>
+                                                    <option value="34">San Isidro</option>
+                                                    <option value="35">San Miguel</option>
+                                                    <option value="36">Surquillo</option>
+                                                    <option value="37">San Borja</option>
+                                                    <option value="38">Santiago de Surco</option>
+                                                    <option value="39">Barranco</option>
+                                                    <option value="40">Chorrillos</option>
+                                                    <option value="41">San Luis</option>
+                                                    <option value="42">Miraflores</option>
                                                 </optgroup>
                                             </select>
                                         </div>
                                         <div class="col-md-6 p-1">
-                                            <label for="fecha_evento">Fecha del evento</label>
-                                            <input type="date" class="form-control" id="fecha_evento" required>
+                                            <label for="fechaEvento">Fecha del evento</label>
+                                            <input type="date" class="form-control" id="fechaEvento" name="fechaEvento" required>
                                         </div>
                                     </div>
                                 </div>
@@ -110,8 +156,8 @@
                                         <input type="number" class="form-control" id="aforo" placeholder="Escoja un local" required readonly disabled>
                                     </div>
                                     <div class="col-md-8 p-1">
-                                        <label for="locales">Locales disponibles</label>
-                                        <select class="form-select" name="locales" id="locales" required>
+                                        <label for="lugar">Locales disponibles</label>
+                                        <select class="form-select" name="lugar" id="lugar" required>
                                             <option value="">Seleccione un local</option>
                                         </select>
                                     </div>
@@ -124,48 +170,44 @@
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-6 p-1">
-                                        <label for="inicio">Hora Inicio</label>
-                                        <input type="time" class="form-control" id="inicio" placeholder="Ingrese la hora de inicio" required onchange="validarHoras()">
+                                        <label for="horaInicio">Hora Inicio</label>
+                                        <input type="time" class="form-control" name = "horaInicio" id="horaInicio" placeholder="Ingrese la hora de inicio" required onchange="validarHoras()">
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <label for="fin">Hora Fin</label>
-                                        <input type="time" class="form-control" id="fin" placeholder="Ingrese la hora de fin" required onchange="validarHoras()">
+                                        <label for="horaFin">Hora Fin</label>
+                                        <input type="time" class="form-control" name = "horaFin" id="horaFin" placeholder="Ingrese la hora de fin" required onchange="validarHoras()">
                                     </div>
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1">
-                                        <label for="motivo"> Motivo de la realización del evento</label>
-                                        <textarea name="" id="motivo" class="form-control" maxlength="300" placeholder="Ingrese su motivo (max. 300 caracteres)"></textarea>
+                                        <label for="razon"> Motivo de la realización del evento</label>
+                                        <textarea name="razon" id="razon" class="form-control" maxlength="300" placeholder="Ingrese su motivo (max. 300 caracteres)"></textarea>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1">
-                                        <label for="motivo"> Descripción de su evento</label>
-                                        <textarea name="" id="motivo" class="form-control" maxlength="1000" placeholder="Ingrese su descripción (max. 1000 caracteres)"></textarea>
+                                        <label for="descripcion"> Descripción de su evento</label>
+                                        <textarea name="descripcion" id="descripcion" class="form-control" maxlength="1000" placeholder="Ingrese su descripción (max. 1000 caracteres)"></textarea>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center p-1">
-                                    <div class="col-md-6 p-1">
-                                        <label for="invitado">Invitados al evento (opcional)</label>
-                                        <input type="text" id="invitado" class="form-control" placeholder="Ingrese el primer invitado">
+                                    <div class="col-md-12 p-1">
+                                        <label for="invitados">Invitados al evento (opcional)</label>
+                                        <input type="text" name= "invitados" id="invitados" class="form-control" placeholder="Ingrese invitados, si es más de uno separar con comas">
                                     </div>
-                                    <div class="col-md-6 p-1">
-                                        <label for="invitado2"></label>
-                                        <input type="text" id="invitado2" class="form-control" placeholder="Ingrese el segundo invitado">
-                                    </div>
-                                </div> 
+                                </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1 justify-content-center">
-                                        <label for="formFile" class="form-label">Subir un flyer del evento (PNG)</label>
-                                        <input class="form-control" type="file" id="formFile" accept=".png" required>
+                                        <label for="foto" class="form-label">Subir un flyer del evento (PNG)</label>
+                                        <input class="form-control" type="file" name = "foto" id="foto" accept=".png" required>
                                     </div>
                                     <div id="fileError" class="text-danger mt-2" style="display: none;">El archivo debe ser una imagen PNG.</div>
-                                </div> 
+                                </div>
                                 <div class="row justify-content-center p-1">
                                     <div class="col-md-12 p-1 d-flex justify-content-center">
-                                        <a href="eventTable.jsp"><button type="submit" class="btn btn-personal">Crear</button></a>
+                                        <button type="submit" class="btn btn-personal">Crear</button>
                                     </div>
-                                </div> 
+                                </div>
                             </form>
                     </div>    
                 </div>
@@ -186,10 +228,10 @@
 
     <script src="/common/script/neonavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
+
     <script>
         document.getElementById('uploadForm').addEventListener('submit', function(event) {
-            const fileInput = document.getElementById('formFile');
+            const fileInput = document.getElementById('foto');
             const file = fileInput.files[0];
             const fileError = document.getElementById('fileError');
 
@@ -267,99 +309,107 @@
     }
 </script>
 
-<script>
-    const localData = {
-        "ancon": {
-            locales: [
-                { name: "El clasico local 1", aforo: 100, direccion: "Av. San Juan 123" },
-                { name: "El local de la playa", aforo: 120, direccion: "Calle Mar Azul 456" }
-            ]
-        },
-        "santa_rosa": {
-            locales: [
-                { name: "El bonito local 2", aforo: 150, direccion: "Calle Futura 456" },
-                { name: "El local del parque", aforo: 80, direccion: "Av. Parque Central 789" }
-            ]
-        },
-        "carabayllo": {
-            locales: [
-                { name: "El pequeño local 3", aforo: 80, direccion: "Jr. Esperanza 789" },
-                { name: "El local del río", aforo: 90, direccion: "Calle Río Verde 101" }
-            ]
-        },
-        "puente_piedra": {
-            locales: [
-                { name: "El gran local 4", aforo: 200, direccion: "Av. Libertad 321" },
-                { name: "El local histórico", aforo: 250, direccion: "Calle Historia 202" }
-            ]
-        },
-    };
+    <script>
+        document.getElementById('distrito').addEventListener('change', function() {
+            const distritoId = this.value;
+            const lugarSelect = document.getElementById('lugar');
+            const aforoInput = document.getElementById('aforo');
+            const direccionInput = document.getElementById('Direccion');
 
-    document.getElementById('distrito').addEventListener('change', function() {
-        const selectedDistrito = this.value;
-        const localSelect = document.getElementById('locales');
-        localSelect.innerHTML = '<option value="">Seleccione un local</option>';
+            // Resetear los campos
+            aforoInput.value = '';
+            direccionInput.value = '';
 
-        if (localData[selectedDistrito]) {
-            localData[selectedDistrito].locales.forEach(local => {
-                const option = document.createElement('option');
-                option.value = local.name;
-                option.text = local.name;
-                localSelect.appendChild(option);
-            });
-        }
-    });
+            if (distritoId) {
+                // Crear y configurar la solicitud XMLHttpRequest
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', '${pageContext.request.contextPath}/eventos?action=getLugares&distritoId=' + distritoId, true);
 
-    document.getElementById('locales').addEventListener('change', function() {
-        const selectedLocalName = this.value;
-        const aforoInput = document.getElementById('aforo');
-        const direccionInput = document.getElementById('Direccion');
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        lugarSelect.innerHTML = xhr.responseText;
+                    } else {
+                        lugarSelect.innerHTML = '<option value="">Error al cargar lugares</option>';
+                    }
+                };
 
-        // Clear values
-        aforoInput.value = '';
-        direccionInput.value = '';
+                xhr.onerror = function() {
+                    lugarSelect.innerHTML = '<option value="">Error de conexión</option>';
+                };
 
-        for (const distrito in localData) {
-            const locales = localData[distrito].locales;
-            const foundLocal = locales.find(local => local.name === selectedLocalName);
-            if (foundLocal) {
-                aforoInput.value = foundLocal.aforo;
-                direccionInput.value = foundLocal.direccion;
-                break;
+                xhr.send();
+            } else {
+                lugarSelect.innerHTML = '<option value="">Seleccione un local</option>';
             }
-        }
-    });
-</script>
+        });
+
+        // Mantener el evento change para el select de lugar
+        document.getElementById('lugar').addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const aforoInput = document.getElementById('aforo');
+            const direccionInput = document.getElementById('Direccion');
+
+            if (selectedOption.value) {
+                aforoInput.value = selectedOption.dataset.aforo;
+                direccionInput.value = selectedOption.dataset.direccion;
+            } else {
+                aforoInput.value = '';
+                direccionInput.value = '';
+            }
+        });
+    </script>
 
 <script>
     function toggleInput() {
-        const select = document.getElementById('entrada');
-        const input = document.getElementById('detalle');
+        const select = document.getElementById('tipoDonacion');
+        const detalleInput = document.getElementById('detalle');
+        const detalleMonetarioHidden = document.getElementById('detalleMonetario');
 
-        // Resetear y habilitar el input
-        input.value = '';
-        input.disabled = false;
+        detalleInput.value = ''; // Limpia el campo
+        detalleMonetarioHidden.value = ''; // Limpia el campo oculto
 
-        // Asignar validaciones según la opción seleccionada
-        if (select.value === 'monetario') {
-            input.placeholder = 'Ingrese un número (máx. 3 dígitos)';
-            input.oninput = function () {
-                // Permitir solo números y limitar a 3 caracteres
+        if (select.value === 'Monetario') {
+            detalleInput.type = 'number';
+            detalleInput.placeholder = 'Ingrese el monto (máx. 3 dígitos)';
+            detalleInput.maxLength = 3;
+            detalleInput.name = 'detalleMonetario'; // Seteamos el nombre para que sea enviado como detalle monetario
+
+            detalleInput.oninput = function() {
                 this.value = this.value.replace(/[^0-9]/g, '').slice(0, 3);
+                detalleMonetarioHidden.value = this.value; // Actualizamos el hidden input con el valor
             };
-        } else if (select.value === 'suministros') {
-            input.placeholder = 'Ingrese solo letras (máx. 60 caracteres)';
-            input.oninput = function () {
-                // Permitir solo letras y espacios, y limitar a 60 caracteres
+        } else if (select.value === 'Suministros') {
+            detalleInput.type = 'text';
+            detalleInput.placeholder = 'Ingrese los suministros requeridos';
+            detalleInput.maxLength = 60;
+            detalleInput.name = 'detalleSuministro'; //Seteamos el nombre para que sea enviado como suministros
+            detalleInput.oninput = function() {
                 this.value = this.value.replace(/[^a-zA-Z\s]/g, '').slice(0, 60);
+                detalleMonetarioHidden.value = ''; //limpiamos el valor anterior
             };
         } else {
-            // Si no se selecciona una opción válida, desactiva el input
-            input.disabled = true;
-            input.placeholder = 'Seleccione una opción';
-            input.oninput = null; // Elimina cualquier evento anterior
+            detalleInput.placeholder = 'Seleccione una opción';
+            detalleInput.name = ''; //limpiamos el nombre anterior
         }
+
+        //Importante:  se quita el disable del input
+        detalleInput.disabled = false;
     }
+
+
+    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+        const tipoDonacion = document.getElementById('tipoDonacion').value;
+        const detalle = document.getElementById('detalle').value;
+        const detalleMonetario = document.getElementById('detalleMonetario').value;
+
+        if (tipoDonacion === 'Monetario' && detalleMonetario.trim() === '') { //Validamos que si es monetario, detalleMonetario no este vacio
+            event.preventDefault();
+            alert('Por favor ingrese el monto');
+        } else if (tipoDonacion === 'Suministros' && detalle.trim() === '') {  //Validamos que si es suministro, detalle no este vacio
+            event.preventDefault();
+            alert('Por favor ingrese los suministros');
+        }
+    });
 </script>
 </body>
 </html>

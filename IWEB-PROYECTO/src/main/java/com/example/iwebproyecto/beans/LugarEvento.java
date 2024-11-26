@@ -8,6 +8,7 @@ public class LugarEvento {
     private Administrador administrador;
     private Foto foto;  // Asumiendo que Foto es otro bean
     private boolean eliminado;
+    private Distrito distrito;
 
     // Constructor vacío
     public LugarEvento() {}
@@ -79,5 +80,13 @@ public class LugarEvento {
 
     public void setEliminado(boolean eliminado) {
         this.eliminado = eliminado;
+    }
+
+    public Distrito getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(Distrito distrito) {
+        this.distrito = distrito;
     }
 }

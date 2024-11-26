@@ -6,65 +6,64 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 
 
 public class FotoDao extends BaseDao {
-    public void GuadarFoto(Foto foto) {
-        String sql = "insert into fotos (rutaFoto) values (?);";
-        try(Connection conn = this.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+    public int guardarFoto(Foto foto) {
+        String sql = "INSERT INTO fotos (rutaFoto) VALUES (?)";
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, foto.getRutaFoto());
             stmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        String sql1 = "SELECT fotoID FROM fotos WHERE rutaFoto=?";
-        try (Connection conn = this.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql1)
-             ) {
 
-            stmt.setString(1, foto.getRutaFoto());
-            ResultSet rs = stmt.executeQuery();
-            // Ejecutar la consulta y obtener el ID de la foto
-            if (rs.next()) {
-                int fotoID = rs.getInt("fotoID");
-                foto.setFotoID(fotoID);
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    System.err.println("Error: No se obtuvo el ID de la foto recién creada.");
+                    return 0; // Indica error
+                }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println("Error al guardar la foto: " + e.getMessage());
+            e.printStackTrace(); // Reemplaza con un manejo de errores más robusto
+            return 0; // Indica error
         }
     }
 
-    public void ActualizarFoto(Foto foto,String Nuevaruta) {
-        foto.setRutaFoto(Nuevaruta);
-        String sql = "UPDATE fotos SET rutaFoto = ? WHERE fotoID = ?;";
-        try(Connection conn1 = this.getConnection();
-            PreparedStatement stmt = conn1.prepareStatement(sql)) {
-            stmt.setString(1, Nuevaruta);
+    public boolean actualizarFoto(Foto foto) {
+        String sql = "UPDATE fotos SET rutaFoto = ? WHERE fotoID = ?";
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, foto.getRutaFoto());
             stmt.setInt(2, foto.getFotoID());
-            stmt.executeUpdate();
+            return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println("Error al actualizar la foto: " + e.getMessage());
+            e.printStackTrace(); // Reemplaza con un manejo de errores más robusto
+            return false;
         }
     }
 
-
-    public Foto obtenerFotoPorId(int fotoId) throws SQLException {
+    public Foto obtenerFotoPorId(int fotoId) {
+        String sql = "SELECT * FROM fotos WHERE fotoID = ?";
         try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement("select * from fotos where fotoId=?")) {
-
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, fotoId);
-
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                Foto foto = new Foto();
-
-                foto.setFotoID(rs.getInt("fotoId"));
-                foto.setRutaFoto(rs.getString("rutaFoto"));
-
-                return foto;
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    Foto foto = new Foto();
+                    foto.setFotoID(rs.getInt("fotoID"));
+                    foto.setRutaFoto(rs.getString("rutaFoto"));
+                    return foto;
+                }
             }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener la foto: " + e.getMessage());
+            e.printStackTrace(); // Reemplaza con un manejo de errores más robusto
+            return null;
         }
         return null;
     }

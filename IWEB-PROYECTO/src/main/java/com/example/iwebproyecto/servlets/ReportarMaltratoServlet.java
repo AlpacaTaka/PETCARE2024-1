@@ -73,13 +73,13 @@ public class ReportarMaltratoServlet extends HttpServlet {
         foto.setRutaFoto(uploadPath);
 
         FotoDao fotoDao = new FotoDao();
-        fotoDao.GuadarFoto(foto);
+        fotoDao.guardarFoto(foto);
 
         // Nombre del archivo
         String fileName = "("+foto.getFotoID()+")"+request.getParameter("imagen");
         String filePath = uploadPath + File.separator + fileName;
 
-        fotoDao.ActualizarFoto(foto,filePath);
+        fotoDao.actualizarFoto(foto);
 
         // Leer el contenido de la solicitud manualmente
         try (InputStream inputStream = request.getInputStream();

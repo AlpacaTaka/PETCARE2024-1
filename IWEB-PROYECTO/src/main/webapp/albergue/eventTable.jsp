@@ -50,7 +50,7 @@
                     </div>
                     <div class="welcome-text">Hola, Patitas Felices</div>
                 </div>
-                <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+                <div class="logo"><a href="/user/inicio.jsp"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></a></div>
             </header>
 
             <div class="main">
@@ -132,7 +132,7 @@
                                       <!-- Card 1 -->
                                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
                                         <div class="card h-100">
-                                            <img src="<%= fotoRuta %>" class="card-img-top" alt="<%= nombre %>" style="max-width: 300px; height: 260px; object-fit: cover;">
+                                            <img src="${pageContext.request.contextPath}<%= evento.getFoto().getRutaFoto() %>" class="card-img-top" alt="${evento.nombre}" style="max-width: 300px; height: 260px; object-fit: cover;">
                                             <div class="card-body">
                                                 <h4 class="card-title text-center"><%= nombre %></h4>
                                                 <hr>
