@@ -270,5 +270,47 @@ public class PublicacionMascotaPerdidaDao extends BaseDao {
         }
     }
 
+    public boolean guardarPublicacion(PublicacionMascotaPerdida publicacion) throws SQLException {
+        String sql = "INSERT INTO publicacionmascotaperdida (" +
+                "descripcion, nombreMascota, distintivo, edadMascota, tamanio, especie, raza, " +
+                "descripcionAdicional, lugarPerdida, fechaPerdida, horaPerdida, nombreContacto, " +
+                "telefonoContacto, fotoID, aniadirRecompensa, montoRecompensa, usuarioID, " +
+                "aprobadoCoordinador, mascotaEncontrada, fechaFormulario) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection connection = this.getConnection()
+                ;PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, publicacion.getDescripcion());
+            stmt.setString(2, publicacion.getNombreMascota());
+            stmt.setString(3, publicacion.getDistintivo());
+            stmt.setInt(4, publicacion.getEdadMascota());
+            stmt.setString(5, publicacion.getTamanio());
+            stmt.setString(6, publicacion.getEspecie());
+            stmt.setString(7, publicacion.getRaza());
+            stmt.setString(8, publicacion.getDescripcionAdicional());
+            stmt.setString(9, publicacion.getLugarPerdida());
+            stmt.setDate(10, java.sql.Date.valueOf(publicacion.getFechaPerdida()));
+            stmt.setTime(11, java.sql.Time.valueOf(publicacion.getHoraPerdida()));
+            stmt.setString(12, publicacion.getNombreContacto());
+            stmt.setString(13, publicacion.getTelefonoContacto());
+            stmt.setInt(14, publicacion.getFoto().getFotoID());
+            stmt.setBoolean(15, publicacion.isAniadirRecompensa());
+            if (publicacion.getMontoRecompensa() != null) {
+                stmt.setInt(16, publicacion.getMontoRecompensa());
+            } else {
+                stmt.setNull(16, java.sql.Types.INTEGER);
+            }
+            stmt.setInt(17, publicacion.getUsuario().getUsuarioID());
+            if (publicacion.getAprobadoCoordinador() != null) {
+                stmt.setBoolean(18, publicacion.getAprobadoCoordinador());
+            } else {
+                stmt.setNull(18, java.sql.Types.BOOLEAN);
+            }
+            stmt.setBoolean(19, publicacion.isMascotaEncontrada());
+            stmt.setDate(20, java.sql.Date.valueOf(publicacion.getFechaFormulario()));
+
+            return stmt.executeUpdate() > 0;
+        }
+    }
+
 }
 

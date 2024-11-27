@@ -64,12 +64,12 @@
         <div class="barside">
             <ul class="navlinks">
                 <li><a href="<%=request.getContextPath()%>/admincuentas" title="Administracion"><i class="fi-rr-ballot-check"></i></a></li>
-                <li><a href="/administrator/solicitudCuentaAlbergues.html" title="Validacion Albergues"><i class="fi-rr-house-building"></i></a></li>
-                <li><a href="/administrator/validacionUsuarios.html" title="Validacion Usuarios"><i class="fi-rr-user-trust"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/Administrator/solicitudCuentaAlbergues.jsp" title="Validacion Albergues"><i class="fi-rr-house-building"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/Administrator/validacionUsuarios.jsp" title="Validacion Usuarios"><i class="fi-rr-user-trust"></i></a></li>
                 <li><a href="<%=request.getContextPath()%>/CrearCoordinador" title="Crear Coordinador de Zona"><i class="fi-rr-people-network-partner"></i></a></li>
                 <li><a href="<%=request.getContextPath()%>/LugarHabilitado" title="Crear Lugar Habilitado"><i class="fi-rr-map-location-track"></i></a></li>
-                <li><a href="/administrator/dashboard.html" title="Dashboard"><i class="fi-rr-search-alt"></i></a></li>
-                <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/Administrador/dashboard.jsp" title="Dashboard"><i class="fi-rr-search-alt"></i></a></li>
+                <li id="cerrar-sesion"><a href="${pageContext.request.contextPath}" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
             </ul>
 
         </div>
@@ -462,7 +462,7 @@
         });
     });
 </script>
-<script src="/common/script/neonavbar.js"></script>
+<script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
     // Función para abrir el popup

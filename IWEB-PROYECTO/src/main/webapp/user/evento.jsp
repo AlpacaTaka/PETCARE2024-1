@@ -48,34 +48,35 @@ String horaFormateada = horaEvento.format(formatoHora);
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="/user/miPerfil.html" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="/user/allEventos.html" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
-                    <li><a href="/user/postularTemporal.html" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
-                    <li><a href="/user/solicitudesDonacionSuministros.html" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
-                    <li><a href="/user/donacionMonetaria.html" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
-                    <li><a href="/user/solicitudesAdopcion.html" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                    <li><a href="/user/reportarMascotaPerdida.html" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
-                    <li><a href="/user/reportarMaltrato.html" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/MiPerfilUsuario" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/TodosLosEventos" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/PostulacionTemporal" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/SolicitudesDeSuministros" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/TodosLosAlbergues" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/PortalDeAdopcion" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ReportarPerdido" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
+
+                    <li><a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
+
                     <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
-                
+
             </div>
 
             <div id="menu" class="menu">
-                <a href="/user/miPerfil.html">Mi Perfil</a>
-                <a href="/user/misEventos.html">Mis Eventos</a>
-                <a href="/user/misDonaciones.html" id="Sep">Mis Donaciones</a>
+                <a href="${pageContext.request.contextPath}/MiPerfilUsuario">Mi Perfil</a>
+                <a href="${pageContext.request.contextPath}/MisEventosUsuario">Mis Eventos</a>
+                <a href="${pageContext.request.contextPath}/MisDonacionesUsuario" id="Sep">Mis Donaciones</a>
                 <hr>
-                <a href="/user/allEventos.html">Eventos</a>
-                <a href="/user/postularAlbergue.html">Postular a Albergue</a>
-                <a href="/user/postularTemporal.html">Hogar Temporal</a>
-                <a href="/user/solicitudesDonacionSuministros.html">Donaciones de Suministros</a>
-                <a href="/user/donacionMonetaria.html">Donaciones Monetarias</a>
-                <a href="/user/solicitudesAdopcion.html">Portal de Adopciones</a>
-                <a href="/user/mascotasPerdidas.html">Portal de Mascotas Perdidas</a>
-                <a href="/user/avistamientoPerdidos.html">Portal Avistamiento Perdidos</a>
-                <a href="/user/reportarMascotaPerdida.html">Reportar Mascota Perdida</a>
-                <a href="/user/reportarMaltrato.html" id="Sep">Reportar Maltrato</a>
+                <a href="${pageContext.request.contextPath}/TodosLosEventos">Eventos</a>
+                <a href="${pageContext.request.contextPath}/PostulacionTemporal">Hogar Temporal</a>
+                <a href="${pageContext.request.contextPath}/SolicitudesDeSuministros">Donaciones de Suministros</a>
+                <a href="${pageContext.request.contextPath}/TodosLosAlbergues">Donaciones Monetarias</a>
+                <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal de Adopciones</a>
+                <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal de Mascotas Perdidas</a>
+                <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal Avistamiento Perdidos</a>
+                <a href="${pageContext.request.contextPath}/ReportarPerdido">Reportar Mascota Perdida</a>
+                <a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" id="Sep">Reportar Maltrato</a>
                 <hr>
                 <a href="/login/login.html">Cerrar Sesión</a>
 

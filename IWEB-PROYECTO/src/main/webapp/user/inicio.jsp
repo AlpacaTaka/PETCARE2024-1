@@ -6,10 +6,15 @@
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.time.LocalTime" %>
 <%@ page import="com.example.iwebproyecto.beans.PublicacionMascotaPerdida" %>
+<%@ page import="com.example.iwebproyecto.beans.DonacionSuministros" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.ParseException" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
     ArrayList<MascotasAdopcion> listaAdopcion = (ArrayList) request.getAttribute("listaAdopcion");
     ArrayList<PublicacionMascotaPerdida> listaPerdidos = (ArrayList) request.getAttribute("mascotasPerdidas");
+    ArrayList<DonacionSuministros> listaDonaciones = (ArrayList) request.getAttribute("donaciones");
     DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd MMM.").withLocale(new Locale("es", "ES"));
     DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a").withLocale(new Locale("es", "ES"));
 %>
@@ -49,15 +54,15 @@
         <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
         <div class="barside">
             <ul class="navlinks">
-                <li><a href="MiPerfilUsuario" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                <li><a href="/user/allEventos.jsp" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
-                <li><a href="/user/postularTemporal.jsp" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
-                <li><a href="/user/solicitudesDonacionSuministros.jsp" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
-                <li><a href="TodosLosAlbergues" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
-                <li><a href="/user/solicitudesAdopcion.jsp" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                <li><a href="/user/reportarMascotaPerdida.jsp" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/MiPerfilUsuario" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/TodosLosEventos" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/PostulacionTemporal" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/SolicitudesDeSuministros" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/TodosLosAlbergues" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/PortalDeAdopcion" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/ReportarPerdido" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
 
-                <li><a href="${pageContext.request.contextPath}/user/reportarMaltrato.jsp" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
 
                 <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
             </ul>
@@ -65,19 +70,19 @@
         </div>
 
         <div id="menu" class="menu">
-            <a href="MiPerfilUsuario">Mi Perfil</a>
-            <a href="/user/misEventos.jsp">Mis Eventos</a>
-            <a href="/user/misDonaciones.jsp" id="Sep">Mis Donaciones</a>
+            <a href="${pageContext.request.contextPath}/MiPerfilUsuario">Mi Perfil</a>
+            <a href="${pageContext.request.contextPath}/MisEventosUsuario">Mis Eventos</a>
+            <a href="${pageContext.request.contextPath}/MisDonacionesUsuario" id="Sep">Mis Donaciones</a>
             <hr>
-            <a href="/user/allEventos.jsp">Eventos</a>
-            <a href="/user/postularAlbergue.jsp">Postular a Albergue</a>
-            <a href="/user/postularTemporal.jsp">Hogar Temporal</a>
-            <a href="/user/solicitudesDonacionSuministros.jsp">Donaciones de Suministros</a>
-            <a href="/user/donacionMonetaria.jsp">Donaciones Monetarias</a>
-            <a href="/user/solicitudesAdopcion.jsp">Portal de Adopciones</a>
-            <a href="/user/mascotasPerdidas.jsp">Portal de Mascotas Perdidas</a>
-            <a href="/user/reportarMascotaPerdida.jsp">Reportar Mascota Perdida</a>
-            <a href="/user/reportarMaltrato.jsp" id="Sep">Reportar Maltrato</a>
+            <a href="${pageContext.request.contextPath}/TodosLosEventos">Eventos</a>
+            <a href="${pageContext.request.contextPath}/PostulacionTemporal">Hogar Temporal</a>
+            <a href="${pageContext.request.contextPath}/SolicitudesDeSuministros">Donaciones de Suministros</a>
+            <a href="${pageContext.request.contextPath}/TodosLosAlbergues">Donaciones Monetarias</a>
+            <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal de Adopciones</a>
+            <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal de Mascotas Perdidas</a>
+            <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal Avistamiento Perdidos</a>
+            <a href="${pageContext.request.contextPath}/ReportarPerdido">Reportar Mascota Perdida</a>
+            <a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" id="Sep">Reportar Maltrato</a>
             <hr>
             <a href="/login/login.html">Cerrar Sesión</a>
 
@@ -130,7 +135,7 @@
                                                             <%= fechaFormateada + " " + horaFormateada %>
                                                         </div>
                                                         <p class="card-text"><%= evento.getDescripcionEvento() %></p>
-                                                        <a href="evento.jsp?id=<%= evento.getEventoAlbergueID() %>" class="btn btn-personal" style="margin-bottom: 10px">Ver Evento</a>
+                                                        <a href="TodosLosEventos?action=visualizar&id=<%= evento.getEventoAlbergueID() %>" class="btn btn-personal" style="margin-bottom: 10px">Ver Evento</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -152,7 +157,7 @@
                         </div>
                         <!-- Botonera de Ver mas Eventos-->
                         <div class="boton-contenedor">
-                            <a href="/user/allEventos.jsp" class="btn btn-personal2">Ver más Eventos</a>
+                            <a href="${pageContext.request.contextPath}/TodosLosEventos" class="btn btn-personal2">Ver más Eventos</a>
                         </div>
 
                     </div>
@@ -165,7 +170,7 @@
                             <div class="row" style="gap: 5px;">
                                 <div class="col ">
                                     <div class="d-grid " style="align-content: center;">
-                                        <a href="mascotasPerdidas.jsp">
+                                        <a href="${pageContext.request.contextPath}/PortalDeAdopcion">
                                             <button class="btn btn-personal btn-lg" type="button" style="width: 100%;">
                                                 <i class="fi-rr-cat-dog" style="font-size: 20px;"></i><div>Adopta una Mascota</div></button>
                                         </a>
@@ -173,7 +178,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="d-grid ">
-                                        <a href="postularTemporal.jsp"><button class="btn btn-personal btn-lg" type="button" style="width: 100%;">
+                                        <a href="${pageContext.request.contextPath}/Inicio"><button class="btn btn-personal btn-lg" type="button" style="width: 100%;">
                                             <i class="fi-rr-home-heart" style="font-size: 20px;"></i><div>Inscribete como hogar temporal</div>
                                         </button>
                                         </a>
@@ -193,143 +198,96 @@
 
                         <!-- Carrusel visible solo en desktop (lg en adelante) -->
                         <div class="container d-none d-lg-block">
+
+
                             <div id="carouselDonaciones-desk" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="3000">
                                 <div class="carousel-inner">
-                                    <!-- Primera diapositiva -->
-                                    <div class="carousel-item active">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="card card-don">
-                                                    <img src="/common/img/donaciones/donacion1.png" class="card-img-top card-img-don" alt="...">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Ven y Ayuda!</h5>
-                                                        <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                            Activo
-                                                        </div>
-                                                        <p class="card-text">Participa en la gimkana par ayudar a nuestros peluditos!</p>
-                                                        <a href="/user/solicitudDonacionSuministros.jsp" class="btn btn-personal" id="btn-crd-cr">Ver Solicitud</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="card card-don">
-                                                    <img src="/common/img/donaciones/donacion2.png" class="card-img-top card-img-don" alt="...">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Necesitamos Comida</h5>
-                                                        <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                            Activo
-                                                        </div>
-                                                        <p class="card-text">Requerimos comida de Perro Adulto</p>
-                                                        <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="card card-don">
-                                                    <img src="/common/img/donaciones/donacion3.png" class="card-img-top card-img-don" alt="...">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Se Necesitan Camas</h5>
-                                                        <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                            Activo
-                                                        </div>
-                                                        <p class="card-text">El abergue patitas felices requiere de su gran ayuda para llevar calidez</p>
-                                                        <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <!-- Segunda diapositiva -->
-                                    <div class="carousel-item">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="card card-don">
-                                                    <img src="/common/img/donaciones/donacion4.jpg" class="card-img-top card-img-don" alt="...">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Campaña de Adopcion y Donacion</h5>
-                                                        <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                            Activo
-                                                        </div>
-                                                        <p class="card-text">Ven ayuda</p>
-                                                        <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="card card-don">
-                                                    <img src="/common/img/donaciones/donacion5.jpg" class="card-img-top card-img-don" alt="...">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Buscamos donacion de ropa usada</h5>
-                                                        <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                            Activo
-                                                        </div>
-                                                        <p class="card-text">Descripción de la tarjeta 5.</p>
-                                                        <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="card card-don">
-                                                    <img src="/common/img/donaciones/donacion6.jpg" class="card-img-top card-img-don" alt="...">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Necesitamos un nuevo local</h5>
-                                                        <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                            Activo
-                                                        </div>
-                                                        <p class="card-text">Descripción de la tarjeta 6.</p>
-                                                        <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <%
+                                        int contador = 0; // Contador para controlar los slides
+                                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss"); // Cambiado a HH:mm:ss para coincidir con el formato de la base de datos
 
-                                    <!-- Tercera diapositiva -->
-                                    <div class="carousel-item">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="card card-don">
-                                                    <img src="/common/img/donaciones/donacion7.png" class="card-img-top card-img-don" alt="...">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Necesitamos dinero para vacunas</h5>
-                                                        <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                            Activo
-                                                        </div>
-                                                        <p class="card-text">Descripción de la tarjeta 7.</p>
-                                                        <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
+                                        for (DonacionSuministros donacion : listaDonaciones) {
+                                            String activeClass = (contador == 0) ? "active" : "";
 
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            Date fechaInicio = null;
+                                            Date fechaFin = null;
+                                            LocalTime horaInicio = null;
+                                            LocalTime horaFin = null;
+
+                                            boolean datosValidos = true;
+
+                                            try {
+                                                // Convertir las fechas de String a Date
+                                                fechaInicio = dateFormat.parse(donacion.getFechaInicioRecepcion());
+                                                fechaFin = dateFormat.parse(donacion.getFechaFinRecepcion());
+
+                                                // Convertir las horas de String a LocalTime con segundos
+                                                horaInicio = LocalTime.parse(donacion.getHoraInicioRecepcion(), timeFormat);
+                                                horaFin = LocalTime.parse(donacion.getHoraFinRecepcion(), timeFormat);
+                                            } catch (Exception e) {
+                                                datosValidos = false; // Si ocurre una excepción, los datos no son válidos
+                                            }
+
+                                            // Obtener la fecha y hora actual
+                                            Date fechaActual = new Date(); // Fecha actual
+                                            LocalTime horaActual = LocalTime.now(); // Hora actual
+
+                                            String estadoDonacion = "Pasado"; // Por defecto es "Pasado"
+
+                                            if (datosValidos) {
+                                                // Revisar si la fecha actual está entre la fecha de inicio y fin (incluyendo el día de fin)
+                                                if ((fechaActual.after(fechaInicio) || fechaActual.equals(fechaInicio)) &&
+                                                        (fechaActual.before(fechaFin) || fechaActual.equals(fechaFin))) {
+
+                                                    // Revisar horas solo si la fecha actual está en la fecha de inicio o fin
+                                                    if (fechaActual.equals(fechaInicio)) {
+                                                        // Para el día de inicio, debe ser después o igual a la hora de inicio
+                                                        if (horaActual.isAfter(horaInicio) || horaActual.equals(horaInicio)) {
+                                                            estadoDonacion = "Activo";
+                                                        }
+                                                    } else if (fechaActual.equals(fechaFin)) {
+                                                        // Para el día de fin, debe ser antes o igual a la hora de fin
+                                                        if (horaActual.isBefore(horaFin) || horaActual.equals(horaFin)) {
+                                                            estadoDonacion = "Activo";
+                                                        }
+                                                    } else {
+                                                        // Para los días entre el inicio y el fin, está activo todo el día
+                                                        estadoDonacion = "Activo";
+                                                    }
+                                                }
+                                            }
+                                    %>
+                                    <% if (contador % 3 == 0) { %>
+                                    <!-- Empieza un nuevo slide cada 3 tarjetas -->
+                                    <div class="carousel-item <%= activeClass %>">
+                                        <div class="row">
+                                            <% } %>
+
                                             <div class="col-md-4">
                                                 <div class="card card-don">
-                                                    <img src="/common/img/donaciones/donacion8.png" class="card-img-top card-img-don" alt="...">
+                                                    <img src="${pageContext.request.contextPath}/<%=donacion.getFoto().getRutaFoto()%>" class="card-img-top card-img-adop" alt="...">
                                                     <div class="card-body">
-                                                        <h5 class="card-title">Ayudanos a Ayudar</h5>
-                                                        <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                            Activo
+                                                        <div class="badge text-bg-<%= estadoDonacion.equals("Activo") ? "success" : "secondary" %> text-wrap" style="width: 7rem;">
+                                                            <%= estadoDonacion %>
                                                         </div>
-                                                        <p class="card-text">Descripción de la tarjeta 8.</p>
-                                                        <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
+                                                        <h5 class="card-title"><%= donacion.getTituloAvisoDonacion() %></h5>
+                                                        <a href="PortalDeAdopcion?action=vista&id=<%= donacion.getDonacionSuministrosID() %>" class="btn btn-personal" id="btn-crd-cr">Ver Solicitud</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="card card-don">
-                                                    <img src="/common/img/donaciones/donacion9.png" class="card-img-top card-img-don" alt="...">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Necesitamos su Corazon noble</h5>
-                                                        <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                            Activo
-                                                        </div>
-                                                        <p class="card-text">Descripción de la tarjeta 9.</p>
-                                                        <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                                            <% if ((contador + 1) % 3 == 0 || contador == listaDonaciones.size() - 1) { %>
+                                            <!-- Cierra la fila y el slide después de 3 tarjetas o si es el último elemento -->
+                                        </div> <!-- Cierra la fila -->
+                                    </div> <!-- Cierra el slide -->
+                                    <% } %>
+
+                                    <%
+                                            contador++; // Aumenta el índice después de cada tarjeta
+                                        }
+                                    %>
                                 </div>
 
                                 <!-- Controles del carrusel -->
@@ -342,6 +300,11 @@
                                     <span class="visually-hidden">Siguiente</span>
                                 </button>
                             </div>
+
+
+
+
+
                         </div>
 
 
@@ -496,7 +459,7 @@
 
                         <!-- Botonera de Ver mas Solicitudes de Donacion-->
                         <div class="boton-contenedor">
-                            <a href="/user/solicitudesDonacionSuministros.jsp" class="btn btn-personal2">Ver más Solicitudes</a>
+                            <a href="${pageContext.request.contextPath}/SolicitudesDeSuministros" class="btn btn-personal2">Ver más Solicitudes</a>
                         </div>
 
 
@@ -770,7 +733,7 @@
                         </div>
 
                         <div class="boton-contenedor">
-                            <a href="/user/solicitudesAdopcion.jsp" class="btn btn-personal2">Ver Portal de Adopciones</a>
+                            <a href="${pageContext.request.contextPath}/PortalDeAdopcion" class="btn btn-personal2">Ver Portal de Adopciones</a>
                         </div>
 
 

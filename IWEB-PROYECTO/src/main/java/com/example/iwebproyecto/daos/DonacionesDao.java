@@ -39,6 +39,36 @@ public class DonacionesDao extends BaseDao {
 
 
 
+    public ArrayList<DonacionSuministros> listarInicioDonacioneaSuministros(){
+        ArrayList<DonacionSuministros> donacionesSuministros = new ArrayList<>();
+
+        String sql = "SELECT *, " +
+                "       IF( (CURDATE() BETWEEN `fechaInicioRecepcion` AND `fechaFinRecepcion`) " +
+                "           AND (CURTIME() BETWEEN `horaInicioRecepcion` AND `horaFinRecepcion`), 1, 0) AS activo " +
+                "FROM donacionsuministros " +
+                "WHERE `eliminado` = 0 " +
+                "ORDER BY activo DESC, `fechaInicioRecepcion` ASC " +
+                "LIMIT 9;";
+
+        try (Connection conn =this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                DonacionSuministros donacion = new DonacionSuministros();
+                donacion =mapearDonacionSuministros(rs);
+                donacionesSuministros.add(donacion);
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return donacionesSuministros;
+
+    }
+
+
     public ArrayList<DonacionSuministros> listarDonacionesSuministros(){
         ArrayList<DonacionSuministros> donacionesSuministros = new ArrayList<>();
 

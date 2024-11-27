@@ -108,7 +108,7 @@
                                             <td><%=solicitudTemporal.getUsuario().getCorreoElectronico()%></td>
                                             <td><%=solicitudTemporal.getCelular()%></td>
                                             <td>
-                                                <a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Consultar"><span class="fi fi-rr-paper-plane"></span></button></a>
+                                                <a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue?action=send&id=<%=solicitudTemporal.getUsuario().getUsuarioID()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Consultar"><span class="fi fi-rr-paper-plane"></span></button></a>
                                             </td>
                                         </tr>
                                         <%}%>
