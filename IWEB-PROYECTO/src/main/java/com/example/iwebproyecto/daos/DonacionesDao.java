@@ -9,13 +9,63 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DonacionesDao extends BaseDao {
 
 
+    public ArrayList<DonacionSuministros> listarDonacionesSuministrosNoEliminados(){
+        ArrayList<DonacionSuministros> donacionesSuministros = new ArrayList<>();
+
+        String sql = "SELECT * FROM donacionsuministros WHERE eliminado = 0 " +
+                "ORDER BY fechaInicioRecepcion ASC, horaInicioRecepcion ASC";
+
+        try (Connection conn =this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                DonacionSuministros donacion = new DonacionSuministros();
+                donacion =mapearDonacionSuministros(rs);
+                donacionesSuministros.add(donacion);
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return donacionesSuministros;
+    }
+
+
+
+    public ArrayList<DonacionSuministros> listarDonacionesSuministros(){
+        ArrayList<DonacionSuministros> donacionesSuministros = new ArrayList<>();
+
+        String sql = "SELECT * FROM donacionsuministros";
+
+        try (Connection conn =this.getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                DonacionSuministros donacion = new DonacionSuministros();
+                donacion =mapearDonacionSuministros(rs);
+                donacionesSuministros.add(donacion);
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return donacionesSuministros;
+    }
+
+
+
 
     public DonacionSuministros obtenerSolicitudesDonacionSuministrosPorId(int donacionSuministroId) throws SQLException {
-        String sql = "select * from donacionsuministros where donacionSuministro=?;";
+        String sql = "select * from donacionsuministros where donacionSuministrosID=?;";
 
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -35,7 +85,8 @@ public class DonacionesDao extends BaseDao {
     private DonacionSuministros mapearDonacionSuministros(ResultSet rs) throws SQLException {
         DonacionSuministros donacionSuministros = new DonacionSuministros();
 
-        donacionSuministros.setDonacionSuministrosID(rs.getInt("donacionSuministro"));
+
+        donacionSuministros.setDonacionSuministrosID(rs.getInt("donacionSuministrosID"));
         donacionSuministros.setTituloAvisoDonacion(rs.getString("tituloAvisoDonacion"));
         donacionSuministros.setCorreoElectronicoDonacion(rs.getString("correoElectronicoDonacion"));
         donacionSuministros.setTipoSuministro(rs.getString("tipoSuministro"));
@@ -46,7 +97,9 @@ public class DonacionesDao extends BaseDao {
         donacionSuministros.setFechaFinRecepcion(rs.getString("fechaFinRecepcion"));
         donacionSuministros.setHoraInicioRecepcion(rs.getString("horaInicioRecepcion"));
         donacionSuministros.setHoraFinRecepcion(rs.getString("horaFinRecepcion"));
-        donacionSuministros.setMensajeParaDonantes(rs.getString("mensajeParaDonante"));
+        donacionSuministros.setMensajeParaDonantes(rs.getString("mensajeParaDonantes"));
+        donacionSuministros.setEliminado(rs.getBoolean("eliminado"));
+
 
         DistritoDao distritoDao = new DistritoDao();
         Distrito distrito = distritoDao.obtenerDistritoPorId(rs.getInt("distritoID"));
