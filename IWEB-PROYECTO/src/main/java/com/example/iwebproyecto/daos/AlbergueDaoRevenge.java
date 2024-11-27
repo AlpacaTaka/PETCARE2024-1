@@ -542,7 +542,7 @@ public class AlbergueDaoRevenge extends BaseDao {
     }
 
     public ArrayList<UsuarioAdopcion> listaUsuarioAdopcion(int albergueID) {
-        String sql = "select u.*,a.albergueID from usuarioadopcion u, mascotasadopcion m, albergue a where m.idAdopcion=u.idAdopcion and a.albergueID=m.albergueID and m.albergueID=?;";
+        String sql = "select u.*,a.albergueID from usuarioadopcion u, mascotasadopcion m, albergue a where m.idAdopcion=u.idAdopcion and a.albergueID=m.albergueID and m.eliminado=0 and m.albergueID=?;";
         ArrayList<UsuarioAdopcion> listaUsuarioAdopcion = new ArrayList<>();
         UsuarioDao usuarioDao = new UsuarioDao();
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
@@ -626,5 +626,34 @@ public class AlbergueDaoRevenge extends BaseDao {
             e.printStackTrace();
         }
         return denunciaMaltrato;
+    }
+    public void AdopcionAprobar(int usuarioAdopcionID,int idAdopcion,boolean aprueba){
+        String sql="UPDATE usuarioadopcion set aprobado=? where usuarioAdopcionID=?;";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setBoolean(1, aprueba);
+            pstmt.setInt(2, usuarioAdopcionID);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(aprueba){
+            sql="UPDATE mascotasadopcion set eliminado=1 where idAdopcion=?;";
+            try (Connection conn = this.getConnection();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, idAdopcion);
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            sql="UPDATE usuarioadopcion set aprobado=0 where idAdopcion=?;";
+            try (Connection conn = this.getConnection();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, idAdopcion);
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

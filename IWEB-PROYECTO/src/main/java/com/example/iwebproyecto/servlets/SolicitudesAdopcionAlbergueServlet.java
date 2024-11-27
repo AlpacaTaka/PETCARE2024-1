@@ -12,8 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "SolicitudesAdopcionAlbergue", value = "/SolicitudesDeAdopcion")
-public class SolicitudesAdopcionAlbergue extends HttpServlet {
+@WebServlet(name = "SolicitudesAdopcionAlbergueServlet", value = "/SolicitudesDeAdopcion")
+public class SolicitudesAdopcionAlbergueServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -31,13 +31,28 @@ public class SolicitudesAdopcionAlbergue extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("albergue/solicitudesAdopcion.jsp");
                 rd.forward(request, response);
                 break;
-            /*case "create":
-                request.setAttribute("idAlbergue", idAlbergue);
-                request.getRequestDispatcher("albergue/albergueFormAdop.jsp").forward(request,response);
+            case "accept":
+                int usuarioAdopcionID= Integer.parseInt(request.getParameter("id"));
+                int idAdopcion= Integer.parseInt(request.getParameter("idAdopcion"));
+                albergueDaoRevenge.AdopcionAprobar(usuarioAdopcionID,idAdopcion,true);
+                response.sendRedirect(request.getContextPath() + "/SolicitudesDeAdopcion");
                 break;
-            case "edit":
+            case "decline":
+                int usuarioAdopcionIDdecline= Integer.parseInt(request.getParameter("id"));
+                int idAdopcionDecline= Integer.parseInt(request.getParameter("idAdopcion"));
+                albergueDaoRevenge.AdopcionAprobar(usuarioAdopcionIDdecline,idAdopcionDecline,false);
+                response.sendRedirect(request.getContextPath() + "/SolicitudesDeAdopcion");
+                break;
+            /*case "decline":
                 String id = request.getParameter("id");
-                Pelicula pelicula = peliculaDao.buscarPorId(Integer.parseInt(id));
+                UsuarioAdopcion usuarioAdopcion = albergueDaoRevenge.obtenerMascotasAdopcionPorID(id);
+                if(usuarioAdopcion != null) {
+                    try{
+                        albergueDaoRevenge.AdopcionAprobar();
+                    }
+                }
+                break;*/
+                /*Pelicula pelicula = peliculaDao.buscarPorId(Integer.parseInt(id));
 
                 if(pelicula != null){
                     request.setAttribute("pelicula",pelicula);

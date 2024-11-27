@@ -110,8 +110,8 @@
                                             <td><%=usuarioAdopcion.getUsuario().getCorreoElectronico()%></td>
                                             <td>
                                                 <div style="display: flex; justify-content: center;">
-                                                    <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                    <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
+                                                    <button type="button" onclick="aceptarSolicitud('<%=request.getContextPath()%>/SolicitudesDeAdopcion?action=accept&id=<%=usuarioAdopcion.getUsuarioAdopcionID()%>&idAdopcion=<%=usuarioAdopcion.getMascotasAdopcion().getIdAdopcion()%>')" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
+                                                    <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup('<%=request.getContextPath()%>/SolicitudesDeAdopcion?action=decline&id=<%=usuarioAdopcion.getUsuarioAdopcionID()%>&idAdopcion=<%=usuarioAdopcion.getMascotasAdopcion().getIdAdopcion()%>')"><span class="fi fi-rr-x"></span></button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -246,28 +246,47 @@
         </script>
         <script>
             // Función para abrir el popup
-            function abrirPopup() {
-              document.getElementById('popup').style.display = 'block';
+            function abrirPopup(redireccionamiento) {
+                document.getElementById('popup').style.display = 'block';
+                document.getElementById('popup').href = redireccionamiento;
             }
-        
             // Función para cerrar el popup
             function cerrarPopup() {
-              document.getElementById('popup').style.display = 'none';
+                document.getElementById('popup').style.display = 'none';
+                document.getElementById('popup').href = null;
             }
-        
+
             // Función de confirmación (puedes agregar la lógica de eliminación aquí)
             function confirmarAccion() {
-              alert('Solicitud rechazada');
-              cerrarPopup();
+                alert('Evento eliminado correctamente.')
+                window.location.href = document.getElementById('popup').href;
+                cerrarPopup();
             }
-          </script>
+        </script>
 
         <script>
                 
             // Función de confirmación 
-            function aceptarSolicitud() {
-            alert('Solicitud aceptada.');
-            cerrarPopupCoordinador();
+            //function aceptarSolicitud() {
+            //alert('Solicitud aceptada.');
+            //cerrarPopupCoordinador();
+            //}
+            // Función para abrir el popup
+            function aceptarSolicitud(redireccionamiento) {
+                document.getElementById('popup').style.display = 'block';
+                document.getElementById('popup').href = redireccionamiento;
+            }
+            // Función para cerrar el popup
+            function cerrarPopup() {
+                document.getElementById('popup').style.display = 'none';
+                document.getElementById('popup').href = null;
+            }
+
+            // Función de confirmación (puedes agregar la lógica de eliminación aquí)
+            function confirmarAccion() {
+                alert('Evento eliminado correctamente.')
+                window.location.href = document.getElementById('popup').href;
+                cerrarPopup();
             }
         </script>
     </body>
