@@ -90,7 +90,7 @@
                 <a href="/user/miPerfil.html">Mi Perfil</a>
                 <a href="/user/misEventos.html">Mis Eventos</a>
                 <a href="/user/misDonaciones.html" id="Sep">Mis Donaciones</a>
-                <hr>
+                <hr style="margin: 1px">
                 <a href="TodosLosEventos">Eventos</a>
                 <a href="/user/postularAlbergue.html">Postular a Albergue</a>
                 <a href="/user/postularTemporal.html">Hogar Temporal</a>
@@ -101,7 +101,7 @@
                 <a href="/user/avistamientoPerdidos.html">Portal Avistamiento Perdidos</a>
                 <a href="/user/reportarMascotaPerdida.html">Reportar Mascota Perdida</a>
                 <a href="/user/reportarMaltrato.html" id="Sep">Reportar Maltrato</a>
-                <hr>
+                <hr style="margin: 0px">
                 <a href="/login/login.html">Cerrar Sesión</a>
 
             </div>

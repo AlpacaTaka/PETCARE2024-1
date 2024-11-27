@@ -183,7 +183,7 @@ body{
 
             /* Estilos para los enlaces dentro del menú */
             .menu a {
-                padding: 10px 15px;
+                padding: 8px 15px;
                 text-decoration: none;
                 font-size: 15px;
                 color: #fff;
@@ -202,7 +202,7 @@ body{
             }
 
             #Sep{
-                margin-bottom: 20px;
+                margin-bottom: 7px;
             }
 
 /*============ FIN DISEÑO NAVBAR===========*/
