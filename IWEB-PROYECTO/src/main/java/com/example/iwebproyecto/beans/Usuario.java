@@ -1,5 +1,7 @@
 package com.example.iwebproyecto.beans;
 
+import java.time.LocalDate;
+
 public class Usuario {
     private int usuarioID;
     private String nombre;
@@ -12,6 +14,8 @@ public class Usuario {
     private Distrito distrito;
     private Foto foto;
     private boolean eliminado;
+
+    private LocalDate fechaRegistrado;
 
     public Usuario(int usuarioID, String nombre, String apellido, String dni, String direccion, String correoElectronico, String contrasenia, boolean activo, Distrito distrito, Foto foto, boolean eliminado) {
 
@@ -116,5 +120,12 @@ public class Usuario {
     public void setFoto(Foto foto) {
         this.foto = foto;
 
+    }
+    public LocalDate getFechaRegistrado() {
+        return fechaRegistrado;
+    }
+
+    public void setFechaRegistrado(LocalDate fechaRegistrado) {
+        this.fechaRegistrado = fechaRegistrado;
     }
 }

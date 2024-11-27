@@ -75,12 +75,12 @@ public class ServletCrearCoordinador extends HttpServlet {
         switch (action){
             case "create":
                 crearCoordinadorDao.CrearCoordinadorZona(coordinadorZona);
-                response.sendRedirect(request.getContextPath()+"/CrearCoordinador");
+                response.sendRedirect(request.getContextPath()+"/admincuentas");
                 break;
             case "edit":
                 coordinadorZona.setCoordinadorID(Integer.parseInt(request.getParameter("id")));
                 crearCoordinadorDao.editarCoordinadorZona(coordinadorZona);
-                response.sendRedirect(request.getContextPath()+"/CrearCoordinador");
+                response.sendRedirect(request.getContextPath()+"/admincuentas");
                 break;
         }
 

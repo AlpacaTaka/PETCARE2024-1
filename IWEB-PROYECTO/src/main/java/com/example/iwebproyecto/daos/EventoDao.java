@@ -60,18 +60,13 @@ public class EventoDao extends BaseDao {
             pstmt.setString(10, evento.getRazonEvento());
             pstmt.setString(11, evento.getDescripcionEvento());
             pstmt.setString(12, evento.getInvitados());
-            pstmt.setInt(13, evento.getFoto().getFotoID());
+            pstmt.setObject(13, evento.getFoto().getFotoID());
             pstmt.setInt(14, evento.getAlbergue().getAlbergueID());
             pstmt.setBoolean(15, evento.isAprobado());
             pstmt.setBoolean(16, evento.isEliminado());
 
+            pstmt.executeUpdate();
 
-            // Obtener el ID generado
-            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    evento.setEventoAlbergueID(generatedKeys.getInt(1));
-                }
-            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

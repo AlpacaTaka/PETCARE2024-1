@@ -69,13 +69,13 @@ public class ServletLugarHabilitado extends HttpServlet {
         switch (action) {
             case "create":
                 lugarHabilitadoDao.crearLugarHabilitado(lugarEvento);
-                response.sendRedirect(request.getContextPath()+"/LugarHabilitado");
+                response.sendRedirect(request.getContextPath()+"/admincuentas");
                 break;
 
             case "edit":
                 lugarEvento.setLugarID(Integer.parseInt(request.getParameter("id")));
                 lugarHabilitadoDao.editarLugarHabilitado(lugarEvento);
-                response.sendRedirect(request.getContextPath()+"/LugarHabilitado");
+                response.sendRedirect(request.getContextPath()+"/admincuentas");
                 break;
         }
     }

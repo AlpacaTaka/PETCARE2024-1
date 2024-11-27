@@ -658,6 +658,15 @@ public class AlbergueDaoRevenge extends BaseDao {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            sql="UPDATE usuarioadopcion set fechaAdoptado=? where usuarioAdopcionID=?;";
+            try (Connection conn = this.getConnection();
+                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setDate(1, Date.valueOf(LocalDate.now()));
+                pstmt.setInt(2, usuarioAdopcionID);
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
