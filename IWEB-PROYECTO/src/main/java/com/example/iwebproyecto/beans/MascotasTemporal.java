@@ -2,6 +2,7 @@ package com.example.iwebproyecto.beans;
 
 public class MascotasTemporal {
     private int idMascotaTemporal;
+    private String nombreMascotaTemporal;
     private String estadoUsuario;
 
     private Usuario usuario;
@@ -14,8 +15,8 @@ public class MascotasTemporal {
     private int peso;
     private int edad;
     private String sexo;
-    private int poseeDiscapacidad;
-    private int descripcionDiscapacidad;
+    private boolean poseeDiscapacidad;
+    private String descripcionDiscapacidad;
 
     private Foto foto;
 
@@ -23,7 +24,7 @@ public class MascotasTemporal {
 
     public MascotasTemporal() {}
 
-    public MascotasTemporal(int idMascotaTemporal, String estadoUsuario, Usuario usuario, Albergue albergue, String estado, String raza, String especie, String tamanio, int peso, int edad, String sexo, int poseeDiscapacidad, int descripcionDiscapacidad, Foto foto, String fecha) {
+    /*public MascotasTemporal(int idMascotaTemporal, String estadoUsuario, Usuario usuario, Albergue albergue, String estado, String raza, String especie, String tamanio, int peso, int edad, String sexo, int poseeDiscapacidad, int descripcionDiscapacidad, Foto foto, String fecha) {
         this.idMascotaTemporal = idMascotaTemporal;
         this.estadoUsuario = estadoUsuario;
         this.usuario = usuario;
@@ -42,7 +43,7 @@ public class MascotasTemporal {
         this.foto = foto;
 
         this.fecha = fecha;
-    }
+    }*/
 
     public int getIdMascotaTemporal() {
         return idMascotaTemporal;
@@ -118,19 +119,27 @@ public class MascotasTemporal {
         this.sexo = sexo;
     }
 
-    public int getPoseeDiscapacidad() {
+    public String getNombreMascotaTemporal() {
+        return nombreMascotaTemporal;
+    }
+
+    public void setNombreMascotaTemporal(String nombreMascotaTemporal) {
+        this.nombreMascotaTemporal = nombreMascotaTemporal;
+    }
+
+    public boolean isPoseeDiscapacidad() {
         return poseeDiscapacidad;
     }
 
-    public void setPoseeDiscapacidad(int poseeDiscapacidad) {
+    public void setPoseeDiscapacidad(boolean poseeDiscapacidad) {
         this.poseeDiscapacidad = poseeDiscapacidad;
     }
 
-    public int getDescripcionDiscapacidad() {
+    public String getDescripcionDiscapacidad() {
         return descripcionDiscapacidad;
     }
 
-    public void setDescripcionDiscapacidad(int descripcionDiscapacidad) {
+    public void setDescripcionDiscapacidad(String descripcionDiscapacidad) {
         this.descripcionDiscapacidad = descripcionDiscapacidad;
     }
 

@@ -31,9 +31,9 @@ public class ContactarTemporalAlbergueServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("albergue/contactarTemporal.jsp");
                 rd.forward(request, response);
                 break;
-            case "create":
-                request.setAttribute("idAlbergue", idAlbergue);
-                request.getRequestDispatcher("albergue/albergueFormAdop.jsp").forward(request,response);
+            case "send":
+                request.setAttribute("idUser", request.getParameter("id"));
+                request.getRequestDispatcher("albergue/albergueFormTemporal.jsp").forward(request,response);
                 break;
             case "edit":
                 String id = request.getParameter("id");
@@ -74,6 +74,7 @@ public class ContactarTemporalAlbergueServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
+        int idUser = Integer.parseInt(request.getParameter("idUser"));
         String nombreMascota = request.getParameter("nombreMascota");
         String especie = request.getParameter("especie");
         String raza = request.getParameter("raza");
@@ -85,45 +86,34 @@ public class ContactarTemporalAlbergueServlet extends HttpServlet {
         if (raza.isEmpty()){
             raza="Fermosa";
         }
-        int idDistrito = Integer.parseInt(request.getParameter("idDistrito"));
-        String direccion = request.getParameter("direccionHallazgo");
+        String tamanio = request.getParameter("tamanio");
+        int peso = Integer.parseInt(request.getParameter("peso"));
         int edad = Integer.parseInt(request.getParameter("edad"));
-        String sexo = request.getParameter("sexoMascota");
-        String descripcion = request.getParameter("breveDescripcion");
-        int idFoto = 30;/*request.getParameter("rutaFoto");*/
-        boolean seEncuentraTemporal= Boolean.parseBoolean(request.getParameter("hogarTemp"));
-        String condicionesAdopcion = request.getParameter("condiciones");
+        String sexo = request.getParameter("flexRadioDefault");
+        boolean posee = request.getParameter("posee").equals("si");
+        String discapacidad = request.getParameter("discapacidad");
+        discapacidad = discapacidad==null ? "No tiene" : discapacidad;
         int albergueID = 6;/*Integer.parseInt(request.getParameter("idAlbergue"));*/
-        boolean eliminado = false;
-        MascotasAdopcion mascota = new MascotasAdopcion();
-        mascota.setNombreMascota(nombreMascota);
-        mascota.setEspecie(especie);
-        mascota.setRaza(raza);
-        Distrito distrito = new Distrito();
-        distrito.setDistritoID(idDistrito);
-        mascota.setDistrito(distrito);
-        mascota.setDireccionHallazgo(direccion);
-        mascota.setEdadAprox(edad);
-        mascota.setSexo(sexo);
-        mascota.setDescripcionGeneral(descripcion);
-        Foto foto = new Foto();
-        foto.setFotoID(idFoto);
-        mascota.setFoto(foto);
-        mascota.setSeEncuentraTemporal(seEncuentraTemporal);
-        mascota.setCondicionesAdopcion(condicionesAdopcion);
+        MascotasTemporal mascotasTemporal = new MascotasTemporal();
+        mascotasTemporal.setNombreMascotaTemporal(nombreMascota);
+        mascotasTemporal.setEspecie(especie);
+        mascotasTemporal.setRaza(raza);
+        mascotasTemporal.setTamanio(tamanio);
+        mascotasTemporal.setPeso(peso);
+        mascotasTemporal.setEdad(edad);
+        mascotasTemporal.setSexo(sexo);
+        mascotasTemporal.setPoseeDiscapacidad(posee);
+        mascotasTemporal.setDescripcionDiscapacidad(discapacidad);
         Albergue albergue = new Albergue();
         albergue.setAlbergueID(albergueID);
-        mascota.setAlbergue(albergue);
-        mascota.setEliminado(eliminado);
+        mascotasTemporal.setAlbergue(albergue);
+        Foto foto = new Foto();
+        foto.setFotoID(30);
+        mascotasTemporal.setFoto(foto);
         switch (action) {
-            case "create":
-                albergueDaoRevenge.crearMascotaAdopcion(mascota);
-                response.sendRedirect(request.getContextPath()+"/PortalAdopciones");
-                break;
-            case "edit":
-                mascota.setIdAdopcion(Integer.parseInt(request.getParameter("id")));
-                albergueDaoRevenge.editarMascotaAdopcion(mascota);
-                response.sendRedirect(request.getContextPath()+"/PortalAdopciones");
+            case "send":
+                albergueDaoRevenge.enviarMascotaTemporal(mascotasTemporal,idUser);
+                response.sendRedirect(request.getContextPath()+"/HogaresTemporalesAlbergue");
                 break;
         }
     }

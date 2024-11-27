@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-    <div class="contenedor-p">    
+    <div class="contenedor-p">
         <header class="cabecera">
             <div class="izquierda" onclick="toggleMenu()">
                 <div class="menu-c">
@@ -28,51 +28,57 @@
                 </div>
                 <div class="welcome-text">Hola, Patitas Felices</div>
             </div>
-            <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
+
         <div class="main">
+
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="miPerfil.jsp" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="adoptionTable.jsp" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                    <li><a href="eventTable.jsp" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
-                    <li><a href="donationTable.jsp" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
-                    <li><a href="contactarTemporal.jsp" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
-                    <li><a href="solicitudesAdopcion.jsp" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/PortalAdopciones" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/eventos" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/DonacionSuministros" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/SolicitudesDeAdopcion" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/DenunciasDeMaltrato" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
                     <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
-                    <li id="cerrar-sesion"><a href="#micuenta" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                    <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
             </div>
+
             <div id="menu" class="menu">
-                <a href="miPerfil.jsp">Mi Perfil</a>
-                <a href="adoptionTable.jsp">Portal de Adopciones</a>
-                <a href="eventTable.jsp">Mis Eventos Benéficos</a>
-                <a href="donationTable.jsp">Mis Eventos de Donación</a>
-                <a href="contactarTemporal.jsp">Hogares Temporales</a>
-                <a href="solicitudesAdopcion.jsp">Solicitudes de Adopción</a>
+                <a href="<%=request.getContextPath()%>/miPerfilAlbergue">Mi Perfil</a>
+                <a href="<%=request.getContextPath()%>/PortalAdopciones">Portal de Adopciones</a>
+                <a href="<%=request.getContextPath()%>/eventos">Mis Eventos Benéficos</a>
+                <a href="<%=request.getContextPath()%>/DonacionSuministros">Mis Eventos de Donación</a>
+                <a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue">Hogares Temporales</a>
+                <a href="<%=request.getContextPath()%>/SolicitudesDeAdopcion">Solicitudes de Adopción</a>
+                <a href="<%=request.getContextPath()%>/DenunciasDeMaltrato">Denuncias de maltrato</a>
                 <!--<a href="#">Solicitudes de Adopción</a>-->
                 <hr>
-                <a href="#">Cerrar Sesión</a>
+                <a href="<%=request.getContextPath()%>">Cerrar Sesión</a>
             </div>
             <div class="container-fluid d-flex" id="contenido-principal">
                 <div class="row" id="contenido-nofooter" style="flex-grow: 1;align-content:center">
                     <div class="container md-8  d-flex justify-content-center" style="width: 85%; margin-bottom: 20px; padding: 0;">
-                        <a href="contactarTemporal.jsp"><button type="button" class="btn btn-personal2">Regresar</button></a>
+                        <a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue"><button type="button" class="btn btn-personal2">Regresar</button></a>
                     </div>
                     <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                        <form id="uploadForm" style="padding:10px" >
+                        <form id="uploadForm" style="padding:10px" method="POST" ACTION="<%=request.getContextPath()%>/HogaresTemporalesAlbergue?action=send">
+                            <input type="hidden" name="idUser" value="<%=request.getParameter("id")%>">
                             <h1 style="margin-top: 10px;" class="text-center">Complete los datos de la mascota a enviar</h1>
                             <div class="row justify-content-center p-1">
                                 
                                 <div class="col-md-6 p-1">
                                     <label for="nombreMascota">Nombre</label>
-                                    <input type="text" id="nombreMascota" class="form-control" placeholder="Ingrese el nombreMascota de la mascota" required>
+                                    <input name="nombreMascota" type="text" id="nombreMascota" class="form-control" placeholder="Ingrese el nombreMascota de la mascota" required>
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="Especies">Especie</label>
-                                    <select class="form-select" id="Especies" aria-label="Floating label select example" required>
-                                        <option selected>Seleccione la especie de la Mascota</option>
+                                    <select class="form-select" id="Especies" name="especie" aria-label="Floating label select example" required>
+                                        <option selected value="">Seleccione la especie de la Mascota</option> vv
                                         <option value="Perro">Perro</option>
                                         <option value="Gato">Gato</option>
                                         <option value="Ave">Ave</option>
@@ -82,49 +88,49 @@
                                         <option value="Huron">Hurón</option>
                                         <option value="Chinchilla">Chinchilla</option>
                                         <option value="MiniPig">MiniPig</option>
-                                      </select>
+                                    </select>
                                 </div>
                                 
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
                                     <label for="Razas">Raza</label>
-                                    <select class="form-select" id="Razas" aria-label="Floating label select example" required>
+                                    <select name="raza" class="form-select" id="Razas" aria-label="Floating label select example" required>
                                     <option value="">Ingrese raza de la mascota</option>
                                   </select>
                                 </div>
                                 <div class="col-md-6 p-1">
-                                    <label for="otra raza"> Si colocó otra raza,  escribala aquí
+                                    <label for="otraRaza"> Si colocó otra raza,  escribala aquí
                                     </label>
-                                    <input type="text" class="form-control"  id="otra-raza"  idplaceholder="Otra raza" disabled>
+                                    <input name="otraRaza" type="text" class="form-control"  id="otraRaza"  idplaceholder="Otra raza" disabled>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
                                     <label for="tamaño">Tamaño (en cm)</label>
-                                    <input type="number" class="form-control" id="tamaño" placeholder="Ingrese el tamaño de la mascota" required>
+                                    <input name="tamanio" type="number" class="form-control" id="tamaño" placeholder="Ingrese el tamaño de la mascota" required>
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="peso">Peso (en kg)</label>
-                                    <input type="number" class="form-control" id="peso" placeholder="Ingrese el peso de la mascota" required>
+                                    <input name="peso" type="number" class="form-control" id="peso" placeholder="Ingrese el peso de la mascota" required>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-7 p-1">
                                     <label for="edad">Edad Aproximada</label>
-                                    <input type="number" class="form-control" id="edad" placeholder="Ingrese edad">
+                                    <input name="edad" type="number" class="form-control" id="edad" placeholder="Ingrese edad" required>
                                 </div>
                                 <div class="col-md-5 p-1 ">
-                                    <label for="Sexo">Sexo de la Mascotx</label>
+                                    <label>Sexo de la mascota</label>
                                     <div class="col-md-12 d-flex justify-content-around align-self-center">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Macho">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                             Macho
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked value="Hembra">
                                             <label class="form-check-label" for="flexRadioDefault2">
                                             Hembra
                                             </label>
@@ -135,7 +141,7 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
                                     <label for="discapacidad">Posee alguna discapacidad?</label>
-                                    <select class="form-select" id="discapacidad" aria-label="Floating label select example" required onchange="toggleDiscapacidad()">
+                                    <select name="posee" class="form-select" id="discapacidad" aria-label="Floating label select example" required onchange="toggleDiscapacidad()">
                                         <option value="">Ingrese su respuesta</option>
                                         <option value="si">Sí</option>
                                         <option value="no">No</option>
@@ -143,7 +149,7 @@
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="tipo_discapacidad">Describa la discapacidad (max. 100 caracteres)</label>
-                                    <input type="text" class="form-control" id="tipo_discapacidad" maxlength="100" disabled>
+                                    <input name="discapacidad" type="text" class="form-control" id="tipo_discapacidad" maxlength="100" disabled>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
@@ -157,7 +163,7 @@
 
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1 d-flex justify-content-center">
-                                    <a href="contactarTemporal.jsp"><button type="submit" class="btn btn-personal">Enviar</button></a>
+                                    <button type="submit" class="btn btn-personal">Enviar</button>
                                 </div>
 
                             </div>                           
@@ -178,7 +184,7 @@
         </div>
     </div>
 
-    <script src="/common/script/neonavbar.js"></script>
+    <script src="<%=request.getContextPath()%>/common/script/neonavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         const select1 = document.getElementById('Especies');
