@@ -200,7 +200,7 @@
                                 <div class="card .perdido">
                                     <img src="/common/img/perdidos/perdido1.jpg" class="card-img-top card-img-don" alt="Canela">
                                     <div class="card-body">
-                                        <h5 class="card-title text-center">Canela</h5>
+                                        <h5 class="card-title text-center"><%= perdido.getNombreMascota() %></h5>
                                         <p class="card-text"><strong>Lugar de extravío: </strong><%= perdido.getLugarPerdida() %></p>
                                         <p class="card-text"><strong>Días perdido: </strong><%= diasPerdidos %></p>
                                     </div>
