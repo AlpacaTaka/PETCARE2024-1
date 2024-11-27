@@ -586,8 +586,11 @@ public class AlbergueDaoRevenge extends BaseDao {
                 denunciaMaltrato.setTipoMaltrato(rs.getString(6));
                 denunciaMaltrato.setNombreApellidoMaltratador(rs.getString(7));
                 denunciaMaltrato.setDireccion(rs.getString(8));
-                Foto foto = new Foto();
-                foto.setFotoID(rs.getInt(9));
+
+                FotoDao fotoDao= new FotoDao();
+                Foto foto =fotoDao.obtenerFotoPorId(rs.getInt(9));
+                System.out.println(rs.getInt(9));
+                System.out.println(foto.getRutaFoto());
                 denunciaMaltrato.setFoto(foto);
                 denunciaMaltrato.setRealizoDenuncia(rs.getBoolean(10));
                 denunciaMaltrato.setFechaFormulario(LocalDate.parse(rs.getString(12)));
@@ -616,8 +619,9 @@ public class AlbergueDaoRevenge extends BaseDao {
                 denunciaMaltrato.setTipoMaltrato(rs.getString(6));
                 denunciaMaltrato.setNombreApellidoMaltratador(rs.getString(7));
                 denunciaMaltrato.setDireccion(rs.getString(8));
-                Foto foto = new Foto();
-                foto.setFotoID(rs.getInt(9));
+
+                FotoDao fotoDao= new FotoDao();
+                Foto foto =fotoDao.obtenerFotoPorId(rs.getInt(9));
                 denunciaMaltrato.setFoto(foto);
                 denunciaMaltrato.setRealizoDenuncia(rs.getBoolean(10));
                 denunciaMaltrato.setFechaFormulario(LocalDate.parse(rs.getString(12)));

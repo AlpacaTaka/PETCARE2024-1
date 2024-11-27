@@ -125,7 +125,7 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col d-flex justify-content-center">
                                     <div class="image-container">
-                                        <img src="<%=request.getContextPath()%>/common/img/perdidos/perdido5.jpg" alt="Perfil de usuario">
+                                        <img src="<%=request.getContextPath()%>/<%=denuncia.getFoto().getRutaFoto()%>" alt="Perfil de usuario">
                                     </div>
                                 </div>
                             </div>
