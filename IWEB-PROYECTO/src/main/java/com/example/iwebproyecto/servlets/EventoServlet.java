@@ -162,6 +162,7 @@ public class EventoServlet extends HttpServlet {
                     Foto foto = procesarImagen(filePart, request, response, fotoDao);
                     if (foto == null) return;
 
+
                     EventoBenefico nuevoEvento = new EventoBenefico();
                     nuevoEvento.setNombre(nombre);
                     nuevoEvento.setTipoDonacion(tipoDonacion);
@@ -274,7 +275,7 @@ public class EventoServlet extends HttpServlet {
 
         // Guardar la foto en la base de datos con la ruta generada
         Foto foto = new Foto();
-        foto.setRutaFoto(uniqueFileName);
+        foto.setRutaFoto("/uploads/fotosEvento/" + uniqueFileName);
         fotoDao.GuadarFoto(foto);
 
         // Guardar el archivo en el sistema de archivos
