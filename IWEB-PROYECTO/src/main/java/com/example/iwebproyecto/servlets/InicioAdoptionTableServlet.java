@@ -1,6 +1,9 @@
 package com.example.iwebproyecto.servlets;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import com.example.iwebproyecto.beans.Albergue;
@@ -8,15 +11,22 @@ import com.example.iwebproyecto.beans.Distrito;
 import com.example.iwebproyecto.beans.Foto;
 import com.example.iwebproyecto.beans.MascotasAdopcion;
 import com.example.iwebproyecto.daos.AlbergueDaoRevenge;
+import com.example.iwebproyecto.daos.FotoDao;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Part;
 
 @WebServlet(name = "InicioAlbergueServlet", value = "/PortalAdopciones")
+@MultipartConfig
 public class InicioAdoptionTableServlet extends HttpServlet {
+
+    private static final int ALBERGUE_ID = 6;
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -80,19 +90,31 @@ public class InicioAdoptionTableServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
+        FotoDao fotoDao = new FotoDao();
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
+        System.out.println("Debug: All Parameters:");
+        for (String paramName : request.getParameterMap().keySet()) {
+            System.out.println(paramName + ": " + request.getParameter(paramName));
+        }
+
         String nombreMascota = request.getParameter("nombreMascota");
         String especie = request.getParameter("especie");
         String raza = request.getParameter("raza");
-        raza=raza.toUpperCase().charAt(0)+raza.substring(1,raza.length());
+        if (raza == null) {
+            raza = ""; // Default to empty string if null
+        }
+        raza = raza.trim().toUpperCase(); // Trim whitespace first
+        if (raza.isEmpty()) {
+            raza = "Fermosa"; // Your default value
+        } else {
+            raza = raza.charAt(0) + raza.substring(1).toLowerCase();
+        }
+
         String otraRaza = request.getParameter("otraRaza");
-        if (raza.equals("Otro")) {
-            raza=otraRaza;
+        if (raza.equals("OTRO")) {
+            raza = otraRaza != null ? otraRaza : "Fermosa";
         }
-        if (raza.isEmpty()){
-            raza="Fermosa";
-        }
-        int idDistrito = Integer.parseInt(request.getParameter("idDistrito"));
+        int idDistrito = Integer.parseInt(request.getParameter("distrito"));
         String direccion = request.getParameter("direccionHallazgo");
         int edad = Integer.parseInt(request.getParameter("edad"));
         String sexo = request.getParameter("sexoMascota");
@@ -100,7 +122,7 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         int idFoto = 30;/*request.getParameter("rutaFoto");*/
         boolean seEncuentraTemporal= Boolean.parseBoolean(request.getParameter("hogarTemp"));
         String condicionesAdopcion = request.getParameter("condiciones");
-        int albergueID = 6;/*Integer.parseInt(request.getParameter("idAlbergue"));*/
+        int albergueID = 6;
         boolean eliminado = false;
         MascotasAdopcion mascota = new MascotasAdopcion();
         mascota.setNombreMascota(nombreMascota);
@@ -113,8 +135,8 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         mascota.setEdadAprox(edad);
         mascota.setSexo(sexo);
         mascota.setDescripcionGeneral(descripcion);
-        Foto foto = new Foto();
-        foto.setFotoID(idFoto);
+        Part filePart = request.getPart("foto");
+        Foto foto = procesarImagen(filePart, request, response, fotoDao);
         mascota.setFoto(foto);
         mascota.setSeEncuentraTemporal(seEncuentraTemporal);
         mascota.setCondicionesAdopcion(condicionesAdopcion);
@@ -122,10 +144,18 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         albergue.setAlbergueID(albergueID);
         mascota.setAlbergue(albergue);
         mascota.setEliminado(eliminado);
+
+        if (filePart != null) {
+            System.out.println("File Part Details:");
+            System.out.println("Size: " + filePart.getSize());
+            System.out.println("Content Type: " + filePart.getContentType());
+            System.out.println("Submitted File Name: " + filePart.getSubmittedFileName());
+        }
+
         switch (action) {
             case "create":
                 albergueDaoRevenge.crearMascotaAdopcion(mascota);
-                response.sendRedirect(request.getContextPath()+"/PortalAdopciones");
+                response.sendRedirect(request.getContextPath() + "/PortalAdopciones?action=lista");
                 break;
             case "edit":
                 mascota.setIdAdopcion(Integer.parseInt(request.getParameter("id")));
@@ -134,4 +164,53 @@ public class InicioAdoptionTableServlet extends HttpServlet {
                 break;
         }
     }
+
+    private Foto procesarImagen(Part filePart, HttpServletRequest request, HttpServletResponse response, FotoDao fotoDao) throws ServletException, IOException {
+        // Definir una ruta fija fuera de target
+        String uploadPath = "C:/Users/omarr/Desktop/PETCARE2024-1/IWEB-PROYECTO/src/main/webapp/uploads/fotosMascotasAdopcion";
+
+        // Crear directorio si no existe
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
+
+        // Verificar si se ha seleccionado un archivo
+        if (filePart == null || filePart.getSize() == 0) {
+            request.setAttribute("mensajeError", "Debe seleccionar una imagen.");
+            request.getRequestDispatcher("/albergue/albergueFormAdop.jsp").forward(request, response);
+            return null;
+        }
+
+        // Obtener la imagen desde el formulario y generar un nombre único
+        String originalFileName = filePart.getSubmittedFileName();
+        String uniqueFileName = System.currentTimeMillis() + "_" + originalFileName;
+        String filePath = uploadPath + File.separator + uniqueFileName;
+
+        // Guardar la foto en la base de datos con la ruta generada
+        Foto foto = new Foto();
+        foto.setRutaFoto("/uploads/fotosMascotasAdopcion/" + uniqueFileName);
+        fotoDao.GuadarFoto(foto);
+
+        // Guardar el archivo en el sistema de archivos
+        try (InputStream inputStream = filePart.getInputStream();
+             FileOutputStream outputStream = new FileOutputStream(filePath)) {
+
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            System.out.println("Imagen guardada exitosamente en: " + filePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("mensajeError", "Error al guardar la imagen: " + e.getMessage());
+            request.getRequestDispatcher("/albergue/albergueFormAdop.jsp").forward(request, response);
+            return null;
+        }
+
+        return foto;
+    }
+
+
 }
