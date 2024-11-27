@@ -22,7 +22,7 @@ public class InicioAdoptionTableServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Establece el tipo de contenido de la respuesta
-        response.setContentType("text/html");
+         response.setContentType("text/html");
 
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
