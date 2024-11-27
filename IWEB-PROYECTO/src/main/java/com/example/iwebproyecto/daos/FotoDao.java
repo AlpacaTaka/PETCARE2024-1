@@ -54,3 +54,6 @@ public class FotoDao extends BaseDao {
         return null;
     }
 }
+
+
+
