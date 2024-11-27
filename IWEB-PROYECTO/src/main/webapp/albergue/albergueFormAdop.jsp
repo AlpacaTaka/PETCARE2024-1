@@ -71,7 +71,7 @@
                     <a href="<%=request.getContextPath()%>/PortalAdopciones"><button type="button" class="btn btn-personal2">Regresar</button></a>
                 </div>
                 <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                    <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/PortalAdopciones" enctype="multipart/form-data" accept-charset="UTF-8">
+                    <form id="uploadForm" style="padding:10px" method="POST" action="${pageContext.request.contextPath}/PortalAdopciones?action=create" enctype="multipart/form-data" accept-charset="UTF-8">
                         <input type="hidden" name="id" value="<%=albergueID%>">
                         <h1 style="margin-top: 10px;" class="text-center">Creación de perfil de Mascota para Adopción</h1>
                         <div class="row justify-content-center p-1">
@@ -104,9 +104,9 @@
                                 </select>
                             </div>
                             <div class="col-md-6 p-1">
-                                <label for="otra-raza"> Si colocó otra raza,  escribala aquí
+                                <label for="otraRaza"> Si colocó otra raza,  escribala aquí
                                 </label>
-                                <input type="text" class="form-control" name="otraRaza" id="otra-raza"  <%--placeholder="Otra raza"--%> disabled>
+                                <input type="text" class="form-control" name="otraRaza" id="otraRaza"  <%--placeholder="Otra raza"--%> disabled>
                             </div>
                         </div>
                         <div class="row justify-content-center p-1">
@@ -258,7 +258,7 @@
     <script>
         const select1 = document.getElementById('Especies');
         const select2 = document.getElementById('Razas');
-        const otraRazaInput = document.getElementById('otra-raza');
+        const otraRazaInput = document.getElementById('otraRaza');
 
         const opciones = {
             Perro: ['Galgo', 'Shitzu', 'Chihuhua','No sabe','Otro'],
@@ -349,7 +349,7 @@
         })
     </script>
     <script>
-        const razaInput = document.getElementById('otra-raza')
+        const razaInput = document.getElementById('otraRaza')
         razaInput.addEventListener('input', function(){
             this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
         })
