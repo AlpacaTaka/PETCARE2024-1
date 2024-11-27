@@ -4,6 +4,7 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/Administrador/administracionCuentas.jsp" value="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/Administrador" />
+        <entry key="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/Administrador/editarAlbergue.jsp" value="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/Administrador" />
         <entry key="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue/adoptionTable.jsp" value="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue" />
         <entry key="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue/albergueFormAdop.jsp" value="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue" />
         <entry key="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue/albergueFormEvento.jsp" value="file://$PROJECT_DIR$/IWEB-PROYECTO/src/main/webapp/albergue" />

@@ -25,7 +25,6 @@ import jakarta.servlet.http.Part;
 @MultipartConfig
 public class InicioAdoptionTableServlet extends HttpServlet {
 
-    private static final int ALBERGUE_ID = 6;
 
 
     @Override
@@ -93,9 +92,7 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         FotoDao fotoDao = new FotoDao();
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
         System.out.println("Debug: All Parameters:");
-        for (String paramName : request.getParameterMap().keySet()) {
-            System.out.println(paramName + ": " + request.getParameter(paramName));
-        }
+
 
         String nombreMascota = request.getParameter("nombreMascota");
         String especie = request.getParameter("especie");
@@ -119,11 +116,15 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         int edad = Integer.parseInt(request.getParameter("edad"));
         String sexo = request.getParameter("sexoMascota");
         String descripcion = request.getParameter("breveDescripcion");
-        int idFoto = 30;/*request.getParameter("rutaFoto");*/
         boolean seEncuentraTemporal= Boolean.parseBoolean(request.getParameter("hogarTemp"));
         String condicionesAdopcion = request.getParameter("condiciones");
         int albergueID = 6;
         boolean eliminado = false;
+
+        Part filePart = request.getPart("foto");
+        Foto foto = procesarImagen(filePart, request, response, fotoDao);
+        if (foto == null) return;
+
         MascotasAdopcion mascota = new MascotasAdopcion();
         mascota.setNombreMascota(nombreMascota);
         mascota.setEspecie(especie);
@@ -135,8 +136,6 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         mascota.setEdadAprox(edad);
         mascota.setSexo(sexo);
         mascota.setDescripcionGeneral(descripcion);
-        Part filePart = request.getPart("foto");
-        Foto foto = procesarImagen(filePart, request, response, fotoDao);
         mascota.setFoto(foto);
         mascota.setSeEncuentraTemporal(seEncuentraTemporal);
         mascota.setCondicionesAdopcion(condicionesAdopcion);
