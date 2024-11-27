@@ -1,5 +1,10 @@
-<%@ page import="java.util.List" %>
+<%@ page import="com.example.iwebproyecto.beans.SolicitudTemporal" %>
 <%@ page import="com.example.iwebproyecto.beans.PublicacionMascotaPerdida" %>
+<%@ page import="java.util.Objects" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.temporal.ChronoUnit" %>
+<%@ page import="com.example.iwebproyecto.beans.Comentarios" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -50,7 +55,7 @@
                 </div>
                 <div class="welcome-text">Hola, Coordinador Zona Norte</div>
             </div>
-            <div class="logo"><a href="user/inicio.html"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
         </header>
 
         <div class="main">
@@ -61,24 +66,24 @@
                     <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/coordinador/listaPublicacionesDeMascotaPerdida.jsp" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
 
-                    <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                    <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
                 
             </div>
 
             <div id="menu" class="menu">
-                <a href="miPerfil.jsp">Mi Perfil</a>
+                <a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp">Mi Perfil</a>
                 <hr>
-                <a href="listaSolicitudesDeHogarTemporal1.jsp">Solicitudes de hogar temporal</a>
-                <a href="listaHogaresTemporales.jsp">Comentarios de hogares temporales</a>
+                <a href="${pageContext.request.contextPath}/ListaSolicitudes">Solicitudes de hogar temporal</a>
+                <a href="${pageContext.request.contextPath}/ListaTemporales">Comentarios de hogares temporales</a>
                 <hr>
-                <a href="listaSolicitudesDeMascotaPerdida.html">Solicitudes de mascota perdida</a>
-                <a href="listaPublicacionesDeMascotaPerdida.jsp">Publicaciones de mascota perdida</a>
+                <a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes">Solicitudes de mascota perdida</a>
+                <a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones">Publicaciones de mascota perdida</a>
                 <hr>
-                <a href="/login/signin.html">Cerrar Sesión</a>
+                <a href="<%=request.getContextPath()%>">Cerrar Sesión</a>
 
             </div>
 
@@ -98,7 +103,7 @@
                             <div class="col-sm-4 order-first" style="min-width: 300px;">
                                 <div class="input-group ">
                                     <button class="btn" button type="button"  aria-label="Close" style="background-color: #4D0E0E; cursor: default;"><span class="fi-rr-search" style="font-size: 20px; color:rgb(255, 255, 255)"></span></button>
-                                    <input type="text" id="searchInput" class="form-control" placeholder="Busque por nombre y apellido" maxlength="60">
+                                    <input type="text" id="searchInput" class="form-control" placeholder="Busque por nombre" maxlength="60">
                                 </div>
                             </div>
                             <!-- 
@@ -186,7 +191,7 @@
         </div>
     </div>
 
-    <script src="/common/script/neonavbar.js"></script>
+    <script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script>
