@@ -20,9 +20,14 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.sql.SQLException;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 
 
 @WebServlet(name = "EventoServlet", urlPatterns = {"/eventos"})
+@MultipartConfig
 public class EventoServlet extends HttpServlet {
 
     private static final int ALBERGUE_ID = 6;
@@ -245,47 +250,53 @@ public class EventoServlet extends HttpServlet {
         return null; // Indica que el parámetro es nulo o vacío
     }
 
-    private Foto procesarImagen(Part filePart, HttpServletRequest request, HttpServletResponse response, FotoDao fotoDao) throws IOException, ServletException, SQLException {
-        if (filePart != null && filePart.getSubmittedFileName() != null && !filePart.getSubmittedFileName().isEmpty()) {
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-            // Validar que sea una imagen PNG
-            if (!fileName.toLowerCase().endsWith(".png")) {
-                request.setAttribute("mensajeError", "El archivo debe ser una imagen PNG.");
-                request.getRequestDispatcher("/albergue/albergueFormEvento.jsp").forward(request, response);
-                return null; // Indica un error
-            }
+    private Foto procesarImagen(Part filePart, HttpServletRequest request, HttpServletResponse response, FotoDao fotoDao) throws ServletException, IOException {
+        // Definir una ruta fija fuera de target
+        String uploadPath = "C:/Users/omarr/Desktop/PETCARE2024-1/IWEB-PROYECTO/src/main/webapp/uploads/fotosEvento";
 
-            // Define la ruta completa donde se guardará la imagen
-            String relativePath = "/common/img/eventos/" + fileName;
-            String basePath = getServletContext().getRealPath("");
-            String filePath = basePath + relativePath;
-            try (InputStream inputStream = filePart.getInputStream()) {
-                Path path = Paths.get(filePath);
-                Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
-
-                // Crea un objeto Foto y guarda la información en la base de datos
-                Foto foto = new Foto();
-                foto.setRutaFoto(relativePath);
-                //int fotoId = fotoDao.guardarFoto(foto);
-                int fotoId = 1;
-                if (fotoId <= 0) { // Maneja el posible fallo en guardarFoto()
-                    request.setAttribute("mensajeError", "Error al guardar la foto en la base de datos.");
-                    request.getRequestDispatcher("/albergue/albergueFormEvento.jsp").forward(request, response);
-                    return null; // Indica un error
-                }
-                foto.setFotoID(fotoId); // Asigna el ID generado a la foto
-                return foto;
-            } catch (IOException e) {
-                request.setAttribute("mensajeError", "Error al guardar la imagen: " + e.getMessage());
-                request.getRequestDispatcher("/albergue/albergueFormEvento.jsp").forward(request, response);
-                return null; // Indica un error
-            }
-        } else {
-            request.setAttribute("mensajeError", "Debe subir una imagen PNG.");
-            request.getRequestDispatcher("/albergue/albergueFormEvento.jsp").forward(request, response);
-            return null; // Indica que no se subió ninguna imagen
+        // Crear directorio si no existe
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
         }
+
+        // Verificar si se ha seleccionado un archivo
+        if (filePart == null || filePart.getSize() == 0) {
+            request.setAttribute("mensajeError", "Debe seleccionar una imagen.");
+            request.getRequestDispatcher("/albergue/albergueFormEvento.jsp").forward(request, response);
+            return null;
+        }
+
+        // Obtener la imagen desde el formulario y generar un nombre único
+        String originalFileName = filePart.getSubmittedFileName();
+        String uniqueFileName = System.currentTimeMillis() + "_" + originalFileName;
+        String filePath = uploadPath + File.separator + uniqueFileName;
+
+        // Guardar la foto en la base de datos con la ruta generada
+        Foto foto = new Foto();
+        foto.setRutaFoto(uniqueFileName);
+        fotoDao.GuadarFoto(foto);
+
+        // Guardar el archivo en el sistema de archivos
+        try (InputStream inputStream = filePart.getInputStream();
+             FileOutputStream outputStream = new FileOutputStream(filePath)) {
+
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            System.out.println("Imagen guardada exitosamente en: " + filePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("mensajeError", "Error al guardar la imagen: " + e.getMessage());
+            request.getRequestDispatcher("/albergue/albergueFormEvento.jsp").forward(request, response);
+            return null;
+        }
+
+        return foto;
     }
+
 
 
 }

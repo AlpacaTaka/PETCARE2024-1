@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-8 d-flex justify-content-start" style="padding-right: 10px;">
-                                    <a href="albergueFormEvento.jsp">
+                                    <a href="<%=request.getContextPath()%>/albergue/albergueFormEvento.jsp">
                                         <button type="button" class="btn btn-personal">
                                             <span class="fi fi-rr-add">&nbsp;Nuevo</span>
                                         </button>
@@ -132,7 +132,10 @@
                                       <!-- Card 1 -->
                                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
                                         <div class="card h-100">
-                                            <img src="${pageContext.request.contextPath}<%= evento.getFoto().getRutaFoto() %>" class="card-img-top" alt="${evento.nombre}" style="max-width: 300px; height: 260px; object-fit: cover;">
+                                            <img src="${pageContext.request.contextPath}/uploads/fotosEventos/<%= evento.getFoto().getRutaFoto().substring(evento.getFoto().getRutaFoto().lastIndexOf('/') + 1) %>"
+                                                 class="card-img-top"
+                                                 alt="<%= evento.getNombre() %>"
+                                                 style="max-width: 300px; height: 260px; object-fit: cover;">
                                             <div class="card-body">
                                                 <h4 class="card-title text-center"><%= nombre %></h4>
                                                 <hr>
