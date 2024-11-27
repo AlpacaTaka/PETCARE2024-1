@@ -55,15 +55,15 @@ public class EventoServlet extends HttpServlet {
                 break;
 
             case "visualizar":
-                int eventoId = Integer.parseInt(request.getParameter("eventoAlbergueID"));
-                EventoBenefico evento = eventoDao.obtenerEventoPorID(eventoId);
+                int eventoIdv = Integer.parseInt(request.getParameter("id")); /*eventoAlbergueID*/
+                EventoBenefico evento = eventoDao.obtenerEventoPorID(eventoIdv);
                 request.setAttribute("evento", evento);
                 request.getRequestDispatcher("/albergue/albergueVisEvento.jsp").forward(request, response);
                 break;
 
             case "editar":
-                eventoId = Integer.parseInt(request.getParameter("eventoAlbergueID"));
-                EventoBenefico eventoEditar = eventoDao.obtenerEventoPorID(eventoId);
+                int eventoIde = Integer.parseInt(request.getParameter("id"));
+                EventoBenefico eventoEditar = eventoDao.obtenerEventoPorID(eventoIde);
                 request.setAttribute("evento", eventoEditar);
                 request.setAttribute("lugaresDisponibles", lugaresDisponibles);
                 request.getRequestDispatcher("/albergue/albergueFormEvento.jsp").forward(request, response);
@@ -73,7 +73,7 @@ public class EventoServlet extends HttpServlet {
                 String eliminarEventoId = request.getParameter("id");
                 if (eliminarEventoId != null) {
                     try {
-                        eventoId = Integer.parseInt(eliminarEventoId);
+                        int eventoId = Integer.parseInt(eliminarEventoId);
                         boolean eliminado = eventoDao.eliminarEvento(eventoId);
                         if (eliminado) {
                             response.sendRedirect(request.getContextPath() + "/eventos?action=lista");
