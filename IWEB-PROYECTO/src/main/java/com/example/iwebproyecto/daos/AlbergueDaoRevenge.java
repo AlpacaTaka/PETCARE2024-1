@@ -675,4 +675,46 @@ public class AlbergueDaoRevenge extends BaseDao {
             }
         }
     }
+    public void enviarMascotaTemporal(MascotasTemporal mascotasTemporal, int usuarioID) {
+        String sql = "INSERT INTO mascotastemporal (nombreMascotaTemporal, especie, raza, tamanio, peso, edad, sexo, poseeDiscapacidad, descripcionDiscapacidad, fotoID, albergueID)  VALUE (?,?,?,?,?,?,?,?,?,?,?);";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, mascotasTemporal.getNombreMascotaTemporal());
+            pstmt.setString(2, mascotasTemporal.getEspecie());
+            pstmt.setString(3, mascotasTemporal.getRaza());
+            pstmt.setString(4, mascotasTemporal.getTamanio());
+            pstmt.setInt(5, mascotasTemporal.getPeso());
+            pstmt.setInt(6, mascotasTemporal.getEdad());
+            pstmt.setString(7, mascotasTemporal.getSexo());
+            pstmt.setBoolean(8,mascotasTemporal.isPoseeDiscapacidad());
+            pstmt.setString(9, mascotasTemporal.getDescripcionDiscapacidad());
+            pstmt.setInt(10,mascotasTemporal.getFoto().getFotoID());
+            pstmt.setInt(11,mascotasTemporal.getAlbergue().getAlbergueID());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        sql="select * from mascotastemporal order by mascotaTemporalID desc;";
+        int ID=0;
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs =pstmt.executeQuery();
+            while (rs.next()) {
+                ID = rs.getInt(1);
+                break;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        sql = "INSERT INTO usuariomascotatemporal (usuarioID, mascotaTemporalID, terminoTiempoTemporal, fechaAceptoTemporal)  VALUE (?,?,?,null);";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, usuarioID);
+            pstmt.setInt(2, ID);
+            pstmt.setBoolean(3, false);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
