@@ -124,32 +124,6 @@
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="cardContainer" style="width: 100%;">
 
 
-                            <div class="col-12 col-md-6 col-lg-4 mb-4 card-item">
-                                <div class="card h-100">
-                                    <div class="card-body text-center">
-                                        <h4 class="card-title">Oscar</h4>
-                                        <img src="/common/img/perdidos/perdido4.jpg" class="card-img-top" alt="..." style="max-width: 300px; height:260px; object-fit: cover;">
-                                        <div class="row" style="margin-top: 10px ; ">
-                                            <p class="card-text"><strong>Lugar de extravío:</strong> Parque Condesa Pueblo Libre</p>
-                                        </div>
-                                        <div class="row">
-                                            <p class="card-text"><strong>Días perdido:</strong> 2</p>
-                                        </div>
-
-                                        <div class="row" style="margin-top: 10px ; justify-content: left;">
-                                            <div class="col d-flex justify-content-center align-items-center">
-                                                <h5 class="card-title" style="color: green;">Perdido/a</h5>
-                                            </div>
-
-                                            <div class="col d-flex justify-content-center">
-                                                <a href="publicacionDeMascotaPerdida.html" class="btn btn-personal" id="btn-crd-cr">Ver publicación</a>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
                             <%
                                 List<PublicacionMascotaPerdida> lista = (List<PublicacionMascotaPerdida>) request.getSession().getAttribute("listaMascotaPerdida");
                                 if (lista != null) {
@@ -163,7 +137,7 @@
                                         <h4 class="card-title"><%=so.getNombreMascota()%></h4>
                                         <img src="/common/img/perdidos/perdido7.jpg" class="card-img-top" alt="..." style="max-width: 300px; height:260px; object-fit: cover;">
                                         <div class="row" style="margin-top: 10px ;">
-                                            <p class="card-text"><strong>Lugar de extravío:</strong><%=so.getLugarPerdida()%></p>
+                                            <p class="card-text"><strong>Lugar de extravío: </strong><%=so.getLugarPerdida()%></p>
                                         </div>
                                         <%
                                             // Obtenengo la fecha actual
@@ -172,23 +146,32 @@
                                             // Obtener la fecha de perdida
                                             LocalDate fechaPerdida = so.getFechaPerdida();
 
-                                            // Calcular la diferencia en milisegundos
-                                            long diferenciaMillis = fechaActual.getTime() - fechaPerdida.getTime();
-
                                             // Convertir la diferencia de milisegundos a días
                                             long diasPerdidos = ChronoUnit.DAYS.between(fechaPerdida, fechaActual);
                                         %>
                                         <div class="row">
-                                            <p class="card-text"><strong>Días perdido:</strong><%= diasPerdidos %></p>
+                                            <p class="card-text"><strong>Días perdido:</strong> <%= diasPerdidos %></p>
                                         </div>
 
                                         <div class="row" style="margin-top: 10px ; justify-content: left;">
                                             <div class="col d-flex justify-content-center align-items-center">
+                                                <%if (so.isMascotaEncontrada()){
+
+
+                                                %>
+                                                <h5 class="card-title" style="color: green;">Encontrado/a</h5>
+                                                <%
+                                                    }else{
+
+                                                %>
                                                 <h5 class="card-title" style="color: green;">Perdido/a</h5>
+                                                <%
+                                                }
+                                                %>
                                             </div>
 
                                             <div class="col d-flex justify-content-center">
-                                                <a href="publicacionDeMascotaPerdida?id=<%=so.getPublicacionMascotaPerdidaID()%>" class="btn btn-personal" id="btn-crd-cr">Ver publicación</a>
+                                                <a href="VerPubicacionMascotaPerdida?id=<%=so.getPublicacionMascotaPerdidaID()%>" class="btn btn-personal" >Ver publicación</a>
                                             </div>
                                         </div>
 
@@ -201,9 +184,6 @@
                             %>
                             <p>No hay solicitudes disponibles.</p>
                             <% } %>
-
-                            <!-- Card 2 -->
-
 
 
 
@@ -239,10 +219,10 @@
     </div>
 </div>
 
-<script src="/common/script/neonavbar.js"></script>
+<script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
 <script>
+
     document.addEventListener("DOMContentLoaded", function() {
         // Capturamos el campo de búsqueda
         var searchInput = document.querySelector('.form-control');
@@ -300,6 +280,62 @@
     });
 
     document.addEventListener("DOMContentLoaded", function() {
+        // Capturamos el campo de búsqueda
+        var searchInput = document.querySelector('.form-control');
+        var pagination = document.getElementById('pagination'); // Referencia a la paginación
+
+        // Evento 'keyup' para filtrar las cards cuando se escribe
+        searchInput.addEventListener('keyup', function() {
+            var inputValue = searchInput.value.toLowerCase(); // Convertir el texto a minúsculas
+            var cards = document.querySelectorAll('.card-item'); // Seleccionar todas las cards
+
+            let visibleCards = 0; // Contador para cards visibles
+
+            cards.forEach(function(card) {
+                var cardTitle = card.querySelector('.card-title').textContent.toLowerCase(); // Obtener título
+
+                if (cardTitle.includes(inputValue)) {
+                    if (inputValue.length > 0 || visibleCards < 8) { // Mostrar solo 6 como máximo cuando no hay búsqueda
+                        card.classList.add('d-block'); // Mostrar la card si coincide
+                        card.classList.remove('d-none'); // Asegurarse de que no esté oculta
+                        visibleCards++; // Aumentar el contador de cards visibles
+                    } else {
+                        card.classList.remove('d-block'); // Ocultar si excede 6 cards
+                        card.classList.add('d-none'); // Asegurarse de que esté oculta
+                    }
+                } else {
+                    card.classList.remove('d-block'); // Ocultar la card si no coincide
+                    card.classList.add('d-none'); // Asegurarse de que esté oculta
+                }
+            });
+
+            // Si el input está vacío, asegúrate de que no se muestren más de 8 cards
+            if (inputValue.length === 0) {
+                visibleCards = 0;
+                cards.forEach(function(card) {
+                    if (visibleCards < 8) {
+                        card.classList.add('d-block');
+                        card.classList.remove('d-none');
+                        visibleCards++;
+                    } else {
+                        card.classList.remove('d-block');
+                        card.classList.add('d-none');
+                    }
+                });
+            }
+
+            // Si se está buscando, ocultar la paginación
+            if (inputValue.length > 0) {
+                pagination.style.display = 'none'; // Ocultar la paginación
+            } else {
+                pagination.style.display = ''; // Mostrar la paginación si no hay búsqueda
+                showPage(1); // Mostrar la primera página cuando no hay búsqueda
+            }
+        });
+
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
         const itemsPerPage = 6;
         let currentPage = 1;
         const cardItems = document.querySelectorAll('.card-item');
@@ -334,7 +370,7 @@
 
             // Botón anterior (se desactiva si estamos en la primera página)
             let prevClass = currentPage === 1 ? 'disabled' : '';
-            pagination.innerHTML += `<li class="page-item <%="${prevClass}"%>"><a class="page-link" data-page="${currentPage - 1}" href="#">Anterior</a></li>`;
+            pagination.innerHTML += `<li class="page-item <%="${prevClass}"%>"><a class="page-link" data-page="<%="${currentPage - 1}"%>" href="#">Anterior</a></li>`;
 
             // Números de página
             for (let i = 1; i <= totalPages; i++) {
@@ -343,8 +379,6 @@
                 pagination.innerHTML += `<li class="page-item <%="${activeClass} ${pageClass}"%>"><a class="page-link" data-page="<%="${i}"%>" href="#"><%="${i}"%></a></li>`;
             }
 
-            // Botón siguiente (se desactiva si estamos en la última página)
-            let nextClass = currentPage === totalPages ? 'disabled' : '';
             // Botón siguiente (se desactiva si estamos en la última página)
             let nextClass = currentPage === totalPages ? 'disabled' : '';
             pagination.innerHTML += `<li class="page-item <%="${nextClass}"%>"><a class="page-link" data-page="<%="${currentPage + 1}"%>" href="#">Siguiente</a></li>`;
