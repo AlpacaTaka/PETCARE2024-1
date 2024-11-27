@@ -2,6 +2,7 @@ package com.example.iwebproyecto.servlets;
 
 import com.example.iwebproyecto.beans.CoordinadorZona;
 import com.example.iwebproyecto.beans.Foto;
+import com.example.iwebproyecto.beans.LugarEvento;
 import com.example.iwebproyecto.beans.Zona;
 import com.example.iwebproyecto.daos.CrearCoordinadorDao;
 import jakarta.servlet.ServletException;
@@ -18,12 +19,26 @@ public class ServletCrearCoordinador extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "create" : request.getParameter("action");
+        CrearCoordinadorDao zona = new CrearCoordinadorDao();
         int idAdmin = 4;
         switch (action) {
             case "create":
                 request.setAttribute("idAdmin", idAdmin);
                 request.getRequestDispatcher("Administrador/creacionCoordinadorZona.jsp").forward(request, response);
                 break;
+            case "edit":
+            String id = request.getParameter("id");
+            CoordinadorZona zona2 = zona.buscarCoordinadorPorID(Integer.parseInt(id));
+            request.setAttribute("zona",zona2);
+            request.getRequestDispatcher("Administrador/editarCoordinadorZona.jsp").forward(request,response);
+            case "view":
+                String idv = request.getParameter("id");
+                CoordinadorZona zonav = zona.buscarCoordinadorPorID(Integer.parseInt(idv));
+                request.setAttribute("zona",zonav);
+                request.setAttribute("idAdmin", idAdmin);
+                request.getRequestDispatcher("Administrador/vistaCoordinadorZona.jsp").forward(request,response);
+                break;
+
         }
     }
 
@@ -60,6 +75,11 @@ public class ServletCrearCoordinador extends HttpServlet {
         switch (action){
             case "create":
                 crearCoordinadorDao.CrearCoordinadorZona(coordinadorZona);
+                response.sendRedirect(request.getContextPath()+"/CrearCoordinador");
+                break;
+            case "edit":
+                coordinadorZona.setCoordinadorID(Integer.parseInt(request.getParameter("id")));
+                crearCoordinadorDao.editarCoordinadorZona(coordinadorZona);
                 response.sendRedirect(request.getContextPath()+"/CrearCoordinador");
                 break;
         }

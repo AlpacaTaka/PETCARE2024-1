@@ -1,9 +1,6 @@
 package com.example.iwebproyecto.servlets;
 
-import com.example.iwebproyecto.beans.Administrador;
-import com.example.iwebproyecto.beans.Distrito;
-import com.example.iwebproyecto.beans.Foto;
-import com.example.iwebproyecto.beans.LugarEvento;
+import com.example.iwebproyecto.beans.*;
 import com.example.iwebproyecto.daos.LugarHabilitadoDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,12 +16,27 @@ public class ServletLugarHabilitado extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "create" : request.getParameter("action");
+        LugarHabilitadoDao dao = new LugarHabilitadoDao();
         int idAdmin = 4;
         switch (action) {
             case "create":
                 request.setAttribute("idAdmin", idAdmin);
                 request.getRequestDispatcher("Administrador/creacionLugarHabilitado.jsp").forward(request, response);
                 break;
+
+            case "edit":
+                String id = request.getParameter("id");
+                LugarEvento lugar = dao.buscarLugarPorID(Integer.parseInt(id));
+                request.setAttribute("lugar",lugar);
+                request.getRequestDispatcher("Administrador/editarLugarHabilitado.jsp").forward(request,response);
+            case "view":
+                String idv = request.getParameter("id");
+                LugarEvento lugarVista = dao.buscarLugarPorID(Integer.parseInt(idv));
+                request.setAttribute("lugar",lugarVista);
+                request.setAttribute("idAdmin", idAdmin);
+                request.getRequestDispatcher("Administrador/vistaLugarHabilitado.jsp").forward(request,response);
+                break;
+
         }
     }
 
@@ -57,6 +69,12 @@ public class ServletLugarHabilitado extends HttpServlet {
         switch (action) {
             case "create":
                 lugarHabilitadoDao.crearLugarHabilitado(lugarEvento);
+                response.sendRedirect(request.getContextPath()+"/LugarHabilitado");
+                break;
+
+            case "edit":
+                lugarEvento.setLugarID(Integer.parseInt(request.getParameter("id")));
+                lugarHabilitadoDao.editarLugarHabilitado(lugarEvento);
                 response.sendRedirect(request.getContextPath()+"/LugarHabilitado");
                 break;
         }

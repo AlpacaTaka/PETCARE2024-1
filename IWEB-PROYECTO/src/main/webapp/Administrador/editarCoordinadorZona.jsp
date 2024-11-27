@@ -1,18 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="zona" scope="request" type="com.example.iwebproyecto.beans.CoordinadorZona"/>
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="/common/img/logos/paw.ico">
-  <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
+  <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="/common/css/baseDesign.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
   <link rel="stylesheet" href="CSSDELAPAGINA.css">
   <title>Crear Coordinador de Zona</title>
   <style>
-
+    /* Para Chrome, Safari y Opera */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   </style>
 </head>
 <body>
@@ -26,7 +32,7 @@
       </div>
       <div class="welcome-text">Hola, Administrador</div>
     </div>
-    <div class="logo"><a href=""><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+    <div class="logo"><a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
   </header>
 
   <div class="main">
@@ -37,8 +43,8 @@
         <li><a href="/administrator/administracionCuentas.html" title="Administracion"><i class="fi-rr-ballot-check"></i></a></li>
         <li><a href="/administrator/solicitudCuentaAlbergues.html" title="Validacion Albergues"><i class="fi-rr-house-building"></i></a></li>
         <li><a href="/administrator/validacionUsuarios.html" title="Validacion Usuarios"><i class="fi-rr-user-trust"></i></a></li>
-        <li><a href="/administrator/creacionCoordinadorZona.html" title="Crear Coordinador de Zona"><i class="fi-rr-people-network-partner"></i></a></li>
-        <li><a href="/administrator/creacionLugarHabilitado.html" title="Crear Lugar Habilitado"><i class="fi-rr-map-location-track"></i></a></li>
+        <li><a href="<%=request.getContextPath()%>/CrearCoordinador" title="Crear Coordinador de Zona"><i class="fi-rr-people-network-partner"></i></a></li>
+        <li><a href="<%=request.getContextPath()%>/LugarHabilitado" title="Crear Lugar Habilitado"><i class="fi-rr-map-location-track"></i></a></li>
         <li><a href="/administrator/dashboard.html" title="Dashboard"><i class="fi-rr-search-alt"></i></a></li>
         <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
       </ul>
@@ -53,8 +59,8 @@
       <a href="/administrator/validacionUsuarios.html">Validar Usuarios</a>
       <hr>
 
-      <a href="/administrator/creacionCoordinadorZona.html">Crear Coordinador de Zona</a>
-      <a href="/administrator/creacionLugarHabilitado.html">Crear lugar habilitado</a>
+      <a href="<%=request.getContextPath()%>/CrearCoordinador">Crear Coordinador de Zona</a>
+      <a href="<%=request.getContextPath()%>/LugarHabilitado">Crear lugar habilitado</a>
       <hr>
       <a href="/administrator/dashboard.html">Dashboard</a>
       <hr>
@@ -67,29 +73,30 @@
 
       <div class="row" id="contenido-nofooter" style="flex-grow: 1;align-content:center">
         <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-          <form id="uploadForm" style="padding:10px" >
+          <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/CrearCoordinador?action=edit" >
+            <input type="hidden" name="id" value="<%=zona.getCoordinadorID()%>">
             <h1 style="margin-top: 10px;" class="text-center">Edición de Coordinador Zonal</h1>
             <!--Primera fila de selección-->
             <div class="row justify-content-center p-1">
               <div class="col-md-6 p-1">
                 <label for="Nombre-coordinador">Nombres</label>
-                <input type="text" class="form-control" placeholder="Alan" id="Nombre-coordinador" name="Nombre-coordinador" maxlength="40" required>
+                <input type="text" class="form-control" value="<%=zona.getNombre()%>" placeholder="Ingrese sus nombres" id="Nombre-coordinador" name="NombreCoordinador" maxlength="40" required>
               </div>
               <div class="col-md-6 p-1">
                 <label for="Apellido-coordinador">Apellidos</label>
-                <input type="text" class="form-control" placeholder="Garcia Perez" id="Apellido-coordinador" name="Apellido-coordinador" maxlength="50" required>
+                <input type="text" class="form-control" value="<%=zona.getApellido()%>" placeholder="Ingrese los apellidos" id="Apellido-coordinador" name="ApellidoCoordinador" maxlength="50" required>
               </div>
             </div>
             <!--Segunda fila de selección-->
             <div class="row justify-content-center p-1">
               <div class="col-md-5 p-1">
                 <label for="celular-coordinador">Celular</label>
-                <input type="number" class="form-control" id="celular-coordinador" placeholder="962137991" required>
+                <input type="number" class="form-control" value="<%=zona.getCelular()%>" id="celular-coordinador" placeholder="Ingrese su número de celular" name="celuCoordinador" required>
               </div>
 
               <div class="col-md-7 p-1">
                 <label for="correo-coordinador">Correo electrónico</label>
-                <input type="email" class="form-control" id="correo-coordinador" min="10" max="254" placeholder="alanG@gmail.com" required>
+                <input type="email" class="form-control" value="<%=zona.getCorreoElectronico()%>" name="correoCoordinador" id="correo-coordinador" min="10" max="254" placeholder="Ingrese el correo electrónico" required>
                 <span id="errorMessage" style="color: red; display: none;">Error: correo inválido.</span>
               </div>
             </div>
@@ -97,32 +104,30 @@
             <div class="row justify-content-center p-1">
               <div class="col-md-5 p-1">
                 <label for="dni-coordinador">DNI</label>
-                <input type="number" class="form-control" id="dni-coordinador" placeholder="79831285" required>
+                <input type="number" class="form-control" value="<%=zona.getDni()%>" id="dni-coordinador" name="dniCoordinador" placeholder="Ingrese el número de DNI" required>
               </div>
 
               <div class="col-md-4 p-1">
                 <label for="zona-asignada">Zona Asignada</label>
-                <select class="form-select" id="zona-asignada" aria-label="Floating label select example" required>
-                  <option value="" disabled selected>Zona Norte</option>
-                  <option value="Zona Norte">Zona Norte</option>
-                  <option value="Zona Sur">Zona Sur</option>
-                  <option value="Zona Este">Zona Este</option>
-                  <option value="Zona Oeste">Zona Oeste</option>
+                <select class="form-select" name="zonaID" id="zona-asignada" aria-label="Floating label select example" required>
+                  <option value="" disabled selected>Seleccione una opción</option>
+                  <option value="3" <%String zonaID= zona.getZona().getZonaID() == 3 ? "selected" : null;%><%=zonaID%>>Zona Norte</option>
+                  <option value="4" <%zonaID= zona.getZona().getZonaID() == 4 ? "selected" : null;%><%=zonaID%>>Zona Sur</option>
+                  <option value="1" <%zonaID= zona.getZona().getZonaID() == 1 ? "selected" : null;%><%=zonaID%>>Zona Este</option>
+                  <option value="2" <%zonaID= zona.getZona().getZonaID() == 2 ? "selected" : null;%><%=zonaID%>>Zona Oeste</option>
                 </select>
               </div>
 
               <div class="col-md-3 p-1">
                 <label for="fechaNacimineto">Fecha de nacimiento</label><br>
-                <input type="date" class="form-control"  id="fechaNacimineto" name="fechaNacimiento" required>
+                <input type="date" class="form-control" value="<%=zona.getFechaNacimiento()%>"  id="fechaNacimineto" name="fechaNacimiento" required>
               </div>
-
-
 
             </div>
             <!--Boton de enviar-->
             <div class="row justify-content-center p-1">
               <div class="col-md-12 p-1 d-flex justify-content-center">
-                <button type="submit" class="btn btn-personal">Enviar</button>
+                <button type="submit" class="btn btn-personal">Editar</button>
               </div>
             </div>
           </form>
