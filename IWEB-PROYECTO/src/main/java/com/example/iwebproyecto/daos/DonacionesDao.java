@@ -64,7 +64,7 @@ public class DonacionesDao extends BaseDao {
 
 
 
-    public DonacionSuministros obtenerSolicitudesDonacionSuministrosPorId(int donacionSuministroId) throws SQLException {
+    public DonacionSuministros obtenerSolicitudesDonacionSuministrosPorId(int donacionSuministroId){
         String sql = "select * from donacionsuministros where donacionSuministrosID=?;";
 
         try (Connection conn = this.getConnection();
