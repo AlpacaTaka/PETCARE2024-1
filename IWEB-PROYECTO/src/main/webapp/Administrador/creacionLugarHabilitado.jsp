@@ -34,7 +34,7 @@
     <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
     <div class="barside">
       <ul class="navlinks">
-        <li><a href="/administrator/administracionCuentas.html" title="Administracion"><i class="fi-rr-ballot-check"></i></a></li>
+        <li><a href="<%=request.getContextPath()%>/admincuentas" title="Administracion"><i class="fi-rr-ballot-check"></i></a></li>
         <li><a href="/administrator/solicitudCuentaAlbergues.html" title="Validacion Albergues"><i class="fi-rr-house-building"></i></a></li>
         <li><a href="/administrator/validacionUsuarios.html" title="Validacion Usuarios"><i class="fi-rr-user-trust"></i></a></li>
         <li><a href="<%=request.getContextPath()%>/CrearCoordinador" title="Crear Coordinador de Zona"><i class="fi-rr-people-network-partner"></i></a></li>
@@ -46,7 +46,7 @@
     </div>
 
     <div id="menu" class="menu">
-      <a href="/administrator/administracionCuentas.html">Administración</a>
+      <a href="<%=request.getContextPath()%>/admincuentas">Administración</a>
       <hr>
 
       <a href="/administrator/solicitudCuentaAlbergues.html">Validar Albergues</a>

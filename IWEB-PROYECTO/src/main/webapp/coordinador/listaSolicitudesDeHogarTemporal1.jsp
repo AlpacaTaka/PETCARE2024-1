@@ -51,23 +51,24 @@
                 <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
-                <li><a href="${pageContext.request.contextPath}/coordinador/listaPublicacionesDeMascotaPerdida.jsp" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
 
-                <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
             </ul>
         </div>
 
         <div id="menu" class="menu">
-            <a href="miPerfil.jsp">Mi Perfil</a>
+            <a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp">Mi Perfil</a>
             <hr>
-            <a href="listaSolicitudesDeHogarTemporal1.html">Solicitudes de hogar temporal</a>
-            <a href="listaHogaresTemporales.jsp">Comentarios de hogares temporales</a>
+            <a href="${pageContext.request.contextPath}/ListaSolicitudes">Solicitudes de hogar temporal</a>
+            <a href="${pageContext.request.contextPath}/ListaTemporales">Comentarios de hogares temporales</a>
             <hr>
-            <a href="listaSolicitudesDeMascotaPerdida.jsp">Solicitudes de mascota perdida</a>
-            <a href="listaPublicacionesDeMascotaPerdida.jsp">Publicaciones de mascota perdida</a>
+            <a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes">Solicitudes de mascota perdida</a>
+            <a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones">Publicaciones de mascota perdida</a>
             <hr>
-            <a href="#">Cerrar Sesión</a>
+            <a href="<%=request.getContextPath()%>">Cerrar Sesión</a>
+
         </div>
 
         <div class="container-fluid d-flex" id="contenido-principal">

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
-    int albergueID = (int) request.getAttribute("idAlbergue");
+    int albergueID = 6;
 %>
 <%--jsp:useBean id=""/--%>
 <!DOCTYPE html>
@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/common/css/baseDesign.css">
-    <link rel="stylesheet" href="CSSDELAPAGINA.css">
     <title>Formulario de Adopción</title>
     <style>
         /* Para Chrome, Safari y Opera */
@@ -72,7 +71,7 @@
                     <a href="<%=request.getContextPath()%>/PortalAdopciones"><button type="button" class="btn btn-personal2">Regresar</button></a>
                 </div>
                 <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                    <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/PortalAdopciones?action=create">
+                    <form id="uploadForm" style="padding:10px" method="POST" action="${pageContext.request.contextPath}/PortalAdopciones?action=create" enctype="multipart/form-data" accept-charset="UTF-8">
                         <input type="hidden" name="id" value="<%=albergueID%>">
                         <h1 style="margin-top: 10px;" class="text-center">Creación de perfil de Mascota para Adopción</h1>
                         <div class="row justify-content-center p-1">
@@ -105,15 +104,15 @@
                                 </select>
                             </div>
                             <div class="col-md-6 p-1">
-                                <label for="otra-raza"> Si colocó otra raza,  escribala aquí
+                                <label for="otraRaza"> Si colocó otra raza,  escribala aquí
                                 </label>
-                                <input type="text" class="form-control" name="otraRaza" id="otra-raza"  <%--placeholder="Otra raza"--%> disabled>
+                                <input type="text" class="form-control" name="otraRaza" id="otraRaza"  <%--placeholder="Otra raza"--%> disabled>
                             </div>
                         </div>
                         <div class="row justify-content-center p-1">
                             <div class="col-md-4 p-1" >
                                 <label for="distrito">Distrito</label>
-                                <select class="form-select" name="idDistrito" id="distrito" required>
+                                <select class="form-select" name="distrito" id="distrito" required>
                                     <option value="">Selecciona un distrito</option>
                                     <optgroup label="Lima Norte">
                                         <option value="1">Ancon</option>
@@ -203,8 +202,8 @@
                         </div>
                         <div class="row justify-content-center p-1">
                             <div class="col-md-12 p-1 justify-content-center">
-                                <label for="formFile" class="form-label">Subir una foto de la mascota (PNG)</label>
-                                <input class="form-control" type="file" id="formFile" accept=".png" required>
+                                <label for="foto" class="form-label">Subir una foto de la mascota (PNG)</label>
+                                <input class="form-control" type="file" id="foto" name ="foto" accept=".png" required>
                             </div>
                             <div id="fileError" class="text-danger mt-2" style="display: none;">El archivo debe ser una imagen PNG.</div>
                         </div>
@@ -259,7 +258,7 @@
     <script>
         const select1 = document.getElementById('Especies');
         const select2 = document.getElementById('Razas');
-        const otraRazaInput = document.getElementById('otra-raza');
+        const otraRazaInput = document.getElementById('otraRaza');
 
         const opciones = {
             Perro: ['Galgo', 'Shitzu', 'Chihuhua','No sabe','Otro'],
@@ -302,7 +301,7 @@
     </script>
     <script>
         document.getElementById('uploadForm').addEventListener('submit', function(event) {
-            const fileInput = document.getElementById('formFile');
+            const fileInput = document.getElementById('foto');
             const file = fileInput.files[0];
             const fileError = document.getElementById('fileError');
 
@@ -350,7 +349,7 @@
         })
     </script>
     <script>
-        const razaInput = document.getElementById('otra-raza')
+        const razaInput = document.getElementById('otraRaza')
         razaInput.addEventListener('input', function(){
             this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
         })

@@ -290,7 +290,9 @@ public class AlbergueDaoRevenge extends BaseDao {
     public void crearMascotaAdopcion(MascotasAdopcion mascotasAdopcion) {
         String sql = "INSERT INTO mascotasadopcion (nombreMascota, especieMascota, raza, distritoID, direccionHallazgo, edadAprox, sexo, descripcionGeneral, fotoID, seEncuentraTemporal, condicionesAdopcion, albergueID, eliminado) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?);";
         try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+
             pstmt.setString(1, mascotasAdopcion.getNombreMascota());
             pstmt.setString(2,mascotasAdopcion.getEspecie());
             pstmt.setString(3,mascotasAdopcion.getRaza());
@@ -304,7 +306,11 @@ public class AlbergueDaoRevenge extends BaseDao {
             pstmt.setString(11,mascotasAdopcion.getCondicionesAdopcion());
             pstmt.setInt(12,mascotasAdopcion.getAlbergue().getAlbergueID());
             pstmt.setBoolean(13,mascotasAdopcion.isEliminado());
+
+
             pstmt.executeUpdate();
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
