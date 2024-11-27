@@ -214,8 +214,7 @@ public class PublicacionMascotaPerdidaDao extends BaseDao {
         PublicacionMascotaPerdida sol = new PublicacionMascotaPerdida();
 
         String sql = "UPDATE publicacionmascotaperdida\n" +
-                "SET aprobadoCoordinador = "+aprobado+"\n" +
-                "WHERE publicacionMascotaPerdidaID = "+id+";";
+                "SET aprobadoCoordinador = " + aprobado + " WHERE publicacionMascotaPerdidaID = "+id + " ;";
         try(Connection conn = this.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.executeUpdate();

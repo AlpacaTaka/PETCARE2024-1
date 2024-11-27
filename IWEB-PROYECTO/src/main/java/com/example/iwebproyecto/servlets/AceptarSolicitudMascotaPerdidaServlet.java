@@ -24,7 +24,7 @@ public class AceptarSolicitudMascotaPerdidaServlet extends HttpServlet {
 
         // Respuesta al cliente
         response.setContentType("text/html");
-        response.sendRedirect("ListaMascotaPerdida");
+        response.sendRedirect("ListaMascotaPerdida?action=ListaSolicitudes");
     }
 
 }
