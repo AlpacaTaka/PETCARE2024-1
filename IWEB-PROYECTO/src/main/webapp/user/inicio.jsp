@@ -60,7 +60,7 @@
                 <li><a href="${pageContext.request.contextPath}/SolicitudesDeSuministros" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/TodosLosAlbergues" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/PortalDeAdopcion" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                <li><a href="${pageContext.request.contextPath}/MascotasPerdidasUsuario" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/ReportarPerdido" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
 
                 <li><a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
 
@@ -81,8 +81,8 @@
             <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal de Adopciones</a>
             <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal de Mascotas Perdidas</a>
             <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal Avistamiento Perdidos</a>
-            <a href="/user/reportarMascotaPerdida.html">Reportar Mascota Perdida</a>
-            <a href="/user/reportarMaltrato.html" id="Sep">Reportar Maltrato</a>
+            <a href="${pageContext.request.contextPath}/ReportarPerdido">Reportar Mascota Perdida</a>
+            <a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" id="Sep">Reportar Maltrato</a>
             <hr>
             <a href="/login/login.html">Cerrar Sesión</a>
 

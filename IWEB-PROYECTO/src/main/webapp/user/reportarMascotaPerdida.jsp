@@ -1,15 +1,16 @@
-
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css">
+    <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
     <title>Post de mascota perdida</title>
 
@@ -34,7 +35,7 @@
                 </div>
                 <div class="welcome-text">Hola, Juan</div>
             </div>
-            <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="/user/inicio.html"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
 
         <div class="main">
@@ -42,33 +43,34 @@
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="/user/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="/user/allEventos.jsp" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
-                    <li><a href="/user/postularTemporal.jsp" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
-                    <li><a href="/user/solicitudesDonacionSuministros.jsp" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
-                    <li><a href="/user/donacionMonetaria.jsp" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
-                    <li><a href="/user/solicitudesAdopcion.jsp" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                    <li><a href="/user/miPerfil.html" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="/user/allEventos.html" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
+                    <li><a href="/user/postularTemporal.html" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
+                    <li><a href="/user/solicitudesDonacionSuministros.html" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
+                    <li><a href="/user/donacionMonetaria.html" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
+                    <li><a href="/user/solicitudesAdopcion.html" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
                     <li><a href="/user/reportarMascotaPerdida.html" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
-                    <li><a href="/user/reportarMaltrato.jsp" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
+                    <li><a href="/user/reportarMaltrato.html" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
                     <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
                 
             </div>
 
             <div id="menu" class="menu">
-                <a href="/user/miPerfil.jsp">Mi Perfil</a>
-                <a href="/user/misEventos.jsp">Mis Eventos</a>
-                <a href="/user/misDonaciones.jsp" id="Sep">Mis Donaciones</a>
+                <a href="/user/miPerfil.html">Mi Perfil</a>
+                <a href="/user/misEventos.html">Mis Eventos</a>
+                <a href="/user/misDonaciones.html" id="Sep">Mis Donaciones</a>
                 <hr>
-                <a href="/user/allEventos.jsp">Eventos</a>
-                <a href="/user/postularAlbergue.jsp">Postular a Albergue</a>
-                <a href="/user/postularTemporal.jsp">Hogar Temporal</a>
-                <a href="/user/solicitudesDonacionSuministros.jsp">Donaciones de Suministros</a>
-                <a href="/user/donacionMonetaria.jsp">Donaciones Monetarias</a>
-                <a href="/user/solicitudesAdopcion.jsp">Portal de Adopciones</a>
-                <a href="/user/mascotasPerdidas.jsp">Portal de Mascotas Perdidas</a>
+                <a href="/user/allEventos.html">Eventos</a>
+                <a href="/user/postularAlbergue.html">Postular a Albergue</a>
+                <a href="/user/postularTemporal.html">Hogar Temporal</a>
+                <a href="/user/solicitudesDonacionSuministros.html">Donaciones de Suministros</a>
+                <a href="/user/donacionMonetaria.html">Donaciones Monetarias</a>
+                <a href="/user/solicitudesAdopcion.html">Portal de Adopciones</a>
+                <a href="/user/mascotasPerdidas.html">Portal de Mascotas Perdidas</a>
+                <a href="/user/avistamientoPerdidos.html">Portal Avistamiento Perdidos</a>
                 <a href="/user/reportarMascotaPerdida.html">Reportar Mascota Perdida</a>
-                <a href="/user/reportarMaltrato.jsp" id="Sep">Reportar Maltrato</a>
+                <a href="/user/reportarMaltrato.html" id="Sep">Reportar Maltrato</a>
                 <hr>
                 <a href="/login/login.html">Cerrar Sesión</a>
 
@@ -77,8 +79,9 @@
             <div class="container-fluid d-flex" id="contenido-principal">
                 <!--Boton de regreso a la página principal-->
                 <div class="col" id="contenido-nofooter">
-                    <div class="container md-8" style="width: 85%;max-width: 800px; margin-bottom: 20px; padding: 0;">
-                        <button type="button"  class="btn btn-personal2" onclick="location.href='inicio.jsp'">  Regresar   </button>
+                    <div class="container md-8 d-flex justify-content-between" style="width: 85%;max-width: 800px; margin-bottom: 20px; padding: 0;">
+                        <button type="button"  class="btn btn-personal2" onclick="location.href='/user/inicio.html'">  Regresar   </button>
+                        <button type="button"  class="btn btn-personal" onclick="location.href='/ReportarPerdido?action=listar'">  Ver mis reportes  </button>
                     </div>
                     <div class="container md-12" style="width: 85%;max-width: 800px; background-color: #fca6519f; border-radius: 30px; margin-bottom: 20px; padding: 10px 20px;">
                         <h1 style="margin-top: 10px; color: #4d0e0e; font-style: italic" class="text-center" >Generar un post por mascota perdida</h1>
@@ -87,7 +90,7 @@
                     
                     <!--Container del formulario-->
                     <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                        <form id="uploadForm"style="padding:10px">
+                        <form id="uploadForm" style="padding:10px" action="ReportarPerdido?action=guardar" method="post">
                             <h1 style="margin-top: 10px;" class="text-center">Formulario de mascota perdida</h1>
                             <br>
                             <!--Primera columna de selección-->
@@ -100,23 +103,23 @@
                             <!--Segunda columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-5 p-1"> 
-                                    <label for="nombreMascota-mascota">Nombre</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese el nombreMascota de su mascota" id="nombreMascota-mascota" name="nombreMascota-mascota" maxlength="24" required>
+                                    <label for="nombre-mascota">Nombre</label>
+                                    <input type="text" class="form-control" placeholder="Ingrese el nombre de su mascota" id="nombre-mascota" name="nombre-mascota" maxlength="24" required>
                                 </div>
                                 <div class="col-md-5 p-1"> 
                                     <label for="distintivo">Distintivo</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese el distintivo de su mascota" id="distintivo" name="distintivo" maxlength="30" required>
+                                    <input type="text"  class="form-control" placeholder="Ingrese el distintivo de su mascota" id="distintivo" name="distintivo" maxlength="30" required>
                                 </div>
                                 <div class="col-md-2 p-1">
                                     <label for="edad-mascota">Edad</label>
-                                    <input type="number" class="form-control" id="edad-mascota" min="1" max="20" placeholder="En años" required>
+                                    <input type="number" name="edad-mascota" class="form-control" id="edad-mascota" min="1" max="20" placeholder="En años" required>
                                 </div>
                             </div>
                             <!--Tercera columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
                                     <label for="">Tamaño</label>
-                                    <select class="form-select" id="Tamaño" aria-label="Floating label select example" required>
+                                    <select name= "tamanio" class="form-select" id="Tamaño" aria-label="Floating label select example" required>
                                         <option value="" disabled selected>Seleccione una opción</option>
                                         <option value="Pequeño">Pequeño</option>
                                         <option value="Mediano">Mediano</option>
@@ -125,7 +128,7 @@
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="">Especie</label>
-                                    <select class="form-select" id="Especies" aria-label="Floating label select example" required>
+                                    <select class="form-select" name="Especie" id="Especies" aria-label="Floating label select example" required>
                                         <option value="" disabled selected>Seleccione una opción</option>
                                         <option value="Perro">Perro</option>
                                         <option value="Gato">Gato</option>
@@ -143,20 +146,20 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
                                     <label for="">Raza</label>
-                                    <select class="form-select" id="Razas" aria-label="Floating label select example" required>
+                                    <select name="Raza" class="form-select" id="Razas" aria-label="Floating label select example" required>
                                     <option value="">Ingrese raza de la mascota</option>
                                   </select>
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="otra raza"> Si colocó otra raza,  escribala aquí</label>
-                                    <input type="text" class="form-control"  id="otra-raza" placeholder="Indique el tipo de raza" idplaceholder="Otra raza" maxlength="30" disabled>
+                                    <input type="text" name="otra-raza" class="form-control"  id="otra-raza" placeholder="Indique el tipo de raza" idplaceholder="Otra raza" maxlength="30" disabled>
                                 </div>
                             </div>
                             <!--Sexta columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">                         
                                     <label for="Descripcion-mascota">Descripción adicional</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese la descripción de su mascota" id="Descripcion-mascota" name="Descripcion-mascota" maxlength="300" required>      
+                                    <input type="text" class="form-control" placeholder="Ingrese la descripción de su mascota" id="Descripcion-mascota" name="descripcion-adicional" maxlength="300" required>
                                 </div>
                             </div>
                             <!--Septima columna de selección-->
@@ -171,18 +174,18 @@
                                 </div>
                                <div class="col-md-3 p-1">
                                     <label for="hora-perdida">Hora de perdida</label>
-                                    <input type="time" class="form-control" id="hora-perdida" required>
+                                    <input type="time" class="form-control" id="hora-perdida" name="hora-perdida" required>
                                 </div>
                             </div>
                             <!--Octava columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-8 p-1"> 
-                                    <label for="nombreMascota-contacto">Nombre de contacto</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese su nombreMascota completo para contactarlo" id="nombreMascota-contacto" name="nombreMascota-contacto" maxlength="70" required>
+                                    <label for="nombre-contacto">Nombre de contacto</label>
+                                    <input type="text" class="form-control" placeholder="Ingrese su nombre completo para contactarlo" id="nombre-contacto" name="nombre-contacto" maxlength="70" required>
                                 </div>
                                 <div class="col-md-4 p-1">
                                     <label for="celular-contacto">Teléfono de contacto</label>
-                                    <input type="number" class="form-control" id="celular-contacto" placeholder="Ingrese un número de celular" required>
+                                    <input type="number" class="form-control" id="celular-contacto" placeholder="Ingrese un número de celular" name="telefono-contacto" required>
                                 </div>
                             </div>
                             <!--Novena columna de selección-->
@@ -238,16 +241,16 @@
         </div>
     </div>
 
-        <script src="/common/script/neonavbar.js"></script>
+        <script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script>
-            const nombreMascotaInput = document.getElementById('nombreMascota-mascota');
+            const nombreMascotaInput = document.getElementById('nombre-mascota');
             const select1 = document.getElementById('Especies');
             const select2 = document.getElementById('Razas');
             const otraRazaInput = document.getElementById('otra-raza');
             const recompensaInput =  document.querySelectorAll('input[name="recompensa"]');
             const montoRecompensaInput = document.getElementById('monto-recompensa');
-            const nombreContactoInput = document.getElementById('nombreMascota-contacto');
+            const nombreContactoInput = document.getElementById('nombre-contacto');
             const celularContactoInput = document.getElementById('celular-contacto');
             const fechaPerdidaInput = document.getElementById('fechaPerdida');
 
