@@ -224,4 +224,6 @@ public class PublicacionMascotaPerdida {
     public void setFechaFormulario(LocalDate fechaFormulario) {
         this.fechaFormulario = fechaFormulario;
     }
+
+
 }

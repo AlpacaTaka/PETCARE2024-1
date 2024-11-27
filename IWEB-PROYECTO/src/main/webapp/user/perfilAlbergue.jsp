@@ -149,20 +149,19 @@
             </div>
 
             <div id="menu" class="menu">
-                <a href="/user/miPerfil.html">Mi Perfil</a>
-                <a href="/user/misEventos.html">Mis Eventos</a>
-                <a href="/user/misDonaciones.html" id="Sep">Mis Donaciones</a>
+                <a href="${pageContext.request.contextPath}/MiPerfilUsuario">Mi Perfil</a>
+                <a href="${pageContext.request.contextPath}/MisEventosUsuario">Mis Eventos</a>
+                <a href="${pageContext.request.contextPath}/MisDonacionesUsuario" id="Sep">Mis Donaciones</a>
                 <hr>
-                <a href="/user/allEventos.html">Eventos</a>
-                <a href="/user/postularAlbergue.html">Postular a Albergue</a>
-                <a href="/user/postularTemporal.html">Hogar Temporal</a>
-                <a href="/user/solicitudesDonacionSuministros.html">Donaciones de Suministros</a>
-                <a href="/user/donacionMonetaria.html">Donaciones Monetarias</a>
-                <a href="/user/solicitudesAdopcion.html">Portal de Adopciones</a>
-                <a href="/user/mascotasPerdidas.html">Portal de Mascotas Perdidas</a>
-                <a href="/user/avistamientoPerdidos.html">Portal Avistamiento Perdidos</a>
-                <a href="/user/reportarMascotaPerdida.html">Reportar Mascota Perdida</a>
-                <a href="/user/reportarMaltrato.html" id="Sep">Reportar Maltrato</a>
+                <a href="${pageContext.request.contextPath}/TodosLosEventos">Eventos</a>
+                <a href="${pageContext.request.contextPath}/PostulacionTemporal">Hogar Temporal</a>
+                <a href="${pageContext.request.contextPath}/SolicitudesDeSuministros">Donaciones de Suministros</a>
+                <a href="${pageContext.request.contextPath}/TodosLosAlbergues">Donaciones Monetarias</a>
+                <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal de Adopciones</a>
+                <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal de Mascotas Perdidas</a>
+                <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal Avistamiento Perdidos</a>
+                <a href="${pageContext.request.contextPath}/ReportarPerdido">Reportar Mascota Perdida</a>
+                <a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" id="Sep">Reportar Maltrato</a>
                 <hr>
                 <a href="/login/login.html">Cerrar Sesión</a>
 
