@@ -50,7 +50,7 @@
                     <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets" style="color: #000;"></i></a></li>
 
                     <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
@@ -89,7 +89,7 @@
                             <div class="row">
                                 <div class="col" style="margin-bottom:15px;">
                                     <div style="display: flex; justify-content: center; margin-top: 2%; ">
-                                        <img src="/common/img/perdidos/perdido4.jpg" class="card-img-top" alt="..."
+                                        <img src="<%=sol.getFoto().getRutaFoto()%>" class="card-img-top" alt="..."
                                             style="min-width: 250px ; min-height: 300px; object-fit: cover;">
                                     </div>
                                 </div>

@@ -47,7 +47,7 @@
                     <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget" style="color: #000;"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
 
                     <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
@@ -80,7 +80,7 @@
 
                     %>
                     <div class="container md-8" style="width: 85%; max-width: 800px; margin-bottom: 20px; padding: 0;">
-                        <a href="listaSolicitudesDeMascotaPerdida.jsp" style="color: black;"><button type="button" class="btn btn-personal2"> Regresar </button></a>
+                        <a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" style="color: black;"><button type="button" class="btn btn-personal2"> Regresar </button></a>
                     </div>
 
                     <h1 class="card-title" style="margin-top: 10px; margin-bottom: 10px; text-align: center;margin-bottom: 20px;">Solicitud de mascota perdida</h1>
@@ -95,7 +95,7 @@
                                                 <div class="card" style="width: 80%;">
                                                     
                                                         <div class="col">
-                                                            <img src="/common/img/perdidos/perdido1.jpg" class="card-img-eve" alt="Imagen" style="height: 400px;width: 100%;">
+                                                            <img src="<%=sol.getFoto().getRutaFoto()%>" class="card-img-eve" alt="Imagen" style="height: 400px;width: 100%;">
                                                         </div>
                                             
                                                     

@@ -42,16 +42,16 @@
             </div>
             <div class="welcome-text">Hola, Coordinador Zona Norte</div>
         </div>
-        <div class="logo"><a href="/user/inicio.html"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+        <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
     </header>
 
     <div class="main">
         <div class="barside">
             <ul class="navlinks">
                 <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user" style="color: #000;"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget" ></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
 
                 <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
@@ -88,14 +88,16 @@
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="cardContainer" style="width: 100%;">
                             <%
                                 List<SolicitudTemporal> lista = (List<SolicitudTemporal>) request.getSession().getAttribute("listaSolicitudesTemporal");
+
                                 if (lista != null) {
                                     for (SolicitudTemporal so : lista) {
+                                        System.out.println(so.getFoto().getRutaFoto());
                             %>
                             <div class="col-12 col-md-6 col-lg-4 mb-4 card-item">
                                 <div class="card h-100">
                                     <div class="card-body text-center">
                                         <h4 class="card-title"><%= so.getUsuario().getNombre() %><br><%= so.getUsuario().getApellido() %></h4>
-                                        <img src="/common/img/solTemporales/st2.jpg" class="card-img-top" alt="..." style="max-width: 300px; height: 260px; object-fit: cover;">
+                                        <img src="<%=so.getFoto().getRutaFoto()%>" class="card-img-top" alt="..." style="max-width: 300px; height: 260px; object-fit: cover;">
                                         <p class="card-text" style="margin-top: 10px; text-align: center;">Solicitud enviada el <%=so.getFecha()%>.</p>
                                         <a href="VerSolicitudTemporal?id=<%=so.getSolicitudID()%>" class="btn btn-personal" id="btn-crd-cr">Ver solicitud</a>
                                     </div>

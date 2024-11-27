@@ -11,7 +11,7 @@ public class CoordinadorDao extends BaseDao {
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM coordinadorzona c where c.coordinadorID=6;");) {
+             ResultSet rs = stmt.executeQuery("SELECT c.*, f.rutaFoto FROM coordinadorzona c inner join fotos f on c.fotoID=f.fotoID  where c.coordinadorID=6;");) {
             while (rs.next()) {
                 coor.setCoordinadorID(rs.getInt("coordinadorID"));
                 coor.setNombre(rs.getString("nombre"));
@@ -28,6 +28,9 @@ public class CoordinadorDao extends BaseDao {
                 zona.setZonaID(rs.getInt("zonaID"));
                 coor.setZona(zona);
                 coor.setEstado(rs.getString("eliminado"));
+                Foto foto2 = new Foto();
+                foto2.setRutaFoto(rs.getString("rutaFoto"));
+                coor.setFoto(foto2);
             }
 
         } catch (SQLException e) {

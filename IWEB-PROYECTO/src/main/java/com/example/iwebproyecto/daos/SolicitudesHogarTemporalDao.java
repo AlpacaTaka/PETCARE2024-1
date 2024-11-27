@@ -10,9 +10,7 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
     public ArrayList<SolicitudTemporal> listarSolicitudesHogarTemporal() {
         ArrayList<SolicitudTemporal> listaSolicitudesHogarTemporal = new ArrayList<>();
 
-        String sql = "SELECT s.*, u.nombre,u.apellido FROM solicitudtemporal s \n" +
-                "inner join usuario u on u.usuarioID=s.usuarioID\n" +
-                "where s.aprobadoCoordinador is null;";
+        String sql = "SELECT s.*, u.nombre,u.apellido,f.rutaFoto FROM solicitudtemporal s inner join usuario u on u.usuarioID=s.usuarioID inner join fotos f on f.fotoID=s.fotoID where s.aprobadoCoordinador is null;";
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -48,6 +46,7 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
 
                 Foto foto = new Foto();
                 foto.setFotoID(rs.getInt("fotoID"));
+                foto.setRutaFoto(rs.getString("rutaFoto"));
                 sol.setFoto(foto);
 
                 sol.setFecha(rs.getString("fechaFormulario"));
@@ -66,8 +65,9 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
     public ArrayList<SolicitudTemporal> listarHogarTemporal() {
         ArrayList<SolicitudTemporal> listaSolicitudesHogarTemporal = new ArrayList<>();
 
-        String sql = "SELECT s.*, u.nombre,u.apellido FROM solicitudtemporal s \n" +
+        String sql = "SELECT s.*, u.nombre,u.apellido, f.rutaFoto FROM solicitudtemporal s \n" +
                 "inner join usuario u on u.usuarioID=s.usuarioID\n" +
+                "inner join fotos f on f.fotoID=s.fotoID\n" +
                 "where s.aprobadoCoordinador = 1;";
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
@@ -104,6 +104,7 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
 
                 Foto foto = new Foto();
                 foto.setFotoID(rs.getInt("fotoID"));
+                foto.setRutaFoto(rs.getString("rutaFoto"));
                 sol.setFoto(foto);
 
                 sol.setFecha(rs.getString("fechaFormulario"));
@@ -129,10 +130,13 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
     public SolicitudTemporal listarHogarTemporalPorID(int id) {
         SolicitudTemporal sol = new SolicitudTemporal();
 
-        String sql = "SELECT s.*, u.nombre, u.dni , u.direccion , u.apellido, d.nombreDistrito, u.correoElectronico, z.nombreZona\n" +
+        String sql = "SELECT s.*, u.nombre, u.dni , u.direccion , u.apellido, d.nombreDistrito, u.correoElectronico, z.nombreZona,f.rutaFoto\n" +
                 "FROM solicitudtemporal s\n" +
-                "INNER JOIN usuario u ON u.usuarioID = s.usuarioID inner join distrito d ON d.distritoID = u.distritoID inner join zona z ON z.zonaID = d.zonaID\n" +
-                "WHERE s.aprobadoCoordinador = 1 and s.solicitudID= "+id+";";
+                "INNER JOIN usuario u ON u.usuarioID = s.usuarioID \n" +
+                "inner join distrito d ON d.distritoID = u.distritoID \n" +
+                "inner join zona z ON z.zonaID = d.zonaID\n" +
+                "inner join fotos f on f.fotoID=u.fotoID\n" +
+                "WHERE s.aprobadoCoordinador is true and s.solicitudID= 16;";
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -178,6 +182,7 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
 
                 Foto foto = new Foto();
                 foto.setFotoID(rs.getInt("fotoID"));
+                foto.setRutaFoto(rs.getString("rutaFoto"));
                 sol.setFoto(foto);
 
                 sol.setFecha(rs.getString("fechaFormulario"));

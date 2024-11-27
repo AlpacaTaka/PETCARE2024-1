@@ -57,7 +57,7 @@
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user" style="color: #000;"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
@@ -104,7 +104,7 @@
                                 <div class="row justify-content-center p-1" style="margin-top: 25px;">
                                     <div class="col d-flex justify-content-center">
                                         <div class="image-container" style="border-radius: 4%; width: 300px; height: 300px;">
-                                            <img src="${pageContext.request.contextPath}/common/img/coordinador/c1.jpeg" alt="Perfil de usuario">
+                                            <img src="<%=coor.getFoto().getRutaFoto()%>" alt="Perfil de usuario">
                                         </div>
                                     </div>
                                 </div>

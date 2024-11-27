@@ -51,7 +51,7 @@
                 </div>
                 <div class="welcome-text">Hola, Coordinador Zona Norte</div>
             </div>
-            <div class="logo"><a href="/user/inicio.html"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
 
         <div class="main">
@@ -61,7 +61,7 @@
                 <ul class="navlinks">
                     <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment" style="color: #000;"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
 
@@ -142,7 +142,7 @@
                                     <div class="card h-100">
                                         <div class="card-body text-center">
                                             <h4 class="card-title"><%=so.getUsuario().getNombre()%><br><%=so.getUsuario().getApellido()%></h4>
-                                            <img src="/common/img/solTemporales/st10.jpg" class="card-img-top" alt="..." style="max-width: 300px; height: 260px; object-fit: cover;">
+                                            <img src="<%=so.getFoto().getRutaFoto()%>" class="card-img-top" alt="..." style="max-width: 300px; height: 260px; object-fit: cover;">
                                             <div class="row" style="margin-top: 10px;">
                                                 <div class="col d-flex justify-content-center align-items-center">
                                                     <h5 class="card-title" style="color: <%=color%>;"><%=so.getEstadoTemporal()%></h5>

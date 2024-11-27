@@ -66,7 +66,7 @@
                     <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget" style="color: #000;"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
 
                     <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
@@ -140,7 +140,7 @@
                                     <div class="card h-100">
                                         <div class="card-body text-center">
                                             <h4 class="card-title"><%=so.getNombreMascota()%></h4>
-                                            <img src="/common/img/perdidos/perdido6.jpg" class="card-img-top" alt="..." style="max-width: 300px; height: 260px; object-fit: cover;">
+                                            <img src="<%=so.getFoto().getRutaFoto()%>" class="card-img-top" alt="..." style="max-width: 300px; height: 260px; object-fit: cover;">
                                             <p class="card-text" style="margin-top: 10px; text-align: center;">Solicitud enviada el <%=so.getFechaFormulario()%>.</p>
                                             <a href="VerSolicitudMascotaPerdida?id=<%=so.getPublicacionMascotaPerdidaID()%>" class="btn btn-personal" id="btn-crd-cr">Ver solicitud</a>
                                         </div>

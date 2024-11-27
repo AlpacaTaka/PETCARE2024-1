@@ -34,7 +34,7 @@
                 </div>
                 <div class="welcome-text">Hola, Coordinador Zona Norte</div>
             </div>
-            <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
+            <div class="logo" ><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
         </header>
 
         <div class="main">
@@ -44,7 +44,7 @@
                 <ul class="navlinks">
                     <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment" style="color: #000;"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
 
@@ -84,7 +84,7 @@
 
                 <div class="col" id="contenido-nofooter" style="flex-grow: 1;align-content:center">
                     <div class="container md-8" style="width: 85%; max-width: 800px; margin-bottom: 20px; padding: 0;">
-                        <a href="listaHogaresTemporales.jsp" style="color: black;"><button type="button" class="btn btn-personal2"> Regresar </button></a>
+                        <a href="${pageContext.request.contextPath}/ListaTemporales" style="color: black;"><button type="button" class="btn btn-personal2"> Regresar </button></a>
                     </div>
 
                     
@@ -97,7 +97,7 @@
                                 <div class="col" style="margin-bottom:15px;">
 
                                     <div style="display: flex; justify-content: center; margin-top: 2%; min-width: 200px; ">
-                                        <img src="/common/img/solTemporales/st10.jpg" class="card-img-top" alt="..." style="min-width: 250px ; min-height: 300px; object-fit: cover;">
+                                        <img src="<%=sol.getFoto().getRutaFoto()%>" class="card-img-top" alt="..." style="min-width: 250px ; min-height: 300px; object-fit: cover;">
                                     </div>
                                     
 

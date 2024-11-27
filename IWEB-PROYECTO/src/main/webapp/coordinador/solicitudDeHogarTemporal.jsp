@@ -36,7 +36,7 @@
         <div class="barside">
             <ul class="navlinks">
                 <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user" style="color: #000;"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
@@ -61,7 +61,7 @@
         <div class="container-fluid d-flex" id="contenido-principal">
             <div class="row" id="contenido-nofooter" style="flex-grow: 1;align-content:center">
                 <div class="container md-8" style="width: 85%; max-width: 800px; margin-bottom: 20px; padding: 0;">
-                    <a href="listaSolicitudesDeHogarTemporal1.jsp" style="color: black;"><button type="button" class="btn btn-personal2"> Regresar </button></a>
+                    <a href="${pageContext.request.contextPath}/ListaSolicitudes" style="color: black;"><button type="button" class="btn btn-personal2"> Regresar </button></a>
                 </div>
                 <div>
                     <h1 class="text-center">Revisar solicitud de hogar temporal</h1>
