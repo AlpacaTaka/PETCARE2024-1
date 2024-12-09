@@ -17,7 +17,19 @@ import java.io.IOException;
 public class VerSolicitudTemporalServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String quitar = (String) request.getSession().getAttribute("quitar");
+
+
+
         int id = Integer.parseInt(request.getParameter("id"));
+        if (quitar != null) {
+            System.out.println(id);
+            SolicitudesHogarTemporalDao dao = new SolicitudesHogarTemporalDao();
+            SolicitudTemporal sol1 = dao.listarHogarTemporalPorID(id);
+
+            HttpSession session = request.getSession();
+            session.setAttribute("VerComentario", sol1);
+        }
         System.out.println(id);
         RequestDispatcher view;
         SolicitudesHogarTemporalDao dao = new SolicitudesHogarTemporalDao();
@@ -28,6 +40,7 @@ public class VerSolicitudTemporalServlet extends HttpServlet {
 
         view = request.getRequestDispatcher("coordinador/solicitudDeHogarTemporal.jsp");
         view.forward(request, response);
+
 
     }
 }

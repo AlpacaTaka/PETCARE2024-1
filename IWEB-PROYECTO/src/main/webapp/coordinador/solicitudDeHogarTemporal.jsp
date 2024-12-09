@@ -37,8 +37,8 @@
             <ul class="navlinks">
                 <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user" style="color: #000;"></i></a></li>
-                <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Hogares temporales"><i class="fi-rr-user-check"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi fi-rr-paw"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
 
                 <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
@@ -60,14 +60,26 @@
 
         <div class="container-fluid d-flex" id="contenido-principal">
             <div class="row" id="contenido-nofooter" style="flex-grow: 1;align-content:center">
+                <% String quitar = (String) request.getSession().getAttribute("quitar");
+                    SolicitudTemporal sol = (SolicitudTemporal) request.getSession().getAttribute("VerSolicitudTemporal"); %>
+
                 <div class="container md-8" style="width: 85%; max-width: 800px; margin-bottom: 20px; padding: 0;">
                     <a href="${pageContext.request.contextPath}/ListaSolicitudes" style="color: black;"><button type="button" class="btn btn-personal2"> Regresar </button></a>
                 </div>
                 <div>
+                    <%if (quitar == null){
+                    %>
                     <h1 class="text-center">Revisar solicitud de hogar temporal</h1>
+                    <%
+                    } else{
+
+                    %>
+                    <h1 class="text-center">Solicitud de hogar temporal Rechazada</h1>
+                    <%
+                        }%>
                 </div>
 
-                <% SolicitudTemporal sol = (SolicitudTemporal) request.getSession().getAttribute("VerSolicitudTemporal"); %>
+
 
                 <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px; margin-top: 30px;">
 
@@ -373,24 +385,49 @@
 
                         </div>
                     </div>
+
                     <hr>
+                    <%
+                       System.out.println(quitar);
+                        if (quitar == null) {
+
+                    %>
 
                     <label  style="margin-bottom: 10px;" ><strong>Indique si se ha comunicado por teléfono con el postulante y si ha realizado una visita inopinada (indicando el día y la hora):</strong></label>
 
                         <form action="AceptarSolicitudHogarTemporal" method="POST">
                             <input id="id" type="hidden" name="id" value="<%=sol.getSolicitudID()%>">
-                            <textarea id="comunicacion" name="comunicacion" class="form-control" maxlength="300" placeholder="Escriba aquí..." rows="4" required></textarea>
-                            <input type="hidden" id="accion" name="accion" value="">
+                    <textarea id="comunicacion" name="comunicacion" class="form-control" maxlength="300" placeholder="Escriba aquí..." rows="4" required></textarea>
+                    <input type="hidden" id="accion" name="accion" value="">
 
-                            <div class="row justify-content-center p-1">
-                                <div class="col-md-6 p-1 d-flex justify-content-center">
-                                    <button type="button" class="btn btn-personal" onclick="abrirPopup('popup', '¿Seguro que desea aceptar esta solicitud?', 'aceptar')">ACEPTAR</button>
-                                </div>
-                                <div class="col-md-6 p-1 d-flex justify-content-center">
-                                    <button type="button" class="btn btn-personal" onclick="abrirPopup('popup', '¿Seguro que desea rechazar esta solicitud?', 'rechazar')">RECHAZAR</button>
-                                </div>
+                    <div class="row justify-content-center p-1">
+                        <div class="col-md-6 p-1 d-flex justify-content-center">
+                            <button type="button" class="btn btn-personal" onclick="abrirPopup('popup', '¿Seguro que desea aceptar esta solicitud?', 'aceptar')">ACEPTAR</button>
+                        </div>
+                        <div class="col-md-6 p-1 d-flex justify-content-center">
+                            <button type="button" class="btn btn-personal" onclick="abrirPopup('popup', '¿Seguro que desea rechazar esta solicitud?', 'rechazar')">RECHAZAR</button>
+                        </div>
+                    </div>
+                    </form>
+                    <% }
+                    %>
+
+                    <% SolicitudTemporal com = (SolicitudTemporal) request.getSession().getAttribute("VerComentario");
+                        if (quitar != null){
+                    %>
+                        <div class="row justify-content-center p-1">
+                            <div class="col align-items">
+                                <p class="card-text" style="text-align: left; background-color:#4D0E0E ; border-radius: 15px;padding: 10px; color:white;">
+                                    <strong>Coordinador de zona <%=com.getUsuario().getDistrito().getZona().getNombreZona()%>:</strong><br><%=com.getComentario()%>
+                                </p>
                             </div>
-                        </form>
+                        </div>
+                        <br>
+                    <%
+                        }
+                        session.setAttribute("quitar", null);%>
+
+
 
 
                 </div>

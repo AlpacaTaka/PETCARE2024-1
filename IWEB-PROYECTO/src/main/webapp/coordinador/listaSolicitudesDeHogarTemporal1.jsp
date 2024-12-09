@@ -50,8 +50,8 @@
             <ul class="navlinks">
                 <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user" style="color: #000;"></i></a></li>
-                <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget" ></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Hogares temporales"><i class="fi-rr-user-check"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi fi-rr-paw"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
 
                 <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
@@ -82,6 +82,36 @@
                                 <input type="text" id="searchInput" class="form-control" placeholder="Busque por nombre y apellido" maxlength="60">
                             </div>
                         </div>
+                        <div class="col-sm-4 order-second" style="min-width: 300px;">
+                            <form action="FiltrosCoordinador" method="post" class="d-flex justify-content-center">
+                                <input type="hidden" name="action" value="SolicitudesHogares">
+
+
+                                <% String quitar = (String) request.getSession().getAttribute("quitar");
+                                    if (quitar == null){
+
+                                    %>
+
+
+                                <button type="submit" class="btn btn-personal">
+                                    Ver Solicitudes Rechazadas
+                                </button>
+                                <%
+                                    }else{
+
+                                    %>
+                                <button type="button" class="btn btn-personal" onclick="location.href='${pageContext.request.contextPath}/ListaSolicitudes';">
+                                    Regresar
+                                </button>
+
+
+                                <%
+                                    } %>
+
+
+                            </form>
+
+                        </div>
                     </div>
 
                     <div class="container d-flex justify-content-center mt-4" style="margin-bottom: 30px;">
@@ -89,7 +119,7 @@
                             <%
                                 List<SolicitudTemporal> lista = (List<SolicitudTemporal>) request.getSession().getAttribute("listaSolicitudesTemporal");
 
-                                if (lista != null) {
+                            if (lista != null) {
                                     for (SolicitudTemporal so : lista) {
                                         System.out.println(so.getFoto().getRutaFoto());
                             %>

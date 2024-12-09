@@ -3,6 +3,7 @@
 <%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -61,8 +62,8 @@
                 <ul class="navlinks">
                     <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment" style="color: #000;"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Hogares temporales"><i class="fi-rr-user-check" style="color: #000;"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi fi-rr-paw"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
 
                     <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
@@ -94,7 +95,7 @@
                     <div class="container" >
                         
                         <h1 style="text-align: center; margin-bottom: 40px;">Hogares Temporales</h1>
-                        
+
                         <div class="row g-0 justify-content-between">
                             <div class="col-sm-4 order-first" style="min-width: 300px;">
                                 <div class="input-group ">
@@ -103,24 +104,26 @@
                                 </div>
                             </div>
 
-                            <!-- <div class="col-12 col-sm-4 d-flex justify-content-center mt-3 mt-sm-0">
-                                <button class="btn btn-personal2 dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                                    Ordenar
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="filterDropdown">
-                                    <li>
-                                        <label class="dropdown-item">
-                                            <input type="radio" name="filter" class="filter-radio" value="card1"> Fecha de envío (más recientes)
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="dropdown-item">
-                                            <input type="radio" name="filter" class="filter-radio" value="card2"> Fecha de envío (más antiguos)
-                                        </label>
-                                    </li>
-                                </ul>
+                            <div class="col-sm-4 order-second" style="min-width: 300px;">
+                                    <form action="FiltrosCoordinador" method="post" class="d-flex gap-2">
+                                        <input type="hidden" name="action" value="Hogares">
+
+                                        <select name="estado" id="estadoCombo" class="form-select" style="max-width: 200px;">
+                                            <option value="" selected>Seleccione para filtrar</option>
+
+
+                                            <option value="Activo">Hogares Activos</option>
+                                            <option value="Inactivo">Hogares Inactivos</option>
+                                            <option value="Limpiar">Limpiar Filtro</option>
+                                        </select>
+
+                                        <!-- Botón de filtrar -->
+                                        <button type="submit" class="btn btn-personal">
+                                            Filtrar
+                                        </button>
+                                    </form>
+
                             </div>
-                        </div>-->
                         
                         <div class="container d-flex justify-content-center mt-4" style="margin-bottom: 30px;">
                             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="cardContainer" style="width: 100%;">
