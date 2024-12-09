@@ -153,7 +153,7 @@
 
                                                 <div class="col d-flex justify-content-center">
 
-                                                    <a href="VerHogarTemporal?id=<%=so.getSolicitudID()%>" class="btn btn-personal" id="btn-crd-cr">Ver comentarios</a>
+                                                    <a href="VerHogarTemporal?id=<%=so.getSolicitudID()%>" class="btn btn-personal" id="btn-crd-cr">Ver Hogar Temporal</a>
                                                 </div>
                                             </div>
                                         </div>
