@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.iwebproyecto.beans.SolicitudTemporal" %>
+<%@ page import="com.example.iwebproyecto.beans.CoordinadorZona" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -40,7 +41,10 @@
                 <div>Menu</div>
                 <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
             </div>
-            <div class="welcome-text">Hola, Coordinador Zona Norte</div>
+            <%
+                CoordinadorZona coor= (com.example.iwebproyecto.beans.CoordinadorZona) request.getSession().getAttribute("CoordinadorZona");
+            %>
+            <div class="welcome-text">Hola, Coordinador <%=coor.getZona().getNombreZona()%></div>
         </div>
         <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
     </header>
@@ -74,7 +78,24 @@
         <div class="container-fluid d-flex" id="contenido-principal">
             <div class="col" id="contenido-nofooter" style="flex-grow: 1;align-content:center">
                 <div class="container">
+                    <% String quitar = (String) request.getSession().getAttribute("quitar");
+                        if (quitar == null){
+
+                    %>
+
                     <h1 style="text-align: center; margin-bottom: 40px;">Solicitudes de Hogar Temporal</h1>
+
+                    <%
+                    }else{
+
+                    %>
+
+                    <h1 style="text-align: center; margin-bottom: 40px;">Solicitudes de Hogar Temporal Rechazadas</h1>
+
+                    <%
+                        } %>
+
+
                     <div class="row g-0 justify-content-between">
                         <div class="col-sm-4 order-first" style="min-width: 300px;">
                             <div class="input-group">
@@ -83,11 +104,10 @@
                             </div>
                         </div>
                         <div class="col-sm-4 order-second" style="min-width: 300px;">
-                            <form action="FiltrosCoordinador" method="post" class="d-flex justify-content-center">
-                                <input type="hidden" name="action" value="SolicitudesHogares">
+                            <form action="FiltrosCoordinador?action=SolicitudesHogares" method="post" class="d-flex justify-content-center">
 
 
-                                <% String quitar = (String) request.getSession().getAttribute("quitar");
+                                <%
                                     if (quitar == null){
 
                                     %>

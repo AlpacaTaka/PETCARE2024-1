@@ -1,4 +1,5 @@
 <%@ page import="com.example.iwebproyecto.beans.SolicitudTemporal" %>
+<%@ page import="com.example.iwebproyecto.beans.CoordinadorZona" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -32,7 +33,10 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Coordinador Zona Norte</div>
+                <%
+                    CoordinadorZona coor= (com.example.iwebproyecto.beans.CoordinadorZona) request.getSession().getAttribute("CoordinadorZona");
+                %>
+                <div class="welcome-text">Hola, Coordinador <%=coor.getZona().getNombreZona()%></div>
             </div>
             <div class="logo" ><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
         </header>

@@ -27,6 +27,7 @@ public class ListaMascotaPerdida extends HttpServlet {
                 ArrayList<PublicacionMascotaPerdida> lista= daoCoo.listarSolicitudnMascotaPerdida();
                 HttpSession session = request.getSession();
                 session.setAttribute("listaMascotaPerdida", lista);
+                session.setAttribute("quitar3", null);
 
                 view = request.getRequestDispatcher("coordinador/listaSolicitudesDeMascotaPerdida.jsp");
                 view.forward(request, response);

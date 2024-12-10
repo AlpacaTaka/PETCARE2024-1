@@ -26,8 +26,10 @@ import java.io.IOException;
 
 @WebServlet(name = "FiltrosCoordinadorServlet", value = "/FiltrosCoordinador")
 public class FiltrosCoordinadorServlet extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
+        String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
+        //String action = request.getParameter("action");
 
 
         switch (action){
@@ -69,7 +71,45 @@ public class FiltrosCoordinadorServlet extends HttpServlet {
                 view = request.getRequestDispatcher("coordinador/listaSolicitudesDeHogarTemporal1.jsp");
                 view.forward(request, response);
                 break;
+            case "MascotaPedida":
+                String accion2 = request.getParameter("estado");
+                if(accion2.equals("Limpiar")){
+                    response.setContentType("text/html");
+                    response.sendRedirect("ListaMascotaPerdida?action=ListaPublicaciones");
+                }else{
+                    RequestDispatcher view2;
+                    PublicacionMascotaPerdidaDao Dao = new PublicacionMascotaPerdidaDao();
+                    System.out.println(accion2);
+                    ArrayList<PublicacionMascotaPerdida> lista2;
+                    if (accion2.equals("Encontrada")){
+                        lista2= Dao.listarPublicacionMascotaPerdidaFiltro("true");
+                    }else{
+                        lista2= Dao.listarPublicacionMascotaPerdidaFiltro("false");
+                    }
 
+
+                    HttpSession session2 = request.getSession();
+                    session2.setAttribute("listaMascotaPerdida", lista2);
+
+                    view2 = request.getRequestDispatcher("coordinador/listaPublicacionesDeMascotaPerdida.jsp");
+                    view2.forward(request, response);
+
+                }
+                break;
+            case "SolicitudesPerdidas":
+                RequestDispatcher view3;
+                response.setContentType("text/html");
+                PublicacionMascotaPerdidaDao daoCoo3 = new PublicacionMascotaPerdidaDao();
+                ArrayList<PublicacionMascotaPerdida> lista3= daoCoo3.listarSolicitudnMascotaPerdidaFiltro();
+                HttpSession session3 = request.getSession();
+                session3.setAttribute("listaMascotaPerdida", lista3);
+
+                String quitar3 = "quitar3";
+                session3.setAttribute("quitar3", quitar3);
+
+                view3 = request.getRequestDispatcher("coordinador/listaSolicitudesDeMascotaPerdida.jsp");
+                view3.forward(request, response);
+                break;
 
 
 

@@ -1,6 +1,7 @@
 <%@ page import="com.example.iwebproyecto.beans.SolicitudTemporal" %>
 <%@ page import="com.example.iwebproyecto.beans.PublicacionMascotaPerdida" %>
 <%@ page import="java.util.Objects" %>
+<%@ page import="com.example.iwebproyecto.beans.CoordinadorZona" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 
@@ -35,7 +36,10 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Coordinador Zona Norte</div>
+                <%
+                    CoordinadorZona coor= (com.example.iwebproyecto.beans.CoordinadorZona) request.getSession().getAttribute("CoordinadorZona");
+                %>
+                <div class="welcome-text">Hola, Coordinador <%=coor.getZona().getNombreZona()%></div>
             </div>
             <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
         </header>
@@ -48,7 +52,7 @@
                     <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Hogares temporales"><i class="fi-rr-user-check"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi fi-rr-paw"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi fi-rr-paw" style="color: #000;"></i></a></li>
 
                     <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
 
@@ -82,10 +86,49 @@
 
                     %>
                     <div class="container md-8" style="width: 85%; max-width: 800px; margin-bottom: 20px; padding: 0;">
+
+                        <% String quitar = (String) request.getSession().getAttribute("quitar3");
+                            if (quitar == null){
+
+                        %>
+
                         <a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" style="color: black;"><button type="button" class="btn btn-personal2"> Regresar </button></a>
+
+                        <%
+                        }else{
+
+                        %>
+
+                        <form action="${pageContext.request.contextPath}/FiltrosCoordinador?action=SolicitudesPerdidas" method="post" style="display: inline;">
+                            <button type="submit" class="btn btn-personal2">
+                                Regresar
+                            </button>
+                        </form>
+                        <%
+                            } %>
+
+
+
                     </div>
 
-                    <h1 class="card-title" style="margin-top: 10px; margin-bottom: 10px; text-align: center;margin-bottom: 20px;">Solicitud de mascota perdida</h1>
+                    <%
+                        if (quitar == null){
+
+                    %>
+
+                    <h1 class="card-title" style="margin-top: 10px; margin-bottom: 10px; text-align: center;margin-bottom: 20px;">Solicitud de Mascota Perdida</h1>
+
+                    <%
+                    }else{
+
+                    %>
+
+                    <h1 class="card-title" style="margin-top: 10px; margin-bottom: 10px; text-align: center;margin-bottom: 20px;">Solicitud de Mascota Perdida Rechazada</h1>
+
+                    <%
+                        } %>
+
+
                     <div class="container md-8" style="width: 85%; max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px; display: flex; justify-content: center; align-items: center;">
                         <div class="card-body" style="width: 100%; text-align: center;">
                             <h2 class="card-title" style="margin-top: 10px;"><%=sol.getNombreMascota()%></h2>
@@ -190,6 +233,12 @@
                                 </div>
                             </div>
 
+
+                            <%
+                                if (quitar == null){
+
+                            %>
+
                             <form action="AceptarSolicitudMascotaPerdida" method="POST">
                                 <input id="id" type="hidden" name="id" value="<%=sol.getPublicacionMascotaPerdidaID()%>">
                                 <input type="hidden" id="accion" name="accion" value="">
@@ -202,13 +251,25 @@
                                     </div>
                                 </div>
                             </form>
-                            
+
                             <div class="row justify-content-center p-1" id="razonDiv" style="display: none;">
                                 <div class="col-md-12 p-1">
                                     <label for="razon">Razón del rechazo:</label>
                                     <input type="text" class="form-control" id="razon" placeholder="Escriba la razón" />
                                 </div>
                             </div>
+
+                            <%
+                            }else{
+
+                            %>
+
+                            <br>
+
+                            <%
+                                } %>
+
+
                         </div>
                         
                     </div>

@@ -5,6 +5,7 @@
 <%@ page import="java.time.temporal.ChronoUnit" %>
 <%@ page import="com.example.iwebproyecto.beans.Comentarios" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.iwebproyecto.beans.CoordinadorZona" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -37,7 +38,10 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Coordinador Zona Norte</div>
+                <%
+                    CoordinadorZona coor= (com.example.iwebproyecto.beans.CoordinadorZona) request.getSession().getAttribute("CoordinadorZona");
+                %>
+                <div class="welcome-text">Hola, Coordinador <%=coor.getZona().getNombreZona()%></div>
             </div>
             <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
 
@@ -81,7 +85,7 @@
                         <a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" style="color: black;"><button type="button" class="btn btn-personal2"> Regresar </button></a>
                     </div>
 
-                    <h1 class="card-title" style="margin-top: 10px; margin-bottom: 10px; text-align: center;margin-bottom: 20px;">Publicación de mascota perdida</h1>
+                    <h1 class="card-title" style="margin-top: 10px; margin-bottom: 10px; text-align: center;margin-bottom: 20px;">Publicación de Mascota Perdida</h1>
                     <div class="container md-8" style="width: 85%; max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px; display: flex; justify-content: center; align-items: center;">
 
                         <div class="card-body" style="width: 100%; text-align: center;">
@@ -214,9 +218,13 @@
                                 <hr>
 
                             </div>
-                            <div class="col">
-                                <button type="submit" class="btn btn-personal" onclick="abrirPopup()">ELIMINAR PUBLICACIÓN DUPLICADA</button>
-                            </div>
+                            <form action="${pageContext.request.contextPath}/EliminarPublicacionMascotaPerdida" method="post">
+                                <input type="hidden" name="publicacionMascotaPerdidaID" value="<%=sol.getPublicacionMascotaPerdidaID()%>">
+                                <div class="col">
+                                    <button type="submit" class="btn btn-personal">ELIMINAR PUBLICACIÓN DUPLICADA</button>
+                                </div>
+                            </form>
+
                             <hr>
                             <p class="card-text" style="text-align: left; display: flex; margin-top: 1%;"><strong>COMENTARIOS: </strong></p>
 
@@ -251,6 +259,10 @@
                                 %>
                             </div>
 
+
+                            <% if(!sol.isMascotaEncontrada()){
+
+                            %>
                             <hr>
                             <form action="VerPubicacionMascotaPerdida" method="POST">
                                 <input id="id" type="hidden" name="id" value="<%=sol.getPublicacionMascotaPerdidaID()%>">
@@ -269,6 +281,15 @@
                                     </div>
                                 </div>
                             </form>
+                            <%
+                            } else {
+
+                            %>
+                            <br>
+                            <%
+
+                                }%>
+
 
                         </div>
                     </div>

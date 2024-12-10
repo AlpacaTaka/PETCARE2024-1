@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.iwebproyecto.beans.SolicitudTemporal" %>
 <%@ page import="java.util.Objects" %>
+<%@ page import="com.example.iwebproyecto.beans.CoordinadorZona" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 
@@ -50,7 +51,10 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Coordinador Zona Norte</div>
+                <%
+                    CoordinadorZona coor= (com.example.iwebproyecto.beans.CoordinadorZona) request.getSession().getAttribute("CoordinadorZona");
+                %>
+                <div class="welcome-text">Hola, Coordinador <%=coor.getZona().getNombreZona()%></div>
             </div>
             <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
         </header>
@@ -105,8 +109,7 @@
                             </div>
 
                             <div class="col-sm-4 order-second" style="min-width: 300px;">
-                                    <form action="FiltrosCoordinador" method="post" class="d-flex gap-2">
-                                        <input type="hidden" name="action" value="Hogares">
+                                    <form action="FiltrosCoordinador?action=Hogares" method="post" class="d-flex gap-2">
 
                                         <select name="estado" id="estadoCombo" class="form-select" style="max-width: 200px;">
                                             <option value="" selected>Seleccione para filtrar</option>

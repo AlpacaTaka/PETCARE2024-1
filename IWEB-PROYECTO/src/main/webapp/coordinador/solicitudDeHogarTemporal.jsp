@@ -1,4 +1,5 @@
 <%@ page import="com.example.iwebproyecto.beans.SolicitudTemporal" %>
+<%@ page import="com.example.iwebproyecto.beans.CoordinadorZona" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -27,7 +28,10 @@
                 <div>Menu</div>
                 <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
             </div>
-            <div class="welcome-text">Hola, Coordinador Zona Norte</div>
+            <%
+                CoordinadorZona coor= (com.example.iwebproyecto.beans.CoordinadorZona) request.getSession().getAttribute("CoordinadorZona");
+            %>
+            <div class="welcome-text">Hola, Coordinador <%=coor.getZona().getNombreZona()%></div>
         </div>
         <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
     </header>
@@ -64,8 +68,31 @@
                     SolicitudTemporal sol = (SolicitudTemporal) request.getSession().getAttribute("VerSolicitudTemporal"); %>
 
                 <div class="container md-8" style="width: 85%; max-width: 800px; margin-bottom: 20px; padding: 0;">
+
+                    <%
+                        if (quitar == null){
+
+                    %>
+
                     <a href="${pageContext.request.contextPath}/ListaSolicitudes" style="color: black;"><button type="button" class="btn btn-personal2"> Regresar </button></a>
+                    <%
+                    }else{
+
+                    %>
+
+                    <form action="${pageContext.request.contextPath}/FiltrosCoordinador?action=SolicitudesHogares" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-personal2">
+                            Regresar
+                        </button>
+                    </form>
+
+                    <%
+                        } %>
+
+
+
                 </div>
+
                 <div>
                     <%if (quitar == null){
                     %>

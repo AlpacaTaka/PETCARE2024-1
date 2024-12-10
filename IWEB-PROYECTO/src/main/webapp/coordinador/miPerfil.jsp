@@ -41,6 +41,7 @@
 </head>
 <body>
     <div class="contenedor-p">
+
         
         <header class="cabecera">
             <div class="izquierda" onclick="toggleMenu()">
@@ -48,7 +49,10 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Coordinador Zona Norte</div>
+                <%
+                    CoordinadorZona coor= (com.example.iwebproyecto.beans.CoordinadorZona) request.getSession().getAttribute("CoordinadorZona");
+                %>
+                <div class="welcome-text">Hola, Coordinador <%=coor.getZona().getNombreZona()%></div>
             </div>
             <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
         </header>
@@ -98,9 +102,6 @@
         
                             <form id="uploadForm" style="padding:10px" >
 
-                                <%
-                                    CoordinadorZona coor= (com.example.iwebproyecto.beans.CoordinadorZona) request.getSession().getAttribute("CoordinadorZona");
-                                %>
 
                                 <div class="row justify-content-center p-1" style="margin-top: 25px;">
                                     <div class="col d-flex justify-content-center">
