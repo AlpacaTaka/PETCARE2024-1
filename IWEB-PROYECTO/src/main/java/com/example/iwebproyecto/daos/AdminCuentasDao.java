@@ -256,7 +256,7 @@ public class AdminCuentasDao extends BaseDao {
         albergue.setFoto(foto);
 
         albergue.setEliminado(rs.getBoolean("eliminado"));
-        albergue.setFechaRegistrado(rs.getDate("fechaRegistrado").toString());
+        albergue.setFechaRegistrado(String.valueOf(LocalDate.parse(rs.getDate("fechaRegistrado").toString())));
         albergue.setDescripcion(rs.getString("descripcion"));
 
         return albergue;

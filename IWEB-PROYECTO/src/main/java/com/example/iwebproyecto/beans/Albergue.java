@@ -1,6 +1,8 @@
 package com.example.iwebproyecto.beans;
 
 
+import java.time.LocalDate;
+
 public class Albergue {
     private int albergueID;
     private String nombreAlbergue;
@@ -25,12 +27,21 @@ public class Albergue {
     private String numeroPlin;
     private String codigoQR;
     private boolean aprobado;
-
     private Foto foto;
     private String mensaje;
     private boolean eliminado;
     private String fechaRegistrado;
     private String descripcion;
+
+    public String getFechaRegistrado() {
+        return fechaRegistrado;
+    }
+
+    public void setFechaRegistrado(String fechaRegistrado) {
+        this.fechaRegistrado = fechaRegistrado;
+    }
+
+
 
 
     // Constructor vacío
@@ -257,13 +268,7 @@ public class Albergue {
         this.eliminado = eliminado;
     }
 
-    public String getFechaRegistrado() {
-        return fechaRegistrado;
-    }
 
-    public void setFechaRegistrado(String fechaRegistrado) {
-        this.fechaRegistrado = fechaRegistrado;
-    }
 
     public String getDescripcion() {
         return descripcion;

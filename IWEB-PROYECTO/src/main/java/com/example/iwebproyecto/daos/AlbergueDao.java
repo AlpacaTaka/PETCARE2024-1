@@ -5,6 +5,7 @@ import com.example.iwebproyecto.beans.Distrito;
 import com.example.iwebproyecto.beans.Foto;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AlbergueDao extends BaseDao {
@@ -124,7 +125,7 @@ public class AlbergueDao extends BaseDao {
         albergue.setFoto(foto);
 
         albergue.setEliminado(rs.getBoolean("eliminado"));
-        albergue.setFechaRegistrado(rs.getDate("fechaRegistrado").toString());
+        albergue.setFechaRegistrado(String.valueOf(LocalDate.parse(rs.getDate("fechaRegistrado").toString())));
         albergue.setDescripcion(rs.getString("descripcion"));
 
         return albergue;
