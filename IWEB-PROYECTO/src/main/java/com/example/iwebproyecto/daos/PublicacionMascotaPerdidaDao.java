@@ -415,7 +415,7 @@ public class PublicacionMascotaPerdidaDao extends BaseDao {
         }
     }
 
-    public boolean eliminarPublicacion(int id) {
+    public void eliminarPublicacion(int id) {
         String deleteComentarios = "DELETE FROM comentarios WHERE publicacionMascotaPerdidaID = ?";
         String deleteAvistada = "DELETE FROM publicacionmascotaavistada WHERE publicacionMascotaPerdidaID = ?";
         String deletePerdida = "DELETE FROM publicacionmascotaperdida WHERE publicacionMascotaPerdidaID = ?";
@@ -436,10 +436,8 @@ public class PublicacionMascotaPerdidaDao extends BaseDao {
             stmtPerdida.setInt(1, id);
             int rowsAffected = stmtPerdida.executeUpdate();
 
-            return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
     }
 
