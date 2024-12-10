@@ -34,6 +34,7 @@
             <div class="welcome-text">Hola, Coordinador <%=coor.getZona().getNombreZona()%></div>
         </div>
         <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
+
     </header>
 
     <div class="main">
@@ -445,7 +446,7 @@
                         <div class="row justify-content-center p-1">
                             <div class="col align-items">
                                 <p class="card-text" style="text-align: left; background-color:#4D0E0E ; border-radius: 15px;padding: 10px; color:white;">
-                                    <strong>Coordinador de zona <%=com.getUsuario().getDistrito().getZona().getNombreZona()%>:</strong><br><%=com.getComentario()%>
+                                     <strong>Coordinador de zona <%=com.getUsuario().getDistrito().getZona().getNombreZona()%>:</strong><br><%=com.getComentario()%>
                                 </p>
                             </div>
                         </div>

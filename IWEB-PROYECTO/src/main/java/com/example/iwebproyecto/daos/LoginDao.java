@@ -105,4 +105,100 @@ public class LoginDao extends BaseDao{
         // Si no se encuentra el usuario en ninguna tabla
         return false;
     }
+
+
+    public int authenticateUsuario(String username, String password) {
+        String sql = "SELECT usuarioID FROM usuario_credenciales WHERE correoElectronico = ? AND contrasenia = ?";
+        return authenticateUsuarioAndGetId(sql, username, password);
+    }
+
+    public int authenticateCoordinador(String username, String password) {
+        String sql = "SELECT coordinadorID FROM coordinador_credenciales WHERE correoElectronico = ? AND contrasenia = ?";
+        return authenticateCoordinadorAndGetId(sql, username, password);
+    }
+
+    public int authenticateAlbergue(String username, String password) {
+        String sql = "SELECT albergueID FROM albergue_credenciales WHERE correoElectronico = ? AND contrasenia = ?";
+        return authenticateAlbergueAndGetId(sql, username, password);
+    }
+
+    public int authenticateAdmin(String username, String password) {
+        String sql = "SELECT adminID FROM admin_credenciales WHERE correoElectronico = ? AND contrasenia = ?";
+        return authenticateAdminAndGetId(sql, username, password);
+    }
+
+    // Métodos específicos para cada rol
+    private int authenticateUsuarioAndGetId(String sql, String username, String password) {
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("usuarioID"); // Devuelve el usuarioID si las credenciales coinciden
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // Credenciales no coinciden o error
+    }
+
+    private int authenticateCoordinadorAndGetId(String sql, String username, String password) {
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("coordinadorID"); // Devuelve el coordinadorID si las credenciales coinciden
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // Credenciales no coinciden o error
+    }
+
+    private int authenticateAlbergueAndGetId(String sql, String username, String password) {
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("albergueID"); // Devuelve el albergueID si las credenciales coinciden
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // Credenciales no coinciden o error
+    }
+
+    private int authenticateAdminAndGetId(String sql, String username, String password) {
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("adminID"); // Devuelve el adminID si las credenciales coinciden
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // Credenciales no coinciden o error
+    }
+
+
 }

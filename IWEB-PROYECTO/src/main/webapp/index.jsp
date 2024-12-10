@@ -11,7 +11,8 @@
 <br/>
 <a href="Inicio">Usuario</a>
 <a href="PortalAdopciones">Albergue</a>
-<a href="Iniciar Sesión">Login</a>
+
+<a href="${pageContext.request.contextPath}/login/login.jsp">Login</a>
 <form action="MiPerfilCoodinadorServlet" method="GET">
     <input type="hidden" name="action" value="vista">
     <button type="submit">Coordinador</button>

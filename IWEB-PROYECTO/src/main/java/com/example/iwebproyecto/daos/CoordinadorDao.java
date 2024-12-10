@@ -1,17 +1,18 @@
 package com.example.iwebproyecto.daos;
 
 import com.example.iwebproyecto.beans.*;
+import jakarta.servlet.http.HttpSession;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class CoordinadorDao extends BaseDao {
-    public CoordinadorZona ObtenerCoordinadorZona() {
+    public CoordinadorZona ObtenerCoordinadorZona(int idZona) {
         CoordinadorZona coor = new CoordinadorZona();
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT c.*, f.rutaFoto FROM coordinadorzona c inner join fotos f on c.fotoID=f.fotoID  where c.coordinadorID=6;");) {
+             ResultSet rs = stmt.executeQuery("SELECT c.*, f.rutaFoto FROM coordinadorzona c inner join fotos f on c.fotoID=f.fotoID  where c.coordinadorID=" + idZona+ ";");) {
             while (rs.next()) {
                 coor.setCoordinadorID(rs.getInt("coordinadorID"));
                 coor.setNombre(rs.getString("nombre"));

@@ -330,7 +330,7 @@ public class PublicacionMascotaPerdidaDao extends BaseDao {
     public ArrayList<Comentarios> listarComentarios(int id) {
         ArrayList<Comentarios> listCom = new ArrayList<Comentarios>();
 
-        String sql = "SELECT c.*, coo.nombre,coo.apellido FROM comentarios c inner join coordinadorzona coo on coo.coordinadorID=c.coordinadorID where c.publicacionMascotaPerdidaID="+id+";";
+        String sql = "SELECT c.*, coo.nombre,coo.apellido FROM comentarios c inner join coordinadorzona coo on coo.coordinadorID=c.coordinadorID where c.publicacionMascotaPerdidaID="+id+" ORDER BY fechaComentario ASC ;";
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -355,7 +355,7 @@ public class PublicacionMascotaPerdidaDao extends BaseDao {
         return listCom;
     }
 
-    public void guardarComentario(Comentarios comentario, int id) {
+    public void guardarComentario(Comentarios comentario, int id,int idCoordinador) {
         LocalDate hoy = LocalDate.now();
 
 
@@ -363,7 +363,7 @@ public class PublicacionMascotaPerdidaDao extends BaseDao {
         System.out.println(fechaHoy);
 
         String sql = "INSERT INTO comentarios (comentarios, coordinadorID, publicacionMascotaPerdidaID, fechaComentario)\n" +
-                "VALUES (?, 7, "+id+" ,'" + fechaHoy + "' );";
+                "VALUES (?, " + idCoordinador + ", "+id+" ,'" + fechaHoy + "' );";
         try(Connection conn = this.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setString(1, comentario.getComentarios() );

@@ -169,7 +169,8 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col align-items">
                                     <p class="card-text" style="text-align: left; background-color:#4D0E0E ; border-radius: 15px;padding: 10px; color:white;">
-                                        <strong>Coordinador de zona <%=sol.getUsuario().getDistrito().getZona().getNombreZona()%>:</strong><br><%=sol.getComentario()%>
+                                        <%-- <strong>Coordinador de zona <%=sol.getUsuario().getDistrito().getZona().getNombreZona()%>:</strong><br><%=sol.getComentario()%> --%>
+                                            <strong>Coordinador de zona:</strong><br><%=sol.getComentario()%>
                                     </p>
                                 </div>
 

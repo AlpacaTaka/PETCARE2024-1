@@ -47,7 +47,8 @@ public class MiPerfilCoodinadorServlet extends HttpServlet {
             case "vista":
                 response.setContentType("text/html");
                 CoordinadorDao daoCoor = new CoordinadorDao();
-                CoordinadorZona coor= daoCoor.ObtenerCoordinadorZona();
+                HttpSession session2 = request.getSession(false);
+                CoordinadorZona coor= daoCoor.ObtenerCoordinadorZona((Integer) session2.getAttribute("SesionIDCoordinador"));
 
                 switch (coor.getZona().getZonaID()){
                     case 1:

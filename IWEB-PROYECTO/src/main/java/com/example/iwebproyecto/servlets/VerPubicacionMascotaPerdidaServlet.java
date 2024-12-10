@@ -46,8 +46,8 @@ public class VerPubicacionMascotaPerdidaServlet extends HttpServlet {
         System.out.println(comentario);
         RequestDispatcher view;
         PublicacionMascotaPerdidaDao dao = new PublicacionMascotaPerdidaDao();
-
-        dao.guardarComentario(com,id);
+        HttpSession session2 = request.getSession(false);
+        dao.guardarComentario(com,id, (Integer) session2.getAttribute("SesionIDCoordinador"));
 
         PublicacionMascotaPerdida sol = dao.listarPublicacionMascotaPerdidaPorID(id);
         ArrayList<Comentarios> lista2 = dao.listarComentarios(id);
