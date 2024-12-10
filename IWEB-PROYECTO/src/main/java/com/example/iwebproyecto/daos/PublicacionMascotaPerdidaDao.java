@@ -58,6 +58,58 @@ public class PublicacionMascotaPerdidaDao extends BaseDao {
         return listaPublicacionMascotaPerdida;
     }
 
+    public ArrayList<PublicacionMascotaPerdida> listarPublicacionMascotaPerdidaFiltro( String accion) {
+        ArrayList<PublicacionMascotaPerdida> listaPublicacionMascotaPerdida = new ArrayList<>();
+
+        String sql = "SELECT p.*,f.rutaFoto FROM publicacionmascotaperdida p inner join fotos f on f.fotoID=p.fotoID where p.aprobadoCoordinador is true and mascotaEncontrada is " + accion + ";"; // Completa el SQL para seleccionar todos los registros
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                PublicacionMascotaPerdida sol = new PublicacionMascotaPerdida();
+
+                // Completar asignaciones de las columnas a los atributos del objeto
+                sol.setPublicacionMascotaPerdidaID(rs.getInt("publicacionMascotaPerdidaID"));
+                sol.setDescripcion(rs.getString("descripcion"));
+                sol.setNombreMascota(rs.getString("nombreMascota"));
+                sol.setDistintivo(rs.getString("distintivo"));
+                sol.setEdadMascota(rs.getInt("edadMascota"));
+                sol.setTamanio(rs.getString("tamanio"));
+                sol.setEspecie(rs.getString("especie"));
+                sol.setRaza(rs.getString("raza"));
+                sol.setDescripcionAdicional(rs.getString("descripcionAdicional"));
+                sol.setLugarPerdida(rs.getString("lugarPerdida"));
+                sol.setFechaPerdida(rs.getDate("fechaPerdida").toLocalDate());
+                sol.setHoraPerdida(rs.getTime("horaPerdida").toLocalTime());
+                sol.setNombreContacto(rs.getString("nombreContacto"));
+                sol.setTelefonoContacto(rs.getString("telefonoContacto"));
+
+                Foto foto = new Foto();
+                foto.setFotoID(rs.getInt("fotoID"));
+                foto.setRutaFoto(rs.getString("rutaFoto"));
+                sol.setFoto(foto);
+
+                sol.setAniadirRecompensa(rs.getBoolean("aniadirRecompensa"));
+                sol.setMontoRecompensa(rs.getInt("montoRecompensa"));
+
+                Usuario usuario = new Usuario();
+                usuario.setUsuarioID(rs.getInt("usuarioID"));
+
+                sol.setUsuario(usuario);
+
+                sol.setAprobadoCoordinador(rs.getBoolean("aprobadoCoordinador"));
+                sol.setMascotaEncontrada(rs.getBoolean("mascotaEncontrada"));
+                sol.setFechaFormulario(LocalDate.parse(rs.getString("fechaFormulario")));
+
+                listaPublicacionMascotaPerdida.add(sol);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaPublicacionMascotaPerdida;
+    }
+
     public ArrayList<PublicacionMascotaPerdida> listarSolicitudnMascotaPerdida() {
         ArrayList<PublicacionMascotaPerdida> listaPublicacionMascotaPerdida = new ArrayList<>();
 
@@ -110,10 +162,62 @@ public class PublicacionMascotaPerdidaDao extends BaseDao {
         return listaPublicacionMascotaPerdida;
     }
 
+    public ArrayList<PublicacionMascotaPerdida> listarSolicitudnMascotaPerdidaFiltro() {
+        ArrayList<PublicacionMascotaPerdida> listaPublicacionMascotaPerdida = new ArrayList<>();
+
+        String sql = "SELECT p.*,f.rutaFoto FROM publicacionmascotaperdida p inner join fotos f on f.fotoID=p.fotoID  where p.aprobadoCoordinador is false"; // Completa el SQL para seleccionar todos los registros
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                PublicacionMascotaPerdida sol = new PublicacionMascotaPerdida();
+
+                // Completar asignaciones de las columnas a los atributos del objeto
+                sol.setPublicacionMascotaPerdidaID(rs.getInt("publicacionMascotaPerdidaID"));
+                sol.setDescripcion(rs.getString("descripcion"));
+                sol.setNombreMascota(rs.getString("nombreMascota"));
+                sol.setDistintivo(rs.getString("distintivo"));
+                sol.setEdadMascota(rs.getInt("edadMascota"));
+                sol.setTamanio(rs.getString("tamanio"));
+                sol.setEspecie(rs.getString("especie"));
+                sol.setRaza(rs.getString("raza"));
+                sol.setDescripcionAdicional(rs.getString("descripcionAdicional"));
+                sol.setLugarPerdida(rs.getString("lugarPerdida"));
+                sol.setFechaPerdida(rs.getDate("fechaPerdida").toLocalDate());
+                sol.setHoraPerdida(rs.getTime("horaPerdida").toLocalTime());
+                sol.setNombreContacto(rs.getString("nombreContacto"));
+                sol.setTelefonoContacto(rs.getString("telefonoContacto"));
+
+                Foto foto = new Foto();
+                foto.setFotoID(rs.getInt("fotoID"));
+                foto.setRutaFoto(rs.getString("rutaFoto"));
+                sol.setFoto(foto);
+
+                sol.setAniadirRecompensa(rs.getBoolean("aniadirRecompensa"));
+                sol.setMontoRecompensa(rs.getInt("montoRecompensa"));
+
+                Usuario usuario = new Usuario();
+                usuario.setUsuarioID(rs.getInt("usuarioID"));
+
+                sol.setUsuario(usuario);
+
+                sol.setAprobadoCoordinador(rs.getBoolean("aprobadoCoordinador"));
+                sol.setMascotaEncontrada(rs.getBoolean("mascotaEncontrada"));
+                sol.setFechaFormulario(LocalDate.parse(rs.getString("fechaFormulario")));
+
+                listaPublicacionMascotaPerdida.add(sol);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaPublicacionMascotaPerdida;
+    }
+
     public PublicacionMascotaPerdida listarSolicitudnMascotaPerdidaPorID(int id) {
         PublicacionMascotaPerdida sol = new PublicacionMascotaPerdida();
 
-        String sql = "SELECT p.*, f.rutaFoto FROM publicacionmascotaperdida p inner join fotos f on f.fotoID=p.fotoID where p.aprobadoCoordinador is null and p.publicacionMascotaPerdidaID="+id+";"; // Completa el SQL para seleccionar todos los registros
+        String sql = "SELECT p.*, f.rutaFoto FROM publicacionmascotaperdida p inner join fotos f on f.fotoID=p.fotoID where  p.publicacionMascotaPerdidaID="+id+";"; // Completa el SQL para seleccionar todos los registros
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -310,6 +414,33 @@ public class PublicacionMascotaPerdidaDao extends BaseDao {
             return stmt.executeUpdate() > 0;
         }
     }
+
+    public void eliminarPublicacion(int id) {
+        String deleteComentarios = "DELETE FROM comentarios WHERE publicacionMascotaPerdidaID = ?";
+        String deleteAvistada = "DELETE FROM publicacionmascotaavistada WHERE publicacionMascotaPerdidaID = ?";
+        String deletePerdida = "DELETE FROM publicacionmascotaperdida WHERE publicacionMascotaPerdidaID = ?";
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmtComentarios = conn.prepareStatement(deleteComentarios);
+             PreparedStatement stmtAvistada = conn.prepareStatement(deleteAvistada);
+             PreparedStatement stmtPerdida = conn.prepareStatement(deletePerdida)) {
+
+            // Eliminar registros relacionados en comentarios
+            stmtComentarios.setInt(1, id);
+            stmtComentarios.executeUpdate();
+
+            // Eliminar registros relacionados en publicacionmascotaavistada
+            stmtAvistada.setInt(1, id);
+            stmtAvistada.executeUpdate();
+
+            // Eliminar el registro principal en publicacionmascotaperdida
+            stmtPerdida.setInt(1, id);
+            int rowsAffected = stmtPerdida.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
 

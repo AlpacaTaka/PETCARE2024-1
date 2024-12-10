@@ -5,7 +5,9 @@
 <%@ page import="java.time.temporal.ChronoUnit" %>
 <%@ page import="com.example.iwebproyecto.beans.Comentarios" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.iwebproyecto.beans.CoordinadorZona" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -36,7 +38,10 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Coordinador Zona Norte</div>
+                <%
+                    CoordinadorZona coor= (com.example.iwebproyecto.beans.CoordinadorZona) request.getSession().getAttribute("CoordinadorZona");
+                %>
+                <div class="welcome-text">Hola, Coordinador <%=coor.getZona().getNombreZona()%></div>
             </div>
             <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
 
@@ -48,8 +53,8 @@
                 <ul class="navlinks">
                     <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Hogares temporales"><i class="fi-rr-user-check"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi fi-rr-paw"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets" style="color: #000;"></i></a></li>
 
                     <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
@@ -80,7 +85,7 @@
                         <a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" style="color: black;"><button type="button" class="btn btn-personal2"> Regresar </button></a>
                     </div>
 
-                    <h1 class="card-title" style="margin-top: 10px; margin-bottom: 10px; text-align: center;margin-bottom: 20px;">Publicación de mascota perdida</h1>
+                    <h1 class="card-title" style="margin-top: 10px; margin-bottom: 10px; text-align: center;margin-bottom: 20px;">Publicación de Mascota Perdida</h1>
                     <div class="container md-8" style="width: 85%; max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px; display: flex; justify-content: center; align-items: center;">
 
                         <div class="card-body" style="width: 100%; text-align: center;">
@@ -213,9 +218,13 @@
                                 <hr>
 
                             </div>
-                            <div class="col">
-                                <button type="submit" class="btn btn-personal" onclick="abrirPopup()">ELIMINAR PUBLICACIÓN DUPLICADA</button>
-                            </div>
+                            <form action="${pageContext.request.contextPath}/EliminarPublicacionMascotaPerdida" method="post">
+                                <input type="hidden" name="publicacionMascotaPerdidaID" value="<%=sol.getPublicacionMascotaPerdidaID()%>">
+                                <div class="col">
+                                    <button type="submit" class="btn btn-personal">ELIMINAR PUBLICACIÓN DUPLICADA</button>
+                                </div>
+                            </form>
+
                             <hr>
                             <p class="card-text" style="text-align: left; display: flex; margin-top: 1%;"><strong>COMENTARIOS: </strong></p>
 
@@ -250,6 +259,10 @@
                                 %>
                             </div>
 
+
+                            <% if(!sol.isMascotaEncontrada()){
+
+                            %>
                             <hr>
                             <form action="VerPubicacionMascotaPerdida" method="POST">
                                 <input id="id" type="hidden" name="id" value="<%=sol.getPublicacionMascotaPerdidaID()%>">
@@ -259,7 +272,7 @@
                                     </div>
 
                                     <div class="row" style="margin-bottom: 10px;">
-                                        <textarea class="form-control" id="nuevoComentario" name="comentario" rows="3" placeholder="Escribe tu comentario aquí..."></textarea>
+                                        <textarea class="form-control" id="nuevoComentario" name="comentario" rows="3" placeholder="Escribe tu comentario aquí..." required></textarea>
                                     </div>
                                     <div class="row justify-content-end">
                                         <div class="col-md-6 p-1 align-items">
@@ -268,6 +281,15 @@
                                     </div>
                                 </div>
                             </form>
+                            <%
+                            } else {
+
+                            %>
+                            <br>
+                            <%
+
+                                }%>
+
 
                         </div>
                     </div>

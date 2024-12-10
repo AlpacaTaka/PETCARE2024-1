@@ -1,5 +1,6 @@
 <%@ page import="com.example.iwebproyecto.beans.CoordinadorZona" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -34,12 +35,13 @@
             height: 100%;
             object-fit: cover; /* Mantiene las proporciones de la imagen dentro del contenedor */
         }
-        
-        
+
+
     </style>
 </head>
 <body>
     <div class="contenedor-p">
+
         
         <header class="cabecera">
             <div class="izquierda" onclick="toggleMenu()">
@@ -47,7 +49,10 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Coordinador Zona Norte</div>
+                <%
+                    CoordinadorZona coor= (com.example.iwebproyecto.beans.CoordinadorZona) request.getSession().getAttribute("CoordinadorZona");
+                %>
+                <div class="welcome-text">Hola, Coordinador <%=coor.getZona().getNombreZona()%></div>
             </div>
             <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
         </header>
@@ -59,8 +64,8 @@
                 <ul class="navlinks">
                     <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user" style="color: #000;"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Hogares temporales"><i class="fi-rr-user-check"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi fi-rr-paw"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
 
                     <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
@@ -97,9 +102,6 @@
         
                             <form id="uploadForm" style="padding:10px" >
 
-                                <%
-                                    CoordinadorZona coor= (com.example.iwebproyecto.beans.CoordinadorZona) request.getSession().getAttribute("CoordinadorZona");
-                                %>
 
                                 <div class="row justify-content-center p-1" style="margin-top: 25px;">
                                     <div class="col d-flex justify-content-center">

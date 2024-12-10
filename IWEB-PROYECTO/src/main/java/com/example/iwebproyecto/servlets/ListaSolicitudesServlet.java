@@ -24,6 +24,7 @@ public class ListaSolicitudesServlet extends HttpServlet {
         ArrayList<SolicitudTemporal> lista= daoCoo.listarSolicitudesHogarTemporal();
         HttpSession session = request.getSession();
         session.setAttribute("listaSolicitudesTemporal", lista);
+        session.setAttribute("quitar", null);
 
         view = request.getRequestDispatcher("coordinador/listaSolicitudesDeHogarTemporal1.jsp");
         view.forward(request, response);

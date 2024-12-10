@@ -1,7 +1,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.time.LocalDate, java.time.temporal.ChronoUnit" %>
 <%@ page import="com.example.iwebproyecto.beans.PublicacionMascotaPerdida" %>
+<%@ page import="com.example.iwebproyecto.beans.CoordinadorZona" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -50,7 +52,10 @@
                 <div>Menu</div>
                 <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
             </div>
-            <div class="welcome-text">Hola, Coordinador Zona Norte</div>
+            <%
+                CoordinadorZona coor= (com.example.iwebproyecto.beans.CoordinadorZona) request.getSession().getAttribute("CoordinadorZona");
+            %>
+            <div class="welcome-text">Hola, Coordinador <%=coor.getZona().getNombreZona()%></div>
         </div>
         <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
     </header>
@@ -62,8 +67,8 @@
             <ul class="navlinks">
                 <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
-                <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Hogares temporales"><i class="fi-rr-user-check"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi fi-rr-paw"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets" style="color: #000;"></i></a></li>
 
                 <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
@@ -100,6 +105,26 @@
                                 <button class="btn" button type="button"  aria-label="Close" style="background-color: #4D0E0E; cursor: default;"><span class="fi-rr-search" style="font-size: 20px; color:rgb(255, 255, 255)"></span></button>
                                 <input type="text" id="searchInput" class="form-control" placeholder="Busque por nombre" maxlength="60">
                             </div>
+                        </div>
+                        <div class="col-sm-4 order-second" style="min-width: 300px;">
+                            <form action="FiltrosCoordinador?action=MascotaPedida" method="post" class="d-flex gap-2">
+
+
+                                <select name="estado" id="estadoCombo" class="form-select" style="max-width: 200px;">
+                                    <option value="" selected>Seleccione para filtrar</option>
+
+
+                                    <option value="Encontrada">Mascota Encontrada</option>
+                                    <option value="Perdida">Mascota Perdida</option>
+                                    <option value="Limpiar">Limpiar Filtro</option>
+                                </select>
+
+                                <!-- Botón de filtrar -->
+                                <button type="submit" class="btn btn-personal">
+                                    Filtrar
+                                </button>
+                            </form>
+
                         </div>
                         <!--
                         <div class="col-12 col-sm-4 d-flex justify-content-center mt-3 mt-sm-0">
@@ -165,7 +190,7 @@
                                                     }else{
 
                                                 %>
-                                                <h5 class="card-title" style="color: green;">Perdido/a</h5>
+                                                <h5 class="card-title" style="color: red;">Perdido/a</h5>
                                                 <%
                                                 }
                                                 %>

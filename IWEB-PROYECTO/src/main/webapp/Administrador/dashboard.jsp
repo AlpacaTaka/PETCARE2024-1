@@ -1,3 +1,5 @@
+<%@ page import="java.util.ArrayList" %>
+<jsp:useBean id="dashboardDTO" scope="request" type="com.example.iwebproyecto.dtos.DashboardDTO"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -88,7 +90,7 @@
                 <!-- Segunda Fila -->
                 <div class="col-md-6" style="width: 100%;max-width: 500px;border-radius: 30px; padding: 20px;">
                     <div class="card">
-                        <div class="card-header">Mascotas Perdidas por Mes</div>
+                        <div class="card-header">Mascotas Perdidas en los Últimos Tres Meses</div>
                         <div class="card-body">
                             <canvas id="mascotasPerdidasMes" style="max-height: 300px"></canvas>
                         </div>
@@ -96,7 +98,7 @@
                 </div>
                 <div class="col-md-6" style="width: 100%;max-width: 500px;border-radius: 30px; padding: 20px;">
                     <div class="card">
-                        <div class="card-header">Usuarios Baneados vs Activos</div>
+                        <div class="card-header">Usuarios Inactivos vs Activos</div>
                         <div class="card-body">
                             <canvas id="usuariosBaneadosActivos" style="max-height: 215px"></canvas>
                         </div>
@@ -106,7 +108,7 @@
                 <!-- Tercera Fila -->
                 <div class="col-md-6" style="width: 100%;max-width: 500px;border-radius: 30px; padding: 20px;">
                     <div class="card">
-                        <div class="card-header">Albergues Registrados</div>
+                        <div class="card-header">Albergues Registrados En El Año</div>
                         <div class="card-body">
                             <canvas id="alberguesRegistrados" style="max-height: 300px"></canvas>
                         </div>
@@ -114,14 +116,13 @@
                 </div>
                 <div class="col-md-6" style="width: 100%;max-width: 500px;border-radius: 30px; padding: 20px;">
                     <div class="card">
-                        <div class="card-header">Mascotas Encontradas por Mes</div>
+                        <div class="card-header">Mascotas Encontradas en los Últimos Tres Meses</div>
                         <div class="card-body">
                             <canvas id="mascotasEncontradasMes" style="max-height: 300px"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
-
             <!-- Footer -->
             <footer class="pt-4">
                 <div class="container">
@@ -145,10 +146,10 @@
 
     // Datos de ejemplo (reemplaza con tus datos reales)
     const donacionesPorAlbergueData = {
-        labels: ['Albergue A', 'Albergue B', 'Albergue C'],
+        labels: [<%for(String NombreAlbergue : dashboardDTO.getAlberguesDonacion()){%>'<%=NombreAlbergue%>', <%}%>],
         datasets: [{
             label: 'Cantidad de donaciones',
-            data: [120, 150, 80],
+            data: [<%for(int Cantidad : dashboardDTO.getCantidadesTotalesDonacionAlbergue()){%><%=Cantidad+", "%><%}%>],
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1
@@ -184,10 +185,10 @@
 
     // Gráfico 2: Top 10 Donaciones por Usuario
     const topDonacionesPorUsuarioData = {
-        labels: ['Usuario A', 'Usuario B', 'Usuario C', 'Usuario D', 'Usuario E','Usuario F','Usuario G','Usuario H','Usuario I','Usuario J'],
+        labels: [<%for (String user : dashboardDTO.getUsuariosDonacion()){%><%="'"+user+"',"%><%}%>],
         datasets: [{
             label: 'Cantidad de donaciones',
-            data: [100,90,80,70,60,50, 40, 30, 20, 10],
+            data: [<%for (int cant : dashboardDTO.getCantidadesTotalesDonacionUsuario()){%><%="'"+cant+"',"%><%}%>],
             backgroundColor: 'rgba(255, 159, 64, 0.2)',
             borderColor: 'rgba(255, 159, 64, 1)',
             borderWidth: 1
@@ -219,20 +220,10 @@
     });
 
     // Suponiendo que tienes un array con la cantidad de mascotas perdidas por mes
-    const monthsMap = {
-        "Enero": 5,
-        "Febrero": 8,
-        "Marzo": 12,
-        "Abril": 4,
-        "Mayo": 3,
-        "Junio": 2,
-        "Julio": 2,
-        "Agosto": 5,
-        "Septiembre": 8,
-        "Octubre": 4,
-        "Noviembre": 10,
-        "Diciembre": 11
+    const monthsMap = {<%--"Enero": 5,"Febrero": 8,"Marzo": 12,"Abril": 4,"Mayo": 3,"Junio": 2,"Julio": 2,"Agosto": 5,"Septiembre": 8,"Octubre": 4,"Noviembre": 10,"Diciembre": 11,--%><%String comafinal=", ";%><%for (int i=dashboardDTO.getMesesMascotaPerdida().size()-1;i>=0;i--){%>
+        "<%=dashboardDTO.getMesesMascotaPerdida().get(i)%>": <%=dashboardDTO.getCantidadesTotalesMesMascotaPerdida().get(i)%><%if(i==0){comafinal="";}%><%=comafinal%><%}%>
     };
+
     // Ejemplo de datos del año
 
     const mascotasPerdidasPorMes = Object.values(monthsMap);
@@ -249,10 +240,8 @@
         labels: lastThreeMonths, // Los últimos 3 meses
         datasets: [{
             label: 'Mascotas Perdidas',
-            data: [
-                mascotasPerdidasPorMes[monthsMap[lastThreeMonths[0]]], // Julio
-                mascotasPerdidasPorMes[monthsMap[lastThreeMonths[1]]], // Agosto
-                mascotasPerdidasPorMes[monthsMap[lastThreeMonths[2]]] // Septiembre
+            data: [<%--mascotasPerdidasPorMes[monthsMap[lastThreeMonths[0]]], // Julio mascotasPerdidasPorMes[monthsMap[lastThreeMonths[1]]], // AgostomascotasPerdidasPorMes[monthsMap[lastThreeMonths[2]]] // Septiembre--%>
+                <%for (String mesParaMascotaPerdida: dashboardDTO.getMesesMascotaPerdida()){%>monthsMap["<%=mesParaMascotaPerdida%>"],<%}%>
             ],
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
@@ -266,12 +255,12 @@
             type: 'line',
             data: mascotasPerdidasMesData,
             options: {
-                plugins: {
+                <%--plugins: {
                     title: {
                         display: true,
                         text: `Total de Mascotas Perdidas en el Año: ${totalYear}`
                     }
-                },
+                },--%>
                 scales: {
                     y: {
                         title: {
@@ -289,7 +278,7 @@
         labels: ['Baneados', 'Activos'],
         datasets: [{
             label: 'Usuarios',
-            data: [10, 90],
+            data: [<%=dashboardDTO.getUsuariosDesactivados()%>,<%=dashboardDTO.getUsuarioActivos()%>],
             backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(75, 192, 192, 0.2)'],
             borderColor: ['rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)'],
             borderWidth: 1
@@ -312,7 +301,7 @@
     const todosLosMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
     // Datos de Albergues Registrados para
-    const todosLosDatosDeAlbergues = [5, 7, 6, 9, 1, 7, 12, 10, 5, 4, 3, 8];
+    const todosLosDatosDeAlbergues = [<%for (int k=1;k<13;k++){%><%int numero= dashboardDTO.getDiccionarioMesyRegistrados().containsKey(k) ? dashboardDTO.getDiccionarioMesyRegistrados().get(k) : 0;%><%=numero%>,<%}%>];
 
     // Filtrar los meses y los datos hasta el mes actual
     const etiquetasAlbergues = todosLosMeses.slice(0, indiceMesActual + 1);
@@ -340,12 +329,12 @@
             type: 'bar',
             data: alberguesRegistradosData,
             options: {
-                plugins: {
+                <%--plugins: {
                     title: {
                         display: true,
                         text: `Total de Albergues Registrados en el Año: ${totalAlberguesRegistrados}` // Mostrar el total en el título
                     }
-                },
+                },--%>
                 scales: {
                     y: {
                         beginAtZero: true,
@@ -359,19 +348,8 @@
         });
     });
 
-    const foundMonthsMap = {
-        "Enero": 7,
-        "Febrero": 5,
-        "Marzo": 9,
-        "Abril": 6,
-        "Mayo": 3,
-        "Junio": 4,
-        "Julio": 6,
-        "Agosto": 8,
-        "Septiembre": 12,
-        "Octubre": 10,
-        "Noviembre": 9,
-        "Diciembre": 11
+    const foundMonthsMap = {<%String comafinalDos=", ";%><%for (int j=dashboardDTO.getMesesMascotaEncontrada().size()-1;j>=0;j--){%>
+        "<%=dashboardDTO.getMesesMascotaEncontrada().get(j)%>": <%=dashboardDTO.getCantidadesTotalesMesMascotaEncontrada().get(j)%><%if(j==0){comafinalDos="";}%><%=comafinalDos%><%}%>
     };
 
 
@@ -385,10 +363,8 @@
         labels: lastThreeMonthsFound, // Los últimos 3 meses para mascotas encontradas
         datasets: [{
             label: 'Mascotas Encontradas',
-            data: [
-                foundMonthsMap[lastThreeMonthsFound[0]], // Mes 1
-                foundMonthsMap[lastThreeMonthsFound[1]], // Mes 2
-                foundMonthsMap[lastThreeMonthsFound[2]]  // Mes 3
+            data: [<%--foundMonthsMap[lastThreeMonthsFound[0]], // Mes 1 foundMonthsMap[lastThreeMonthsFound[1]], // Mes 2 foundMonthsMap[lastThreeMonthsFound[2]]  // Mes 3--%>
+                <%for (String mesParaMascotaEncontrada: dashboardDTO.getMesesMascotaEncontrada()){%>foundMonthsMap["<%=mesParaMascotaEncontrada%>"],<%}%>
             ],
             borderColor: 'rgba(255, 206, 86, 1)',
             borderWidth: 1,
@@ -402,12 +378,12 @@
             type: 'line',
             data: mascotasEncontradasMesData,
             options: {
-                plugins: {
+                <%--plugins: {
                     title: {
                         display: true,
                         text: `Total de Mascotas Encontradas en el Año: ${totalYearFound}`
                     }
-                },
+                },--%>
                 scales: {
                     y: {
                         title: {

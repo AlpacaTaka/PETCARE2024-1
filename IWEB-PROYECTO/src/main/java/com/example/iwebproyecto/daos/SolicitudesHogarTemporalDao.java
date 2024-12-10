@@ -62,6 +62,61 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
         return listaSolicitudesHogarTemporal;
     }
 
+    public ArrayList<SolicitudTemporal> listarSolicitudesHogarTemporalFiltro() {
+        ArrayList<SolicitudTemporal> listaSolicitudesHogarTemporal = new ArrayList<>();
+
+        String sql = "SELECT s.*, u.nombre,u.apellido,f.rutaFoto FROM solicitudtemporal s inner join usuario u on u.usuarioID=s.usuarioID inner join fotos f on f.fotoID=s.fotoID where s.aprobadoCoordinador is false;";
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                SolicitudTemporal sol = new SolicitudTemporal();
+
+                // Seteamos los datos de la tabla en el bean
+                sol.setSolicitudID(rs.getInt("solicitudID"));
+
+                Usuario usuario = new Usuario();
+                usuario.setUsuarioID(rs.getInt("usuarioID"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellido(rs.getString("apellido"));
+                sol.setUsuario(usuario);
+
+                sol.setEdad(rs.getInt("edad"));
+                sol.setGenero(rs.getString("genero"));
+                sol.setCelular(rs.getString("celular"));
+                sol.setCantidadCuartos(rs.getInt("cantidadCuartos"));
+                sol.setMetrajeVivienda(rs.getInt("metrajeVivienda"));
+                sol.setTieneMascotas(rs.getInt("tieneMascotas"));
+                sol.setCantidadMascota(rs.getInt("cantidadMascota"));
+                sol.setTieneHijos(rs.getInt("tieneHijos"));
+                sol.setViveSolo(rs.getInt("viveSolo"));
+                sol.setTrabajaRemoto(rs.getInt("trabajaRemoto"));
+                sol.setNombrePersonaReferencia(rs.getString("nombrePersonaReferencia"));
+                sol.setNumeroContactoPR(rs.getString("numeroContactoPR"));
+                sol.setTiempoTemporal(rs.getInt("tiempoTemporal"));
+
+                sol.setInicioTemporal(rs.getString("inicioTemporal"));
+                sol.setFinTemporal(rs.getString("finTemporal"));
+
+                Foto foto = new Foto();
+                foto.setFotoID(rs.getInt("fotoID"));
+                foto.setRutaFoto(rs.getString("rutaFoto"));
+                sol.setFoto(foto);
+
+                sol.setFecha(rs.getString("fechaFormulario"));
+                sol.setComentario(rs.getString("comentarioCoordinador"));
+                sol.setNumeroRechazos(rs.getInt("numeroRechazosConsecutivos"));
+
+                listaSolicitudesHogarTemporal.add(sol);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaSolicitudesHogarTemporal;
+    }
+
     public ArrayList<SolicitudTemporal> listarHogarTemporal() {
         ArrayList<SolicitudTemporal> listaSolicitudesHogarTemporal = new ArrayList<>();
 
@@ -69,6 +124,73 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
                 "inner join usuario u on u.usuarioID=s.usuarioID\n" +
                 "inner join fotos f on f.fotoID=s.fotoID\n" +
                 "where s.aprobadoCoordinador = 1;";
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                SolicitudTemporal sol = new SolicitudTemporal();
+
+                // Seteamos los datos de la tabla en el bean
+                sol.setSolicitudID(rs.getInt("solicitudID"));
+
+                Usuario usuario = new Usuario();
+                usuario.setUsuarioID(rs.getInt("usuarioID"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellido(rs.getString("apellido"));
+                sol.setUsuario(usuario);
+
+                sol.setEdad(rs.getInt("edad"));
+                sol.setGenero(rs.getString("genero"));
+                sol.setCelular(rs.getString("celular"));
+                sol.setCantidadCuartos(rs.getInt("cantidadCuartos"));
+                sol.setMetrajeVivienda(rs.getInt("metrajeVivienda"));
+                sol.setTieneMascotas(rs.getInt("tieneMascotas"));
+                sol.setCantidadMascota(rs.getInt("cantidadMascota"));
+                sol.setTieneHijos(rs.getInt("tieneHijos"));
+                sol.setViveSolo(rs.getInt("viveSolo"));
+                sol.setTrabajaRemoto(rs.getInt("trabajaRemoto"));
+                sol.setNombrePersonaReferencia(rs.getString("nombrePersonaReferencia"));
+                sol.setNumeroContactoPR(rs.getString("numeroContactoPR"));
+                sol.setTiempoTemporal(rs.getInt("tiempoTemporal"));
+
+                sol.setInicioTemporal(rs.getString("inicioTemporal"));
+                sol.setFinTemporal(rs.getString("finTemporal"));
+
+                Foto foto = new Foto();
+                foto.setFotoID(rs.getInt("fotoID"));
+                foto.setRutaFoto(rs.getString("rutaFoto"));
+                sol.setFoto(foto);
+
+                sol.setFecha(rs.getString("fechaFormulario"));
+                sol.setComentario(rs.getString("comentarioCoordinador"));
+                sol.setNumeroRechazos(rs.getInt("numeroRechazosConsecutivos"));
+
+                if(rs.getBoolean("desactivadoAdministrador")){
+                    sol.setEstadoTemporal("Inactivo");
+
+                }else{
+                    sol.setEstadoTemporal("Activo");
+                }
+
+                listaSolicitudesHogarTemporal.add(sol);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaSolicitudesHogarTemporal;
+    }
+
+
+
+    public ArrayList<SolicitudTemporal> listarHogarTemporalFiltro(String estado) {
+        ArrayList<SolicitudTemporal> listaSolicitudesHogarTemporal = new ArrayList<>();
+
+        String sql = "SELECT s.*, u.nombre,u.apellido, f.rutaFoto FROM solicitudtemporal s \n" +
+                "inner join usuario u on u.usuarioID=s.usuarioID\n" +
+                "inner join fotos f on f.fotoID=s.fotoID\n" +
+                "where s.aprobadoCoordinador = 1 and s.desactivadoAdministrador is " + estado + ";";
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -136,7 +258,7 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
                 "inner join distrito d ON d.distritoID = u.distritoID \n" +
                 "inner join zona z ON z.zonaID = d.zonaID\n" +
                 "inner join fotos f on f.fotoID=u.fotoID\n" +
-                "WHERE s.aprobadoCoordinador is true and s.solicitudID= 16;";
+                "WHERE s.solicitudID= " + id + ";";
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -205,13 +327,14 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
         return sol;
     }
 
+
     public SolicitudTemporal listarSolicitudesHogarTemporalPorID(int id) {
         SolicitudTemporal sol = new SolicitudTemporal();
 
         String sql = "SELECT s.*, u.nombre, u.dni , u.direccion , u.apellido, d.nombreDistrito, u.correoElectronico, z.nombreZona\n" +
                 "FROM solicitudtemporal s\n" +
                 "INNER JOIN usuario u ON u.usuarioID = s.usuarioID inner join distrito d ON d.distritoID = u.distritoID inner join zona z ON z.zonaID = d.zonaID\n" +
-                "WHERE s.aprobadoCoordinador is null and s.solicitudID= "+id+";";
+                "WHERE s.solicitudID= "+id+";";
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {

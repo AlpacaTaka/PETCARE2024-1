@@ -5,6 +5,7 @@
 <%@ page import="java.time.temporal.ChronoUnit" %>
 <%@ page import="com.example.iwebproyecto.beans.Comentarios" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.iwebproyecto.beans.CoordinadorZona" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -53,7 +54,10 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Coordinador Zona Norte</div>
+                <%
+                    CoordinadorZona coor= (com.example.iwebproyecto.beans.CoordinadorZona) request.getSession().getAttribute("CoordinadorZona");
+                %>
+                <div class="welcome-text">Hola, Coordinador <%=coor.getZona().getNombreZona()%></div>
             </div>
             <div class="logo"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
         </header>
@@ -65,8 +69,8 @@
                 <ul class="navlinks">
                     <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget" style="color: #000;"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Hogares temporales"><i class="fi-rr-user-check"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi fi-rr-paw" style="color: #000;"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
 
                     <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
@@ -96,8 +100,23 @@
                 <div class="col" id="contenido-nofooter" style="flex-grow: 1;align-content:center">
                     
                     <div class="container" >
-                        
-                        <h1 style="text-align: center; margin-bottom: 40px;">Solicitudes de mascota perdida</h1>
+                        <% String quitar = (String) request.getSession().getAttribute("quitar3");
+                            if (quitar == null){
+
+                        %>
+
+                        <h1 style="text-align: center; margin-bottom: 40px;">Solicitudes de Mascota Perdida</h1>
+
+                        <%
+                        }else{
+
+                        %>
+
+                        <h1 style="text-align: center; margin-bottom: 40px;">Solicitudes de Mascota Perdida Rechazadas</h1>
+
+                        <%
+                            } %>
+
                         
                         <div class="row g-0 justify-content-between">
                             <div class="col-sm-4 order-first" style="min-width: 300px;">
@@ -105,6 +124,35 @@
                                     <button class="btn" button type="button"  aria-label="Close" style="background-color: #4D0E0E; cursor: default;"><span class="fi-rr-search" style="font-size: 20px; color:rgb(255, 255, 255)"></span></button>
                                     <input type="text" id="searchInput" class="form-control" placeholder="Busque por nombre" maxlength="60">
                                 </div>
+                            </div>
+                            <div class="col-sm-4 order-second" style="min-width: 300px;">
+                                <form action="FiltrosCoordinador?action=SolicitudesPerdidas" method="post" class="d-flex justify-content-center">
+
+
+                                    <%
+                                        if (quitar == null){
+
+                                    %>
+
+
+                                    <button type="submit" class="btn btn-personal">
+                                        Ver Solicitudes Rechazadas
+                                    </button>
+                                    <%
+                                    }else{
+
+                                    %>
+                                    <button type="button" class="btn btn-personal" onclick="location.href='${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes';">
+                                        Regresar
+                                    </button>
+
+
+                                    <%
+                                        } %>
+
+
+                                </form>
+
                             </div>
                             <!-- 
                             <div class="col-12 col-sm-4 d-flex justify-content-center mt-3 mt-sm-0">
@@ -124,6 +172,7 @@
                                     </li>
                                 </ul>
                             </div>  -->
+
                         </div>
 
                         <div class="container d-flex justify-content-center mt-4" style="margin-bottom: 30px;">

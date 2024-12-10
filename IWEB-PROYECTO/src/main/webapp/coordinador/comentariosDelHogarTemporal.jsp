@@ -1,4 +1,5 @@
 <%@ page import="com.example.iwebproyecto.beans.SolicitudTemporal" %>
+<%@ page import="com.example.iwebproyecto.beans.CoordinadorZona" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSSDELAPAGINA.css">
-    <title>Comentarios de hogar temporal</title>
+    <title>Hogar Temporal</title>
     <style>
         
         /* Esto es solo de referencia para ver su espacio disponible - borrar*/ 
@@ -32,7 +33,10 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Coordinador Zona Norte</div>
+                <%
+                    CoordinadorZona coor= (com.example.iwebproyecto.beans.CoordinadorZona) request.getSession().getAttribute("CoordinadorZona");
+                %>
+                <div class="welcome-text">Hola, Coordinador <%=coor.getZona().getNombreZona()%></div>
             </div>
             <div class="logo" ><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></div>
         </header>
@@ -44,8 +48,8 @@
                 <ul class="navlinks">
                     <li><a href="${pageContext.request.contextPath}/coordinador/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaSolicitudes" title="Solicitudes de hogar temporal"><i class="fi-rr-subscription-user"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Comentarios de hogares temporales"><i class="fi fi-rr-comment" style="color: #000;"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi-rr-piggy-bank-budget"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaTemporales" title="Hogares temporales"><i class="fi-rr-user-check" style="color: #000;"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaSolicitudes" title="Solicitudes de mascota perdida"><i class="fi fi-rr-paw"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ListaMascotaPerdida?action=ListaPublicaciones" title="Publicaciones de mascota perdida"><i class="fi-rr-pets"></i></a></li>
 
                     <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
@@ -145,7 +149,7 @@
                                 
                                 
                             </div>
-                            <p class="card-text" style="text-align: left; display: flex; "><strong>COMENTARIOS: </strong></p>
+                            <p class="card-text" style="text-align: left; display: flex; "><strong>COMENTARIO: </strong></p>
 
                             <%
                                 if (sol.getComentario() == null){
