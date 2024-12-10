@@ -82,7 +82,7 @@
             <div class="form-group">
                 <label for="formFile" class="form-label">Adjunte una foto de perfil</label>
                 <input class="form-control" type="file" id="formFile" accept=".png" required>
-                <div id="fileError" class="text-danger mt-2" style="display: none; color: red;">El archivo debe ser una imagen PNG.</div>
+                <div id="file_Error" class="text-danger mt-2" style="display: none; color: red;">El archivo debe ser una imagen PNG.</div>
             </div>
 
             <div class="form-group">
@@ -188,22 +188,21 @@
             <div class="form-group">
                 <label for="formFile2" class="form-label">Adjunte código qr YAPE</label>
                 <input class="form-control" type="file" id="formFile2" accept=".png" required>
-                <div id="fileError" class="text-danger mt-2" style="display: none; color: red;">El archivo debe ser una imagen PNG.</div>
+                <div id="file_Error1" class="text-danger mt-2" style="display: none; color: red;">El archivo debe ser una imagen PNG.</div>
             </div>
 
             <div class="form-group">
                 <label for="formFile3" class="form-label">Adjunte código qr PLIN</label>
                 <input class="form-control" type="file" id="formFile3" accept=".png" required>
-                <div id="fileError" class="text-danger mt-2" style="display: none; color: red;">El archivo debe ser una imagen PNG.</div>
+                <div id="file_Error2" class="text-danger mt-2" style="display: none; color: red;">El archivo debe ser una imagen PNG.</div>
             </div>
 
             <div class="form-group">
                 <button type="submit" class="button">
                     Enviar
                 </button>
-                </div-->
+            </div>
         </form>
-        <!--div class="image-container"></div-->
     </div>
 </div>
 </body>
@@ -246,7 +245,7 @@
     document.getElementById("formFile").addEventListener("change", function (event) {
         const fileInput = event.target;
         const file = fileInput.files[0];
-        const fileError = document.getElementById("fileError");
+        const fileError = document.getElementById("file_Error");
 
         if (file && file.type !== "image/png") {
             fileError.style.display = "block";
@@ -258,10 +257,10 @@
 
     // Evita el envío del formulario si hay un error
     document.querySelector("form").addEventListener("submit", function (event) {
-        const file = document.getElementById("formFile").files[0];
+        const file = document.getElementById("form_File").files[0];
         if (file && file.type !== "image/png") {
             event.preventDefault(); // Evita el envío del formulario
-            document.getElementById("fileError").style.display = "block";
+            document.getElementById("file_Error").style.display = "block";
         }
     });
 </script>
@@ -269,7 +268,7 @@
     document.getElementById("formFile2").addEventListener("change", function (event) {
         const fileInput = event.target;
         const file = fileInput.files[0];
-        const fileError = document.getElementById("fileError");
+        const fileError = document.getElementById("file_Error1");
 
         if (file && file.type !== "image/png") {
             fileError.style.display = "block";
@@ -284,7 +283,7 @@
         const file = document.getElementById("formFile2").files[0];
         if (file && file.type !== "image/png") {
             event.preventDefault(); // Evita el envío del formulario
-            document.getElementById("fileError").style.display = "block";
+            document.getElementById("file_Error").style.display = "block";
         }
     });
 </script>
@@ -292,7 +291,7 @@
     document.getElementById("formFile3").addEventListener("change", function (event) {
         const fileInput = event.target;
         const file = fileInput.files[0];
-        const fileError = document.getElementById("fileError");
+        const fileError = document.getElementById("file_Error2");
 
         if (file && file.type !== "image/png") {
             fileError.style.display = "block";
@@ -307,7 +306,7 @@
         const file = document.getElementById("formFile3").files[0];
         if (file && file.type !== "image/png") {
             event.preventDefault(); // Evita el envío del formulario
-            document.getElementById("fileError").style.display = "block";
+            document.getElementById("file_Error").style.display = "block";
         }
     });
 </script>
@@ -315,7 +314,7 @@
     document.getElementById('uploadForm').addEventListener('submit', function(event) {
         const fileInput = document.getElementById('formFile3');
         const file = fileInput.files[0];
-        const fileError = document.getElementById('fileError');
+        const fileError = document.getElementById('file_Error');
 
         // Verifica si el archivo tiene el tipo MIME de PNG
         if (file && file.type !== 'image/png') {
@@ -331,7 +330,7 @@
     document.getElementById('uploadForm').addEventListener('submit', function(event) {
         const fileInput = document.getElementById('formFile');
         const file = fileInput.files[0];
-        const fileError = document.getElementById('fileError');
+        const fileError = document.getElementById('file_Error');
 
         // Verifica si el archivo tiene el tipo MIME de PNG
         if (file && file.type !== 'image/png') {

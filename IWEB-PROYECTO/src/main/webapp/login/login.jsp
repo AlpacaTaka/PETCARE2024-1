@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <a href="<%=request.getContextPath()%>/fpassword.jsp">¿Olvido su contraseña?</a>
-                <a href="<%=request.getContextPath()%>/signin.jsp"">Crear cuenta</a>
+                <a href="<%=request.getContextPath()%>/signin.jsp">Crear cuenta</a>
                 <a href="signinAlbergue.html">Inscribir su albergue</a>
             </div>
         </form>
