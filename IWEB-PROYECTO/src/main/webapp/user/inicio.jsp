@@ -206,7 +206,7 @@
                                     <%
                                         int contador = 0; // Contador para controlar los slides
                                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                                        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss"); // Cambiado a HH:mm:ss para coincidir con el formato de la base de datos
+                                        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
 
                                         for (DonacionSuministros donacion : listaDonaciones) {
                                             String activeClass = (contador == 0) ? "active" : "";
@@ -223,7 +223,7 @@
                                                 fechaInicio = dateFormat.parse(donacion.getFechaInicioRecepcion());
                                                 fechaFin = dateFormat.parse(donacion.getFechaFinRecepcion());
 
-                                                // Convertir las horas de String a LocalTime con segundos
+                                                // Convertir las horas de String a LocalTime
                                                 horaInicio = LocalTime.parse(donacion.getHoraInicioRecepcion(), timeFormat);
                                                 horaFin = LocalTime.parse(donacion.getHoraFinRecepcion(), timeFormat);
                                             } catch (Exception e) {
@@ -237,23 +237,24 @@
                                             String estadoDonacion = "Pasado"; // Por defecto es "Pasado"
 
                                             if (datosValidos) {
-                                                // Revisar si la fecha actual está entre la fecha de inicio y fin (incluyendo el día de fin)
-                                                if ((fechaActual.after(fechaInicio) || fechaActual.equals(fechaInicio)) &&
-                                                        (fechaActual.before(fechaFin) || fechaActual.equals(fechaFin))) {
+                                                // Revisar si la fecha actual está antes de la fecha de inicio o dentro del rango de fechas
+                                                if (fechaActual.before(fechaInicio) ||
+                                                        (!fechaActual.before(fechaInicio) && !fechaActual.after(fechaFin))) {
 
-                                                    // Revisar horas solo si la fecha actual está en la fecha de inicio o fin
+                                                    // Si estamos en la fecha de inicio, revisar la hora de inicio
                                                     if (fechaActual.equals(fechaInicio)) {
-                                                        // Para el día de inicio, debe ser después o igual a la hora de inicio
-                                                        if (horaActual.isAfter(horaInicio) || horaActual.equals(horaInicio)) {
+                                                        if (!horaActual.isBefore(horaInicio)) {
                                                             estadoDonacion = "Activo";
                                                         }
-                                                    } else if (fechaActual.equals(fechaFin)) {
-                                                        // Para el día de fin, debe ser antes o igual a la hora de fin
-                                                        if (horaActual.isBefore(horaFin) || horaActual.equals(horaFin)) {
+                                                    }
+                                                    // Si estamos en la fecha de fin, revisar la hora de fin
+                                                    else if (fechaActual.equals(fechaFin)) {
+                                                        if (!horaActual.isAfter(horaFin)) {
                                                             estadoDonacion = "Activo";
                                                         }
-                                                    } else {
-                                                        // Para los días entre el inicio y el fin, está activo todo el día
+                                                    }
+                                                    // Fechas intermedias o fechas futuras
+                                                    else {
                                                         estadoDonacion = "Activo";
                                                     }
                                                 }

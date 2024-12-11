@@ -43,8 +43,8 @@ public class DonacionesDao extends BaseDao {
         ArrayList<DonacionSuministros> donacionesSuministros = new ArrayList<>();
 
         String sql = "SELECT *, " +
-                "       IF( (CURDATE() BETWEEN `fechaInicioRecepcion` AND `fechaFinRecepcion`) " +
-                "           AND (CURTIME() BETWEEN `horaInicioRecepcion` AND `horaFinRecepcion`), 1, 0) AS activo " +
+                "       IF((CURDATE() <= `fechaFinRecepcion`) " +
+                "          AND (CURDATE() >= `fechaInicioRecepcion` OR CURDATE() < `fechaInicioRecepcion`), 1, 0) AS activo " +
                 "FROM donacionsuministros " +
                 "WHERE `eliminado` = 0 " +
                 "ORDER BY activo DESC, `fechaInicioRecepcion` ASC " +

@@ -1,9 +1,11 @@
 package com.example.iwebproyecto.servlets;
 
 import com.example.iwebproyecto.beans.Albergue;
+import com.example.iwebproyecto.beans.Distrito;
 import com.example.iwebproyecto.beans.DonacionSuministros;
 import com.example.iwebproyecto.beans.PublicacionMascotaPerdida;
 import com.example.iwebproyecto.daos.AlbergueDao;
+import com.example.iwebproyecto.daos.AlbergueDaoRevenge;
 import com.example.iwebproyecto.daos.DonacionesDao;
 import com.example.iwebproyecto.daos.MascotasDao;
 import jakarta.servlet.*;
@@ -21,6 +23,7 @@ public class DonSuministroServlet extends HttpServlet {
                "lista" : request.getParameter("action");
         DonacionesDao daoDon = new DonacionesDao();
         MascotasDao mascotasDao = new MascotasDao();
+
         switch (action) {
             case "lista":
 
@@ -37,11 +40,20 @@ public class DonSuministroServlet extends HttpServlet {
                 break;
             case "vista":
                 int idDonacion = Integer.valueOf(request.getParameter("id"));
+
+
+
+
                 DonacionSuministros donacionSuministros = new DonacionSuministros();
                 donacionSuministros = daoDon.obtenerSolicitudesDonacionSuministrosPorId(idDonacion);
+
+
+
+
                 System.out.println(donacionSuministros.getCorreoElectronicoDonacion());
+
                 request.setAttribute("donacionSuministros", donacionSuministros);
-                request.getRequestDispatcher("user/perfilAlbergue.jsp").forward(request, response);
+                request.getRequestDispatcher("user/solicitudDonacionSuministros.jsp").forward(request, response);
 
                 break;
             case "Donacion":
