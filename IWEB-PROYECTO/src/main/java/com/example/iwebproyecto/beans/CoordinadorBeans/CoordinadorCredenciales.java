@@ -1,5 +1,6 @@
 package com.example.iwebproyecto.beans.CoordinadorBeans;
 
+import com.example.iwebproyecto.beans.CoordinadorZona;
 import com.example.iwebproyecto.daos.BaseDao;
 
 import java.time.LocalDateTime;
@@ -9,20 +10,18 @@ public class CoordinadorCredenciales extends BaseDao {
     private Integer idCoordinador_credenciales;
     private String correoElectronico;
     private String contrasenia;
-    private CoordinadorCredenciales coordinador;
+    private CoordinadorZona coordinadorZona;
     private boolean requiereCambioClave;
     private String tokenRecuperacion;
     private LocalDateTime fechaExpiracionToken;
 
-    public CoordinadorCredenciales getCoordinador() {
-        return coordinador;
+    public CoordinadorZona getCoordinadorZona() {
+        return coordinadorZona;
     }
 
-    public void setCoordinador(CoordinadorCredenciales coordinador) {
-        this.coordinador = coordinador;
+    public void setCoordinadorZona(CoordinadorZona coordinadorZona) {
+        this.coordinadorZona = coordinadorZona;
     }
-
-
 
     public Integer getIdCoordinador_credenciales() {
         return idCoordinador_credenciales;
