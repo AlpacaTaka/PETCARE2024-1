@@ -329,7 +329,7 @@ public class AlbergueDaoRevenge extends BaseDao {
 
     public void editarMascotaAdopcion(MascotasAdopcion mascotasAdopcion){
         String sql="UPDATE mascotasadopcion set nombreMascota=?,especieMascota=?,raza=?,distritoID=?,direccionHallazgo=?"+
-                ",edadAprox=?,sexo=?,descripcionGeneral=?,fotoID=?,seEncuentraTemporal=?,condicionesAdopcion=?,albergueID=? where idAdopcion=?;";
+                ",edadAprox=?,sexo=?,descripcionGeneral=?,seEncuentraTemporal=?,condicionesAdopcion=?,albergueID=? where idAdopcion=?;";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, mascotasAdopcion.getNombreMascota());
@@ -340,11 +340,10 @@ public class AlbergueDaoRevenge extends BaseDao {
             pstmt.setInt(6,mascotasAdopcion.getEdadAprox());
             pstmt.setString(7,mascotasAdopcion.getSexo());
             pstmt.setString(8,mascotasAdopcion.getDescripcionGeneral());
-            pstmt.setInt(9,mascotasAdopcion.getFoto().getFotoID());
-            pstmt.setBoolean(10,mascotasAdopcion.isSeEncuentraTemporal());
-            pstmt.setString(11,mascotasAdopcion.getCondicionesAdopcion());
-            pstmt.setInt(12,mascotasAdopcion.getAlbergue().getAlbergueID());
-            pstmt.setInt(13,mascotasAdopcion.getIdAdopcion());
+            pstmt.setBoolean(9,mascotasAdopcion.isSeEncuentraTemporal());
+            pstmt.setString(10,mascotasAdopcion.getCondicionesAdopcion());
+            pstmt.setInt(11,mascotasAdopcion.getAlbergue().getAlbergueID());
+            pstmt.setInt(12,mascotasAdopcion.getIdAdopcion());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

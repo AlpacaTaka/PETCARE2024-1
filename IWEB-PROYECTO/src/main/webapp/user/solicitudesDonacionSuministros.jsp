@@ -118,24 +118,72 @@
                             <!--Cards-->
                             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="cardContainer" style="width: 100%;">
                                 <!-- Card 1 -->
+
                                 <%
                                     if (listaSolicitudes != null && !listaSolicitudes.isEmpty()) {
+                                        // Obtener la fecha y hora actuales
+                                        java.util.Date fechaActual = new java.util.Date();
+                                        java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                                        java.time.format.DateTimeFormatter timeFormat = java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss");
+                                        java.time.LocalTime horaActual = java.time.LocalTime.now();
+
                                         for (DonacionSuministros donacion : listaSolicitudes) {
+                                            // Inicializa las variables para las fechas y horas de inicio y fin
+                                            java.util.Date fechaInicio = null;
+                                            java.util.Date fechaFin = null;
+                                            java.time.LocalTime horaInicio = null;
+                                            java.time.LocalTime horaFin = null;
+
+                                            String estadoDonacion = "Pasado"; // Por defecto es "Pasado"
+
+                                            try {
+                                                // Parsear las fechas
+                                                fechaInicio = dateFormat.parse(donacion.getFechaInicioRecepcion());
+                                                fechaFin = dateFormat.parse(donacion.getFechaFinRecepcion());
+
+                                                // Parsear las horas
+                                                horaInicio = java.time.LocalTime.parse(donacion.getHoraInicioRecepcion(), timeFormat);
+                                                horaFin = java.time.LocalTime.parse(donacion.getHoraFinRecepcion(), timeFormat);
+
+                                                // Determinar el estado
+                                                if (fechaActual.before(fechaInicio)) {
+                                                    estadoDonacion = "Activo"; // Futuro, pero marcado como activo
+                                                } else if (!fechaActual.before(fechaInicio) && !fechaActual.after(fechaFin)) {
+                                                    // Si está entre las fechas de inicio y fin
+                                                    if (fechaActual.equals(fechaInicio)) {
+                                                        if (!horaActual.isBefore(horaInicio)) {
+                                                            estadoDonacion = "Activo";
+                                                        }
+                                                    } else if (fechaActual.equals(fechaFin)) {
+                                                        if (!horaActual.isAfter(horaFin)) {
+                                                            estadoDonacion = "Activo";
+                                                        }
+                                                    } else {
+                                                        estadoDonacion = "Activo"; // Está entre las fechas,
+                                                    }
+                                                }
+                                            } catch (Exception e) {
+                                                // Manejar excepciones de parseo
+                                                estadoDonacion = "Pasado";
+                                            }
                                 %>
                                 <div class="col-12 col-md-6 col-lg-4 mb-4 card-item">
                                     <div class="card h-100">
-                                        <img src="${pageContext.request.contextPath}/<%= donacion.getFoto().getRutaFoto() %>" class="card-img-top" alt="<%= donacion.getTituloAvisoDonacion() %>">
+                                        <img src="${pageContext.request.contextPath}/<%= donacion.getFoto().getRutaFoto() %>" class="card-img-top" alt="<%= donacion.getTituloAvisoDonacion() %>"
+
+                                             onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Imagen+No+Disponible';">
                                         <div class="card-body">
                                             <div class="row d-flex justify-content-center">
-                                                <div class="badge text-bg-success text-wrap" style="max-width: 70%; margin-bottom: 10px">
-                                                    Activo
-                                                  </div>
+                                                <div class="badge text-bg-<%= estadoDonacion.equals("Activo") ? "success" : "secondary" %> text-wrap" style="max-width: 70%; margin-bottom: 10px">
+                                                    <%= estadoDonacion %>
+                                                </div>
                                                   <h5 class="card-title text-center"><%= donacion.getTituloAvisoDonacion() %></h5>
+
                                             </div>
                                             
 
                                               <p class="card-text"><%= donacion.getAlbergue().getNombreAlbergue() %></p>
-                                            <a href="solicitudDonacionSuministros.html" class="btn btn-personal">Ver Solicitud</a>
+                                            <a href="<%=request.getContextPath()%>/SolicitudesDeSuministros?action=vista&id=<%= donacion.getDonacionSuministrosID() %>" class="btn btn-personal">Ver Solicitud</a>
                                         </div>
                                     </div>
                                 </div>

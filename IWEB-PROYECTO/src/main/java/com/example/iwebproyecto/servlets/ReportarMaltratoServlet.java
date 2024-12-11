@@ -84,7 +84,7 @@ public class ReportarMaltratoServlet extends HttpServlet {
         FotoDao fotoDao = new FotoDao();
         // Definir una ruta fija fuera de target
         //Si van a probarlo alguno de ustedes deben de cambiar la ruta o les lanzará error.
-        String uploadPath = "D:/2024-2/PROYECTOOOOO/2024_IWEB_PETCARE/PETCARE2024-1/IWEB-PROYECTO/src/main/webapp/uploads/fotosMaltrato";  // Ruta fija en el sistema de archivos
+        String uploadPath = getServletContext().getRealPath("/") + "uploads/fotosMaltrato";
 
         // Crear directorio si no existe
         File uploadDir = new File(uploadPath);
