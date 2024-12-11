@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="evento" scope="request" type="com.example.iwebproyecto.beans.EventoBenefico"/>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -77,24 +78,32 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
                                     <label for="nombre">Nombre del evento a realizar</label>
-                                    <input type="text" id="nombre" class="form-control" placeholder="Nombre evento número" readonly disabled>
+                                    <input type="text" id="nombre" class="form-control" value="${evento.nombre}" readonly disabled>
                                 </div>
                                 
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
                                     <label for="tipoDonacion">Entrada</label>
-                                    <select class="form-select" name="tipoDonacion" id="tipoDonacion" required onchange="toggleInput()" disabled>
-                                        <option value="">Selecciona una opción</option>
-                                        <option value="monetario">Monetario</option>
-                                        <option value="suministros">Suministros</option>
+                                    <select class="form-select" name="tipoDonacion" id="tipoDonacion" required disabled>
+                                        <option value="${evento.tipoDonacion}" selected>${evento.tipoDonacion}</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-6 p-1">
                                     <label for="detalle">Detalle</label>
-                                    <input id="detalle" name="detalleSuministro" class="form-control" type="text" placeholder="Seleccione una opción" disabled />
-                                    <input type="hidden" id="detalleMonetario" name="detalleMonetario" />
+                                    <% System.out.println("Tipo de Donación: " + evento.getTipoDonacion()); %>
+                                    <%  // Formatear el detalle según el tipo de donación
+                                        if ("Monetario".equals(evento.getTipoDonacion())) {
+                                    %>
+                                    <input id="detalle" name="detalle" class="form-control" type="text" value="${evento.detalleMonetario}" disabled />
+                                    <%
+                                    } else {
+                                    %>
+                                    <input id="detalle" name="detalle" class="form-control" type="text" value="${evento.detalleSuministro}" disabled />
+                                    <%
+                                        }
+                                    %>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
@@ -102,71 +111,65 @@
                                     <div class="col-md-6 p-1">
                                         <label for="distrito">Distrito</label>
                                         <select class="form-select" name="distrito" id="distrito" disabled>
-                                            <option value="">Selecciona un distrito</option>
-                                            <optgroup label="Lima Norte">
-                                                <option value="ancon" selected disabled>Ancon</option>
-                                                <option value="santa_rosa">Santa Rosa</option>
-                                                <option value="carabayllo">Carabayllo</option>
-                                                <option value="puente_piedra">Puente Piedra</option>
-                                            </optgroup>
+                                            <option value="${evento.distrito.distritoID}">${evento.distrito.nombreDistrito}</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 p-1">
                                         <label for="fechaEvento">Fecha del evento</label>
-                                        <input type="date" class="form-control" id="fechaEvento" readonly disabled>
+                                        <input type="date" class="form-control" id="fechaEvento" value ="${evento.fechaEvento}" readonly disabled>
                                     </div>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-4 p-1">
                                     <label for="aforo">Aforo máximo del evento</label>
-                                    <input type="number" class="form-control" id="aforo" placeholder="100" readonly disabled>
+                                    <input type="number" class="form-control" id="aforo" value="${evento.lugar.aforoMax}" readonly disabled>
                                 </div>
                                 <div class="col-md-8 p-1">
                                     <label for="lugar">Locales disponibles</label>
                                     <select class="form-select" name="lugar" id="lugar" disabled>
-                                        <option value="lugar">El clásico local 1</option>
+                                        <option value="lugar">${evento.lugar.nombreLugar}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
                                     <label for="Direccion">Dirección del evento</label>
-                                    <input type="text" class="form-control" placeholder="Av. San Juan 123" maxlength="100" id="Direccion" name="Direccion" readonly disabled>
+                                    <input type="text" class="form-control" value="${evento.lugar.direccionLugar}" maxlength="100" id="Direccion" name="Direccion" readonly disabled>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
                                     <label for="horaInicio">Hora Inicio</label>
-                                    <input type="time" class="form-control" id="horaInicio" placeholder="Ingrese la hora de inicio" required onchange="validarHoras()" readonly disabled>
+                                    <input type="time" class="form-control" id="horaInicio" value="${evento.horaInicio}" readonly disabled>
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="horaFin">Hora Fin</label>
-                                    <input type="time" class="form-control" id="horaFin" placeholder="Ingrese la hora de fin" required onchange="validarHoras()" readonly disabled>
+                                    <input type="time" class="form-control" id="horaFin" value="${evento.horaFin}" readonly disabled>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
                                     <label for="razon"> Motivo de la realización del evento</label>
-                                    <textarea name="" id="razon" disabled class="form-control" maxlength="300" placeholder="Ingrese su motivo (max. 300 caracteres)"></textarea>
+                                    <textarea name="" id="razon" disabled class="form-control" maxlength="300" placeholder="${evento.razonEvento}"></textarea>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
                                     <label for="descripcion"> Descripción de su evento</label>
-                                    <textarea name="" id="descripcion" disabled class="form-control" maxlength="1000" placeholder="Ingrese su descripción (max. 1000 caracteres)"></textarea>
+                                    <textarea name="" id="descripcion" disabled class="form-control" maxlength="1000" placeholder="${evento.descripcionEvento}"></textarea>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
                                     <label for="invitados">Invitados al evento (opcional)</label>
-                                    <input type="text" id="invitados" class="form-control" placeholder="Ingrese el primer invitado" readonly disabled>
+                                    <input type="text" id="invitados" class="form-control" value="${evento.invitados}" readonly disabled>
                                 </div>
                             </div> 
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1 justify-content-center">
                                     <label for="formFile" class="form-label">Subir un flyer del evento (PNG)</label>
-                                    <input class="form-control" type="file" id="formFile" accept=".png" disabled>
+                                    <input class="form-control" type="text" id="formFile" accept=".png" value="${evento.foto.rutaFoto}" disabled>
                                 </div>
                                 <div id="fileError" class="text-danger mt-2" style="display: none;">El archivo debe ser una imagen PNG.</div>
                             </div> 

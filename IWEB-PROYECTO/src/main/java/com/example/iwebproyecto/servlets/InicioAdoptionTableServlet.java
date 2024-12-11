@@ -91,7 +91,8 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         String action = request.getParameter("action");
         FotoDao fotoDao = new FotoDao();
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
-        System.out.println("Debug: All Parameters:");
+        System.out.println("ENTRADA AL SERVLET - MÉTODO POST");
+        System.out.println("Action recibido: " + request.getParameter("action"));
 
 
         String nombreMascota = request.getParameter("nombreMascota");
@@ -121,45 +122,63 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         int albergueID = 6;
         boolean eliminado = false;
 
-        Part filePart = request.getPart("foto");
-        Foto foto = procesarImagen(filePart, request, response, fotoDao);
-        if (foto == null) return;
-
-        MascotasAdopcion mascota = new MascotasAdopcion();
-        mascota.setNombreMascota(nombreMascota);
-        mascota.setEspecie(especie);
-        mascota.setRaza(raza);
-        Distrito distrito = new Distrito();
-        distrito.setDistritoID(idDistrito);
-        mascota.setDistrito(distrito);
-        mascota.setDireccionHallazgo(direccion);
-        mascota.setEdadAprox(edad);
-        mascota.setSexo(sexo);
-        mascota.setDescripcionGeneral(descripcion);
-        mascota.setFoto(foto);
-        mascota.setSeEncuentraTemporal(seEncuentraTemporal);
-        mascota.setCondicionesAdopcion(condicionesAdopcion);
-        Albergue albergue = new Albergue();
-        albergue.setAlbergueID(albergueID);
-        mascota.setAlbergue(albergue);
-        mascota.setEliminado(eliminado);
-
-        if (filePart != null) {
-            System.out.println("File Part Details:");
-            System.out.println("Size: " + filePart.getSize());
-            System.out.println("Content Type: " + filePart.getContentType());
-            System.out.println("Submitted File Name: " + filePart.getSubmittedFileName());
-        }
-
         switch (action) {
             case "create":
+                Part filePart = request.getPart("foto");
+                Foto foto = procesarImagen(filePart, request, response, fotoDao);
+
+                MascotasAdopcion mascota = new MascotasAdopcion();
+                mascota.setNombreMascota(nombreMascota);
+                mascota.setEspecie(especie);
+                mascota.setRaza(raza);
+                Distrito distrito = new Distrito();
+                distrito.setDistritoID(idDistrito);
+                mascota.setDistrito(distrito);
+                mascota.setDireccionHallazgo(direccion);
+                mascota.setEdadAprox(edad);
+                mascota.setSexo(sexo);
+                mascota.setDescripcionGeneral(descripcion);
+                mascota.setFoto(foto);
+                mascota.setSeEncuentraTemporal(seEncuentraTemporal);
+                mascota.setCondicionesAdopcion(condicionesAdopcion);
+                Albergue albergue = new Albergue();
+                albergue.setAlbergueID(albergueID);
+                mascota.setAlbergue(albergue);
+                mascota.setEliminado(eliminado);
+
                 albergueDaoRevenge.crearMascotaAdopcion(mascota);
                 response.sendRedirect(request.getContextPath() + "/PortalAdopciones?action=lista");
                 break;
             case "edit":
-                mascota.setIdAdopcion(Integer.parseInt(request.getParameter("id")));
-                albergueDaoRevenge.editarMascotaAdopcion(mascota);
-                response.sendRedirect(request.getContextPath()+"/PortalAdopciones");
+
+                System.out.println("Editando mascota:");
+                System.out.println("ID: " + request.getParameter("id"));
+                System.out.println("Nombre: " + nombreMascota);
+                System.out.println("Especie: " + especie);
+                System.out.println("Raza: " + raza);
+                System.out.println("Distrito: " + idDistrito);
+
+                int idMascota = Integer.parseInt(request.getParameter("id"));
+                MascotasAdopcion mascotaExistente = albergueDaoRevenge.obtenerMascotasAdopcionPorID(idMascota);
+
+                // Actualizar solo los campos necesarios, manteniendo la foto original
+                mascotaExistente.setNombreMascota(nombreMascota);
+                mascotaExistente.setEspecie(especie);
+                mascotaExistente.setRaza(raza);
+                Distrito distritoExistente = new Distrito();
+                distritoExistente.setDistritoID(idDistrito);
+                mascotaExistente.setDistrito(distritoExistente);
+
+                mascotaExistente.setDireccionHallazgo(direccion);
+                mascotaExistente.setEdadAprox(edad);
+                mascotaExistente.setSexo(sexo);
+                mascotaExistente.setDescripcionGeneral(descripcion);
+                mascotaExistente.setSeEncuentraTemporal(seEncuentraTemporal);
+                mascotaExistente.setCondicionesAdopcion(condicionesAdopcion);
+
+                albergueDaoRevenge.editarMascotaAdopcion(mascotaExistente);
+
+                response.sendRedirect(request.getContextPath() + "/PortalAdopciones?action=lista");
                 break;
         }
     }
@@ -177,7 +196,7 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         // Verificar si se ha seleccionado un archivo
         if (filePart == null || filePart.getSize() == 0) {
             request.setAttribute("mensajeError", "Debe seleccionar una imagen.");
-            request.getRequestDispatcher("/albergue/albergueFormAdop.jsp").forward(request, response);
+            request.getRequestDispatcher("albergue/albergueEdAdop.jsp").forward(request, response);
             return null;
         }
 

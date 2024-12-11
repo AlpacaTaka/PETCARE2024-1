@@ -83,7 +83,7 @@
                         <div class="row justify-content-center p-1">
                             <div class="col-md-6 p-1">
                                 <label for="nombreMascota">Nombre</label>
-                                <input id="nombreMascota" name="nombreMascota" value="<%=mascota.getNombreMascota()%>" type="text" class="form-control" placeholder="Ingrese el nombreMascota de la mascota" maxlength="21" disabled>
+                                <input id="nombreMascota" name="nombreMascota" value="<%=mascota.getNombreMascota()%>" type="text" class="form-control" maxlength="21" disabled>
                             </div>
                             <div class="col-md-6 p-1">
                                 <label for="Especies">Especie</label>

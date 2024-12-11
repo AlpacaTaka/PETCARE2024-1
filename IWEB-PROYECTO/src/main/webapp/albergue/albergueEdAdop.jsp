@@ -75,7 +75,8 @@
                         <a href="<%=request.getContextPath()%>/PortalAdopciones"><button type="button" class="btn btn-personal2">Regresar</button></a>
                     </div>
                     <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                        <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/PortalAdopciones?action=edit">
+                        <form id="uploadForm" style="padding:10px" method="POST" action="${pageContext.request.contextPath}/PortalAdopciones" enctype="multipart/form-data">
+                            <input type="hidden" name="action" value="edit">
                             <input type="hidden" name="id" value="<%=mascota.getIdAdopcion()%>">
                             <input type="hidden" name="idA" value="<%=albergueID%>">
                             <h1 style="margin-top: 10px;" class="text-center">Edición de perfil de Mascota para Adopción</h1>
@@ -116,7 +117,7 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-4 p-1" >
                                     <label for="distrito">Distrito</label>
-                                    <select class="form-select" name="idDistrito" id="distrito" required>
+                                    <select class="form-select" name="distrito" id="distrito" required>
                                         <option value="">Selecciona un distrito</option>
                                         <optgroup label="Lima Norte">
                                             <option value="1" <%String distritoID= mascota.getDistrito().getDistritoID() == 1 ? "selected" : null;%><%=distritoID%>>Ancon</option>
