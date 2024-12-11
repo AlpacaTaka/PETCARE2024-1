@@ -148,7 +148,7 @@
                                     <div class="card h-100">
                                         <div class="card-body text-center">
                                             <h4 class="card-title"><%=so.getUsuario().getNombre()%><br><%=so.getUsuario().getApellido()%></h4>
-                                            <img src="<%=so.getFoto().getRutaFoto()%>" class="card-img-top" alt="..." style="max-width: 300px; height: 260px; object-fit: cover;">
+                                            <img src="${pageContext.request.contextPath}<%=so.getFoto().getRutaFoto()%>" class="card-img-top" alt="..." style="max-width: 300px; height: 260px; object-fit: cover;">
                                             <div class="row" style="margin-top: 10px;">
                                                 <div class="col d-flex justify-content-center align-items-center">
                                                     <h5 class="card-title" style="color: <%=color%>;"><%=so.getEstadoTemporal()%></h5>

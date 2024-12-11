@@ -37,6 +37,7 @@ public class VerSolicitudTemporalServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.setAttribute("VerSolicitudTemporal", sol);
+        //session.setAttribute("VerFotosTemporal", fotos);
 
         view = request.getRequestDispatcher("coordinador/solicitudDeHogarTemporal.jsp");
         view.forward(request, response);

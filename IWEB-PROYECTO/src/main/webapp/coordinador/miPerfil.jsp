@@ -106,7 +106,7 @@
                                 <div class="row justify-content-center p-1" style="margin-top: 25px;">
                                     <div class="col d-flex justify-content-center">
                                         <div class="image-container" style="border-radius: 4%; width: 300px; height: 300px;">
-                                            <img src="<%=coor.getFoto().getRutaFoto()%>" alt="Perfil de usuario">
+                                            <img src="${pageContext.request.contextPath}<%=coor.getFoto().getRutaFoto()%>" alt="Perfil de usuario">
                                         </div>
                                     </div>
                                 </div>

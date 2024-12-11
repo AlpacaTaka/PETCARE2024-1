@@ -140,7 +140,7 @@
                                                 <div class="card" style="width: 80%;">
                                                     
                                                         <div class="col">
-                                                            <img src="<%=sol.getFoto().getRutaFoto()%>" class="card-img-eve" alt="Imagen" style="height: 400px;width: 100%;">
+                                                            <img src="${pageContext.request.contextPath}<%=sol.getFoto().getRutaFoto()%>" class="card-img-eve" alt="Imagen" style="height: 400px;width: 100%;">
                                                         </div>
                                             
                                                     

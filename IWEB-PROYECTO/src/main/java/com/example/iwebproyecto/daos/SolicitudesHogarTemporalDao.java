@@ -331,9 +331,9 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
     public SolicitudTemporal listarSolicitudesHogarTemporalPorID(int id) {
         SolicitudTemporal sol = new SolicitudTemporal();
 
-        String sql = "SELECT s.*, u.nombre, u.dni , u.direccion , u.apellido, d.nombreDistrito, u.correoElectronico, z.nombreZona\n" +
+        String sql = "SELECT s.*, u.nombre, u.dni , u.direccion , u.apellido, d.nombreDistrito, u.correoElectronico, z.nombreZona, f.rutaFoto as 'rutaFoto',f2.rutaFoto as 'rutaFoto2',f3.rutaFoto as 'rutaFoto3' \n" +
                 "FROM solicitudtemporal s\n" +
-                "INNER JOIN usuario u ON u.usuarioID = s.usuarioID inner join distrito d ON d.distritoID = u.distritoID inner join zona z ON z.zonaID = d.zonaID\n" +
+                "INNER JOIN usuario u ON u.usuarioID = s.usuarioID inner join distrito d ON d.distritoID = u.distritoID inner join zona z ON z.zonaID = d.zonaID inner join fotos f on f.fotoID = s.fotoID inner join fotos f2 on f2.fotoID = s.fotoID2 inner join fotos f3 on f3.fotoID = s.fotoID3\n" +
                 "WHERE s.solicitudID= "+id+";";
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
@@ -380,7 +380,19 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
 
                 Foto foto = new Foto();
                 foto.setFotoID(rs.getInt("fotoID"));
+                foto.setRutaFoto(rs.getString("rutaFoto"));
                 sol.setFoto(foto);
+
+                Foto foto2 = new Foto();
+                foto2.setFotoID(rs.getInt("fotoID2"));
+                foto2.setRutaFoto(rs.getString("rutaFoto2"));
+                sol.setFoto2(foto2);
+
+                Foto foto3 = new Foto();
+                foto3.setFotoID(rs.getInt("fotoID3"));
+                foto3.setRutaFoto(rs.getString("rutaFoto3"));
+                sol.setFoto3(foto3);
+
 
                 sol.setFecha(rs.getString("fechaFormulario"));
                 sol.setComentario(rs.getString("comentarioCoordinador"));
@@ -401,6 +413,9 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
         }
         return sol;
     }
+
+
+
 
     public void desactivarHogarTemporalPorID(SolicitudTemporal solicitudTemporal) {
         SolicitudTemporal sol = new SolicitudTemporal();
@@ -445,5 +460,6 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
             throw new RuntimeException(e);
         }
     }
+
 }
 

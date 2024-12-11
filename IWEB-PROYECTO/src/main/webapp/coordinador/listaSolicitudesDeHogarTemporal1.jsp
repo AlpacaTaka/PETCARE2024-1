@@ -147,7 +147,7 @@
                                 <div class="card h-100">
                                     <div class="card-body text-center">
                                         <h4 class="card-title"><%= so.getUsuario().getNombre() %><br><%= so.getUsuario().getApellido() %></h4>
-                                        <img src="<%=so.getFoto().getRutaFoto()%>" class="card-img-top" alt="..." style="max-width: 300px; height: 260px; object-fit: cover;">
+                                        <img src="${pageContext.request.contextPath}<%=so.getFoto().getRutaFoto()%>" class="card-img-top" alt="..." style="max-width: 300px; height: 260px; object-fit: cover;">
                                         <p class="card-text" style="margin-top: 10px; text-align: center;">Solicitud enviada el <%=so.getFecha()%>.</p>
                                         <a href="VerSolicitudTemporal?id=<%=so.getSolicitudID()%>" class="btn btn-personal" id="btn-crd-cr">Ver solicitud</a>
                                     </div>

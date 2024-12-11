@@ -97,12 +97,12 @@
                 <div>
                     <%if (quitar == null){
                     %>
-                    <h1 class="text-center">Revisar solicitud de hogar temporal</h1>
+                    <h1 class="text-center">Revisar Solicitud de Hogar Temporal</h1>
                     <%
                     } else{
 
                     %>
-                    <h1 class="text-center">Solicitud de hogar temporal Rechazada</h1>
+                    <h1 class="text-center">Solicitud de Hogar Temporal Rechazada</h1>
                     <%
                         }%>
                 </div>
@@ -123,10 +123,8 @@
                                             <div class="card" style="width: 80%;">
 
                                                 <div class="col">
-                                                    <img src="/common/img/vivienda/v3.jpg" class="card-img-eve" alt="Imagen" style="height: 400px;width: 100%;">
+                                                    <img src="${pageContext.request.contextPath}<%=sol.getFoto().getRutaFoto()%>" class="card-img-eve" alt="Imagen" style="height: 400px;width: 100%;">
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -137,7 +135,7 @@
                                             <div class="card" style="width: 80%;">
 
                                                 <div class="col">
-                                                    <img src="/common/img/vivienda/v2.jpg" class="card-img-eve" alt="Imagen" style="height: 400px; width: 100%;">
+                                                    <img src="${pageContext.request.contextPath}<%=sol.getFoto2().getRutaFoto()%>" class="card-img-eve" alt="Imagen" style="height: 400px; width: 100%;">
                                                 </div>
 
 
@@ -151,7 +149,7 @@
                                             <div class="card" style="width: 80%;">
 
                                                 <div class="col">
-                                                    <img src="/common/img/vivienda/v4.jpg" class="card-img-eve" alt="Imagen" style="height: 400px;width: 100%;">
+                                                    <img src="${pageContext.request.contextPath}<%=sol.getFoto3().getRutaFoto()%>" class="card-img-eve" alt="Imagen" style="height: 400px;width: 100%;">
                                                 </div>
 
 

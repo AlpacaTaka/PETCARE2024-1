@@ -24,6 +24,8 @@ public class SolicitudTemporal {
     private String estado;
 
     private Foto foto;
+    private Foto foto2;
+    private Foto foto3;
 
     private String fecha;
     private String estadoTemporal;
@@ -259,4 +261,19 @@ public class SolicitudTemporal {
         this.foto = foto;
     }
 
+    public Foto getFoto2() {
+        return foto2;
+    }
+
+    public void setFoto2(Foto foto2) {
+        this.foto2 = foto2;
+    }
+
+    public Foto getFoto3() {
+        return foto3;
+    }
+
+    public void setFoto3(Foto foto3) {
+        this.foto3 = foto3;
+    }
 }

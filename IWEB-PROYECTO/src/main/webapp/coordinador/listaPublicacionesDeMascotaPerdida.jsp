@@ -95,7 +95,7 @@
 
 
             <div class="col" id="contenido-nofooter" style="flex-grow: 1;align-content:center">
-                <h1 style="text-align: center; margin-bottom: 40px; margin-top: 20px;">Publicaciones de mascota perdida</h1>
+                <h1 style="text-align: center; margin-bottom: 40px; margin-top: 20px;">Publicaciones de Mascota Perdida</h1>
                 <div class="container" >
 
 
@@ -161,7 +161,7 @@
                                 <div class="card h-100">
                                     <div class="card-body text-center">
                                         <h4 class="card-title"><%=so.getNombreMascota()%></h4>
-                                        <img src="<%=so.getFoto().getRutaFoto()%>" class="card-img-top" alt="..." style="max-width: 300px; height:260px; object-fit: cover;">
+                                        <img src="${pageContext.request.contextPath}<%=so.getFoto().getRutaFoto()%>" class="card-img-top" alt="..." style="max-width: 300px; height:260px; object-fit: cover;">
                                         <div class="row" style="margin-top: 10px ;">
                                             <p class="card-text"><strong>Lugar de extravío: </strong><%=so.getLugarPerdida()%></p>
                                         </div>

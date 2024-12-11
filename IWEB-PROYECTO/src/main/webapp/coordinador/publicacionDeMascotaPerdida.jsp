@@ -94,7 +94,7 @@
                             <div class="row">
                                 <div class="col" style="margin-bottom:15px;">
                                     <div style="display: flex; justify-content: center; margin-top: 2%; ">
-                                        <img src="<%=sol.getFoto().getRutaFoto()%>" class="card-img-top" alt="..."
+                                        <img src="${pageContext.request.contextPath}<%=sol.getFoto().getRutaFoto()%>" class="card-img-top" alt="..."
                                             style="min-width: 250px ; min-height: 300px; object-fit: cover;">
                                     </div>
                                 </div>
