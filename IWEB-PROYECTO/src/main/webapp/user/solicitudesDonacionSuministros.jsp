@@ -159,7 +159,7 @@
                                                             estadoDonacion = "Activo";
                                                         }
                                                     } else {
-                                                        estadoDonacion = "Activo"; // Está entre las fechas, todo el día está activo
+                                                        estadoDonacion = "Activo"; // Está entre las fechas,
                                                     }
                                                 }
                                             } catch (Exception e) {

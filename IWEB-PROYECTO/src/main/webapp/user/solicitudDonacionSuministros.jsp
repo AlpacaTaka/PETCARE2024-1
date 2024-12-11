@@ -76,6 +76,7 @@
 
 
             <div class="container-fluid d-flex" id="contenido-principal">
+
                 <%
                     // Obtener la fecha y hora actuales
                     java.util.Date fechaActual = new java.util.Date();
@@ -163,15 +164,17 @@
                                 </div>
                                 <div class="col-md-6 p-1 justify-content-center">
                                     <p class="card-text" style="color: #721313;"><strong>Teléfono de contacto:</strong> </p>
-                                    <p class="card-text"><%=donacionSuministros.getAlbergue().getNombreContactoDonaciones()%></p>
+                                    <p class="card-text"><%=donacionSuministros.getAlbergue().getNombreContactoDonaciones()%> - <%=donacionSuministros.getAlbergue().getNumeroContactoDonaciones()%></p>
                                     <p class="card-text" style="color: #721313;"><strong>Correo electrónico del albergue:</strong> </p>
                                     <p class="card-text"><%=donacionSuministros.getCorreoElectronicoDonacion()%></p>
                                 </div>
                             </div>                 
                             <div class="row justify-content-center p-1">
-                                <div class="col-md-12 p-1 d-flex justify-content-center">
+                                <div class="col-md-6 p-1 d-flex justify-content-center">
                                     <button onclick="showDonarSumDialog()" class="btn btn-personal" <%= estadoDonacion.equals("Pasado") ? "disabled" : "" %>>Donar</button>
-
+                                </div>
+                                <div class="col-md-6 p-1 d-flex justify-content-center">
+                                    <button onclick="location.href='${pageContext.request.contextPath}/TodosLosAlbergues?action=vista&id=<%= donacionSuministros.getAlbergue().getAlbergueID()%>'" class="btn btn-personal">Ver Albergue</button>
                                 </div>
                                 <div>
                                     <% if (estadoDonacion.equals("Pasado")) { %>
@@ -186,7 +189,7 @@
                         </div>
                     </div>
                 </div>
-                
+
 
                 <!-- Footer (no tocar si ya esta listo)-->
                 <footer class="pt-4">
@@ -201,45 +204,55 @@
 
         </div>
     </div>
-    
+
     <!--Pop up-->
-    <dialog id="confirm-donacion" style="max-width: 400px;border-radius: 20px;background-color: #fca651e1;border: none; justify-content: center;">
-        <div class="pop-up-content" style="text-align: center;padding: 0px 15px;border-style:dashed; border-radius: 20px;border-color: black;padding: 10px;border-width: 2px;">
-            <h2 style="color: #721313;"><italic>Confirma tu donación</italic></h2>
+    <dialog id="form-donacion" style="max-width: 500px; border-radius: 20px; background-color: #fca651e1; border: none;">
+        <div class="pop-up-content" style="text-align: center; padding: 0px 15px; border-style: dashed; border-radius: 20px; border-color: black; padding: 10px; border-width: 2px;">
+            <h2 style="color: black;"><i>Confirma tu donación</i></h2>
             <span class="fi-rr-form" style="font-size: 70px;"></span>
-            <p> Completa el siguiente formulario indicando la información requerida para que el albergue tenga en cuenta tu participación</p>
-            <form id="suministroForm" onsubmit="handleFormSubmit(event)">
-                <!--Primera columna de selección-->
+            <p>Completa el siguiente formulario indicando la información requerida para que el albergue tenga en cuenta tu participación</p>
+            <form id="suministroForm" method="POST" action="${pageContext.request.contextPath}/SolicitudesDeSuministros">
+                <!-- Primera fila -->
+                <input type="hidden" name="donacionSuministrosID" value="<%=donacionSuministros.getDonacionSuministrosID()%>">
                 <div class="row justify-content-center p-2">
-                    <div class="col-md-7 p-1">                         
-                        <label for="tipo-donacion" style="font-size: 14px; font-weight: bold;">Tipo de donación</label>
-                        <input type="text" class="form-control" placeholder="Ingrese la donación a realizar" id="tipo-donacion" name="tipo-donacion" maxlength="20" required>      
+                    <div class="col-md-8 p-1">
+                        <label for="fechaEntrega" style="font-size: 14px; font-weight: bold;">Fecha de entrega</label><br>
+                        <input type="date" class="form-control" id="fechaEntrega" name="fechaEntrega" required>
                     </div>
                     <div class="col-md-4 p-1">
                         <label for="cantidad" style="font-size: 14px; font-weight: bold;">Cantidad</label>
-                        <input type="number" class="form-control" placeholder="Cantidad" id="cantidad" name="cantidad" maxlength="2" required> 
+                        <input type="number" class="form-control" placeholder="Cantidad" id="cantidad" name="cantidad" maxlength="2" required>
                     </div>
                 </div>
-                <!--Segunda columna de selección-->
+                <!-- Segunda fila -->
                 <div class="row justify-content-center p-2">
-                    <div class="col-md-6 p-1">
-                        <label for="fechaEntrega" style="font-size: 14px; font-weight: bold;">Fecha de entrega</label><br>
-                        <input type="date"  class="form-control" id="fechaEntrega" name="fechaEntrega" required> 
-                    </div>
-                    <div class="col-md-5 p-1">
-                        <label for="punto-acopio" style="font-size: 14px; font-weight: bold;">Lugar de entrega</label>
-                        <select class="form-select" id="punto-acopio" aria-label="Floating label select example" required>
-                            <option value="" disabled selected>Seleccione un lugar</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                          </select>
+                    <div class="col-md-12 p-1">
+                        <label for="tipo-donacion" style="font-size: 14px; font-weight: bold;">Tipo de donación</label>
+                        <input type="text" class="form-control" placeholder="Ingrese la donación a realizar" id="tipo-donacion" name="tipo-donacion" maxlength="20" required>
                     </div>
                 </div>
-                    <button type="submit" class="btn btn-personal"> Enviar </button>
+                <div class="popup-buttons">
+                    <button type="submit" class="btn btn-personal">Enviar</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeDialog()">Cancelar</button>
+                </div>
             </form>
         </div>
     </dialog>
+
+
+
+    <div id="popup" class="popup-overlay" style="display: none;">
+        <div class="popup-content">
+            <h2>¿Está seguro de realizar esta donación?</h2>
+            <form method="POST" id="donacionForm">
+                <div class="popup-buttons">
+                    <button type="submit" class="btn btn-danger">Confirmar</button>
+                    <button type="button" class="btn btn-secondary" onclick="cerrarConfirmacionDonacion()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
     <!-- Pop-up de confirmación -->
     <dialog id="confirm-envio" style="max-width: 400px; border-radius: 20px; background-color: #fca651e1; border: none; justify-content: center;">
@@ -258,71 +271,53 @@
 </body>
 </html>
 <script>
-    const donacionDialog = document.getElementById("confirm-donacion");
-    const contenidoPopDialog = document.querySelector(".pop-up-content");
-    const confirmEnvioDialog = document.getElementById("confirm-envio");
-    const contenidoEnvio = confirmEnvioDialog.querySelector(".pop-up-content");
+    // Comprueba si hay un parámetro de error en la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error'); // Busca el parámetro 'error'
 
-    function showDonarSumDialog(){
-        donacionDialog.showModal();
-    }
-
-    function closeDonacionDialog(){
-        donacionDialog.close();
-    }
-
-    function closeEnvioDialog() {
-        confirmEnvioDialog.close(); // Cierra el diálogo de confirmación
-    }
-
-   // Cerrar el pop-up de confirmación al hacer clic fuera del contenido
-   confirmEnvioDialog.addEventListener("click", (e) => {
-        if (!contenidoEnvio.contains(e.target)) {
-            closeEnvioDialog();
+    if (error === 'true') {
+        // Abre el dialog en caso de error
+        const formDialog = document.getElementById("form-donacion");
+        if (formDialog) {
+            formDialog.showModal();
         }
-    });
-
-    // Cerrar el diálogo de donación al hacer clic fuera del contenido
-    donacionDialog.addEventListener("click", (e) => {
-        if (!contenidoPopDialog.contains(e.target)) {
-            closeDonacionDialog();
-        }
-    });
-
-    function handleFormSubmit(event) {
-        event.preventDefault(); // Previene el comportamiento por defecto del formulario
-        closeDonacionDialog(); // Cierra el diálogo de donación
-
-        // Muestra el diálogo de confirmación
-        confirmEnvioDialog.showModal();        
-
-        return false; // Asegúrate de no enviar el formulario de manera tradicional
     }
-
 </script>
 
 <script>
+    const formDialog = document.getElementById("form-donacion");
+    const suministroForm = document.getElementById("suministroForm");
+
+    // Abre el formulario de donación
+    function showDonarSumDialog() {
+        formDialog.showModal();
+    }
+
+    // Cierra el formulario de donación
+    function closeDialog() {
+        formDialog.close();
+    }
+
+    // Validaciones del formulario
     const tipoDonacionInput = document.getElementById('tipo-donacion');
     const fechaEntregaInput = document.getElementById('fechaEntrega');
-    const cantidadInput = document.getElementById('cantidad')
+    const cantidadInput = document.getElementById('cantidad');
 
-    // Validar que solo se ingresen letras
-    tipoDonacionInput.addEventListener('input', function() {
-                this.value = this.value.replace(/[^a-zA-Z\s]/g, ''); // Solo permite letras y espacios
+    tipoDonacionInput.addEventListener('input', function () {
+        this.value = this.value.replace(/[^a-zA-Z\s]/g, ''); // Solo permite letras y espacios
     });
 
-    // Deshabilitar la entrada manual de texto
-    fechaEntregaInput.addEventListener('keydown', function(event) {
-                event.preventDefault();
+    fechaEntregaInput.addEventListener('keydown', function (event) {
+        event.preventDefault(); // Desactiva la entrada manual en el campo de fecha
     });
 
-    cantidadInput.addEventListener('input', function() {
-        // Convertir el valor a string para verificar la longitud
+    cantidadInput.addEventListener('input', function () {
         const value = cantidadInput.value;
-
-        // Validar que no se exceda la longitud de 1 cifras
         if (value.length > 2) {
-            cantidadInput.value = value.slice(0, 2); // Limitar a dos cifras
+            cantidadInput.value = value.slice(0, 2); // Limita a dos dígitos
         }
     });
 </script>
+
+
+

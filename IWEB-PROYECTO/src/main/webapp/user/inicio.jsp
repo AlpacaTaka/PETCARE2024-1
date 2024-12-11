@@ -274,7 +274,7 @@
                                                             <%= estadoDonacion %>
                                                         </div>
                                                         <h5 class="card-title"><%= donacion.getTituloAvisoDonacion() %></h5>
-                                                        <a href="PortalDeAdopcion?action=vista&id=<%= donacion.getDonacionSuministrosID() %>" class="btn btn-personal" id="btn-crd-cr">Ver Solicitud</a>
+                                                        <a href="<%=request.getContextPath()%>/SolicitudesDeSuministros?action=vista&id=<%= donacion.getDonacionSuministrosID() %>" class="btn btn-personal" id="btn-crd-cr">Ver Solicitud</a>
                                                     </div>
                                                 </div>
                                             </div>

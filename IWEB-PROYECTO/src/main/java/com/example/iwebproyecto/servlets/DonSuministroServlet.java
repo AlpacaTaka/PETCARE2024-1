@@ -1,9 +1,6 @@
 package com.example.iwebproyecto.servlets;
 
-import com.example.iwebproyecto.beans.Albergue;
-import com.example.iwebproyecto.beans.Distrito;
-import com.example.iwebproyecto.beans.DonacionSuministros;
-import com.example.iwebproyecto.beans.PublicacionMascotaPerdida;
+import com.example.iwebproyecto.beans.*;
 import com.example.iwebproyecto.daos.AlbergueDao;
 import com.example.iwebproyecto.daos.AlbergueDaoRevenge;
 import com.example.iwebproyecto.daos.DonacionesDao;
@@ -13,7 +10,12 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 @WebServlet(name = "DonSuministroServlet", value = "/SolicitudesDeSuministros")
 public class DonSuministroServlet extends HttpServlet {
@@ -49,9 +51,6 @@ public class DonSuministroServlet extends HttpServlet {
 
 
 
-
-                System.out.println(donacionSuministros.getCorreoElectronicoDonacion());
-
                 request.setAttribute("donacionSuministros", donacionSuministros);
                 request.getRequestDispatcher("user/solicitudDonacionSuministros.jsp").forward(request, response);
 
@@ -70,6 +69,51 @@ public class DonSuministroServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        DonacionesDao daoDon = new DonacionesDao();
+        int idUsuario = 7;
+
+        try {
+            int usuarioID = idUsuario;
+            int donacionSuministrosID = Integer.parseInt(request.getParameter("donacionSuministrosID"));
+            System.out.println(request.getParameter("donacionSuministrosID"));
+            int cantidadSuministro = Integer.parseInt(request.getParameter("cantidad"));
+            System.out.println(request.getParameter("cantidad"));
+            String tipoDonacion = request.getParameter("tipo-donacion");
+            System.out.println(request.getParameter("tipo-donacion"));
+
+
+            // Usar DateTimeFormatter para LocalDate
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            System.out.println(request.getParameter("fechaEntrega"));
+            LocalDate fechaDonacion = LocalDate.parse(request.getParameter("fechaEntrega"), formatter);
+
+
+
+            Usuario usuario = new Usuario();
+            usuario.setUsuarioID(usuarioID);
+
+            DonacionSuministros donacionSuministros = new DonacionSuministros();
+            donacionSuministros.setDonacionSuministrosID(donacionSuministrosID);
+
+            UsuarioDonacionSuministro usuarioDonacion = new UsuarioDonacionSuministro();
+            usuarioDonacion.setUsuario(usuario);
+            usuarioDonacion.setDonacionSuministros(donacionSuministros);
+            usuarioDonacion.setCantidadSuministro(cantidadSuministro);
+            usuarioDonacion.setFechaDonacion(fechaDonacion);
+            usuarioDonacion.setTipoDonacion(tipoDonacion);
+
+            boolean exito = daoDon.insertarUsuarioDonacionSuministros(usuarioDonacion);
+
+            if (exito) {
+                response.sendRedirect("SolicitudesDeSuministros");
+            } else {
+                response.sendRedirect("SolicitudesDeSuministros?action=vista&id="+donacionSuministrosID+"&error=true");
+
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
 
     }
 }

@@ -1,7 +1,6 @@
 package com.example.iwebproyecto.beans;
 
-
-import java.util.Date;
+import java.time.LocalDate;
 
 public class UsuarioDonacionSuministro {
 
@@ -9,19 +8,22 @@ public class UsuarioDonacionSuministro {
     private Usuario usuario; // Relación con el bean Usuario
     private DonacionSuministros donacionSuministros; // Relación con el bean DonacionSuministros
     private int cantidadSuministro;
-    private Date fechaDonacion;
+    private LocalDate fechaDonacion;
+    private String tipoDonacion; // Campo adicional para el tipo de donación
 
     // Constructor vacío
     public UsuarioDonacionSuministro() {
     }
 
     // Constructor completo
-    public UsuarioDonacionSuministro(int usuarioDonacionSuministrosID, Usuario usuario, DonacionSuministros donacionSuministros, int cantidadSuministro, Date fechaDonacion) {
+    public UsuarioDonacionSuministro(int usuarioDonacionSuministrosID, Usuario usuario, DonacionSuministros donacionSuministros,
+                                      int cantidadSuministro, LocalDate fechaDonacion, String tipoDonacion) {
         this.usuarioDonacionSuministrosID = usuarioDonacionSuministrosID;
         this.usuario = usuario;
         this.donacionSuministros = donacionSuministros;
         this.cantidadSuministro = cantidadSuministro;
         this.fechaDonacion = fechaDonacion;
+        this.tipoDonacion = tipoDonacion;
     }
 
     // Getters y Setters
@@ -57,12 +59,20 @@ public class UsuarioDonacionSuministro {
         this.cantidadSuministro = cantidadSuministro;
     }
 
-    public Date getFechaDonacion() {
+    public LocalDate getFechaDonacion() {
         return fechaDonacion;
     }
 
-    public void setFechaDonacion(Date fechaDonacion) {
+    public void setFechaDonacion(LocalDate fechaDonacion) {
         this.fechaDonacion = fechaDonacion;
+    }
+
+    public String getTipoDonacion() {
+        return tipoDonacion;
+    }
+
+    public void setTipoDonacion(String tipoDonacion) {
+        this.tipoDonacion = tipoDonacion;
     }
 
     @Override
@@ -73,6 +83,7 @@ public class UsuarioDonacionSuministro {
                 ", donacionSuministros=" + donacionSuministros +
                 ", cantidadSuministro=" + cantidadSuministro +
                 ", fechaDonacion=" + fechaDonacion +
+                ", tipoDonacion='" + tipoDonacion + '\'' +
                 '}';
     }
 }
