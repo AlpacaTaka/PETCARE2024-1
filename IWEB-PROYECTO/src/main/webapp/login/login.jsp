@@ -8,9 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesion</title>
     <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/Login/CSS/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/login/css/login.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .image-container {
+            flex: 1;
+            background-image: url('${pageContext.request.contextPath}/common/img/loginfiles/Login_Signin_PerritoGrande.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            min-height: 400px;
+        }
+    </style>
 
 <body background="${pageContext.request.contextPath}/common/img/backgrounds/paw_bck.jpg" style="background-repeat: repeat; background-size: cover;">
 <div class="container">
@@ -34,8 +45,8 @@
             </div>
             <div class="form-group">
                 <a href="<%=request.getContextPath()%>/fpassword.jsp">¿Olvido su contraseña?</a>
-                <a href="<%=request.getContextPath()%>/signin.jsp">Crear cuenta</a>
-                <a href="signinAlbergue.html">Inscribir su albergue</a>
+                <a href="<%=request.getContextPath()%>/login/signin.jsp">Crear cuenta</a>
+                <a href="<%=request.getContextPath()%>/login/signinAlbergue.jsp">Inscribir su albergue</a>
             </div>
         </form>
     </div>
