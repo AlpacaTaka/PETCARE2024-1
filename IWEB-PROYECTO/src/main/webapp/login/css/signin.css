@@ -98,16 +98,6 @@ body {
     background-color: #642d2d;
 }
 
-.image-container {
-    flex: 1;
-    margin-left: 10px;
-    background-image: url('/common/img/loginfiles/Login_Signin_Gatito.png'); /* Reemplaza con la URL de tu imagen */
-    background-size: cover;
-    background-position: center;
-    border-radius: 8px;
-    min-height: 650px;
-}
-
 
 @media (max-width: 768px) {
     .container {

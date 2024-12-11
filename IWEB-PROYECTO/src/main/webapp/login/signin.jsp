@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/Login/CSS/signin.css">
+    <link rel="icon" href="<%=request.getContextPath()%>/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/login/css/signin.css">
 
     <style>
         /* Para Chrome, Safari y Opera */
@@ -16,13 +16,22 @@
             -webkit-appearance: none;
             margin: 0;
         }
+        .image-container {
+            flex: 1;
+            margin-left: 10px;
+            background-image: url('<%=request.getContextPath()%>/common/img/loginfiles/Login_Signin_Gatito.png'); /* Reemplaza con la URL de tu imagen */
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            min-height: 650px;
+        }
     </style>
 </head>
 
-<body background="/common/img/backgrounds/paw_bck.jpg" style="background-repeat: repeat; background-size: cover;">
+<body background="<%=request.getContextPath()%>/common/img/backgrounds/paw_bck.jpg" style="background-repeat: repeat; background-size: cover;">
 
 <div class="container-button">
-    <a href="/login/login.html">Regresar</a>
+    <a href="<%=request.getContextPath()%>/login/login.jsp">Regresar</a>
 </div>
 <div class="container">
     <div class="form-container">
@@ -30,88 +39,88 @@
             Registro
         </h2>
         <p>Completa tus datos y espera a que un administrador los valide</p>
-        <form id="uploadForm">
+        <form id="uploadForm" method="POST" action="${pageContext.request.contextPath}/SignIn" enctype="multipart/form-data" accept-charset="UTF-8">
             <div class="form-group">
                 <label for="nombre-login">
                     Nombres
                 </label>
-                <input placeholder="Ingrese sus nombres" type="text" id="nombre-login" maxlength="40" required/>
+                <input placeholder="Ingrese sus nombres" type="text" id="nombre-login" name="nombre-login" maxlength="40" required/>
             </div>
 
             <div class="form-group">
                 <label for="apellido-login">
                     Apellidos
                 </label>
-                <input  placeholder="Ingrese sus apellidos" type="text" id="apellido-login" maxlength="70" required/>
+                <input  placeholder="Ingrese sus apellidos" type="text" id="apellido-login" name="apellido-login" maxlength="70" required/>
             </div>
 
             <div class="form-group">
                 <label for="dni-login">
                     DNI
                 </label>
-                <input placeholder="Ingrese el número de documento" type="number" id="dni-login" required/>
+                <input placeholder="Ingrese el número de documento" type="number" id="dni-login" name="dni-login" required/>
             </div>
             <div class="form-group" for="direccion-login">
                 <label>
                     Dirección
                 </label>
-                <input placeholder="Ingrese su direccion" type="text" for="direccion-login" maxlength="100" required/>
+                <input placeholder="Ingrese su direccion" type="text" name="direccion-login" for="direccion-login" maxlength="100" required/>
             </div>
             <div class="form-group">
                 <label>
                     Distrito
                 </label>
                 <select class="form-select" name="distrito" id="distrito" required>
-                    <option value="" disabled selected>Seleccione una opción</option>
+                    <option value="">Selecciona un distrito</option>
                     <optgroup label="Lima Norte">
-                        <option value="ancon">Ancon</option>
-                        <option value="santa_rosa">Santa Rosa</option>
-                        <option value="carabayllo">Carabayllo</option>
-                        <option value="puente_piedra">Puente Piedra</option>
-                        <option value="comas">Comas</option>
-                        <option value="los_olivos">Los Olivos</option>
-                        <option value="san_martin_porres">San Martín de Porres</option>
-                        <option value="independencia">Independencia</option>
+                        <option value="1">Ancon</option>
+                        <option value="2">Santa Rosa</option>
+                        <option value="3">Carabayllo</option>
+                        <option value="4">Puente Piedra</option>
+                        <option value="5">Comas</option>
+                        <option value="6">Los Olivos</option>
+                        <option value="7">San Martín de Porres</option>
+                        <option value="8">Independencia</option>
                     </optgroup>
                     <optgroup label="Lima Sur">
-                        <option value="san_juan_miraflores">San Juan de Miraflores</option>
-                        <option value="villa_maria_triunfo">Villa María del Triunfo</option>
-                        <option value="villa_salvador">Villa el Salvador</option>
-                        <option value="pachacamac">Pachacamac</option>
-                        <option value="lurin">Lurín</option>
-                        <option value="punta_hermosa">Punta Hermosa</option>
-                        <option value="punta_negra">Punta Negra</option>
-                        <option value="san_bartolo">San Bartolo</option>
-                        <option value="santa_maria_mar">Santa María del Mar</option>
-                        <option value="pucusana">Pucusana</option>
+                        <option value="9">San Juan de Miraflores</option>
+                        <option value="10">Villa María del Triunfo</option>
+                        <option value="11">Villa El Salvador</option>
+                        <option value="12">Pachacamac</option>
+                        <option value="13">Lurin</option>
+                        <option value="14">Punta Hermosa</option>
+                        <option value="15">Punta Negra</option>
+                        <option value="16">San Bartolo</option>
+                        <option value="17">Santa María del Mar</option>
+                        <option value="18">Pucusana</option>
                     </optgroup>
                     <optgroup label="Lima Este">
-                        <option value="san_juan_lurigancho">San Juan de Lurigancho</option>
-                        <option value="chosica">Lurigancho/Chosica</option>
-                        <option value="ate">Ate</option>
-                        <option value="el_agustino">El Agustino</option>
-                        <option value="santa_anita">Santa Anita</option>
-                        <option value="la_molina">La Molina</option>
-                        <option value="cieneguilla">Cieneguilla</option>
+                        <option value="19">San Juan de Lurigancho</option>
+                        <option value="20">Lurigancho/Chosica</option>
+                        <option value="21">Ate</option>
+                        <option value="22">El Agustino</option>
+                        <option value="23">Santa Anita</option>
+                        <option value="24">La Molina</option>
+                        <option value="25">Cieneguilla</option>
                     </optgroup>
                     <optgroup label="Lima Oeste">
-                        <option value="rimac">Rimac</option>
-                        <option value="cercado_lima">Cercado de Lima</option>
-                        <option value="breña">Breña</option>
-                        <option value="pueblo_libre">Pueblo Libre</option>
-                        <option value="magdalena">Magdalena</option>
-                        <option value="jesus_maria">Jesus María</option>
-                        <option value="la_victoria">La Victoria</option>
-                        <option value="lince">Lince</option>
-                        <option value="san_isidro">San Isidro</option>
-                        <option value="san_miguel">San Miguel</option>
-                        <option value="san_borja">San Borja</option>
-                        <option value="surquillo">Surquillo</option>
-                        <option value="santiago_surco">Santiago de Surco</option>
-                        <option value="barranco">Barranco</option>
-                        <option value="chorrillos">Chorrillos</option>
-                        <option value="san_luis">San Luis</option>
-                        <option value="miraflores">Miraflores</option>
+                        <option value="26">Rimac</option>
+                        <option value="27">Cercado de Lima</option>
+                        <option value="28">Breña</option>
+                        <option value="29">Pueblo Libre</option>
+                        <option value="30">Magdalena</option>
+                        <option value="31">Jesus María</option>
+                        <option value="32">La Victoria</option>
+                        <option value="33">Lince</option>
+                        <option value="34">San Isidro</option>
+                        <option value="35">San Miguel</option>
+                        <option value="36">Surquillo</option>
+                        <option value="37">San Borja</option>
+                        <option value="38">Santiago de Surco</option>
+                        <option value="39">Barranco</option>
+                        <option value="40">Chorrillos</option>
+                        <option value="41">San Luis</option>
+                        <option value="42">Miraflores</option>
                     </optgroup>
                 </select>
             </div>
@@ -119,11 +128,11 @@
                 <label>
                     Correo electrónico
                 </label>
-                <input placeholder="Inserte su dirección de correo electronico" type="email" id="email-login" required/>
+                <input placeholder="Inserte su dirección de correo electronico" type="email" id="email-login" name="email-login" required/>
             </div>
             <div class="form-group">
                 <label for="formFile" class="form-label">Adjunte una foto suya</label>
-                <input class="form-control" type="file" id="formFile" accept=".png" required>
+                <input class="form-control" type="file" id="formFile" name="foto" accept=".png" required>
                 <div id="fileError" class="text-danger mt-2" style="display: none; color: red;">El archivo debe ser una imagen PNG.</div>
             </div>
 
