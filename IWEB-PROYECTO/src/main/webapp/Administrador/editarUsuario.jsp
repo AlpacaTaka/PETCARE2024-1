@@ -201,7 +201,7 @@
 
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1 d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-personal">Editar</button>
+                                    <button type="submit" class="btn btn-personal">Editar datos</button>
                                 </div>
                             </div>
                         </form>

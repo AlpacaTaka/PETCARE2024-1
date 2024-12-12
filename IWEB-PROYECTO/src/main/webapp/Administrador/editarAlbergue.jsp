@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="albergue" type="com.example.iwebproyecto.beans.Albergue" scope="request" />
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -93,7 +94,8 @@
                         <a href="<%=request.getContextPath()%>/admincuentas"><button type="button" class="btn btn-personal2">Regresar   </button></a>
                     </div>
                     <div class="container md-8" style="width: 100%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                        <form id="uploadForm" style="padding:10px" >
+                        <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/AlbAdmin?action=edit">
+                            <input type="hidden" name="id" value="<%=albergue.getAlbergueID()%>">
                             <h1 style="margin-top: 10px;" class="text-center">Perfil de Albergue</h1>
 
                             <div class="row justify-content-center p-1">
@@ -110,11 +112,11 @@
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="nombreEncargado">Nombre </label>
-                                    <input type="text" class="form-control" name="nombreEncAlb" id="nombreEncargado" placeholder="Juan Ernesto" required>
+                                    <input type="text" class="form-control" name="nombreEncAlb" id="nombreEncargado" value="<%=albergue.getNombreEncargado()%>" required>
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="apellidoEncargado">Apellido</label>
-                                    <input type="text" class="form-control" id="apellidoEncargado" name="apelEncAlb" placeholder="Sifuentes Martinez" required>
+                                    <input type="text" class="form-control" id="apellidoEncargado" name="apelEncAlb" value="<%=albergue.getApellidoEncargado()%>"  required>
                                 </div>
                             </div>
                             <hr>
@@ -126,91 +128,80 @@
                                 <div class="col-md-9 p-1">
                                     <label for="nombreAlb">Nombre</label>
 
-                                    <input type="text" id="nombreAlb" name="nombreAlb" class="form-control" placeholder=" Patitas Felices" required >
+                                    <input type="text" id="nombreAlb" name="nombreAlb" class="form-control" value="<%=albergue.getNombreAlbergue()%>"  required >
 
                                 </div>
                                 <div class="col-md-3 p-1">
                                     <label for="fecha">Fecha de Creación:</label>
-                                    <input type="number" id="fecha" class="form-control" name="fecha" placeholder="2008" required >
+                                    <input type="date" id="fecha" class="form-control" name="fecha" value="<%=albergue.getFechaCreacion()%>"  required >
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1" >
                                     <label for="correo">Correo:</label>
-                                    <input type="text" id="correo" class="form-control" name="correo" placeholder="patitasfelices@gmail.com" required >
+                                    <input type="text" id="correo" class="form-control" name="correo" value="<%=albergue.getCorreoElectronico()%>"  required >
                                 </div>
-                            </div>
-                            <div class="row justify-content-center p-1">
-                                <div class="col-md-6 p-1" >
-                                    <label for="direccion">Cantidad de animales albergados</label>
-                                    <input type="number" name="animalesAlbergados" class="form-control" placeholder="70" required >
-                                </div>
-                                <div class="col-md-6 p-1" >
-                                    <label for="direccion">Cantidad de espacios para nuevos animales</label>
-                                    <input type="number" name="espacioDisponible" class="form-control" placeholder="30" required >
-                                </div>
-
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-4 p-1" >
                                     <label for="distrito">Distrito</label>
-                                    <select class="form-select" name="distrito" id="distrito" required >
-                                        <option value="">San Martín de Porres</option>
+                                    <select class="form-select" name="idDistrito" id="distrito" required >
+                                        <option value="">Selecciona un distrito</option>
                                         <optgroup label="Lima Norte">
-                                            <option value="ancon">Ancon</option>
-                                            <option value="santa_rosa">Santa Rosa</option>
-                                            <option value="carabayllo">Carabayllo</option>
-                                            <option value="puente_piedra">Puente Piedra</option>
-                                            <option value="comas">Comas</option>
-                                            <option value="los_olivos">Los Olivos</option>
-                                            <option value="san_martin_porres">San Martín de Porres</option>
-                                            <option value="independencia">Independencia</option>
+                                            <option value="1" <%String distritoID= albergue.getDistrito().getDistritoID() == 1 ? "selected" : null;%><%=distritoID%>>Ancon</option>
+                                            <option value="2" <%distritoID= albergue.getDistrito().getDistritoID() == 2 ? "selected" : null;%><%=distritoID%>>Santa Rosa</option>
+                                            <option value="3" <%distritoID= albergue.getDistrito().getDistritoID() == 3 ? "selected" : null;%><%=distritoID%>>Carabayllo</option>
+                                            <option value="4" <%distritoID= albergue.getDistrito().getDistritoID() == 4 ? "selected" : null;%><%=distritoID%>>Puente Piedra</option>
+                                            <option value="5" <%distritoID= albergue.getDistrito().getDistritoID() == 5 ? "selected" : null;%><%=distritoID%>>Comas</option>
+                                            <option value="6" <%distritoID= albergue.getDistrito().getDistritoID() == 6 ? "selected" : null;%><%=distritoID%>>Los Olivos</option>
+                                            <option value="7" <%distritoID= albergue.getDistrito().getDistritoID() == 7 ? "selected" : null;%><%=distritoID%>>San Martín de Porres</option>
+                                            <option value="8" <%distritoID= albergue.getDistrito().getDistritoID() == 8 ? "selected" : null;%><%=distritoID%>>Independencia</option>
                                         </optgroup>
                                         <optgroup label="Lima Sur">
-                                            <option value="san_juan_miraflores">San Juan de Miraflores</option>
-                                            <option value="villa_maria_triunfo">Villa María del Triunfo</option>
-                                            <option value="villa_salvador">Villa el Salvador</option>
-                                            <option value="pachacamac">Pachacamac</option>
-                                            <option value="lurin">Lurín</option>
-                                            <option value="punta_hermosa">Punta Hermosa</option>
-                                            <option value="punta_negra">Punta Negra</option>
-                                            <option value="san_bartolo">San Bartolo</option>
-                                            <option value="santa_maria_mar">Santa María del Mar</option>
-                                            <option value="pucusana">Pucusana</option>
+                                            <option value="9" <%distritoID= albergue.getDistrito().getDistritoID() == 9 ? "selected" : null;%><%=distritoID%>>San Juan de Miraflores</option>
+                                            <option value="10" <%distritoID= albergue.getDistrito().getDistritoID() == 10 ? "selected" : null;%><%=distritoID%>>Villa María del Triunfo</option>
+                                            <option value="11" <%distritoID= albergue.getDistrito().getDistritoID() == 11 ? "selected" : null;%><%=distritoID%>>Villa el Salvador</option>
+                                            <option value="12" <%distritoID= albergue.getDistrito().getDistritoID() == 12 ? "selected" : null;%><%=distritoID%>>Pachacamac</option>
+                                            <option value="13" <%distritoID= albergue.getDistrito().getDistritoID() == 13 ? "selected" : null;%><%=distritoID%>>Lurín</option>
+                                            <option value="14" <%distritoID= albergue.getDistrito().getDistritoID() == 14 ? "selected" : null;%><%=distritoID%>>Punta Hermosa</option>
+                                            <option value="15" <%distritoID= albergue.getDistrito().getDistritoID() == 15 ? "selected" : null;%><%=distritoID%>>Punta Negra</option>
+                                            <option value="16" <%distritoID= albergue.getDistrito().getDistritoID() == 16 ? "selected" : null;%><%=distritoID%>>San Bartolo</option>
+                                            <option value="17" <%distritoID= albergue.getDistrito().getDistritoID() == 17 ? "selected" : null;%><%=distritoID%>>Santa María del Mar</option>
+                                            <option value="18" <%distritoID= albergue.getDistrito().getDistritoID() == 18 ? "selected" : null;%><%=distritoID%>>Pucusana</option>
                                         </optgroup>
                                         <optgroup label="Lima Este">
-                                            <option value="san_juan_lurigancho">San Juan de Lurigancho</option>
-                                            <option value="chosica">Lurigancho/Chosica</option>
-                                            <option value="ate">Ate</option>
-                                            <option value="el_agustino">El Agustino</option>
-                                            <option value="santa_anita">Santa Anita</option>
-                                            <option value="la_molina">La Molina</option>
-                                            <option value="cieneguilla">Cieneguilla</option>
+                                            <option value="19" <%distritoID= albergue.getDistrito().getDistritoID() == 19 ? "selected" : null;%><%=distritoID%>>San Juan de Lurigancho</option>
+                                            <option value="20" <%distritoID= albergue.getDistrito().getDistritoID() == 20 ? "selected" : null;%><%=distritoID%>>Lurigancho/Chosica</option>
+                                            <option value="21" <%distritoID= albergue.getDistrito().getDistritoID() == 21 ? "selected" : null;%><%=distritoID%>>Ate</option>
+                                            <option value="22" <%distritoID= albergue.getDistrito().getDistritoID() == 22 ? "selected" : null;%><%=distritoID%>>El Agustino</option>
+                                            <option value="23" <%distritoID= albergue.getDistrito().getDistritoID() == 23 ? "selected" : null;%><%=distritoID%>>Santa Anita</option>
+                                            <option value="24" <%distritoID= albergue.getDistrito().getDistritoID() == 24 ? "selected" : null;%><%=distritoID%>>La Molina</option>
+                                            <option value="25" <%distritoID= albergue.getDistrito().getDistritoID() == 25 ? "selected" : null;%><%=distritoID%>>Cieneguilla</option>
                                         </optgroup>
                                         <optgroup label="Lima Oeste">
-                                            <option value="rimac">Rimac</option>
-                                            <option value="cercado_lima">Cercado de Lima</option>
-                                            <option value="breña">Breña</option>
-                                            <option value="pueblo_libre">Pueblo Libre</option>
-                                            <option value="magdalena">Magdalena</option>
-                                            <option value="jesus_maria">Jesus María</option>
-                                            <option value="la_victoria">La Victoria</option>
-                                            <option value="lince">Lince</option>
-                                            <option value="san_isidro">San Isidro</option>
-                                            <option value="san_miguel">San Miguel</option>
-                                            <option value="san_borja">San Borja</option>
-                                            <option value="surquillo">Surquillo</option>
-                                            <option value="santiago_surco">Santiago de Surco</option>
-                                            <option value="barranco">Barranco</option>
-                                            <option value="chorrillos">Chorrillos</option>
-                                            <option value="san_luis">San Luis</option>
-                                            <option value="miraflores">Miraflores</option>
+                                            <option value="26" <%distritoID= albergue.getDistrito().getDistritoID() == 26 ? "selected" : null;%><%=distritoID%>>Rimac</option>
+                                            <option value="27" <%distritoID= albergue.getDistrito().getDistritoID() == 27 ? "selected" : null;%><%=distritoID%>>Cercado de Lima</option>
+                                            <option value="28" <%distritoID= albergue.getDistrito().getDistritoID() == 28 ? "selected" : null;%><%=distritoID%>>Breña</option>
+                                            <option value="29" <%distritoID= albergue.getDistrito().getDistritoID() == 29 ? "selected" : null;%><%=distritoID%>>Pueblo Libre</option>
+                                            <option value="30" <%distritoID= albergue.getDistrito().getDistritoID() == 30 ? "selected" : null;%><%=distritoID%>>Magdalena</option>
+                                            <option value="31" <%distritoID= albergue.getDistrito().getDistritoID() == 31 ? "selected" : null;%><%=distritoID%>>Jesus María</option>
+                                            <option value="32" <%distritoID= albergue.getDistrito().getDistritoID() == 32 ? "selected" : null;%><%=distritoID%>>La Victoria</option>
+                                            <option value="33" <%distritoID= albergue.getDistrito().getDistritoID() == 33 ? "selected" : null;%><%=distritoID%>>Lince</option>
+                                            <option value="34" <%distritoID= albergue.getDistrito().getDistritoID() == 34 ? "selected" : null;%><%=distritoID%>>San Isidro</option>
+                                            <option value="35" <%distritoID= albergue.getDistrito().getDistritoID() == 35 ? "selected" : null;%><%=distritoID%>>San Miguel</option>
+                                            <option value="36" <%distritoID= albergue.getDistrito().getDistritoID() == 36 ? "selected" : null;%><%=distritoID%>>San Borja</option>
+                                            <option value="37" <%distritoID= albergue.getDistrito().getDistritoID() == 37 ? "selected" : null;%><%=distritoID%>>Surquillo</option>
+                                            <option value="38" <%distritoID= albergue.getDistrito().getDistritoID() == 38 ? "selected" : null;%><%=distritoID%>>Santiago de Surco</option>
+                                            <option value="39" <%distritoID= albergue.getDistrito().getDistritoID() == 39 ? "selected" : null;%><%=distritoID%>>Barranco</option>
+                                            <option value="40" <%distritoID= albergue.getDistrito().getDistritoID() == 40 ? "selected" : null;%><%=distritoID%>>Chorrillos</option>
+                                            <option value="41" <%distritoID= albergue.getDistrito().getDistritoID() == 41 ? "selected" : null;%><%=distritoID%>>San Luis</option>
+                                            <option value="42" <%distritoID= albergue.getDistrito().getDistritoID() == 42 ? "selected" : null;%><%=distritoID%>>Miraflores</option>
                                         </optgroup>
                                     </select>
                                 </div>
                                 <div class="col-md-8 p-1">
                                     <label for="Direccion">Dirección</label>
-                                    <input type="text" class="form-control" placeholder="Mz. E Lt. 3 Urb. Señor de los Milagros (espalda de la posta)" maxlength="100" id="Direccion" name="Direccion" >
+                                    <input type="text" class="form-control" value="<%=albergue.getDireccion()%>" maxlength="100" id="Direccion" name="Direccion" required>
                                 </div>
 
                             </div>
@@ -218,7 +209,7 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
                                     <label for="direc_donac">Direccion de donaciones</label>
-                                    <input type="text" class="form-control" name="direcDonaciones" id="direc_donac" maxlength="100" placeholder="Mz. E Lt. 3 Urb. Señor de los Milagros (espalda de la posta)" required >
+                                    <input type="text" class="form-control" name="direcDonaciones" id="direc_donac" maxlength="100" value="<%=albergue.getDireccionDonaciones()%>" required >
 
                                 </div>
 
@@ -226,12 +217,12 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
                                     <label for="nom_contac">Nombre de contacto de Donaciones</label>
-                                    <input type="text" class="form-control" name="nombreDonaciones" id="nom_contac" maxlength="100" placeholder="Simeon Carrasco" required>
+                                    <input type="text" class="form-control" name="nombreDonaciones" id="nom_contac" maxlength="100" value="<%=albergue.getNombreContactoDonaciones()%>" required>
 
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="num_donac">Numero de contacto Donaciones</label>
-                                    <input type="number" id="num_donac" name="numeroDonaciones" class="form-control" placeholder="993081812" required >
+                                    <input type="number" id="num_donac" name="numeroDonaciones" class="form-control" value="<%=albergue.getNumeroContactoDonaciones()%>" required >
 
                                 </div>
 
@@ -239,26 +230,27 @@
 
                             <hr>
                             <div class="row justify-content-center p-1">
-                                <div class="col-md-6 p-1">
+                                <div class="col-md-6 p-1" >
                                     <label for="cantidad_albergados">Cantidad de animales albergados</label>
-                                    <input type="number" id="cantidad_albergados" class="form-control" placeholder="70" required disabled>
+                                    <input type="number" name="animalesAlbergados" id="cantidad_albergados" class="form-control" value="<%=albergue.getCantidadAnimales()%>"  required >
                                 </div>
-                                <div class="col-md-6 p-1">
-                                    <label for="espacios_nuevos">Cantidad de espacios para nuevos animales</label>
-                                    <input type="number" id="espacios_nuevos" class="form-control" placeholder="30" required disabled>
+                                <div class="col-md-6 p-1" >
+                                    <label for="espacios_disponibles">Cantidad de espacios para nuevos animales</label>
+                                    <input type="number" name="espacioDisponible" id="espacios_disponibles" class="form-control" value="<%=albergue.getEspaciosDisponibles()%>"  required >
                                 </div>
+
                             </div>
 
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">+
                                     <label for="punto_acopio">Punto de acopio de donaciones</label>
-                                    <input type="text" id="punto_acopio" class="form-control" maxlength="100" placeholder="Colegio Humanitas San Miguel" required disabled>
+                                    <input type="text" id="punto_acopio" class="form-control" maxlength="100" name="puntoAcopio" value="<%=albergue.getPuntoAcopioDonaciones()%>" required >
                                 </div>
                             </div>
 
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1 d-flex justify-content-center">
-                                    <button type="button" class="btn btn-personal" id="editarBtn">Editar datos</button>
+                                    <button type="submit" class="btn btn-personal" id="editarBtn">Editar datos</button>
                                 </div>
                             </div>
                             <hr>

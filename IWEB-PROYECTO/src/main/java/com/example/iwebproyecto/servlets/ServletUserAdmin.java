@@ -28,6 +28,14 @@ public class ServletUserAdmin extends HttpServlet {
                 Usuario usuario = admin.obtenerUsuarioPorID(Integer.parseInt(id));
                 request.setAttribute("usuario", usuario);
                 request.getRequestDispatcher("Administrador/editarUsuario.jsp").forward(request, response);
+
+            case "view":
+                String idv = request.getParameter("id");
+                Usuario usuariov = admin.obtenerUsuarioPorID(Integer.parseInt(idv));
+                request.setAttribute("usuario", usuariov);
+                request.setAttribute("idAdmin", idAdmin);
+                request.getRequestDispatcher("Administrador/verUsuario.jsp").forward(request,response);
+                break;
         }
     }
 

@@ -181,8 +181,8 @@
 
                                         <td>
                                             <div style="display: flex; justify-content: center;">
-                                                <a href="<%=request.getContextPath()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
-                                                <a href="<%=request.getContextPath()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
+                                                <a href="<%=request.getContextPath()%>/AlbAdmin?action=view&id=<%=albergue.getAlbergueID()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
+                                                <a href="<%=request.getContextPath()%>/AlbAdmin?action=edit&id=<%=albergue.getAlbergueID()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
                                                 <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Eliminar" onclick="abrirPopupAlbergue()"><span class="fi fi-rr-trash"></span></button>
                                             </div>
                                         </td>
