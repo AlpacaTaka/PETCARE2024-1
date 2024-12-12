@@ -1,16 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="usuario" type="com.example.iwebproyecto.beans.Usuario" scope="request" />
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
+    <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
-    <title>Crear Coordinador de Zona</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css" rel="stylesheet">
+    <title>Editar Perfil Usuario</title>
     <style>
 
         /* Esto es solo de referencia para ver su espacio disponible - borrar*/
@@ -56,29 +59,29 @@
         <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
         <div class="barside">
             <ul class="navlinks">
-                <li><a href="/administrator/administracionCuentas.html" title="Administracion"><i class="fi-rr-ballot-check"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/admincuentas" title="Administracion"><i class="fi-rr-ballot-check"></i></a></li>
                 <li><a href="/administrator/solicitudCuentaAlbergues.html" title="Validacion Albergues"><i class="fi-rr-house-building"></i></a></li>
                 <li><a href="/administrator/validacionUsuarios.html" title="Validacion Usuarios"><i class="fi-rr-user-trust"></i></a></li>
-                <li><a href="/administrator/creacionCoordinadorZona.html" title="Crear Coordinador de Zona"><i class="fi-rr-people-network-partner"></i></a></li>
-                <li><a href="/administrator/creacionLugarHabilitado.html" title="Crear Lugar Habilitado"><i class="fi-rr-map-location-track"></i></a></li>
-                <li><a href="/administrator/dashboard.html" title="Dashboard"><i class="fi-rr-search-alt"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/CrearCoordinador" title="Crear Coordinador de Zona"><i class="fi-rr-people-network-partner"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/LugarHabilitado" title="Crear Lugar Habilitado"><i class="fi-rr-map-location-track"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/Dashboard" title="Dashboard"><i class="fi-rr-search-alt"></i></a></li>
                 <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
             </ul>
 
         </div>
 
         <div id="menu" class="menu">
-            <a href="/administrator/administracionCuentas.html">Administración</a>
+            <a href="<%=request.getContextPath()%>/admincuentas">Administración</a>
             <hr>
 
             <a href="/administrator/solicitudCuentaAlbergues.html">Validar Albergues</a>
             <a href="/administrator/validacionUsuarios.html">Validar Usuarios</a>
             <hr>
 
-            <a href="/administrator/creacionCoordinadorZona.html">Crear Coordinador de Zona</a>
-            <a href="/administrator/creacionLugarHabilitado.html">Crear lugar habilitado</a>
+            <a href="<%=request.getContextPath()%>/CrearCoordinador">Crear Coordinador de Zona</a>
+            <a href="<%=request.getContextPath()%>/LugarHabilitado">Crear lugar habilitado</a>
             <hr>
-            <a href="/administrator/dashboard.html">Dashboard</a>
+            <a href="<%=request.getContextPath()%>/Dashboard">Dashboard</a>
             <hr>
             <a href="/login/login.html">Cerrar Sesión</a>
 
@@ -90,10 +93,11 @@
             <div class="row" id="contenido-nofooter" style="flex-grow: 1;align-content:center">
                 <div class="container">
                     <div class="container md-8" style="width: 100%;max-width: 800px; margin-bottom: 20px; padding: 0;">
-                        <button type="button" onclick="location.href='/administrator/administracionCuentas.html'" class="btn btn-personal2">Regresar   </button>
+                        <a href="<%=request.getContextPath()%>/admincuentas"><button type="button" class="btn btn-personal2">Regresar   </button></a>
                     </div>
                     <div class="container md-8" style="width: 100%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                        <form id="uploadForm" style="padding:10px" >
+                        <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/UserAdmin?action=edit">
+                            <input type="hidden" name="id" value="<%=usuario.getUsuarioID()%>">
                             <h1 style="margin-top: 10px;" class="text-center">Mi Perfil</h1>
 
                             <div class="row justify-content-center p-1">
@@ -107,11 +111,11 @@
 
                                 <div class="col-md-6 p-1">
                                     <label for="nombre">Nombre</label>
-                                    <input type="text" class="form-control" placeholder="Juan" id="nombre" required>
+                                    <input type="text" class="form-control" value="<%=usuario.getNombre()%>" id="nombre" name="nombreUser" required>
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="apellido">Apellido</label>
-                                    <input type="text" class="form-control" id="apellido" placeholder="Guerrero Adrianzen" required>
+                                    <input type="text" class="form-control" id="apellido" value="<%=usuario.getApellido()%>" name="apellidoUser" required>
                                 </div>
 
                             </div>
@@ -119,62 +123,62 @@
                                 <div class="col-md-4 p-1">
                                     <label for="documentoIdentidad">DNI</label>
 
-                                    <input type="number" class="form-control" placeholder="03203852" id="documentoIdentidad" required>
+                                    <input type="number" class="form-control" value="<%=usuario.getDni()%>" id="documentoIdentidad" name="dni" required>
 
                                 </div>
                                 <div class="col-md-8 p-1">
                                     <label for="distrito">Distrito</label>
-                                    <select class="form-select" name="distrito" id="distrito" required>
-                                        <option value="">Pueblo Libre</option>
+                                    <select class="form-select" name="idDistrito" id="distrito" required>
+                                        <option value="">Selecciona un distrito</option>
                                         <optgroup label="Lima Norte">
-                                            <option value="ancon">Ancon</option>
-                                            <option value="santa_rosa">Santa Rosa</option>
-                                            <option value="carabayllo">Carabayllo</option>
-                                            <option value="puente_piedra">Puente Piedra</option>
-                                            <option value="comas">Comas</option>
-                                            <option value="los_olivos">Los Olivos</option>
-                                            <option value="san_martin_porres">San Martín de Porres</option>
-                                            <option value="independencia">Independencia</option>
+                                            <option value="1" <%String distritoID= usuario.getDistrito().getDistritoID() == 1 ? "selected" : null;%><%=distritoID%>>Ancon</option>
+                                            <option value="2" <%distritoID= usuario.getDistrito().getDistritoID() == 2 ? "selected" : null;%><%=distritoID%>>Santa Rosa</option>
+                                            <option value="3" <%distritoID= usuario.getDistrito().getDistritoID() == 3 ? "selected" : null;%><%=distritoID%>>Carabayllo</option>
+                                            <option value="4" <%distritoID= usuario.getDistrito().getDistritoID() == 4 ? "selected" : null;%><%=distritoID%>>Puente Piedra</option>
+                                            <option value="5" <%distritoID= usuario.getDistrito().getDistritoID() == 5 ? "selected" : null;%><%=distritoID%>>Comas</option>
+                                            <option value="6" <%distritoID= usuario.getDistrito().getDistritoID() == 6 ? "selected" : null;%><%=distritoID%>>Los Olivos</option>
+                                            <option value="7" <%distritoID= usuario.getDistrito().getDistritoID() == 7 ? "selected" : null;%><%=distritoID%>>San Martín de Porres</option>
+                                            <option value="8" <%distritoID= usuario.getDistrito().getDistritoID() == 8 ? "selected" : null;%><%=distritoID%>>Independencia</option>
                                         </optgroup>
                                         <optgroup label="Lima Sur">
-                                            <option value="san_juan_miraflores">San Juan de Miraflores</option>
-                                            <option value="villa_maria_triunfo">Villa María del Triunfo</option>
-                                            <option value="villa_salvador">Villa el Salvador</option>
-                                            <option value="pachacamac">Pachacamac</option>
-                                            <option value="lurin">Lurín</option>
-                                            <option value="punta_hermosa">Punta Hermosa</option>
-                                            <option value="punta_negra">Punta Negra</option>
-                                            <option value="san_bartolo">San Bartolo</option>
-                                            <option value="santa_maria_mar">Santa María del Mar</option>
-                                            <option value="pucusana">Pucusana</option>
+                                            <option value="9" <%distritoID= usuario.getDistrito().getDistritoID() == 9 ? "selected" : null;%><%=distritoID%>>San Juan de Miraflores</option>
+                                            <option value="10" <%distritoID= usuario.getDistrito().getDistritoID() == 10 ? "selected" : null;%><%=distritoID%>>Villa María del Triunfo</option>
+                                            <option value="11" <%distritoID= usuario.getDistrito().getDistritoID() == 11 ? "selected" : null;%><%=distritoID%>>Villa el Salvador</option>
+                                            <option value="12" <%distritoID= usuario.getDistrito().getDistritoID() == 12 ? "selected" : null;%><%=distritoID%>>Pachacamac</option>
+                                            <option value="13" <%distritoID= usuario.getDistrito().getDistritoID() == 13 ? "selected" : null;%><%=distritoID%>>Lurín</option>
+                                            <option value="14" <%distritoID= usuario.getDistrito().getDistritoID() == 14 ? "selected" : null;%><%=distritoID%>>Punta Hermosa</option>
+                                            <option value="15" <%distritoID= usuario.getDistrito().getDistritoID() == 15 ? "selected" : null;%><%=distritoID%>>Punta Negra</option>
+                                            <option value="16" <%distritoID= usuario.getDistrito().getDistritoID() == 16 ? "selected" : null;%><%=distritoID%>>San Bartolo</option>
+                                            <option value="17" <%distritoID= usuario.getDistrito().getDistritoID() == 17 ? "selected" : null;%><%=distritoID%>>Santa María del Mar</option>
+                                            <option value="18" <%distritoID= usuario.getDistrito().getDistritoID() == 18 ? "selected" : null;%><%=distritoID%>>Pucusana</option>
                                         </optgroup>
                                         <optgroup label="Lima Este">
-                                            <option value="san_juan_lurigancho">San Juan de Lurigancho</option>
-                                            <option value="chosica">Lurigancho/Chosica</option>
-                                            <option value="ate">Ate</option>
-                                            <option value="el_agustino">El Agustino</option>
-                                            <option value="santa_anita">Santa Anita</option>
-                                            <option value="la_molina">La Molina</option>
-                                            <option value="cieneguilla">Cieneguilla</option>
+                                            <option value="19" <%distritoID= usuario.getDistrito().getDistritoID() == 19 ? "selected" : null;%><%=distritoID%>>San Juan de Lurigancho</option>
+                                            <option value="20" <%distritoID= usuario.getDistrito().getDistritoID() == 20 ? "selected" : null;%><%=distritoID%>>Lurigancho/Chosica</option>
+                                            <option value="21" <%distritoID= usuario.getDistrito().getDistritoID() == 21 ? "selected" : null;%><%=distritoID%>>Ate</option>
+                                            <option value="22" <%distritoID= usuario.getDistrito().getDistritoID() == 22 ? "selected" : null;%><%=distritoID%>>El Agustino</option>
+                                            <option value="23" <%distritoID= usuario.getDistrito().getDistritoID() == 23 ? "selected" : null;%><%=distritoID%>>Santa Anita</option>
+                                            <option value="24" <%distritoID= usuario.getDistrito().getDistritoID() == 24 ? "selected" : null;%><%=distritoID%>>La Molina</option>
+                                            <option value="25" <%distritoID= usuario.getDistrito().getDistritoID() == 25 ? "selected" : null;%><%=distritoID%>>Cieneguilla</option>
                                         </optgroup>
                                         <optgroup label="Lima Oeste">
-                                            <option value="rimac">Rimac</option>
-                                            <option value="cercado_lima">Cercado de Lima</option>
-                                            <option value="breña">Breña</option>
-                                            <option value="pueblo_libre">Pueblo Libre</option>
-                                            <option value="magdalena">Magdalena</option>
-                                            <option value="jesus_maria">Jesus María</option>
-                                            <option value="la_victoria">La Victoria</option>
-                                            <option value="lince">Lince</option>
-                                            <option value="san_isidro">San Isidro</option>
-                                            <option value="san_miguel">San Miguel</option>
-                                            <option value="san_borja">San Borja</option>
-                                            <option value="surquillo">Surquillo</option>
-                                            <option value="santiago_surco">Santiago de Surco</option>
-                                            <option value="barranco">Barranco</option>
-                                            <option value="chorrillos">Chorrillos</option>
-                                            <option value="san_luis">San Luis</option>
-                                            <option value="miraflores">Miraflores</option>
+                                            <option value="26" <%distritoID= usuario.getDistrito().getDistritoID() == 26 ? "selected" : null;%><%=distritoID%>>Rimac</option>
+                                            <option value="27" <%distritoID= usuario.getDistrito().getDistritoID() == 27 ? "selected" : null;%><%=distritoID%>>Cercado de Lima</option>
+                                            <option value="28" <%distritoID= usuario.getDistrito().getDistritoID() == 28 ? "selected" : null;%><%=distritoID%>>Breña</option>
+                                            <option value="29" <%distritoID= usuario.getDistrito().getDistritoID() == 29 ? "selected" : null;%><%=distritoID%>>Pueblo Libre</option>
+                                            <option value="30" <%distritoID= usuario.getDistrito().getDistritoID() == 30 ? "selected" : null;%><%=distritoID%>>Magdalena</option>
+                                            <option value="31" <%distritoID= usuario.getDistrito().getDistritoID() == 31 ? "selected" : null;%><%=distritoID%>>Jesus María</option>
+                                            <option value="32" <%distritoID= usuario.getDistrito().getDistritoID() == 32 ? "selected" : null;%><%=distritoID%>>La Victoria</option>
+                                            <option value="33" <%distritoID= usuario.getDistrito().getDistritoID() == 33 ? "selected" : null;%><%=distritoID%>>Lince</option>
+                                            <option value="34" <%distritoID= usuario.getDistrito().getDistritoID() == 34 ? "selected" : null;%><%=distritoID%>>San Isidro</option>
+                                            <option value="35" <%distritoID= usuario.getDistrito().getDistritoID() == 35 ? "selected" : null;%><%=distritoID%>>San Miguel</option>
+                                            <option value="36" <%distritoID= usuario.getDistrito().getDistritoID() == 36 ? "selected" : null;%><%=distritoID%>>San Borja</option>
+                                            <option value="37" <%distritoID= usuario.getDistrito().getDistritoID() == 37 ? "selected" : null;%><%=distritoID%>>Surquillo</option>
+                                            <option value="38" <%distritoID= usuario.getDistrito().getDistritoID() == 38 ? "selected" : null;%><%=distritoID%>>Santiago de Surco</option>
+                                            <option value="39" <%distritoID= usuario.getDistrito().getDistritoID() == 39 ? "selected" : null;%><%=distritoID%>>Barranco</option>
+                                            <option value="40" <%distritoID= usuario.getDistrito().getDistritoID() == 40 ? "selected" : null;%><%=distritoID%>>Chorrillos</option>
+                                            <option value="41" <%distritoID= usuario.getDistrito().getDistritoID() == 41 ? "selected" : null;%><%=distritoID%>>San Luis</option>
+                                            <option value="42" <%distritoID= usuario.getDistrito().getDistritoID() == 42 ? "selected" : null;%><%=distritoID%>>Miraflores</option>
                                         </optgroup>
                                     </select>
                                 </div>
@@ -182,14 +186,14 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1" >
                                     <label for="direccion">Dirección</label>
-                                    <input type="text" class="form-control" id="direccion" placeholder="Calle Parque San Martin 252 Dpto. 501" required>
+                                    <input type="text" class="form-control" id="direccion" value="<%=usuario.getDireccion()%>" name="direccionUser" required>
                                 </div>
 
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1" >
                                     <label for="correo">Correo (Gmail)</label>
-                                    <input type="email" id="correo" class="form-control" placeholder="tubebitofiufiu@gmail.com" required>
+                                    <input type="email" id="correo" class="form-control" value="<%=usuario.getCorreoElectronico()%>" name="correoUser" required>
                                 </div>
 
                             </div>
@@ -197,9 +201,8 @@
 
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1 d-flex justify-content-center">
-                                    <p>Si necesita cambiar sus datos personales, contactar son Soporte</p>
+                                    <button type="submit" class="btn btn-personal">Editar</button>
                                 </div>
-
                             </div>
                         </form>
                     </div>

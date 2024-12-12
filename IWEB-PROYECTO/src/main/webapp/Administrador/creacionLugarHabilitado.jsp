@@ -39,7 +39,7 @@
         <li><a href="/administrator/validacionUsuarios.html" title="Validacion Usuarios"><i class="fi-rr-user-trust"></i></a></li>
         <li><a href="<%=request.getContextPath()%>/CrearCoordinador" title="Crear Coordinador de Zona"><i class="fi-rr-people-network-partner"></i></a></li>
         <li><a href="<%=request.getContextPath()%>/LugarHabilitado" title="Crear Lugar Habilitado"><i class="fi-rr-map-location-track"></i></a></li>
-        <li><a href="/administrator/dashboard.html" title="Dashboard"><i class="fi-rr-search-alt"></i></a></li>
+        <li><a href="<%=request.getContextPath()%>/Dashboard" title="Dashboard"><i class="fi-rr-search-alt"></i></a></li>
         <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
       </ul>
 
@@ -56,7 +56,7 @@
       <a href="<%=request.getContextPath()%>/CrearCoordinador">Crear Coordinador de Zona</a>
       <a href="<%=request.getContextPath()%>/LugarHabilitado">Crear lugar habilitado</a>
       <hr>
-      <a href="/administrator/dashboard.html">Dashboard</a>
+      <a href="<%=request.getContextPath()%>/Dashboard">Dashboard</a>
       <hr>
       <a href="/login/login.html">Cerrar Sesión</a>
 

@@ -143,49 +143,43 @@ public class AdminCuentasDao extends BaseDao {
         return distrito;
     }
 
-    public Usuario obtenerUsuarioPorID(int usuarioID) throws SQLException {
+    public Usuario obtenerUsuarioPorID(int usuarioID){
+        Usuario usuario = new Usuario();
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement("SELECT * from usuario WHERE usuarioID = ?")) {
 
             pstmt.setInt(1, usuarioID);
 
             ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return mapearUsuario(rs);
+            while (rs.next()) {
+
+                usuario.setUsuarioID(rs.getInt("usuarioID"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellido(rs.getString("apellido"));
+                usuario.setDni(rs.getString("dni"));
+                usuario.setDireccion(rs.getString("direccion"));
+                usuario.setCorreoElectronico(rs.getString("correoelectronico"));
+                usuario.setActivo(rs.getBoolean("activo"));
+                usuario.setEliminado(rs.getBoolean("eliminado"));
+
+                FotoDao fotoDao = new FotoDao();
+                DistritoDao distritoDao = new DistritoDao();
+
+                Foto foto =fotoDao.obtenerFotoPorId(rs.getInt("fotoID"));
+                usuario.setFoto(foto);
+
+                Distrito distrito= distritoDao.obtenerDistritoPorId(rs.getInt("distritoID"));
+                usuario.setDistrito(distrito);
+
             }
+        }catch (SQLException e) {
+            e.printStackTrace();
         }
-        return null;
-    }
-
-    // Metodo para mapear un ResultSet a un objeto Usuario
-    private Usuario mapearUsuario(ResultSet resultSet) throws SQLException {
-        Usuario usuario = new Usuario();
-        usuario.setUsuarioID(resultSet.getInt("usuarioID"));
-        usuario.setNombre(resultSet.getString("nombre"));
-        usuario.setApellido(resultSet.getString("apellido"));
-        usuario.setDni(resultSet.getString("dni"));
-        usuario.setDireccion(resultSet.getString("direccion"));
-        usuario.setCorreoElectronico(resultSet.getString("correoelectronico"));
-        usuario.setActivo(resultSet.getBoolean("activo"));
-        usuario.setEliminado(resultSet.getBoolean("eliminado"));
-
-        FotoDao fotoDao = new FotoDao();
-        DistritoDao distritoDao = new DistritoDao();
-
-        Foto foto =fotoDao.obtenerFotoPorId(resultSet.getInt("fotoID"));
-        usuario.setFoto(foto);
-
-        Distrito distrito= distritoDao.obtenerDistritoPorId(resultSet.getInt("distritoID"));
-        usuario.setDistrito(distrito);
-
-
-
         return usuario;
     }
 
-    public void editarUsuario(Usuario usuario) throws SQLException {
-        String sql = "UPDATE usuario SET nombre = ?, apellido = ?, dni = ?, direccion = ?, correoelectronico = ?, " +
-                "activo = ?, distritoID = ?, fotos_fotoID = ?, eliminado = ? WHERE usuarioID = ?";
+    public void editarUsuario(Usuario usuario) {
+        String sql = "UPDATE usuario SET nombre = ?, apellido = ?, dni = ?, direccion = ?, correoelectronico = ?, activo = ?, distritoID = ?, fotoID = ?, eliminado = ?, fechaRegistrado = ? WHERE usuarioID = ?";
         try (Connection conn = this.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
             pstmt.setString(1, usuario.getNombre());
@@ -197,8 +191,11 @@ public class AdminCuentasDao extends BaseDao {
             pstmt.setInt(7, usuario.getDistrito().getDistritoID());
             pstmt.setInt(8, usuario.getFoto().getFotoID());
             pstmt.setBoolean(9, usuario.isEliminado());
-            pstmt.setInt(10, usuario.getUsuarioID());
+            pstmt.setInt(11, usuario.getUsuarioID());
+            pstmt.setDate(10, Date.valueOf(usuario.getFechaRegistrado()));
             pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
         }
     }
 

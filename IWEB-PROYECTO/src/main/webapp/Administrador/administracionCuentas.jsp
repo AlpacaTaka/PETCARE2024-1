@@ -68,7 +68,7 @@
                 <li><a href="${pageContext.request.contextPath}/Administrator/validacionUsuarios.jsp" title="Validacion Usuarios"><i class="fi-rr-user-trust"></i></a></li>
                 <li><a href="<%=request.getContextPath()%>/CrearCoordinador" title="Crear Coordinador de Zona"><i class="fi-rr-people-network-partner"></i></a></li>
                 <li><a href="<%=request.getContextPath()%>/LugarHabilitado" title="Crear Lugar Habilitado"><i class="fi-rr-map-location-track"></i></a></li>
-                <li><a href="${pageContext.request.contextPath}/Administrador/dashboard.jsp" title="Dashboard"><i class="fi-rr-search-alt"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/Dashboard" title="Dashboard"><i class="fi-rr-search-alt"></i></a></li>
                 <li id="cerrar-sesion"><a href="${pageContext.request.contextPath}" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
             </ul>
 
@@ -85,7 +85,7 @@
             <a href="<%=request.getContextPath()%>/CrearCoordinador">Crear Coordinador de Zona</a>
             <a href="<%=request.getContextPath()%>/LugarHabilitado">Crear lugar habilitado</a>
             <hr>
-            <a href="/administrator/dashboard.html">Dashboard</a>
+            <a href="<%=request.getContextPath()%>/Dashboard">Dashboard</a>
             <hr>
             <a href="/login/login.html">Cerrar Sesión</a>
 
@@ -143,8 +143,8 @@
 
                                         <td>
                                             <div style="display: flex; justify-content: center;">
-                                                <a href="<%=request.getContextPath()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
-                                                <a href="<%=request.getContextPath()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
+                                                <a href="<%=request.getContextPath()%>/UserAdmin?action=view&id=<%=usuario.getUsuarioID()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
+                                                <a href="<%=request.getContextPath()%>/UserAdmin?action=edit&id=<%=usuario.getUsuarioID()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
                                                 <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Eliminar" onclick="abrirPopupUsuario()"><span class="fi fi-rr-trash"></span></button>
                                             </div>
                                         </td>

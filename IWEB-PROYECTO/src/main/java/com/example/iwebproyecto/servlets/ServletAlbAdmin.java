@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name="ServletAlbAdmin", value = "/EditAlb")
+@WebServlet(name="ServletAlbAdmin", value = "/AlbAdmin")
 public class ServletAlbAdmin extends HttpServlet {
 
     @Override
