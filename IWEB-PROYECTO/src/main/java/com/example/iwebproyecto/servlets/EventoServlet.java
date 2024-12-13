@@ -30,7 +30,7 @@ import java.io.IOException;
 @MultipartConfig
 public class EventoServlet extends HttpServlet {
 
-    private static final int ALBERGUE_ID = 6;
+    //private static final int ALBERGUE_ID = 6;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,13 +38,19 @@ public class EventoServlet extends HttpServlet {
         EventoDao eventoDao = new EventoDao();
         AlbergueDao albergueDao = new AlbergueDao();
         LugarEventoDao lugarEventoDao = new LugarEventoDao(); // Instancia del LugarEventoDao
-        Albergue albergue = albergueDao.obtenerAlberguePorID(6);
+        //Albergue albergue = albergueDao.obtenerAlberguePorID(6);
         ArrayList<LugarEvento> lugaresDisponibles = lugarEventoDao.obtenerTodosLugaresNoEliminados();
+
+        //AlbergueDao albergueDao = new AlbergueDao();
+        int idAlbergue= (Integer) request.getSession().getAttribute("idAlbergue");
+        Albergue albergue = albergueDao.obtenerAlberguePorID(idAlbergue);
+        request.setAttribute("albergue", albergue);
 
         switch (action) {
             case "lista":
 
-                ArrayList<EventoBenefico> listaEventos = eventoDao.listarEventosPorAlbergue(ALBERGUE_ID); // Obtener eventos por albergue
+                //ArrayList<EventoBenefico> listaEventos = eventoDao.listarEventosPorAlbergue(ALBERGUE_ID); // Obtener eventos por albergue
+                ArrayList<EventoBenefico> listaEventos = eventoDao.listarEventosPorAlbergue(idAlbergue);
                 request.setAttribute("listaEventos", listaEventos);
                 request.getRequestDispatcher("/albergue/eventTable.jsp").forward(request, response);
                 break;
@@ -127,7 +133,8 @@ public class EventoServlet extends HttpServlet {
         AlbergueDao albergueDao = new AlbergueDao();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Cambiado para coincidir con el formato HTML
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-        Albergue albergue = albergueDao.obtenerAlberguePorID(6);
+        //Albergue albergue = albergueDao.obtenerAlberguePorID(6);
+        Albergue albergue = albergueDao.obtenerAlberguePorID((Integer) request.getSession().getAttribute("idAlbergue"));
 
 
         try {

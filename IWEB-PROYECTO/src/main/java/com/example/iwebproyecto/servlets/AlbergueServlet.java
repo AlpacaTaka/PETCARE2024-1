@@ -18,17 +18,17 @@ public class AlbergueServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtener el albergueID del parámetro de la solicitud, usar predeterminado de 1 si no se proporciona
-        String idParam = request.getParameter("albergueID");
-        int albergueID = 6;
+        //String idParam = request.getParameter("albergueID");
+        int albergueID = (Integer) request.getSession().getAttribute("idAlbergue");
 
-        if (idParam != null && !idParam.isEmpty()) {
-            try {
-                albergueID = Integer.parseInt(idParam);
-            } catch (NumberFormatException e) {
-                response.sendRedirect("/error.jsp?message=Invalid%20Albergue%20ID");
-                return;
-            }
-        }
+        //if (idParam != null && !idParam.isEmpty()) {
+        //    try {
+        //        albergueID = Integer.parseInt(idParam);
+        //    } catch (NumberFormatException e) {
+        //        response.sendRedirect("/error.jsp?message=Invalid%20Albergue%20ID");
+        //        return;
+        //    }
+        //}
 
         // Busca el albergue en la base de datos
         AlbergueDao albergueDao = new AlbergueDao();

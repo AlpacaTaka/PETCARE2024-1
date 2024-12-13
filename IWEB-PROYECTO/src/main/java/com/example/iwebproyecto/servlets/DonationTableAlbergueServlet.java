@@ -1,6 +1,7 @@
 package com.example.iwebproyecto.servlets;
 
 import com.example.iwebproyecto.beans.*;
+import com.example.iwebproyecto.daos.AlbergueDao;
 import com.example.iwebproyecto.daos.AlbergueDaoRevenge;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -24,11 +25,13 @@ public class DonationTableAlbergueServlet extends HttpServlet {
         response.setContentType("text/html");
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
-        int idAlbergue= 6;
-
+        AlbergueDao albergueDao = new AlbergueDao();
+        int idAlbergue= (Integer) request.getSession().getAttribute("idAlbergue");
+        Albergue albergue = albergueDao.obtenerAlberguePorID(idAlbergue);
+        request.setAttribute("albergue", albergue);
         switch (action) {
             case "lista":
-                ArrayList<DonacionSuministros> list = albergueDaoRevenge.listarDonacionSuministros();
+                ArrayList<DonacionSuministros> list = albergueDaoRevenge.listarDonacionSuministros(idAlbergue);
                 request.setAttribute("lista", list);
                 RequestDispatcher rd = request.getRequestDispatcher("albergue/donationTable.jsp");
                 rd.forward(request, response);
@@ -80,7 +83,7 @@ public class DonationTableAlbergueServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
-        int albergueID = 6;/*Integer.parseInt(request.getParameter("id"));*/
+        int albergueID = (Integer) request.getSession().getAttribute("idAlbergue");/*Integer.parseInt(request.getParameter("id"));*/
         int distritoID = Integer.parseInt(request.getParameter("distritoID"));
         String titulo = request.getParameter("titulo");
         String correo = request.getParameter("correo");

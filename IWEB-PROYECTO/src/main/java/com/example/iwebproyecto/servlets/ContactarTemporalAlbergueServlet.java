@@ -1,6 +1,7 @@
 package com.example.iwebproyecto.servlets;
 
 import com.example.iwebproyecto.beans.*;
+import com.example.iwebproyecto.daos.AlbergueDao;
 import com.example.iwebproyecto.daos.AlbergueDaoRevenge;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -23,10 +24,13 @@ public class ContactarTemporalAlbergueServlet extends HttpServlet {
 
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
-        int idAlbergue= 6;
+        AlbergueDao albergueDao = new AlbergueDao();
+        int idAlbergue= (Integer) request.getSession().getAttribute("idAlbergue");
+        Albergue albergue = albergueDao.obtenerAlberguePorID(idAlbergue);
+        request.setAttribute("albergue", albergue);
         switch (action) {
             case "lista":
-                ArrayList<SolicitudTemporal> list = albergueDaoRevenge.listaDeHogaresTemporales();
+                ArrayList<SolicitudTemporal> list = albergueDaoRevenge.listaDeHogaresTemporales(albergue.getDistrito().getZona().getZonaID());
                 request.setAttribute("lista", list);
                 RequestDispatcher rd = request.getRequestDispatcher("albergue/contactarTemporal.jsp");
                 rd.forward(request, response);
@@ -93,7 +97,7 @@ public class ContactarTemporalAlbergueServlet extends HttpServlet {
         boolean posee = request.getParameter("posee").equals("si");
         String discapacidad = request.getParameter("discapacidad");
         discapacidad = discapacidad==null ? "No tiene" : discapacidad;
-        int albergueID = 6;/*Integer.parseInt(request.getParameter("idAlbergue"));*/
+        int albergueID = (Integer) request.getSession().getAttribute("idAlbergue");/*Integer.parseInt(request.getParameter("idAlbergue"));*/
         MascotasTemporal mascotasTemporal = new MascotasTemporal();
         mascotasTemporal.setNombreMascotaTemporal(nombreMascota);
         mascotasTemporal.setEspecie(especie);

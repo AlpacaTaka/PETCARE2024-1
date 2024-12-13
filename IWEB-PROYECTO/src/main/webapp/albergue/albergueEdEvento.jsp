@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="albergue" type="com.example.iwebproyecto.beans.Albergue" scope="request"/>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,7 +28,7 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Patitas Felices</div>
+                <div class="welcome-text">Hola, <%=albergue.getNombreAlbergue()%></div>
             </div>
             <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
@@ -155,8 +156,8 @@
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
-                                    <label for="motivo"> Motivo de la realización del evento</label>
-                                    <textarea name="" id="motivo" class="form-control" maxlength="300" placeholder="Ingrese su motivo (max. 300 caracteres)"></textarea>
+                                    <label for="motivo1"> Motivo de la realización del evento</label>
+                                    <textarea name="" id="motivo1" class="form-control" maxlength="300" placeholder="Ingrese su motivo (max. 300 caracteres)"></textarea>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">

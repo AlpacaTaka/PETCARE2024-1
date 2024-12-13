@@ -3,6 +3,7 @@
     int albergueID = 6; /*(int) request.getAttribute("idAlbergue");*/
 %>
 <jsp:useBean id="denuncia" scope="request" type="com.example.iwebproyecto.beans.DenunciaMaltrato"/>
+<jsp:useBean id="albergue" scope="request" type="com.example.iwebproyecto.beans.Albergue"/>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -113,11 +114,11 @@
             <!--Boton de regreso a la página principal-->
             <div class="col" id="contenido-nofooter">
                 <div class="container md-8 d-flex justify-content-between g-2" style="width: 90%;max-width: 800px; margin-bottom: 20px; padding: 0;">
-                    <button type="button"  class="btn btn-personal2" onclick="location.href='<%=request.getContextPath()%>/DenunciasDeMaltratog'">  Regresar   </button>
+                    <button type="button"  class="btn btn-personal2" onclick="location.href='<%=request.getContextPath()%>/DenunciasDeMaltrato'">  Regresar   </button>
 
                 </div>
                 <div class="container md-12" style="width: 90%;max-width: 800px; background-color: #fca6519f; border-radius: 30px; margin-bottom: 20px; padding: 10px 20px;">
-                    <h1 style="margin-top: 10px; color: #4d0e0e; font-style: italic" class="text-center" >Pochita</h1>
+                    <h1 style="margin-top: 10px; color: #4d0e0e; font-style: italic" class="text-center" ><%=denuncia.getFechaFormulario()%></h1>
 
                     <hr>
                     <div class="row">
