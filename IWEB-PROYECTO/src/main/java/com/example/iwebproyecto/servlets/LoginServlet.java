@@ -32,7 +32,11 @@ public class LoginServlet extends HttpServlet {
         int id;
         if(dao.authenticateAdmin(email, password) !=0){
 
-            //completa el httpSession de Admin y el redireccionamiento
+            rol="Administrador";
+            id=dao.authenticateAdmin(email, password);
+            HttpSession sessionLogin = request.getSession();
+            sessionLogin.setAttribute("idAdmin", id);
+            response.sendRedirect(request.getContextPath()+"/admincuentas");
 
         }else if(dao.authenticateAlbergue(email, password) !=0){
             rol="Albergue";/*PataFeliz*/

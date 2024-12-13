@@ -20,7 +20,7 @@ public class ServletCrearCoordinador extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "create" : request.getParameter("action");
         CrearCoordinadorDao zona = new CrearCoordinadorDao();
-        int idAdmin = 4;
+        int idAdmin= (Integer) request.getSession().getAttribute("idAdmin");
         switch (action) {
             case "create":
                 request.setAttribute("idAdmin", idAdmin);

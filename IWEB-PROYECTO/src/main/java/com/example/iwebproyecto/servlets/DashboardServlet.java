@@ -25,6 +25,7 @@ public class DashboardServlet extends HttpServlet {
             throws ServletException, IOException {
         // Establece el tipo de contenido de la respuesta
         response.setContentType("text/html");
+        int idAdmin= (Integer) request.getSession().getAttribute("idAdmin");
         DashboardDao dto = new DashboardDao();
         DashboardDTO dashboardDTO = dto.obtenerDatosDashboard();
         request.setAttribute("dashboardDTO", dashboardDTO);

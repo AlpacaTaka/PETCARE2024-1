@@ -17,7 +17,7 @@ public class ServletLugarHabilitado extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "create" : request.getParameter("action");
         LugarHabilitadoDao dao = new LugarHabilitadoDao();
-        int idAdmin = 4;
+        int idAdmin= (Integer) request.getSession().getAttribute("idAdmin");
         switch (action) {
             case "create":
                 request.setAttribute("idAdmin", idAdmin);

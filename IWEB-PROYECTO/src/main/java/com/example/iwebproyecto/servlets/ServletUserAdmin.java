@@ -21,7 +21,7 @@ public class ServletUserAdmin extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "create" : request.getParameter("action");
         AdminCuentasDao admin = new AdminCuentasDao();
-        int idAdmin = 4;
+        int idAdmin= (Integer) request.getSession().getAttribute("idAdmin");
         switch (action) {
             case "edit":
                 String id = request.getParameter("id");

@@ -23,7 +23,7 @@ public class ServletAdminCuentas extends HttpServlet {
 
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
         AdminCuentasDao dao = new AdminCuentasDao();
-        int idAlbergue = 6;
+        int idAdmin= (Integer) request.getSession().getAttribute("idAdmin");
         switch (action) {
             case "lista":
                 ArrayList<Albergue> listaAlb = dao.listarAlbergues();
