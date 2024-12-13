@@ -145,7 +145,7 @@
                                             <div style="display: flex; justify-content: center;">
                                                 <a href="<%=request.getContextPath()%>/UserAdmin?action=view&id=<%=usuario.getUsuarioID()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
                                                 <a href="<%=request.getContextPath()%>/UserAdmin?action=edit&id=<%=usuario.getUsuarioID()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Eliminar" onclick="abrirPopupUsuario()"><span class="fi fi-rr-trash"></span></button>
+                                                <button onclick="abrirPopupUsuario('<%=request.getContextPath()%>/admincuentas?action=deleteUser&id=<%=usuario.getUsuarioID()%>')" type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Eliminar"><span class="fi fi-rr-trash"></span></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -183,7 +183,7 @@
                                             <div style="display: flex; justify-content: center;">
                                                 <a href="<%=request.getContextPath()%>/AlbAdmin?action=view&id=<%=albergue.getAlbergueID()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
                                                 <a href="<%=request.getContextPath()%>/AlbAdmin?action=edit&id=<%=albergue.getAlbergueID()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Eliminar" onclick="abrirPopupAlbergue()"><span class="fi fi-rr-trash"></span></button>
+                                                <button onclick="abrirPopupAlbergue('<%=request.getContextPath()%>/admincuentas?action=deleteAlb&id=<%=albergue.getAlbergueID()%>')" type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Eliminar"><span class="fi fi-rr-trash"></span></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -225,7 +225,7 @@
                                             <div style="display: flex; justify-content: center;">
                                                 <a href="<%=request.getContextPath()%>/CrearCoordinador?action=view&id=<%=coordinador.getCoordinadorID()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
                                                 <a href="<%=request.getContextPath()%>/CrearCoordinador?action=edit&id=<%=coordinador.getCoordinadorID()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Eliminar" onclick="abrirPopupCoordinador()"><span class="fi fi-rr-trash"></span></button>
+                                                <button onclick="abrirPopupCoordinador('<%=request.getContextPath()%>/admincuentas?action=deleteCoord&id=<%=coordinador.getCoordinadorID()%>')" type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Eliminar"><span class="fi fi-rr-trash"></span></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -274,7 +274,7 @@
                                                 <div style="display: flex; justify-content: center;">
                                                     <a href="<%=request.getContextPath()%>/LugarHabilitado?action=view&id=<%=lugar.getLugarID()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
                                                     <a href="<%=request.getContextPath()%>/LugarHabilitado?action=edit&id=<%=lugar.getLugarID()%>"><button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
-                                                    <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Eliminar" onclick="abrirPopupLugar()"><span class="fi fi-rr-trash"></span></button>
+                                                    <button onclick="abrirPopupLugar('<%=request.getContextPath()%>/admincuentas?action=deleteLugar&id=<%=lugar.getLugarID()%>')" type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Eliminar"><span class="fi fi-rr-trash"></span></button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -466,76 +466,80 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
     // Función para abrir el popup
-    function abrirPopupLugar() {
+    function abrirPopupLugar(redireccionamiento) {
         document.getElementById('popupLugar').style.display = 'block';
+        document.getElementById('popupLugar').href = redireccionamiento;
     }
-
     // Función para cerrar el popup
     function cerrarPopupLugar() {
         document.getElementById('popupLugar').style.display = 'none';
+        document.getElementById('popupLugar').href = null;
     }
 
     // Función de confirmación (puedes agregar la lógica de eliminación aquí)
     function confirmarAccionLugar() {
-        alert('Lugar eliminado correctamente.');
+        alert('Lugar eliminado correctamente.')
+        window.location.href = document.getElementById('popupLugar').href;
         cerrarPopupLugar();
     }
 </script>
-
 <script>
     // Función para abrir el popup
-    function abrirPopupUsuario() {
+    function abrirPopupUsuario(redireccionamiento) {
         document.getElementById('popupUsuario').style.display = 'block';
+        document.getElementById('popupUsuario').href = redireccionamiento;
     }
-
     // Función para cerrar el popup
     function cerrarPopupUsuario() {
         document.getElementById('popupUsuario').style.display = 'none';
+        document.getElementById('popupUsuario').href = null;
     }
 
     // Función de confirmación (puedes agregar la lógica de eliminación aquí)
     function confirmarAccionUsuario() {
-        alert('Usuario eliminado correctamente.');
+        alert('Usuario eliminado correctamente.')
+        window.location.href = document.getElementById('popupUsuario').href;
         cerrarPopupUsuario();
     }
 </script>
-
 <script>
     // Función para abrir el popup
-    function abrirPopupAlbergue() {
+    function abrirPopupAlbergue(redireccionamiento) {
         document.getElementById('popupAlbergue').style.display = 'block';
+        document.getElementById('popupAlbergue').href = redireccionamiento;
     }
-
     // Función para cerrar el popup
     function cerrarPopupAlbergue() {
         document.getElementById('popupAlbergue').style.display = 'none';
+        document.getElementById('popupAlbergue').href = null;
     }
 
     // Función de confirmación (puedes agregar la lógica de eliminación aquí)
     function confirmarAccionAlbergue() {
-        alert('Albergue eliminado correctamente.');
+        alert('Albergue eliminado correctamente.')
+        window.location.href = document.getElementById('popupAlbergue').href;
         cerrarPopupAlbergue();
     }
 </script>
-
 <script>
     // Función para abrir el popup
-    function abrirPopupCoordinador() {
+    function abrirPopupCoordinador(redireccionamiento) {
         document.getElementById('popupCoordinador').style.display = 'block';
+        document.getElementById('popupCoordinador').href = redireccionamiento;
     }
-
     // Función para cerrar el popup
     function cerrarPopupCoordinador() {
         document.getElementById('popupCoordinador').style.display = 'none';
+        document.getElementById('popupCoordinador').href = null;
     }
 
     // Función de confirmación (puedes agregar la lógica de eliminación aquí)
     function confirmarAccionCoordinador() {
-        alert('Coordinador eliminado correctamente.');
+        alert('Coordinador eliminado correctamente.')
+        window.location.href = document.getElementById('popupCoordinador').href;
         cerrarPopupCoordinador();
     }
 </script>
-
 
 </body>
 </html>

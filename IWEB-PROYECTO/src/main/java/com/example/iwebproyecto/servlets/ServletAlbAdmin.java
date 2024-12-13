@@ -36,7 +36,6 @@ public class ServletAlbAdmin extends HttpServlet {
                 request.setAttribute("idAdmin", idAdmin);
                 request.getRequestDispatcher("Administrador/verAlbergue.jsp").forward(request,response);
                 break;
-
         }
 
     }

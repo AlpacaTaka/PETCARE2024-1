@@ -55,8 +55,8 @@ public class ServletCrearCoordinador extends HttpServlet {
         int zona = Integer.parseInt(request.getParameter("zonaID"));
         String fecha = request.getParameter("fechaNacimiento");
         int fotoID = 30;
-        boolean flag = true;
-        String estado = "inactivo";
+        boolean flag = false;
+        String estado = "activo";
         CoordinadorZona coordinadorZona = new CoordinadorZona();
         Foto foto = new Foto();
         foto.setFotoID(fotoID);

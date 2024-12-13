@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class AdminCuentasDao extends BaseDao {
     public ArrayList<Albergue> listarAlbergues() {
         ArrayList<Albergue> listaAlbergues = new ArrayList<>();
-        String sql = "SELECT * FROM albergue";
+        String sql = "SELECT * FROM albergue where eliminado = 0";
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
@@ -26,9 +26,21 @@ public class AdminCuentasDao extends BaseDao {
         }
         return listaAlbergues;
     }
+
+    public void borrarAlbergue(int idAlbergue){
+        String sql = "UPDATE albergue set eliminado = 1 where albergueID = ?";
+        try (Connection conn = this.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1,idAlbergue);
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<Usuario> listarUsuarios() {
         ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-        String sql = "SELECT * FROM usuario";
+        String sql = "SELECT * FROM usuario where eliminado = 0";
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
@@ -58,9 +70,20 @@ public class AdminCuentasDao extends BaseDao {
         return listaUsuarios;
     }
 
+    public void borrarUsuario(int idUsuario){
+        String sql = "UPDATE usuario set eliminado = 1 where usuarioID = ?";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1,idUsuario);
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<CoordinadorZona> listarCoordinadores() {
         ArrayList<CoordinadorZona> listaCoordinador = new ArrayList<>();
-        String sql = "SELECT * FROM coordinadorzona";
+        String sql = "SELECT * FROM coordinadorzona where eliminado = 0";
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
@@ -91,9 +114,20 @@ public class AdminCuentasDao extends BaseDao {
         return listaCoordinador;
     }
 
+    public void borrarCoordinador(int idCoordinador){
+        String sql = "UPDATE coordinadorzona set eliminado = 1 where coordinadorID = ?";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1,idCoordinador);
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<LugarEvento> listarLugaresHabilitados() {
         ArrayList<LugarEvento> listaLugares = new ArrayList<>();
-        String sql = "SELECT * FROM lugarevento";
+        String sql = "SELECT * FROM lugarevento where eliminado = 0";
 
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
@@ -120,6 +154,17 @@ public class AdminCuentasDao extends BaseDao {
             e.printStackTrace();
         }
         return listaLugares;
+    }
+
+    public void borrarLugarHabilitado(int idLugar){
+        String sql = "UPDATE lugarevento set eliminado = 1 where lugarID = ?";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1,idLugar);
+            pstmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public Distrito obtenerDistritoPorID(int id) {

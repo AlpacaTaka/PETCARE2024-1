@@ -37,6 +37,26 @@ public class ServletAdminCuentas extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("Administrador/administracionCuentas.jsp");
                 rd.forward(request, response);
                 break;
+            case "deleteAlb":
+                int idd = Integer.parseInt(request.getParameter("id"));
+                dao.borrarAlbergue(idd);
+                response.sendRedirect(request.getContextPath() + "/admincuentas");
+                break;
+            case "deleteUser":
+                int idd2 = Integer.parseInt(request.getParameter("id"));
+                dao.borrarUsuario(idd2);
+                response.sendRedirect(request.getContextPath() + "/admincuentas");
+                break;
+            case "deleteCoord":
+                int idd3 = Integer.parseInt(request.getParameter("id"));
+                dao.borrarCoordinador(idd3);
+                response.sendRedirect(request.getContextPath() + "/admincuentas");
+                break;
+            case "deleteLugar":
+                int idd4 = Integer.parseInt(request.getParameter("id"));
+                dao.borrarLugarHabilitado(idd4);
+                response.sendRedirect(request.getContextPath() + "/admincuentas");
+                break;
         }
 
     }
