@@ -4,14 +4,18 @@
 <%@ page import="com.example.iwebproyecto.beans.Distrito" %>
 <%@ page import="com.example.iwebproyecto.daos.AlbergueDaoRevenge" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%
+<jsp:useBean id="albergue" scope="request" type="com.example.iwebproyecto.beans.Albergue"/>
+<%--
     int albergueID = (int) request.getAttribute("idAlbergue");
     AlbergueDao albergueDao = new AlbergueDao();
     AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
     Albergue albergue = albergueDao.obtenerAlberguePorID(albergueID);
     Distrito distrito = albergueDaoRevenge.obtenerDistritoPorID(albergueID);
+    Distrito distrito = albergueDaoRevenge.obtenerDistritoPorID(albergue.getAlbergueID());
+--%>
+<%
+    AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
 %>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -40,7 +44,7 @@
                 <div>Menu</div>
                 <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
             </div>
-            <div class="welcome-text">Hola, Patitas Felices</div>
+            <div class="welcome-text">Hola, <%=albergue.getNombreAlbergue()%>></div>
         </div>
         <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
     </header>
@@ -86,8 +90,8 @@
                 </div>
                 <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
                     <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/DonacionSuministros?action=create">
-                        <input type="hidden" name="id" value="<%=albergueID%>">
-                        <input type="hidden" name="distritoID" value="<%=distrito.getDistritoID()%>">
+                        <input type="hidden" name="id" value="<%=albergue.getAlbergueID()%>">
+                        <input type="hidden" name="distritoID" value="<%=albergue.getDistrito().getDistritoID()%>">
                         <h1 style="margin-top: 10px;" class="text-center">Creación de Avisos de Donación</h1>
                         <div class="row justify-content-center p-1">
 
@@ -134,7 +138,7 @@
                         <div class="row justify-content-center p-1">
                             <div class="col-md-4 p-1" >
                                 <label for="distritoNombre">Distrito</label>
-                                <input name="nombreDistrito" value="<%=distrito.getNombreDistrito()%>" type="text" class="form-control" id="distritoNombre" readonly>
+                                <input name="nombreDistrito" value="<%=albergue.getDistrito().getNombreDistrito()%>" type="text" class="form-control" id="distritoNombre" readonly>
                             <%--select-- class="form-select" name="idDistrito" id="distrito" required>
                                     <option value="">Selecciona un distrito</option>
                                     <optgroup label="Lima Norte">

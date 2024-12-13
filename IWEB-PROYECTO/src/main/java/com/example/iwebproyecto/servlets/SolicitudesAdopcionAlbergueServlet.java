@@ -1,6 +1,7 @@
 package com.example.iwebproyecto.servlets;
 
 import com.example.iwebproyecto.beans.*;
+import com.example.iwebproyecto.daos.AlbergueDao;
 import com.example.iwebproyecto.daos.AlbergueDaoRevenge;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -23,7 +24,10 @@ public class SolicitudesAdopcionAlbergueServlet extends HttpServlet {
 
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
-        int idAlbergue= 6;
+        AlbergueDao albergueDao = new AlbergueDao();
+        int idAlbergue= (Integer) request.getSession().getAttribute("idAlbergue");
+        Albergue albergue = albergueDao.obtenerAlberguePorID(idAlbergue);
+        request.setAttribute("albergue", albergue);
         switch (action) {
             case "lista":
                 ArrayList<UsuarioAdopcion> list = albergueDaoRevenge.listaUsuarioAdopcion(idAlbergue);
@@ -108,7 +112,8 @@ public class SolicitudesAdopcionAlbergueServlet extends HttpServlet {
         int idFoto = 30;/*request.getParameter("rutaFoto");*/
         boolean seEncuentraTemporal= Boolean.parseBoolean(request.getParameter("hogarTemp"));
         String condicionesAdopcion = request.getParameter("condiciones");
-        int albergueID = 6;/*Integer.parseInt(request.getParameter("idAlbergue"));*/
+        //int albergueID = 6;/*Integer.parseInt(request.getParameter("idAlbergue"));*/
+        int albergueID = (Integer) request.getSession().getAttribute("idAlbergue");
         boolean eliminado = false;
         MascotasAdopcion mascota = new MascotasAdopcion();
         mascota.setNombreMascota(nombreMascota);

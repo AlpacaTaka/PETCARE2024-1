@@ -1,6 +1,7 @@
 <%@ page import="com.example.iwebproyecto.beans.UsuarioAdopcion" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:useBean id="lista" scope="request" type="java.util.ArrayList<com.example.iwebproyecto.beans.UsuarioAdopcion>"/>
+<jsp:useBean id="albergue" scope="request" type="com.example.iwebproyecto.beans.Albergue"/>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -44,7 +45,7 @@
                         <div>Menu</div>
                         <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                     </div>
-                    <div class="welcome-text">Hola, Patitas Felices</div>
+                    <div class="welcome-text">Hola, <%=albergue.getNombreAlbergue()%></div>
                 </div>
                 <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
             </header>

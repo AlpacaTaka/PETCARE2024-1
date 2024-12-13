@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:useBean id="donacionSuministros" scope="request" type="com.example.iwebproyecto.beans.DonacionSuministros"/>
+<jsp:useBean id="albergue" type="com.example.iwebproyecto.beans.Albergue" scope="request"/>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,7 +29,7 @@
                 <div>Menu</div>
                 <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
             </div>
-            <div class="welcome-text">Hola, Patitas Felices</div>
+            <div class="welcome-text">Hola, <%=albergue.getNombreAlbergue()%></div>
         </div>
         <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
     </header>

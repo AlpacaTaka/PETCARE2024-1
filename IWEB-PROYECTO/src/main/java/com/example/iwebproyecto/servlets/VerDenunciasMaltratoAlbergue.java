@@ -25,10 +25,12 @@ public class VerDenunciasMaltratoAlbergue extends HttpServlet {
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
         AlbergueDao albergueDao = new AlbergueDao();
-        int idAlbergue= 6;
+        int idAlbergue= (Integer) request.getSession().getAttribute("idAlbergue");
+        Albergue albergue = albergueDao.obtenerAlberguePorID(idAlbergue);
+        request.setAttribute("albergue", albergue);
         switch (action) {
             case "lista":
-                Albergue albergue = albergueDao.obtenerAlberguePorID(idAlbergue);
+
                 ArrayList<DenunciaMaltrato> list = albergueDaoRevenge.listaDenunciasMaltrato(albergue.getDistrito().getZona().getZonaID());
                 request.setAttribute("lista", list);
                 RequestDispatcher rd = request.getRequestDispatcher("albergue/verDenunciasMaltrato.jsp");

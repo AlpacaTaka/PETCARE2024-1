@@ -248,12 +248,11 @@ public class AlbergueDaoRevenge extends BaseDao {
         return mascotasAdopcion;
     }
 
-    public ArrayList<MascotasAdopcion> listarMascotasAdopcion() {
+    public ArrayList<MascotasAdopcion> listarMascotasAdopcion(int albergueID) {
         String sql = "select * from mascotasadopcion where albergueID=? and eliminado=0 order by idAdopcion desc;";
         ArrayList<MascotasAdopcion> listaMascotasAdopcion = new ArrayList<>();
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            int albergueID = 6;
             pstmt.setInt(1, albergueID);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -387,12 +386,11 @@ public class AlbergueDaoRevenge extends BaseDao {
         return donacionSuministros;
     }
 
-    public ArrayList<DonacionSuministros> listarDonacionSuministros() {
+    public ArrayList<DonacionSuministros> listarDonacionSuministros(int albergueID) {
         String sql = "select d.*,i.nombreDistrito,a.direccionDonaciones from donacionsuministros d, distrito i,albergue a where i.distritoID=d.distritoID and a.albergueID=d.albergueID and a.albergueID=? and d.eliminado=0 order by d.donacionSuministrosID desc;";
         ArrayList<DonacionSuministros> listaDonacionSuministros = new ArrayList<>();
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            int albergueID = 6;
             pstmt.setInt(1, albergueID);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -514,12 +512,13 @@ public class AlbergueDaoRevenge extends BaseDao {
         return distrito;
     }
 
-    public ArrayList<SolicitudTemporal> listaDeHogaresTemporales() {
-        String sql = "select * from solicitudtemporal where aprobadoCoordinador=1 and desactivadoAdministrador=0;";
+    public ArrayList<SolicitudTemporal> listaDeHogaresTemporales(int AlbergueZonaID) {
+        String sql = "select s.* from solicitudtemporal s,usuario u, zona z,distrito d where aprobadoCoordinador=1 and desactivadoAdministrador=0 and s.usuarioID=u.usuarioID and u.distritoID=d.distritoID and z.zonaID=d.zonaID and d.zonaID=?;";
         ArrayList<SolicitudTemporal> listaHogaresTemporales = new ArrayList<>();
         UsuarioDao usuarioDao = new UsuarioDao();
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, AlbergueZonaID);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 SolicitudTemporal solicitudTemporal = new SolicitudTemporal();
@@ -529,9 +528,9 @@ public class AlbergueDaoRevenge extends BaseDao {
                 usuario.setDistrito(distrito);
                 solicitudTemporal.setUsuario(usuario);
                 solicitudTemporal.setCelular(rs.getString(5));
-                solicitudTemporal.setTiempoTemporal(rs.getInt(16));
-                String ini = rs.getString(17);
-                String fin = rs.getString(18);
+                solicitudTemporal.setTiempoTemporal(rs.getInt(18));
+                String ini = rs.getString(19);
+                String fin = rs.getString(20);
                 LocalDate localDate = LocalDate.now();
                 boolean flag = localDate.isAfter(LocalDate.parse(ini)) && localDate.isBefore(LocalDate.parse(fin));
                 if(flag){
@@ -655,10 +654,11 @@ public class AlbergueDaoRevenge extends BaseDao {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            sql="UPDATE usuarioadopcion set aprobado=0 where idAdopcion=?;";
+            sql="UPDATE usuarioadopcion set aprobado=0 where idAdopcion=? and not usuarioAdopcionID=?;";
             try (Connection conn = this.getConnection();
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, idAdopcion);
+                pstmt.setInt(2, usuarioAdopcionID);
                 pstmt.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();

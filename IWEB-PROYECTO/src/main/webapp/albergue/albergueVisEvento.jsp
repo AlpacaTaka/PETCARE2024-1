@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:useBean id="evento" scope="request" type="com.example.iwebproyecto.beans.EventoBenefico"/>
+<jsp:useBean id="albergue" scope="request" type="com.example.iwebproyecto.beans.Albergue"/>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,9 +29,9 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Patitas Felices</div>
+                <div class="welcome-text">Hola, <%=albergue.getNombreAlbergue()%></div>
             </div>
-            <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
 
         <div class="main">
@@ -38,29 +39,29 @@
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="miPerfil.jsp" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="adoptionTable.jsp" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                    <li><a href="eventTable.jsp" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
-                    <li><a href="donationTable.jsp" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
-                    <li><a href="contactarTemporal.jsp" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
-                    <li><a href="solicitudesAdopcion.jsp" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/PortalAdopciones" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/eventos" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/DonacionSuministros" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/SolicitudesDeAdopcion" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/DenunciasDeMaltrato" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
                     <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
-                    <li id="cerrar-sesion"><a href="#micuenta" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                    <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
-                
             </div>
 
             <div id="menu" class="menu">
-                <a href="miPerfil.jsp">Mi Perfil</a>
-                <a href="adoptionTable.jsp">Portal de Adopciones</a>
-                <a href="eventTable.jsp">Mis Eventos Benéficos</a>
-                <a href="donationTable.jsp">Mis Eventos de Donación</a>
-                <a href="contactarTemporal.jsp">Hogares Temporales</a>
-                <a href="solicitudesAdopcion.jsp">Solicitudes de Adopción</a>
+                <a href="<%=request.getContextPath()%>/miPerfilAlbergue">Mi Perfil</a>
+                <a href="<%=request.getContextPath()%>/PortalAdopciones">Portal de Adopciones</a>
+                <a href="<%=request.getContextPath()%>/eventos">Mis Eventos Benéficos</a>
+                <a href="<%=request.getContextPath()%>/DonacionSuministros">Mis Eventos de Donación</a>
+                <a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue">Hogares Temporales</a>
+                <a href="<%=request.getContextPath()%>/SolicitudesDeAdopcion">Solicitudes de Adopción</a>
+                <a href="<%=request.getContextPath()%>/DenunciasDeMaltrato">Denuncias de maltrato</a>
                 <!--<a href="#">Solicitudes de Adopción</a>-->
                 <hr>
-                <a href="#">Cerrar Sesión</a>
-
+                <a href="<%=request.getContextPath()%>">Cerrar Sesión</a>
             </div>
 
 

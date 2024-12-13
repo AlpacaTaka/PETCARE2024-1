@@ -35,7 +35,11 @@ public class LoginServlet extends HttpServlet {
             //completa el httpSession de Admin y el redireccionamiento
 
         }else if(dao.authenticateAlbergue(email, password) !=0){
-
+            rol="Albergue";/*PataFeliz*/
+            id=dao.authenticateAlbergue(email, password);
+            HttpSession sessionLogin = request.getSession();
+            sessionLogin.setAttribute("idAlbergue", id);
+            response.sendRedirect(request.getContextPath()+"/PortalAdopciones");
             //completa el httpSession de Albergue y el redireccionamiento
 
         }else if(dao.authenticateCoordinador(email, password) !=0) {

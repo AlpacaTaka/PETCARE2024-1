@@ -10,6 +10,7 @@ import com.example.iwebproyecto.beans.Albergue;
 import com.example.iwebproyecto.beans.Distrito;
 import com.example.iwebproyecto.beans.Foto;
 import com.example.iwebproyecto.beans.MascotasAdopcion;
+import com.example.iwebproyecto.daos.AlbergueDao;
 import com.example.iwebproyecto.daos.AlbergueDaoRevenge;
 import com.example.iwebproyecto.daos.FotoDao;
 import jakarta.servlet.RequestDispatcher;
@@ -35,10 +36,13 @@ public class InicioAdoptionTableServlet extends HttpServlet {
 
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
-        int idAlbergue= 6;
+        AlbergueDao albergueDao = new AlbergueDao();
+        int idAlbergue= (Integer) request.getSession().getAttribute("idAlbergue");
+        Albergue albergue = albergueDao.obtenerAlberguePorID(idAlbergue);
+        request.setAttribute("albergue", albergue);
         switch (action) {
             case "lista":
-                ArrayList<MascotasAdopcion> list = albergueDaoRevenge.listarMascotasAdopcion();
+                ArrayList<MascotasAdopcion> list = albergueDaoRevenge.listarMascotasAdopcion(idAlbergue);
                 request.setAttribute("lista", list);
                 RequestDispatcher rd = request.getRequestDispatcher("albergue/adoptionTable.jsp");
                 rd.forward(request, response);
@@ -57,6 +61,7 @@ public class InicioAdoptionTableServlet extends HttpServlet {
                 }else{
                     response.sendRedirect(request.getContextPath() + "/PeliculasServlet");DetallesServlet
                 }*/
+
                 MascotasAdopcion mascotasAdopcion = albergueDaoRevenge.obtenerMascotasAdopcionPorID(Integer.parseInt(id));
                 request.setAttribute("mascota",mascotasAdopcion);
                 request.getRequestDispatcher("albergue/albergueEdAdop.jsp").forward(request,response);
@@ -119,7 +124,10 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         String descripcion = request.getParameter("breveDescripcion");
         boolean seEncuentraTemporal= Boolean.parseBoolean(request.getParameter("hogarTemp"));
         String condicionesAdopcion = request.getParameter("condiciones");
-        int albergueID = 6;
+
+        //int albergueID = 6;
+        int albergueID = (Integer) request.getSession().getAttribute("idAlbergue");
+
         boolean eliminado = false;
 
         switch (action) {

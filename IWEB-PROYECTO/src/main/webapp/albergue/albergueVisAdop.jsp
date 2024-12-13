@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%
-    int albergueID = 6; /*(int) request.getAttribute("idAlbergue");*/
-%>
+<%--int albergueID = 6; /*(int) request.getAttribute("idAlbergue");*/--%>
+<jsp:useBean id="albergue" scope="request" type="com.example.iwebproyecto.beans.Albergue"/>
 <jsp:useBean id="mascota" scope="request" type="com.example.iwebproyecto.beans.MascotasAdopcion"/>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,7 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
-    <title>Edita tu formulario de Adopción</title>
+    <title>Vista Formulario de Adopción</title>
     <style>
 
         /* Esto es solo de referencia para ver su espacio disponible - borrar*/
@@ -35,7 +34,7 @@
                 <div>Menu</div>
                 <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
             </div>
-            <div class="welcome-text">Hola, Patitas Felices</div>
+            <div class="welcome-text">Hola, <%=albergue.getNombreAlbergue()%></div>
         </div>
         <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
     </header>
@@ -78,7 +77,7 @@
                 <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
                     <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/PortalAdopciones?action=edit">
                         <input type="hidden" name="id" value="<%=mascota.getIdAdopcion()%>">
-                        <input type="hidden" name="idA" value="<%=albergueID%>">
+                        <input type="hidden" name="idA" value="<%=albergue.getAlbergueID()%>">
                         <h1 style="margin-top: 10px;" class="text-center">Edición de perfil de Mascota para Adopción</h1>
                         <div class="row justify-content-center p-1">
                             <div class="col-md-6 p-1">

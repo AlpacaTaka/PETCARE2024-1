@@ -1,7 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%
-    int albergueID = 6;
-%>
+<jsp:useBean id="albergue" scope="request" type="com.example.iwebproyecto.beans.Albergue"/>
 <%--jsp:useBean id=""/--%>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,7 +28,7 @@
                 <div>Menu</div>
                 <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
             </div>
-            <div class="welcome-text">Hola, Patitas Felices</div>
+            <div class="welcome-text">Hola, <%=albergue.getNombreAlbergue()%></div>
         </div>
         <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
     </header>
@@ -72,7 +70,7 @@
                 </div>
                 <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
                     <form id="uploadForm" style="padding:10px" method="POST" action="${pageContext.request.contextPath}/PortalAdopciones?action=create" enctype="multipart/form-data" accept-charset="UTF-8">
-                        <input type="hidden" name="id" value="<%=albergueID%>">
+                        <input type="hidden" name="id" value="<%=albergue.getAlbergueID()%>">
                         <h1 style="margin-top: 10px;" class="text-center">Creación de perfil de Mascota para Adopción</h1>
                         <div class="row justify-content-center p-1">
                             <div class="col-md-6 p-1">
