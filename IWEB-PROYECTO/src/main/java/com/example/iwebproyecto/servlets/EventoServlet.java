@@ -72,7 +72,7 @@ public class EventoServlet extends HttpServlet {
                 EventoBenefico eventoEditar = eventoDao.obtenerEventoPorID(eventoIde);
                 request.setAttribute("evento", eventoEditar);
                 request.setAttribute("lugaresDisponibles", lugaresDisponibles);
-                request.getRequestDispatcher("/albergue/albergueFormEvento.jsp").forward(request, response);
+                request.getRequestDispatcher("/albergue/albergueEdEvento.jsp").forward(request, response);
                 break;
 
             case "eliminar":

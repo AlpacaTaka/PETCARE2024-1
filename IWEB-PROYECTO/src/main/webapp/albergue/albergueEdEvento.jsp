@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="evento" scope="request" type="com.example.iwebproyecto.beans.EventoBenefico"/>
 <jsp:useBean id="albergue" type="com.example.iwebproyecto.beans.Albergue" scope="request"/>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,7 +31,7 @@
                 </div>
                 <div class="welcome-text">Hola, <%=albergue.getNombreAlbergue()%></div>
             </div>
-            <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="<%=request.getContextPath()%>/miPerfilAlbergue"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
 
         <div class="main">
@@ -38,29 +39,30 @@
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="miPerfil.jsp" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="adoptionTable.jsp" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                    <li><a href="eventTable.jsp" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
-                    <li><a href="donationTable.jsp" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
-                    <li><a href="contactarTemporal.jsp" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
-                    <li><a href="solicitudesAdopcion.jsp" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/miPerfilAlbergue" title="Mi Perfil"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/PortalAdopciones" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/eventos" title="Mis Eventos Benéficos"><i class="fi-rr-calendar-star"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/DonacionSuministros" title="Mis Eventos de Donación"><i class="fi-rr-hand-heart"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue" title="Hogares Temporales"><i class="fi-rr-home-heart"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/SolicitudesDeAdopcion" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
+                    <li><a href="<%=request.getContextPath()%>/DenunciasDeMaltrato" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
                     <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
-                    <li id="cerrar-sesion"><a href="#micuenta" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                    <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
                 </ul>
                 
             </div>
 
             <div id="menu" class="menu">
-                <a href="miPerfil.jsp">Mi Perfil</a>
-                <a href="adoptionTable.jsp">Portal de Adopciones</a>
-                <a href="eventTable.jsp">Mis Eventos Benéficos</a>
-                <a href="donationTable.jsp">Mis Eventos de Donación</a>
-                <a href="contactarTemporal.jsp">Hogares Temporales</a>
-                <a href="solicitudesAdopcion.jsp">Solicitudes de Adopción</a>
+                <a href="<%=request.getContextPath()%>/miPerfilAlbergue">Mi Perfil</a>
+                <a href="<%=request.getContextPath()%>/PortalAdopciones">Portal de Adopciones</a>
+                <a href="<%=request.getContextPath()%>/eventos">Mis Eventos Benéficos</a>
+                <a href="<%=request.getContextPath()%>/DonacionSuministros">Mis Eventos de Donación</a>
+                <a href="<%=request.getContextPath()%>/HogaresTemporalesAlbergue">Hogares Temporales</a>
+                <a href="<%=request.getContextPath()%>/SolicitudesDeAdopcion">Solicitudes de Adopción</a>
+                <a href="<%=request.getContextPath()%>/DenunciasDeMaltrato">Denuncias de maltrato</a>
                 <!--<a href="#">Solicitudes de Adopción</a>-->
                 <hr>
-                <a href="#">Cerrar Sesión</a>
-
+                <a href="<%=request.getContextPath()%>">Cerrar Sesión</a>
             </div>
 
 
@@ -77,33 +79,45 @@
                             <h1 style="margin-top: 10px;" class="text-center">Edite los detalles de su evento</h1>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
-                                    <label for="nombre_evento">Nombre del evento a realizar</label>
-                                    <input type="text" id="nombre_evento" class="form-control" placeholder="Ingrese el nombreMascota del evento" required>
+                                    <label for="nombre">Nombre del evento a realizar</label>
+                                    <input type="text" id="nombre" class="form-control" name = "nombre" value="${evento.nombre}">
                                 </div>
                                 
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
-                                    <label for="entrada">Entrada</label>
-                                    <select class="form-select" name="entrada" id="entrada" required onchange="toggleInput()">
-                                        <option value="">Selecciona una opción</option>
-                                        <option value="monetario">Monetario</option>
+                                    <label for="tipoDonacion">Entrada</label>
+                                    <select class="form-select" name="tipoDonacion" id="tipoDonacion" required onchange="toggleInput()">
+                                        <!-- Opción activa -->
+                                        <option value="${evento.tipoDonacion}" selected>${evento.tipoDonacion}</option>
+                                        <!-- Alternar según lo seleccionado -->
+                                        <%
+                                            if ("Monetario".equals(evento.getTipoDonacion())) {
+                                        %>
                                         <option value="suministros">Suministros</option>
+                                        <%
+                                        } else {
+                                        %>
+                                        <option value="monetario">Monetario</option>
+                                        <%
+                                            }
+                                        %>
                                     </select>
                                 </div>
-                                
                                 <div class="col-md-6 p-1">
                                     <label for="detalle">Detalle</label>
-                                    <input 
-                                        type="text" 
-                                        class="form-control" 
-                                        id="detalle" 
-                                        name="detalle" 
-                                        disabled 
-                                        maxlength="3" 
-                                        placeholder="Ingrese valor"
-                                        oninput="validateInput()" 
-                                    />
+                                    <% System.out.println("Tipo de Donación: " + evento.getTipoDonacion()); %>
+                                    <%  // Formatear el detalle según el tipo de donación
+                                        if ("Monetario".equals(evento.getTipoDonacion())) {
+                                    %>
+                                    <input id="detalle" name="detalleSuministro" class="form-control" type="text" value="${evento.detalleMonetario}"/>
+                                    <%
+                                    } else {
+                                    %>
+                                    <input id="detalle" name="detalle" class="form-control" type="text" value="${evento.detalleSuministro}"/>
+                                    <%
+                                        }
+                                    %>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
@@ -111,78 +125,118 @@
                                     <div class="col-md-6 p-1">
                                         <label for="distrito">Distrito</label>
                                         <select class="form-select" name="distrito" id="distrito" required>
-                                            <option value="">Selecciona un distrito</option>
+                                            <option value="${evento.distrito.distritoID}">${evento.distrito.nombreDistrito}</option>
                                             <optgroup label="Lima Norte">
-                                                <option value="ancon">Ancon</option>
-                                                <option value="santa_rosa">Santa Rosa</option>
-                                                <option value="carabayllo">Carabayllo</option>
-                                                <option value="puente_piedra">Puente Piedra</option>
+                                                <option value="1">Ancon</option>
+                                                <option value="2">Santa Rosa</option>
+                                                <option value="3">Carabayllo</option>
+                                                <option value="4">Puente Piedra</option>
+                                                <option value="5">Comas</option>
+                                                <option value="6">Los Olivos</option>
+                                                <option value="7">San Martín de Porres</option>
+                                                <option value="8">Independencia</option>
+                                            </optgroup>
+                                            <optgroup label="Lima Sur">
+                                                <option value="9">San Juan de Miraflores</option>
+                                                <option value="10">Villa María del Triunfo</option>
+                                                <option value="11">Villa El Salvador</option>
+                                                <option value="12">Pachacamac</option>
+                                                <option value="13">Lurin</option>
+                                                <option value="14">Punta Hermosa</option>
+                                                <option value="15">Punta Negra</option>
+                                                <option value="16">San Bartolo</option>
+                                                <option value="17">Santa María del Mar</option>
+                                                <option value="18">Pucusana</option>
+                                            </optgroup>
+                                            <optgroup label="Lima Este">
+                                                <option value="19">San Juan de Lurigancho</option>
+                                                <option value="20">Lurigancho/Chosica</option>
+                                                <option value="21">Ate</option>
+                                                <option value="22">El Agustino</option>
+                                                <option value="23">Santa Anita</option>
+                                                <option value="24">La Molina</option>
+                                                <option value="25">Cieneguilla</option>
+                                            </optgroup>
+                                            <optgroup label="Lima Oeste">
+                                                <option value="26">Rimac</option>
+                                                <option value="27">Cercado de Lima</option>
+                                                <option value="28">Breña</option>
+                                                <option value="29">Pueblo Libre</option>
+                                                <option value="30">Magdalena</option>
+                                                <option value="31">Jesus María</option>
+                                                <option value="32">La Victoria</option>
+                                                <option value="33">Lince</option>
+                                                <option value="34">San Isidro</option>
+                                                <option value="35">San Miguel</option>
+                                                <option value="36">Surquillo</option>
+                                                <option value="37">San Borja</option>
+                                                <option value="38">Santiago de Surco</option>
+                                                <option value="39">Barranco</option>
+                                                <option value="40">Chorrillos</option>
+                                                <option value="41">San Luis</option>
+                                                <option value="42">Miraflores</option>
                                             </optgroup>
                                         </select>
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <label for="fecha_evento">Fecha del evento</label>
-                                        <input type="date" class="form-control" id="fecha_evento" required>
+                                        <label for="fechaEvento">Fecha del evento</label>
+                                        <input type="date" class="form-control" id="fechaEvento" value ="${evento.fechaEvento}">
                                     </div>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-4 p-1">
                                     <label for="aforo">Aforo máximo del evento</label>
-                                    <input type="number" class="form-control" id="aforo" placeholder="Escoja un local" required readonly>
+                                    <input type="number" class="form-control" id="aforo" value="${evento.lugar.aforoMax}" readonly disabled>
                                 </div>
                                 <div class="col-md-8 p-1">
-                                    <label for="locales">Locales disponibles</label>
-                                    <select class="form-select" name="locales" id="locales" required>
-                                        <option value="">Seleccione un local</option>
+                                    <label for="lugar">Locales disponibles</label>
+                                    <select class="form-select" name="lugar" id="lugar">
+                                        <option value="lugar">${evento.lugar.nombreLugar}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
                                     <label for="Direccion">Dirección del evento</label>
-                                    <input type="text" class="form-control" placeholder="Escoja un local" maxlength="100" id="Direccion" name="Direccion" readonly>
+                                    <input type="text" class="form-control" value="${evento.lugar.direccionLugar}" maxlength="100" id="Direccion" name="Direccion" readonly disabled>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
-                                    <label for="inicio">Hora Inicio</label>
-                                    <input type="time" class="form-control" id="inicio" placeholder="Ingrese la hora de inicio" required onchange="validarHoras()">
+                                    <label for="horaInicio">Hora Inicio</label>
+                                    <input type="time" class="form-control" id="horaInicio" value="${evento.horaInicio}" >
                                 </div>
                                 <div class="col-md-6 p-1">
-                                    <label for="fin">Hora Fin</label>
-                                    <input type="time" class="form-control" id="fin" placeholder="Ingrese la hora de fin" required onchange="validarHoras()">
-                                </div>
-                            </div>
-                            <div class="row justify-content-center p-1">
-                                <div class="col-md-12 p-1">
-                                    <label for="motivo1"> Motivo de la realización del evento</label>
-                                    <textarea name="" id="motivo1" class="form-control" maxlength="300" placeholder="Ingrese su motivo (max. 300 caracteres)"></textarea>
+                                    <label for="horaFin">Hora Fin</label>
+                                    <input type="time" class="form-control" id="horaFin" value="${evento.horaFin}" >
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
-                                    <label for="motivo"> Descripción de su evento</label>
-                                    <textarea name="" id="motivo" class="form-control" maxlength="1000" placeholder="Ingrese su descripción (max. 1000 caracteres)"></textarea>
+                                    <label for="razon"> Motivo de la realización del evento</label>
+                                    <textarea name="" id="razon" class="form-control" maxlength="300" value="${evento.razonEvento}"></textarea>
                                 </div>
                             </div>
                             <div class="row justify-content-center p-1">
-                                <div class="col-md-6 p-1">
-                                    <label for="invitado">Invitados al evento (opcional)</label>
-                                    <input type="text" id="invitado" class="form-control" placeholder="Ingrese el primer invitado">
+                                <div class="col-md-12 p-1">
+                                    <label for="descripcion"> Descripción de su evento</label>
+                                    <textarea name="" id="descripcion" class="form-control" maxlength="1000" value="${evento.descripcionEvento}"></textarea>
                                 </div>
-                                <div class="col-md-6 p-1">
-                                    <label for="invitado2"></label>
-                                    <input type="text" id="invitado2" class="form-control" placeholder="Ingrese el segundo invitado">
+                            </div>
+                            <div class="row justify-content-center p-1">
+                                <div class="col-md-12 p-1">
+                                    <label for="invitados">Invitados al evento (opcional)</label>
+                                    <input type="text" id="invitados" class="form-control" value="${evento.invitados}"  >
                                 </div>
-                            </div> 
+                            </div>
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1 justify-content-center">
                                     <label for="formFile" class="form-label">Subir un flyer del evento (PNG)</label>
-                                    <input class="form-control" type="file" id="formFile" accept=".png" required>
+                                    <input class="form-control" type="text" id="formFile" accept=".png" value="${evento.foto.rutaFoto}" disabled>
                                 </div>
                                 <div id="fileError" class="text-danger mt-2" style="display: none;">El archivo debe ser una imagen PNG.</div>
-                            </div> 
+                            </div>
 
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1 d-flex justify-content-center">
@@ -356,28 +410,36 @@
 </script>
 <script>
     function toggleInput() {
-        const select = document.getElementById('entrada');
-        const input = document.getElementById('detalle');
+        const select = document.getElementById('tipoDonacion'); // El menú desplegable
+        const input = document.getElementById('detalle'); // El campo de detalle
 
-        input.value = ''; // Resetea el valor del input
-        input.disabled = false; // Habilita el input
+        input.value = ''; // Limpia el valor anterior
+        input.disabled = false; // Habilita el campo para que sea editable
 
         if (select.value === 'monetario') {
-            input.type = 'text'; // Usamos 'text' para manejar longitud
-            input.placeholder = 'Ingrese un número (máx. 3 dígitos)';
+            // Si selecciona "monetario"
+            input.type = 'text'; // Caja de texto para el monto
+            input.placeholder = 'Ingrese un monto (máx. 3 dígitos)';
+
+            // Validación: Permitir solo números y limitar a 3 dígitos
             input.oninput = function () {
-                // Permitir solo números y limitar a 3 caracteres
                 this.value = this.value.replace(/[^0-9]/g, '').slice(0, 3);
             };
+
         } else if (select.value === 'suministros') {
-            input.type = 'text';
-            input.placeholder = 'Ingrese solo letras (máx. 60 caracteres)';
+            // Si selecciona "suministros"
+            input.type = 'text'; // Caja de texto para los detalles
+            input.placeholder = 'Ingrese un detalle (máx. 60 caracteres)';
+
+            // Validación: Permitir solo letras, espacios y limitar a 60 caracteres
             input.oninput = function () {
-                // Permitir solo letras y espacios, y limitar a 60 caracteres
                 this.value = this.value.replace(/[^a-zA-Z\s]/g, '').slice(0, 60);
             };
+
         } else {
-            input.disabled = true; // Desactiva el input si no hay opción válida
+            // Si no hay selección válida, desactivar el campo (seguro para errores)
+            input.disabled = true;
+            input.placeholder = 'Seleccione un tipo de donación';
         }
     }
 </script>
