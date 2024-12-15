@@ -213,5 +213,47 @@ public class MascotasDao extends BaseDao {
         return publicacion;
     }
 
+    public boolean insertarUsuarioAdopcion(UsuarioAdopcion usuarioAdopcion) {
+        String sql = "INSERT INTO usuarioadopcion (usuarioID, idAdopcion) VALUES (?, ?)";
+
+        try (Connection conn = this.getConnection(); // Heredando la conexión
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Configuración de los parámetros
+            stmt.setInt(1, usuarioAdopcion.getUsuario().getUsuarioID()); // Usuario ID
+            stmt.setInt(2, usuarioAdopcion.getMascotasAdopcion().getIdAdopcion()); // Adopción ID - MascotaAdopcion ID
+
+
+            // Ejecutar el SQL
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0; // Retorna true si al menos una fila fue insertada
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // En caso de error, retorna false
+        }
+    }
+
+    public boolean verificarInscripcion(int usuarioID, int idMascotaAdopcion) {
+        String sql = "SELECT COUNT(*) FROM usuarioadopcion WHERE usuarioID = ? AND idAdopcion = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, usuarioID);
+            stmt.setInt(2, idMascotaAdopcion);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0; // Si el conteo es mayor que 0, ya está inscrito
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false; // Por defecto, retorna falso si hay un error
+    }
+
+
+
 
 }

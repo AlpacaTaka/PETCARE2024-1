@@ -1,5 +1,7 @@
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="mascota" class="com.example.iwebproyecto.beans.MascotasAdopcion" scope="request" />
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -80,31 +82,47 @@
                     </div>
                     <div class="container md-8" style="width: 85%; max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px; display: flex; justify-content: center; align-items: center;">
                         <div class="card-body" style="width: 100%; text-align: center; padding: 10px 45px;">
-                            <h2 class="card-title" style="margin-top: 10px;">Logan</h2>
+                            <h2 class="card-title" style="margin-top: 10px;"><%=mascota.getNombreMascota()%></h2>
                             <div style="display: flex; justify-content: center; margin-top: 10px; ">
-                                <img src="/common/img/perdidos/perdido3.jpg" class="card-img-eve" alt="Imagen" style="width: 100%; max-width: 60%; height: auto; border-radius: 15px;">
+                                <img src="${pageContext.request.contextPath}/<%=mascota.getFoto().getRutaFoto()%>" class="card-img-eve" alt="Imagen" style="width: 100%; max-width: 60%; height: auto; border-radius: 15px;"
+
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div class="placeholder bg-secondary text-white text-center"
+                                     style="width: 100%; max-width: 60%; height: auto; padding: 20px; border-radius: 15px; display: none;">
+                                    Imagen no disponible
+                                </div>
                             </div>
                             <p class="card-text" style="text-align: left; margin-top: 10px;"><strong>Raza:</strong> </p>
-                            <p class="card-text" style="text-align: center;">Golden Retriever</p>
+                            <p class="card-text" style="text-align: center;"><%=mascota.getRaza()%></p>
                             <p class="card-text" style="text-align: left;"><strong>Lugar donde se encontro:</strong> </p>
-                            <p class="card-text" style="text-align: center;">Puente Azul -Santa Anita</p>
+                            <p class="card-text" style="text-align: center;"><%=mascota.getDireccionHallazgo()%> - <%=mascota.getDistrito().getNombreDistrito()%></p>
                             <p class="card-text" style="text-align: left;"><strong>Descripción:</strong> </p>
-                            <p class="card-text" style="text-align: center;">Perro mediano, cuenta con todas sus vacunas, color de pelaje caramelo y ojos negros</p>
+                            <p class="card-text" style="text-align: center;"><%=mascota.getDescripcionGeneral()%></p>
                             <p class="card-text" style="text-align: left;"><strong>Edad aproximada:</strong> </p>
-                            <p class="card-text" style="text-align: center;">4 años</p>
+                            <p class="card-text" style="text-align: center;"><%=mascota.getEdadAprox()%> año(s)</p>
                             <p class="card-text" style="text-align: left;"><strong>Género:</strong> </p>
-                            <p class="card-text" style="text-align: center;">Macho</p>
+                            <p class="card-text" style="text-align: center;"><%=mascota.getSexo()%> </p>
                             <p class="card-text" style="text-align: left;"><strong>¿Se encuentra en un hogar temporal?:</strong> </p>
-                            <p class="card-text" style="text-align: center;">No</p>
+                            <p class="card-text" style="text-align: center;"><%= mascota.isSeEncuentraTemporal() ? "Sí" : "No" %></p>
                             <p class="card-text" style="text-align: left;"><strong>Condiciones de adopción:</strong> </p>
-                            <p class="card-text" style="text-align: center;">Se requiere que la vivienda sea no menor a 50 m2, ya que al ser un perro de raza grande necesita un mayor espacio para adaptarse</p>    
+                            <p class="card-text" style="text-align: center;"><%=mascota.getCondicionesAdopcion()%></p>
+
+                            <%
+                                boolean estaInscrito = (boolean) request.getAttribute("estaInscrito");
+                            %>
+
+                            <% if (estaInscrito) { %>
+                            <!-- Si ya está inscrito -->
+                            <button class="btn btn-secondary" disabled>Ya estás inscrito</button>
+                            <% } else { %>
 
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1 d-flex justify-content-center">
-                                    <button onclick="showAdopcionDialog()" class="btn btn-personal">Adoptar</button>
+                                    <button onclick="abrirConfirmacionCancelar('<%= mascota.getIdAdopcion()%>')" class="btn btn-personal">Adoptar</button>
                                 </div>
 
-                            </div>  
+                            </div>
+                            <% } %>
                         </div>
                     </div>
                 </div>
@@ -134,6 +152,21 @@
         </div>
     </dialog>
 
+    <div id="popup" class="popup-overlay" style="display: none;">
+        <div class="popup-content">
+            <h2>¿Está seguro de adoptar esta mascota?</h2>
+            <form method="POST" action="PortalDeAdopcion" id="adoptar">
+                <input type="hidden" name="action" value="adoptar">
+                <input type="hidden" name="idMascota" id="eventoIDInput" value="">
+                <input type="hidden" name="nombreMascota" value="<%= mascota.getNombreMascota() %>">
+                <div class="popup-buttons">
+                    <button type="submit" class="btn btn-success">Confirmar</button>
+                    <button type="button" class="btn btn-danger" onclick="cerrarConfirmacionCancelar()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
@@ -157,6 +190,45 @@
     adopcionDialog.addEventListener("click", (e)=> {
         if(!contenidoPopDialog.contains(e.target)){
             adopcionDialog.close();
+        }
+    })
+</script>
+
+<script>
+    let eventoIDSeleccionado = null;
+
+    function abrirConfirmacionCancelar(eventoID) {
+        eventoIDSeleccionado = eventoID;
+        document.getElementById('eventoIDInput').value = eventoIDSeleccionado;
+        document.getElementById('popup').style.display = 'block';
+    }
+
+    function cerrarConfirmacionCancelar() {
+        eventoIDSeleccionado = null;
+        document.getElementById('popup').style.display = 'none';
+    }
+
+
+
+
+
+</script>
+
+<script>
+    const cancelDialog = document.getElementById("cancel-inscripcion");
+    const contenidoPopDialog = document.querySelector(".pop-up-content");
+
+    function showCancelarDialog(){
+        cancelDialog.showModal();
+    }
+
+    function closeCancelDialog(){
+        cancelDialog.close();
+    }
+
+    cancelDialog.addEventListener("click", (e)=> {
+        if(!contenidoPopDialog.contains(e.target)){
+            cancelDialog.close();
         }
     })
 </script>

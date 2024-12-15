@@ -126,7 +126,8 @@
                                             <div class="row g-0">
                                                 <div class="col-md-8">
                                                     <img src="${pageContext.request.contextPath}/<%=evento.getFoto().getRutaFoto()%>"
-                                                         class="card-img-eve" alt="<%= evento.getNombre() %>">
+                                                         class="card-img-eve" alt="<%= evento.getNombre() %>"
+                                                         onerror="this.onerror=null; this.src='https://placehold.co/700x400?text=Imagen+No+Disponible';">
                                                 </div>
                                                 <div class="col-md-4 d-flex align-items-center">
                                                     <div class="card-body">
@@ -268,7 +269,8 @@
 
                                             <div class="col-md-4">
                                                 <div class="card card-don">
-                                                    <img src="${pageContext.request.contextPath}/<%=donacion.getFoto().getRutaFoto()%>" class="card-img-top card-img-adop" alt="...">
+                                                    <img src="${pageContext.request.contextPath}/<%=donacion.getFoto().getRutaFoto()%>" class="card-img-top card-img-adop" alt="..."
+                                                         onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Imagen+No+Disponible';">
                                                     <div class="card-body">
                                                         <div class="badge text-bg-<%= estadoDonacion.equals("Activo") ? "success" : "secondary" %> text-wrap" style="width: 7rem;">
                                                             <%= estadoDonacion %>
@@ -484,7 +486,8 @@
                                         <div class="col-md-3">
                                             <div class="card card-don">
                                                 <!-- Aquí puedes acceder a las propiedades de la mascota -->
-                                                <img src="${pageContext.request.contextPath}/<%=mascota.getFoto().getRutaFoto()%>" class="card-img-top card-img-adop" alt="...">
+                                                <img src="${pageContext.request.contextPath}/<%=mascota.getFoto().getRutaFoto()%>" class="card-img-top card-img-adop" alt="..."
+                                                     onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Imagen+No+Disponible';">
                                                 <div class="card-body">
                                                     <h5 class="card-title"><%= mascota.getNombreMascota() %></h5>
                                                     <a href="PortalDeAdopcion?action=vista&id=<%=mascota.getIdAdopcion()%>" class="btn btn-personal" id="btn-crd-cr">Ver Solicitud</a>
