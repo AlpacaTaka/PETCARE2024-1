@@ -270,7 +270,7 @@ public class EventoServlet extends HttpServlet {
 
     private Foto procesarImagen(Part filePart, HttpServletRequest request, HttpServletResponse response, FotoDao fotoDao) throws ServletException, IOException {
         // Definir una ruta fija fuera de target
-        String uploadPath = "C:/Users/omarr/Desktop/PETCARE2024-1/IWEB-PROYECTO/src/main/webapp/uploads/fotosEvento";
+        String uploadPath = getServletContext().getRealPath("/") + "uploads/fotosEvento";
 
         // Crear directorio si no existe
         File uploadDir = new File(uploadPath);
