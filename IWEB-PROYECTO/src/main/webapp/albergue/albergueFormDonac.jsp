@@ -4,7 +4,7 @@
 <%@ page import="com.example.iwebproyecto.beans.Distrito" %>
 <%@ page import="com.example.iwebproyecto.daos.AlbergueDaoRevenge" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<jsp:useBean id="albergue" scope="request" type="com.example.iwebproyecto.beans.Albergue"/>
+<jsp:useBean id="albergue" type="com.example.iwebproyecto.beans.Albergue" scope="request" />
 <%--
     int albergueID = (int) request.getAttribute("idAlbergue");
     AlbergueDao albergueDao = new AlbergueDao();
@@ -89,7 +89,7 @@
                     <a href="<%=request.getContextPath()%>/DonacionSuministros"><button type="button" class="btn btn-personal2">Regresar</button></a>
                 </div>
                 <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                    <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/DonacionSuministros?action=create">
+                    <form id="uploadForm" style="padding:10px" method="POST" action="<%=request.getContextPath()%>/DonacionSuministros?action=create" enctype="multipart/form-data" accept-charset="UTF-8">
                         <input type="hidden" name="id" value="<%=albergue.getAlbergueID()%>">
                         <input type="hidden" name="distritoID" value="<%=albergue.getDistrito().getDistritoID()%>">
                         <h1 style="margin-top: 10px;" class="text-center">Creación de Avisos de Donación</h1>
@@ -138,7 +138,7 @@
                         <div class="row justify-content-center p-1">
                             <div class="col-md-4 p-1" >
                                 <label for="distritoNombre">Distrito</label>
-                                <input name="nombreDistrito" value="<%=albergue.getDistrito().getNombreDistrito()%>" type="text" class="form-control" id="distritoNombre" readonly>
+                                <input name="nombreDistrito" value="<%=albergue.getDistrito().getNombreDistrito()%>" type="text" class="form-control" id="distritoNombre" readonly disabled>
                             <%--select-- class="form-select" name="idDistrito" id="distrito" required>
                                     <option value="">Selecciona un distrito</option>
                                     <optgroup label="Lima Norte">
@@ -195,7 +195,7 @@
                             </div>
                             <div class="col-md-8 p-1">
                                 <label for="Direccion">Dirección de recepción</label>
-                                <input value="<%=albergue.getPuntoAcopioDonaciones()%>" type="text" class="form-control" placeholder="Maximo 100 caracteres" maxlength="100" id="Direccion" readonly>
+                                <input value="<%=albergue.getPuntoAcopioDonaciones()%>" type="text" class="form-control" placeholder="Maximo 100 caracteres" maxlength="100" id="Direccion" readonly disabled>
                             </div>
                         </div>
 
@@ -224,11 +224,11 @@
                         <div class="row justify-content-center p-1">
                             <div class="col-md-6 p-1">
                                 <label for="nombre_contacto">Nombre de contacto del albergue</label>
-                                <input value="<%=albergue.getNombreContactoDonaciones()%>" type="text" class="form-control" id="nombre_contacto" placeholder="Ingrese el nombre de la persona" maxlength="80" readonly>
+                                <input value="<%=albergue.getNombreContactoDonaciones()%>" type="text" class="form-control" id="nombre_contacto" placeholder="Ingrese el nombre de la persona" maxlength="80" readonly disabled>
                             </div>
                             <div class="col-md-6 p-1">
                                 <label for="num_contacto">Número de contacto para la donación</label>
-                                <input value="<%=albergue.getNumeroContactoDonaciones()%>" type="number" class="form-control" id="num_contacto" oninput="validarNumero()" placeholder="Ingrese el número de contacto" readonly>
+                                <input value="<%=albergue.getNumeroContactoDonaciones()%>" type="number" class="form-control" id="num_contacto" oninput="validarNumero()" placeholder="Ingrese el número de contacto" readonly disabled>
                             </div>
                         </div>
 
@@ -241,7 +241,7 @@
                         <div class="row justify-content-center p-1">
                             <div class="col-md-12 p-1 justify-content-center">
                                 <label for="formFile" class="form-label">Subir una foto de la donacion solicitada (PNG)</label>
-                                <input class="form-control" type="file" id="formFile" accept=".png" required>
+                                <input class="form-control" name= "foto" type="file" id="formFile" accept=".png" required>
                             </div>
                             <div id="fileError" class="text-danger mt-2" style="display: none;">El archivo debe ser una imagen PNG.</div>
 

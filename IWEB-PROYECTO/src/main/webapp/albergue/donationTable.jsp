@@ -113,7 +113,7 @@
                             <!-- Card 1 -->
                             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
                                 <div class="card h-100">
-                                    <img src="<%=request.getContextPath()%>/common/img/donaciones/donacion1.png" class="card-img-top" alt="Donacion 1" style="max-width: 300px; height: 260px;object-fit: cover;">
+                                    <img src="<%= request.getContextPath() + donacionSuministros.getFoto().getRutaFoto() %>" class="card-img-top" alt="<%= donacionSuministros.getTituloAvisoDonacion()%>" style="max-width: 300px; height: 260px;object-fit: cover;">
                                     <div class="card-body">
                                         <div class="row d-flex justify-content-center">
                                             <h4 class="card-title text-center"><%=donacionSuministros.getTituloAvisoDonacion()%></h4>
