@@ -3,10 +3,7 @@ package com.example.iwebproyecto.servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.example.iwebproyecto.beans.DonacionSuministros;
-import com.example.iwebproyecto.beans.EventoBenefico;
-import com.example.iwebproyecto.beans.MascotasAdopcion;
-import com.example.iwebproyecto.beans.PublicacionMascotaPerdida;
+import com.example.iwebproyecto.beans.*;
 import com.example.iwebproyecto.daos.DonacionesDao;
 import com.example.iwebproyecto.daos.EventoDao;
 import com.example.iwebproyecto.daos.MascotasDao;
@@ -28,45 +25,51 @@ public class InicioUsuarioServlet extends HttpServlet {
 
 
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
-
-        switch (action){
-            case "lista"://voy a crear un nuevo trabajo
-
-
-                MascotasDao mascotasDao = new MascotasDao();
-                EventoDao eventoDao = new EventoDao();
-                DonacionesDao donacionesDao = new DonacionesDao();
-
-                ArrayList<EventoBenefico> listaEventos =eventoDao.listarEventosFuturosAleatorios3() ;
-                ArrayList<MascotasAdopcion> listaMascotasAdopcion= mascotasDao.listarMascotasActivasAdopcion8();
-                ArrayList<PublicacionMascotaPerdida> listaPerdidos = mascotasDao.listarNoEncontradasYAprobadasMasDiasPerdido5();
-
-                ArrayList<DonacionSuministros> listarDonaciones = donacionesDao.listarInicioDonacioneaSuministros();
-
-                System.out.println("Lista de donaciones"+ listarDonaciones.size());
-                System.out.println("Lista de Adopciones: " + listaMascotasAdopcion.size() + " elementos.");
-                System.out.println("Lista de Perdidos: " + listaPerdidos.size()+ " elementos.");
-                System.out.println("Lista de Eventos: " + listaEventos.size()+ " elementos.");
-                request.setAttribute("donaciones", listarDonaciones) ;
-                request.setAttribute("eventos", listaEventos) ;
-                request.setAttribute("mascotasPerdidas", listaPerdidos);
-                request.setAttribute("listaAdopcion", listaMascotasAdopcion);
-
-                // Obtiene el RequestDispatcher para la página JSP
-
-                RequestDispatcher rd = request.getRequestDispatcher("user/inicio.jsp");
-
-                // Reenvía la solicitud y la respuesta al JSP
-                rd.forward(request, response);
-                break;
-            case "e": //voy a actualizar
-
-                break;
-            case "s":
-
-
-                break;
+        Usuario u = (Usuario) request.getSession().getAttribute("UsuarioSession");
+        if (u == null) {
+            // Si no hay usuario en la sesión, redirigir al login
+            response.sendRedirect(request.getContextPath());
+            return;
         }
+        else {
+            switch (action){
+                case "lista"://voy a crear un nuevo trabajo
+
+
+                    MascotasDao mascotasDao = new MascotasDao();
+                    EventoDao eventoDao = new EventoDao();
+                    DonacionesDao donacionesDao = new DonacionesDao();
+
+                    ArrayList<EventoBenefico> listaEventos =eventoDao.listarEventosFuturosAleatorios3() ;
+                    ArrayList<MascotasAdopcion> listaMascotasAdopcion= mascotasDao.listarMascotasActivasAdopcion8();
+                    ArrayList<PublicacionMascotaPerdida> listaPerdidos = mascotasDao.listarNoEncontradasYAprobadasMasDiasPerdido5();
+
+                    ArrayList<DonacionSuministros> listarDonaciones = donacionesDao.listarInicioDonacioneaSuministros();
+
+
+                    request.setAttribute("donaciones", listarDonaciones) ;
+                    request.setAttribute("eventos", listaEventos) ;
+                    request.setAttribute("mascotasPerdidas", listaPerdidos);
+                    request.setAttribute("listaAdopcion", listaMascotasAdopcion);
+
+                    // Obtiene el RequestDispatcher para la página JSP
+
+                    RequestDispatcher rd = request.getRequestDispatcher("user/inicio.jsp");
+
+                    // Reenvía la solicitud y la respuesta al JSP
+                    rd.forward(request, response);
+                    break;
+                case "e": //voy a actualizar
+
+                    break;
+                case "s":
+
+
+                    break;
+            }
+
+        }
+
 
 
     }

@@ -28,6 +28,8 @@
     <!-- -->
     <div class="form-container">
         <h2>Iniciar Sesión</h2>
+        <!-- Mostrar mensaje de error si existe -->
+
         <form action="${pageContext.request.contextPath}/Login" id="loginForm" name="login" method="post" onsubmit="return hashPassword()">
             <div class="form-group">
                 <input type="email" id="email" name="email" placeholder="Correo" maxlength="80" required>
@@ -37,18 +39,31 @@
                 <input type="hidden" id="hashedPassword" name="password">
                 <span><i id="toggler" class="far fa-eye"></i></span>
             </div>
-            <div class="alert">
-                <p>Credenciales incorrectas</p>
+            <%
+                HttpSession sessionLogin = request.getSession();
+                String errorMessage = (String) sessionLogin.getAttribute("errorMessage");
+                if (errorMessage != null) {
+                    sessionLogin.removeAttribute("errorMessage");
+            %>
+            <div class="text-danger justify-content-center text-align-center" role="alert" style="color: red">
+                <%= errorMessage %>
             </div>
+            <%
+                }
+            %>
+            <br>
             <div class="form-group">
                 <button type="submit">Iniciar sesión</button>
             </div>
+
             <div class="form-group">
                 <a href="<%=request.getContextPath()%>/fpassword.jsp">¿Olvido su contraseña?</a>
                 <a href="<%=request.getContextPath()%>/login/signin.jsp">Crear cuenta</a>
                 <a href="<%=request.getContextPath()%>/login/signinAlbergue.jsp">Inscribir su albergue</a>
             </div>
+
         </form>
+
     </div>
 
     <!-- imagen perrito, se desativara para la vista web-->

@@ -1,7 +1,9 @@
 package com.example.iwebproyecto.servlets;
 import com.example.iwebproyecto.beans.SolicitudTemporal;
+import com.example.iwebproyecto.beans.Usuario;
 import com.example.iwebproyecto.daos.LoginDao;
 import com.example.iwebproyecto.daos.SolicitudesHogarTemporalDao;
+import com.example.iwebproyecto.daos.UsuarioDao;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -58,6 +61,23 @@ public class LoginServlet extends HttpServlet {
             sessionLogin.setAttribute("SesionIDCoordinador", id);
 
         }else if(dao.authenticateUsuario(email, password) !=0){
+            rol = "Usuario";
+            id = dao.authenticateUsuario(email, password);
+
+            Usuario usuario = new Usuario();
+            UsuarioDao usuarioDao = new UsuarioDao();
+
+            try {
+                usuario=usuarioDao.obtenerUsuarioPorID(id);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            HttpSession session = request.getSession();
+            session.setAttribute("UsuarioSession", usuario);
+            session.setMaxInactiveInterval(10 * 60);
+
+
+            response.sendRedirect(request.getContextPath() + "/Inicio");
 
             //completa el httpSession de Usuario y el redireccionamiento
 
@@ -69,8 +89,9 @@ public class LoginServlet extends HttpServlet {
 
         }else{
             rol = "Nulo";
-            request.setAttribute("errorMessage", "Credenciales incorrectas");
-            request.getRequestDispatcher("/login/login.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            session.setAttribute("errorMessage", "Credenciales incorrectas");
+            response.sendRedirect(request.getContextPath());
         }
 
 
