@@ -11,8 +11,8 @@ import java.nio.file.Paths;
 
 public class EmailService {
 
-    private static final String SENDGRID_API_KEY = "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"; // Reemplaza con tu API Key
-    // Método para cargar una plantilla HTML desde un archivo
+    private static final String SENDGRID_API_KEY = "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"; // Reemplaza con tu API Key
+
     private String cargarPlantilla(String rutaArchivo) {
         try {
             return new String(Files.readAllBytes(Paths.get(rutaArchivo)));
