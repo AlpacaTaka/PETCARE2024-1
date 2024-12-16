@@ -122,7 +122,7 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
 
         String sql = "SELECT s.*, u.nombre,u.apellido, f.rutaFoto FROM solicitudtemporal s \n" +
                 "inner join usuario u on u.usuarioID=s.usuarioID\n" +
-                "inner join fotos f on f.fotoID=s.fotoID\n" +
+                "inner join fotos f on f.fotoID=u.fotoID\n" +
                 "where s.aprobadoCoordinador = 1;";
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
@@ -189,7 +189,7 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
 
         String sql = "SELECT s.*, u.nombre,u.apellido, f.rutaFoto FROM solicitudtemporal s \n" +
                 "inner join usuario u on u.usuarioID=s.usuarioID\n" +
-                "inner join fotos f on f.fotoID=s.fotoID\n" +
+                "inner join fotos f on f.fotoID=u.fotoID\n" +
                 "where s.aprobadoCoordinador = 1 and s.desactivadoAdministrador is " + estado + ";";
         try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
