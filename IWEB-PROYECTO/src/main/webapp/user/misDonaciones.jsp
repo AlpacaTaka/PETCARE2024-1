@@ -1,15 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<%
+    Double totalDonadoObj = (Double) request.getAttribute("totalDonado");
+    double totalDonado = totalDonadoObj != null ? totalDonadoObj : 0.0;
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
+    <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
     <title>Mis Donaciones</title>
     <style>
@@ -120,16 +123,18 @@
                         <div class="row justify-content-center p-4">
                             <div class="col-md-6 p-1" style="background-color: #4D0E0E; border-radius: 30px;">
                                 <p class="text-center" style="margin-top: 20px; color: white; font-size: 18px;">Haz donado un total de</p>
-                                <p class="text-center" style="font-size: 55px;color: white;"><strong>S/. 578.75</strong></p>
+                                <p class="text-center" style="font-size: 55px;color: white;"><strong>S/ <%= String.format("%.1f", totalDonado) %></strong></p>
                                 <p class="text-center" style="margin-top: 20px; color: white; font-size: 18px;">a diversos albergues</p>
                             </div>
                             <div class="col-md-6 p-1" style="margin-top: 30px;">
                                 <p class="text-center" style="margin-top: 20px; padding:0 20px; color: black; font-size: 18px;">Tus donaciones marcan una diferencia, anímate a seguir donando más.</p>
                                 <div class="col-md-12 p-1 d-flex justify-content-center">
-                                    
-                                    <button type="button" class="btn btn-personal d-flex align-items-center" onclick="abrirPopup()" >
-                                        <span class="fi-rr-send-money d-flex align-self-center"></span>&nbsp;Ver detalle
-                                    </button>
+                                    <form action="<%= request.getContextPath() %>/MisDonacionesUsuario" method="get">
+                                        <input type="hidden" name="action" value="consultar">
+                                        <button type="submit" class="btn btn-personal d-flex align-items-center"  >
+                                            <span class="fi-rr-send-money d-flex align-self-center"></span>&nbsp;Ver detalle
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                             
@@ -239,5 +244,5 @@
         </div>
     </div>
 
-    <script src="/common/script/neonavbar.js"></script>
+    <script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

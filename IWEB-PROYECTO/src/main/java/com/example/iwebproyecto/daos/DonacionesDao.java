@@ -171,5 +171,141 @@ public class DonacionesDao extends BaseDao {
         }
     }
 
+    public ArrayList<DonacionSuministros> obtenerSolicitudesDonacionSuministrosPorIdActivo(int albergueId) {
+        ArrayList<DonacionSuministros> donacionesSuministros = new ArrayList<>();
+
+        String sql = "SELECT * FROM donacionsuministros WHERE albergueID = ? AND eliminado = 0 AND CURDATE() <= fechaFinRecepcion";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Configurar el parámetro albergueID
+            pstmt.setInt(1, albergueId);
+
+            // Ejecutar la consulta
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    DonacionSuministros donacion = mapearDonacionSuministros(rs);
+                    donacionesSuministros.add(donacion);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al obtener donaciones de suministros activas por ID de albergue", e);
+        }
+
+        return donacionesSuministros;
+    }
+
+    public boolean guardarDonacionMonetaria(DonacionMonetaria donacion) {
+        String sql = "INSERT INTO usuariodonacionmonetaria (usuarioID, albergueID, cantidadMonetaria, donacionSuministrosID, fechaDonacionMonetaria) " +
+                "VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, donacion.getUsuario().getUsuarioID());
+            pstmt.setInt(2, donacion.getAlbergue().getAlbergueID());
+            pstmt.setInt(3, donacion.getCantidadMonetaria());
+
+            if (donacion.getDonacionSuministrosID() != null) {
+                pstmt.setInt(4, donacion.getDonacionSuministrosID());
+            } else {
+                pstmt.setNull(4, java.sql.Types.INTEGER);
+            }
+
+            pstmt.setString(5, donacion.getFechaDonacionMonetaria());
+
+            int filasInsertadas = pstmt.executeUpdate();
+            return filasInsertadas > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public double obtenerTotalDonadoPorUsuario(int usuarioId) {
+        String sql = "SELECT SUM(cantidadMonetaria) AS total FROM usuariodonacionmonetaria WHERE usuarioID = ?";
+        double total = 0;
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, usuarioId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    total = rs.getDouble("total");
+                }
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al obtener el total donado por el usuario", e);
+        }
+
+        return total;
+    }
+
+    public ArrayList<DonacionMonetaria> listarDonacionesMonetariasPorUsuario(int usuarioId) {
+        ArrayList<DonacionMonetaria> donaciones = new ArrayList<>();
+        String sql = "SELECT dm.*, a.nombreAlbergue, ds.tituloAvisoDonacion " +
+                "FROM usuariodonacionmonetaria dm " +
+                "INNER JOIN albergue a ON dm.albergueID = a.albergueID " +
+                "LEFT JOIN donacionsuministros ds ON dm.donacionSuministrosID = ds.donacionSuministrosID " +
+                "WHERE dm.usuarioID = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, usuarioId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    DonacionMonetaria donacion = new DonacionMonetaria();
+
+
+
+                    donacion.setCantidadMonetaria(rs.getInt("cantidadMonetaria"));
+                    donacion.setFechaDonacionMonetaria(rs.getString("fechaDonacionMonetaria"));
+
+                    // Configurar Albergue
+                    Albergue albergue = new Albergue();
+                    albergue.setNombreAlbergue(rs.getString("nombreAlbergue"));
+                    donacion.setAlbergue(albergue);
+
+                    donacion.setDonacionSuministrosID(rs.getInt("donacionSuministrosID"));
+
+                    // Asignar título de la causa (si existe)
+                    String tituloCausa = rs.getString("tituloAvisoDonacion");
+                    donacion.setDonacionSuministrosTitulo(tituloCausa != null ? tituloCausa : "Sin causa específica");
+
+                    donaciones.add(donacion);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al obtener donaciones monetarias por usuario", e);
+        }
+        return donaciones;
+    }
+    public String obtenerNombreCausaPorID(int causaID) {
+        String nombreCausa = "Sin causa específica"; // Valor por defecto
+        String sql = "SELECT tituloAvisoDonacion FROM donacionsuministros WHERE donacionSuministrosID = ?";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, causaID);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    nombreCausa = rs.getString("tituloAvisoDonacion");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al obtener el nombre de la causa", e);
+        }
+        return nombreCausa;
+    }
+
 
 }

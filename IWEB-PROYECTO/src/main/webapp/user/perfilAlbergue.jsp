@@ -1,4 +1,6 @@
 <%@ page import="com.example.iwebproyecto.beans.Albergue" %>
+<%@ page import="com.example.iwebproyecto.beans.DonacionSuministros" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
 
@@ -183,7 +185,8 @@
                                 <div class="row justify-content-center p-1">
                                     <div class="col d-flex justify-content-center">
                                         <div class="image-container">
-                                            <img src="${pageContext.request.contextPath}<%=a.getFoto().getRutaFoto()%>" alt="Perfil de usuario">
+                                            <img src="${pageContext.request.contextPath}<%=a.getFoto().getRutaFoto()%>" alt="Perfil de usuario"
+                                                 onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Imagen+No+Disponible';">
                                         </div>
                                     </div>
                                 </div>
@@ -709,33 +712,55 @@
                 <!--Pop up-->
                 <dialog id="hacer-donacion" style="max-width: 400px;border-radius: 20px;background-color: #fca651e1;border: none; justify-content: center;">
                     <div class="pop-up-content" style="text-align: center;padding: 0px 15px;">
-                        <h2 style="color: #721313;">Números de yape/plin</h2><br>
+                        <h2 style="color: #721313;">Números de Yape/Plin</h2><br>
+                        <div class="row justify-content-center">
+                            <img src="${pageContext.request.contextPath}/<%= a.getCodigoQR() %>" class="card-img-monetaria" alt="Imagen" style="width: 100%; max-width: 60%; height: auto;"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/200x200?text=Imagen+No+Disponible';">
+                        </div>
                         <div class="row justify-content-center">
                             <!--Primera columna de selección-->
                             <div class="col-md-6 justify-content-center p-1">
-                                <img src="/common/img/donacionesMonetarias/logoPlin.png" class="card-img-monetaria" alt="Imagen" style="width: 100%; max-width: 60%; height: auto;">
-                                <p style="padding: 10px;font-size: 23px;">997565443</p>
+
+                                <p style="padding: 10px;font-size: 23px;">Yape: <%= a.getNumeroYape() %></p>
                             </div>
                             <!--Segunda columna de selección-->
                             <div class="col-md-6 justify-content-center p-1">
-                                <img src="/common/img/donacionesMonetarias/logoYape.png" class="card-img-monetaria" alt="Imagen" style="width: 100%; max-width: 60%; height: auto;">
-                                <p style="padding: 10px;font-size: 23px;">998865443</p>
+
+                                <p style="padding: 10px;font-size: 23px;">Plin: <%= a.getNumeroPlin() %></p>
                             </div>
                         </div>
-                        <form id="suministroForm" onsubmit="handleFormSubmit(event)" >
+                        <form id="suministroForm" action="TodosLosAlbergues" method="post">
+                            <!-- Input oculto para el ID del albergue -->
+                            <input type="hidden" name="albergueId" value="<%= a.getAlbergueID() %>">
                             <!--Primera columna de selección-->
                             <div class="row justify-content-center p-1">
-                                <div class="col-md-5 p-1">                         
+
+                                <div class="col-md-5 p-1">
                                     <label for="cant-donacion" style="font-size: 14px; font-weight: bold;">Ingrese el monto</label>
-                                    <input type="number" class="form-control" placeholder="Ingrese el monto a donar" id="cant-donacion" name="cant-donacion" min="10" max="500" required>      
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">S/.</span>
+                                        <input type="number" class="form-control" placeholder=""
+                                               id="cant-donacion" name="monto" min="10" max="500" required>
+                                    </div>
                                 </div>
                                 <div class="col-md-7 p-1">                         
-                                    <label for="solicitud-donacion" style="font-size: 14px; font-weight: bold;">Solicitud elegida</label>
-                                    <select class="form-select" id="solicitud-donacion" aria-label="Floating label select example" required >
-                                        <option value="" selected>Ninguna solicitud seleccionada</option>
-                                        <option value="1">Ayudanos a ayudar</option>
-                                        <option value="2">Necesitamos su apoyo</option>
-                                        <option value="3">Necesitamos vacunas</option>
+                                    <label for="solicitud-donacion" style="font-size: 14px; font-weight: bold;">Causa específica:</label>
+                                    <select class="form-select" id="solicitud-donacion" aria-label="Floating label select example" name="causaId" required >
+                                        <option value="0" selected>Sin causa específica</option>
+                                        <%
+                                            // Obtener la lista de causas desde el request
+                                            ArrayList<DonacionSuministros> causas = (ArrayList<DonacionSuministros>) request.getAttribute("causas");
+                                            if (causas != null) {
+                                                for (DonacionSuministros causa : causas) {
+                                        %>
+                                        <option value="<%= causa.getDonacionSuministrosID() %>">
+                                            <%= causa.getTituloAvisoDonacion() %>
+                                        </option>
+                                        <%
+                                                }
+                                            }
+                                        %>
+
                                     </select>
                                 </div>
                             </div>
@@ -757,7 +782,7 @@
         </div>
     </div>
 
-        <script src="/common/script/neonavbar.js"></script>
+        <script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
         <script src="js/perfilAlbergue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script>

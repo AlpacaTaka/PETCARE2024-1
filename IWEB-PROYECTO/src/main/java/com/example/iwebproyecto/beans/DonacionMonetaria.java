@@ -2,29 +2,30 @@ package com.example.iwebproyecto.beans;
 
 public class DonacionMonetaria {
     private int donacionMonetariaID;
-    private int usuarioID;
-
-    private Albergue albergue;
-
+    private Usuario usuario; // Bean relacionado
+    private Albergue albergue; // Bean relacionado
     private int cantidadMonetaria;
-    private String fechaRecepcion;
-    private String horaRecepcion;
-    private String fecha;
+    private Integer eventoAlbergueID; // Puede ser NULL
+    private Integer donacionSuministrosID; // Puede ser NULL
+    private String fechaDonacionMonetaria;
+    private String donacionSuministrosTitulo; // Nuevo: Título de la causa específica
 
-    private Foto foto;
 
-    public DonacionMonetaria() {}
+    // Constructor vacío
+    public DonacionMonetaria() {
+    }
 
-    public DonacionMonetaria(int donacionMonetariaID, int usuarioID, Albergue albergue, int cantidadMonetaria, String fechaRecepcion, String horaRecepcion, String fecha, Foto foto) {
-        this.donacionMonetariaID = donacionMonetariaID;
-        this.usuarioID = usuarioID;
+    // Constructor completo
+    public DonacionMonetaria(int usuarioDonacionMonetariaID, Usuario usuario, Albergue albergue,
+                                    int cantidadMonetaria, Integer eventoAlbergueID,
+                                    Integer donacionSuministrosID, String fechaDonacionMonetaria) {
+        this.donacionMonetariaID = usuarioDonacionMonetariaID;
+        this.usuario = usuario;
         this.albergue = albergue;
         this.cantidadMonetaria = cantidadMonetaria;
-        this.fechaRecepcion = fechaRecepcion;
-        this.horaRecepcion = horaRecepcion;
-        this.fecha = fecha;
-        this.foto = foto;
-
+        this.eventoAlbergueID = eventoAlbergueID;
+        this.donacionSuministrosID = donacionSuministrosID;
+        this.fechaDonacionMonetaria = fechaDonacionMonetaria;
     }
 
     public int getDonacionMonetariaID() {
@@ -35,50 +36,13 @@ public class DonacionMonetaria {
         this.donacionMonetariaID = donacionMonetariaID;
     }
 
-    public int getUsuarioID() {
-        return usuarioID;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioID(int usuarioID) {
-        this.usuarioID = usuarioID;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
-
-
-
-    public int getCantidadMonetaria() {
-        return cantidadMonetaria;
-    }
-
-    public void setCantidadMonetaria(int cantidadMonetaria) {
-        this.cantidadMonetaria = cantidadMonetaria;
-    }
-
-
-
-    public String getFechaRecepcion() {
-        return fechaRecepcion;
-    }
-
-    public void setFechaRecepcion(String fechaRecepcion) {
-        this.fechaRecepcion = fechaRecepcion;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getHoraRecepcion() {
-        return horaRecepcion;
-    }
-
-    public void setHoraRecepcion(String horaRecepcion) {
-        this.horaRecepcion = horaRecepcion;
-    }
-
 
     public Albergue getAlbergue() {
         return albergue;
@@ -88,12 +52,43 @@ public class DonacionMonetaria {
         this.albergue = albergue;
     }
 
-    public Foto getFoto() {
-        return foto;
+    public int getCantidadMonetaria() {
+        return cantidadMonetaria;
     }
 
-    public void setFoto(Foto foto) {
-        this.foto = foto;
+    public void setCantidadMonetaria(int cantidadMonetaria) {
+        this.cantidadMonetaria = cantidadMonetaria;
     }
 
+    public Integer getEventoAlbergueID() {
+        return eventoAlbergueID;
+    }
+
+    public void setEventoAlbergueID(Integer eventoAlbergueID) {
+        this.eventoAlbergueID = eventoAlbergueID;
+    }
+
+    public Integer getDonacionSuministrosID() {
+        return donacionSuministrosID;
+    }
+
+    public void setDonacionSuministrosID(Integer donacionSuministrosID) {
+        this.donacionSuministrosID = donacionSuministrosID;
+    }
+
+    public String getFechaDonacionMonetaria() {
+        return fechaDonacionMonetaria;
+    }
+
+    public void setFechaDonacionMonetaria(String fechaDonacionMonetaria) {
+        this.fechaDonacionMonetaria = fechaDonacionMonetaria;
+    }
+
+    public String getDonacionSuministrosTitulo() {
+        return donacionSuministrosTitulo;
+    }
+
+    public void setDonacionSuministrosTitulo(String donacionSuministrosTitulo) {
+        this.donacionSuministrosTitulo = donacionSuministrosTitulo;
+    }
 }

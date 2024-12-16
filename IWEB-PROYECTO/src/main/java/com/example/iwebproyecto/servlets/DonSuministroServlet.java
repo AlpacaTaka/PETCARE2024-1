@@ -50,7 +50,6 @@ public class DonSuministroServlet extends HttpServlet {
                 donacionSuministros = daoDon.obtenerSolicitudesDonacionSuministrosPorId(idDonacion);
 
 
-
                 request.setAttribute("donacionSuministros", donacionSuministros);
                 request.getRequestDispatcher("user/solicitudDonacionSuministros.jsp").forward(request, response);
 
