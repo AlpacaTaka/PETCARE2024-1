@@ -117,9 +117,9 @@
                                     <div class="card-body">
                                         <div class="row d-flex justify-content-center">
                                             <h4 class="card-title text-center"><%=donacionSuministros.getTituloAvisoDonacion()%></h4>
-                                            <div class="badge text-bg-success text-wrap" style="max-width: 70%; margin-bottom: 10px">
+                                            <%--div class="badge text-bg-success text-wrap" style="max-width: 70%; margin-bottom: 10px">
                                                 Activo
-                                            </div>
+                                            </div--%>
                                         </div>
                                         <hr>
                                         <p style="text-align: center;line-height: 23px;"><strong>Dirección:</strong> <%=donacionSuministros.getDistrito().getNombreDistrito()+" "+donacionSuministros.getAlbergue().getDireccionDonaciones()%><strong><br>Fecha:</strong><%=donacionSuministros.getFechaInicioRecepcion()+" "+donacionSuministros.getFechaFinRecepcion()%><br><strong>Horario de recepción:</strong><%=donacionSuministros.getHoraInicioRecepcion()+" "+donacionSuministros.getHoraFinRecepcion()%></p>
@@ -386,7 +386,7 @@
 
     // Función de confirmación (puedes agregar la lógica de eliminación aquí)
     function confirmarAccion() {
-        alert('Evento eliminado correctamente.')
+        alert('Evento de donación eliminado correctamente.')
         window.location.href = document.getElementById('popup').href;
         cerrarPopup();
     }

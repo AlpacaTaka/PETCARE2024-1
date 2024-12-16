@@ -145,6 +145,16 @@
             </div>
         </div>
 
+        <div id="popup2" class="popup-overlay">
+            <div class="popup-content">
+                <h2>¿Seguro que desea aceptar esta solicitud?</h2>
+                <div class="popup-buttons">
+                    <button class="btn-confirmar" onclick="confirmarAccion2()">Confirmar</button>
+                    <button class="btn-cancelar" onclick="cerrarPopup2()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
         <!--DataTable-->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
@@ -259,7 +269,7 @@
 
             // Función de confirmación (puedes agregar la lógica de eliminación aquí)
             function confirmarAccion() {
-                alert('Evento eliminado correctamente.')
+                alert('Se ha rechazado la solicitud.')
                 window.location.href = document.getElementById('popup').href;
                 cerrarPopup();
             }
@@ -274,19 +284,19 @@
             //}
             // Función para abrir el popup
             function aceptarSolicitud(redireccionamiento) {
-                document.getElementById('popup').style.display = 'block';
-                document.getElementById('popup').href = redireccionamiento;
+                document.getElementById('popup2').style.display = 'block';
+                document.getElementById('popup2').href = redireccionamiento;
             }
             // Función para cerrar el popup
-            function cerrarPopup() {
-                document.getElementById('popup').style.display = 'none';
-                document.getElementById('popup').href = null;
+            function cerrarPopup2() {
+                document.getElementById('popup2').style.display = 'none';
+                document.getElementById('popup2').href = null;
             }
 
             // Función de confirmación (puedes agregar la lógica de eliminación aquí)
-            function confirmarAccion() {
-                alert('Evento eliminado correctamente.')
-                window.location.href = document.getElementById('popup').href;
+            function confirmarAccion2() {
+                alert('Se ha aceptado la solicitud.')
+                window.location.href = document.getElementById('popup2').href;
                 cerrarPopup();
             }
         </script>
