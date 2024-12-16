@@ -7,6 +7,7 @@
 <%@ page import="com.example.iwebproyecto.beans.PublicacionMascotaPerdida" %>
 <%@ page import="com.example.iwebproyecto.beans.EventoBenefico" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="UsuarioSession" class="com.example.iwebproyecto.beans.Usuario" scope="session" />
 <%
     DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd MMM.").withLocale(new Locale("es", "ES"));
     DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a").withLocale(new Locale("es", "ES"));
@@ -53,9 +54,9 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Juan</div>
+                <div class="welcome-text">Hola, <%= UsuarioSession.getNombre() %></div>
             </div>
-            <div class="logo"><a href="/user/inicio.html"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="${pageContext.request.contextPath}/Inicio"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
 
         
@@ -146,7 +147,8 @@
                                 <!-- Card para un evento -->
                                 <div class="col-12 col-md-6 col-lg-4 mb-4 card-item">
                                     <div class="card h-100">
-                                        <img src="${pageContext.request.contextPath}/<%= evento.getFoto().getRutaFoto() %>" class="card-img-top" alt="<%= evento.getNombre() %>">
+                                        <img src="${pageContext.request.contextPath}/<%= evento.getFoto().getRutaFoto() %>" class="card-img-top" alt="<%= evento.getNombre() %>"
+                                             onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Imagen+No+Disponible';">
                                         <div class="card-body">
                                             <div class="row d-flex justify-content-center">
                                                 <div class="badge text-bg-primary text-wrap" style="max-width: 70%; margin-bottom: 10px">
@@ -196,7 +198,8 @@
                                         long diasPerdidos = java.time.temporal.ChronoUnit.DAYS.between(fechaPerdida, hoy);
                                 %>
                                 <div class="card .perdido">
-                                    <img src="/common/img/perdidos/perdido1.jpg" class="card-img-top card-img-don" alt="Canela">
+                                    <img src="${pageContext.request.contextPath}/<%=perdido.getFoto().getRutaFoto()%>" class="card-img-top card-img-don" alt="Canela"
+                                         onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Imagen+No+Disponible';">
                                     <div class="card-body">
                                         <h5 class="card-title text-center"><%= perdido.getNombreMascota() %></h5>
                                         <p class="card-text"><strong>Lugar de extravío: </strong><%= perdido.getLugarPerdida() %></p>
@@ -211,7 +214,7 @@
 
                             </div>
                         </div>
-                        <a href="/user/mascotasPerdidas.html" class="btn btn-personal m-2"  id="btn-crd-cr">Ver más</a>
+                        <a href="${pageContext.request.contextPath}/Inicio" class="btn btn-personal m-2"  id="btn-crd-cr">Ver más</a>
 
                         
 

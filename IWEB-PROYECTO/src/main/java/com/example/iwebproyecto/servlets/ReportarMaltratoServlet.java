@@ -35,96 +35,94 @@ public class ReportarMaltratoServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        int idUsuario = 7;
-
-
-        DenunciaMaltrato denu = new DenunciaMaltrato();
-        Usuario usuario = new Usuario();
-        usuario.setUsuarioID(idUsuario);
-        denu.setUsuario(usuario);
-        denu.setTamanio(request.getParameter("tamanio"));
-        denu.setEspecie(request.getParameter("Especie"));
-        if ("otro".equals(request.getParameter("Raza"))){
-            denu.setRaza(request.getParameter("otra-raza"));
-        }else{
-            denu.setRaza(request.getParameter("Raza"));
+        Usuario u = (Usuario) request.getSession().getAttribute("UsuarioSession");
+        if (u == null) {
+            // Si no hay usuario en la sesión, redirigir al login
+            response.sendRedirect(request.getContextPath());
+            return;
         }
-        if ("Otro".equals(request.getParameter("tipo-maltrato"))){
-            denu.setTipoMaltrato(request.getParameter("otro-maltrato"));
-        }else{
-            denu.setTipoMaltrato(request.getParameter("tipo-maltrato"));
-        }
-        denu.setNombreApellidoMaltratador(request.getParameter("Nombre-maltratador"));
-        denu.setDireccion(request.getParameter("Direccion"));
-        if ("si".equals(request.getParameter("flexRadioDefault"))) {
-            denu.setRealizoDenuncia(true);
-        } else if ("no".equals(request.getParameter("flexRadioDefault"))) {
-            denu.setRealizoDenuncia(false);
-        }
+        else{
+            int idUsuario = u.getUsuarioID();
 
 
-        // Establece la fecha actual directamente como LocalDate
-        LocalDate fechaActual = LocalDate.now();
-        denu.setFechaFormulario(fechaActual); // Asigna directamente el objeto LocalDate
+            DenunciaMaltrato denu = new DenunciaMaltrato();
+            Usuario usuario = new Usuario();
+            usuario.setUsuarioID(idUsuario);
+            denu.setUsuario(usuario);
+            denu.setTamanio(request.getParameter("tamanio"));
+            denu.setEspecie(request.getParameter("Especie"));
+            if ("otro".equals(request.getParameter("Raza"))){
+                denu.setRaza(request.getParameter("otra-raza"));
+            }else{
+                denu.setRaza(request.getParameter("Raza"));
+            }
+            if ("Otro".equals(request.getParameter("tipo-maltrato"))){
+                denu.setTipoMaltrato(request.getParameter("otro-maltrato"));
+            }else{
+                denu.setTipoMaltrato(request.getParameter("tipo-maltrato"));
+            }
+            denu.setNombreApellidoMaltratador(request.getParameter("Nombre-maltratador"));
+            denu.setDireccion(request.getParameter("Direccion"));
+            if ("si".equals(request.getParameter("flexRadioDefault"))) {
+                denu.setRealizoDenuncia(true);
+            } else if ("no".equals(request.getParameter("flexRadioDefault"))) {
+                denu.setRealizoDenuncia(false);
+            }
 
-/*
-        System.out.println(fechaActual);
-        System.out.println(request.getParameter("tamanio"));
-        System.out.println(request.getParameter("Especie"));
-        System.out.println(request.getParameter("Raza"));
-        System.out.println(request.getParameter("otra-raza"));
-        System.out.println(request.getParameter("tipo-maltrato"));
-        System.out.println(request.getParameter("otro-maltrato"));
-        System.out.println(request.getParameter("Nombre-maltratador"));
-        System.out.println(request.getParameter("Direccion"));
-        System.out.println(request.getParameter("flexRadioDefault"));
-*/
+
+            // Establece la fecha actual directamente como LocalDate
+            LocalDate fechaActual = LocalDate.now();
+            denu.setFechaFormulario(fechaActual); // Asigna directamente el objeto LocalDate
 
 
-        FotoDao fotoDao = new FotoDao();
-        // Definir una ruta fija fuera de target
-        //Si van a probarlo alguno de ustedes deben de cambiar la ruta o les lanzará error.
-        String uploadPath = getServletContext().getRealPath("/") + "uploads/fotosMaltrato";
+            FotoDao fotoDao = new FotoDao();
+            // Definir una ruta fija fuera de target
+            //Si van a probarlo alguno de ustedes deben de cambiar la ruta o les lanzará error.
+            String uploadPath = getServletContext().getRealPath("/") + "uploads/fotosMaltrato";
 
-        // Crear directorio si no existe
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdirs();
-        }
+            // Crear directorio si no existe
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdirs();
+            }
 
-        // Obtener la imagen desde el formulario y generar un nombre único
-        Part filePart = request.getPart("imagen");
-        String originalFileName = filePart.getSubmittedFileName();
-        String uniqueFileName = System.currentTimeMillis() + "_" + originalFileName;
-        String filePath = uploadPath + File.separator + uniqueFileName;
+            // Obtener la imagen desde el formulario y generar un nombre único
+            Part filePart = request.getPart("imagen");
+            String originalFileName = filePart.getSubmittedFileName();
+            String uniqueFileName = System.currentTimeMillis() + "_" + originalFileName;
+            String filePath = uploadPath + File.separator + uniqueFileName;
 
-        // Guardar la foto en la base de datos con la ruta generada
-        Foto foto = new Foto();
-        foto.setRutaFoto("/uploads/fotosMaltrato/" + uniqueFileName);
-        fotoDao.GuadarFoto(foto);
+            // Guardar la foto en la base de datos con la ruta generada
+            Foto foto = new Foto();
+            foto.setRutaFoto("/uploads/fotosMaltrato/" + uniqueFileName);
+            fotoDao.GuadarFoto(foto);
 
 // Guardar el archivo en el sistema de archivos
-        try (InputStream inputStream = filePart.getInputStream();
-             FileOutputStream outputStream = new FileOutputStream(filePath)) {
+            try (InputStream inputStream = filePart.getInputStream();
+                 FileOutputStream outputStream = new FileOutputStream(filePath)) {
 
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+                System.out.println("Imagen guardada exitosamente en: " + filePath);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            System.out.println("Imagen guardada exitosamente en: " + filePath);
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            // Aquí puedes asociar la foto a la denuncia y guardarlo en la base de datos
+            denu.setFoto(foto);
+            DenunciaMaltratoDao dDao = new DenunciaMaltratoDao();
+            dDao.RegistrarDenunciaMaltrato(denu);
+
+
+
+            response.sendRedirect("Inicio");
         }
 
-        // Aquí puedes asociar la foto a la denuncia y guardarlo en la base de datos
-        denu.setFoto(foto);
-        DenunciaMaltratoDao dDao = new DenunciaMaltratoDao();
-        dDao.RegistrarDenunciaMaltrato(denu);
 
 
-
-        response.sendRedirect("Inicio");
 
 
 
@@ -134,8 +132,17 @@ public class ReportarMaltratoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        Usuario u = (Usuario) request.getSession().getAttribute("UsuarioSession");
+        if (u == null) {
+            // Si no hay usuario en la sesión, redirigir al login
+            response.sendRedirect(request.getContextPath());
+            return;
+        }
+        else{
+            request.getRequestDispatcher("/user/reportarMaltrato.jsp").forward(request, response);
+        }
 
-        request.getRequestDispatcher("/user/reportarMaltrato.jsp").forward(request, response);
+
 
     }
 }

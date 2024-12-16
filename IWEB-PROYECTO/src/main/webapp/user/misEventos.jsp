@@ -7,6 +7,7 @@
 <%@ page import="com.example.iwebproyecto.beans.PublicacionMascotaPerdida" %>
 <%@ page import="com.example.iwebproyecto.beans.EventoBenefico" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="UsuarioSession" class="com.example.iwebproyecto.beans.Usuario" scope="session" />
 <%
     ArrayList<PublicacionMascotaPerdida> listaPerdidos = (ArrayList) request.getAttribute("mascotasPerdidas");
 %>
@@ -62,9 +63,9 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Juan</div>
+                <div class="welcome-text">Hola, <%= UsuarioSession.getNombre() %></div>
             </div>
-            <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="${pageContext.request.contextPath}/Inicio"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
 
         <div class="main">
@@ -113,7 +114,7 @@
 
                 <div class="col" id="contenido-nofooter">
                     <div class="container md-8" style="width: 85%;max-width: 900px; margin-bottom: 20px; padding: 0;">
-                        <button type="button"  class="btn btn-personal2" onclick="location.href='inicio.jsp'">  Regresar   </button>
+                        <button type="button"  class="btn btn-personal2" oonclick="window.history.back()">  Regresar   </button>
                     </div>
                     <div class="container md-8" style="width: 85%;max-width: 900px; background-color:#eb903b76; border-radius: 30px; padding:  20px;">
                         <h1 style="margin-top: 30px; margin-left:20px; font-size: 50px; text-align: center;" >Mis Eventos</h1>
@@ -142,7 +143,8 @@
                                 <div class="row g-0">
                                     <!-- Imagen del evento -->
                                     <div class="col-md-4">
-                                        <img src="${pageContext.request.contextPath}/<%= evento.getFoto().getRutaFoto() %>" class="img-fluid rounded-start" alt="Imagen del evento">
+                                        <img src="${pageContext.request.contextPath}/<%= evento.getFoto().getRutaFoto() %>" class="img-fluid rounded-start" alt="Imagen del evento"
+                                             onerror="this.onerror=null; this.src='https://placehold.co/500x300?text=Imagen+No+Disponible';">
                                     </div>
                                     <!-- Detalles del evento -->
                                     <div class="col-md-8 d-flex align-self-center">
@@ -192,7 +194,8 @@
                                 <div class="row g-0">
                                     <!-- Imagen del evento -->
                                     <div class="col-md-4">
-                                        <img src="${pageContext.request.contextPath}/<%= eventopasado.getFoto().getRutaFoto() %>" class="img-fluid rounded-start" alt="Imagen del evento">
+                                        <img src="${pageContext.request.contextPath}/<%= eventopasado.getFoto().getRutaFoto() %>" class="img-fluid rounded-start" alt="Imagen del evento"
+                                             onerror="this.onerror=null; this.src='https://placehold.co/500x300?text=Imagen+No+Disponible';">
                                     </div>
                                     <!-- Detalles del evento -->
                                     <div class="col-md-8 d-flex align-self-center">

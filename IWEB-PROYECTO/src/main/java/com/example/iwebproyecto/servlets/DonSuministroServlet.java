@@ -21,46 +21,57 @@ import java.util.Date;
 public class DonSuministroServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       String action = request.getParameter("action") == null ?
-               "lista" : request.getParameter("action");
-        DonacionesDao daoDon = new DonacionesDao();
-        MascotasDao mascotasDao = new MascotasDao();
+        String action = request.getParameter("action") == null ?
+                "lista" : request.getParameter("action");
 
-        switch (action) {
-            case "lista":
-
-
-                ArrayList<DonacionSuministros> listaSolicitudes = new ArrayList();
-                ArrayList<PublicacionMascotaPerdida> listaPerdidos = mascotasDao.listarNoEncontradasYAprobadasMasDiasPerdido5();
-                listaSolicitudes = daoDon.listarDonacionesSuministros();
-                request.setAttribute("mascotasPerdidas", listaPerdidos);
-                request.setAttribute("listaSolicitudes", listaSolicitudes);
-                System.out.println(listaSolicitudes.size());
-                RequestDispatcher dispatcher = request.getRequestDispatcher("user/solicitudesDonacionSuministros.jsp");
-                dispatcher.forward(request, response);
-
-                break;
-            case "vista":
-                int idDonacion = Integer.valueOf(request.getParameter("id"));
-
-
-
-
-                DonacionSuministros donacionSuministros = new DonacionSuministros();
-                donacionSuministros = daoDon.obtenerSolicitudesDonacionSuministrosPorId(idDonacion);
-
-
-                request.setAttribute("donacionSuministros", donacionSuministros);
-                request.getRequestDispatcher("user/solicitudDonacionSuministros.jsp").forward(request, response);
-
-                break;
-            case "Donacion":
-
-                break;
-            default:
-
-                break;
+        Usuario u = (Usuario) request.getSession().getAttribute("UsuarioSession");
+        if (u == null) {
+            // Si no hay usuario en la sesión, redirigir al login
+            response.sendRedirect(request.getContextPath());
+            return;
         }
+        else{
+            DonacionesDao daoDon = new DonacionesDao();
+            MascotasDao mascotasDao = new MascotasDao();
+
+            switch (action) {
+                case "lista":
+
+
+                    ArrayList<DonacionSuministros> listaSolicitudes = new ArrayList();
+                    ArrayList<PublicacionMascotaPerdida> listaPerdidos = mascotasDao.listarNoEncontradasYAprobadasMasDiasPerdido5();
+                    listaSolicitudes = daoDon.listarDonacionesSuministros();
+                    request.setAttribute("mascotasPerdidas", listaPerdidos);
+                    request.setAttribute("listaSolicitudes", listaSolicitudes);
+                    System.out.println(listaSolicitudes.size());
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("user/solicitudesDonacionSuministros.jsp");
+                    dispatcher.forward(request, response);
+
+                    break;
+                case "vista":
+                    int idDonacion = Integer.valueOf(request.getParameter("id"));
+
+
+
+
+                    DonacionSuministros donacionSuministros = new DonacionSuministros();
+                    donacionSuministros = daoDon.obtenerSolicitudesDonacionSuministrosPorId(idDonacion);
+
+
+                    request.setAttribute("donacionSuministros", donacionSuministros);
+                    request.getRequestDispatcher("user/solicitudDonacionSuministros.jsp").forward(request, response);
+
+                    break;
+                case "Donacion":
+
+                    break;
+                default:
+
+                    break;
+            }
+        }
+
+
 
 
 
@@ -69,50 +80,62 @@ public class DonSuministroServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        DonacionesDao daoDon = new DonacionesDao();
-        int idUsuario = 7;
-
-        try {
-            int usuarioID = idUsuario;
-            int donacionSuministrosID = Integer.parseInt(request.getParameter("donacionSuministrosID"));
-            System.out.println(request.getParameter("donacionSuministrosID"));
-            int cantidadSuministro = Integer.parseInt(request.getParameter("cantidad"));
-            System.out.println(request.getParameter("cantidad"));
-            String tipoDonacion = request.getParameter("tipo-donacion");
-            System.out.println(request.getParameter("tipo-donacion"));
 
 
-            // Usar DateTimeFormatter para LocalDate
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            System.out.println(request.getParameter("fechaEntrega"));
-            LocalDate fechaDonacion = LocalDate.parse(request.getParameter("fechaEntrega"), formatter);
-
-
-
-            Usuario usuario = new Usuario();
-            usuario.setUsuarioID(usuarioID);
-
-            DonacionSuministros donacionSuministros = new DonacionSuministros();
-            donacionSuministros.setDonacionSuministrosID(donacionSuministrosID);
-
-            UsuarioDonacionSuministro usuarioDonacion = new UsuarioDonacionSuministro();
-            usuarioDonacion.setUsuario(usuario);
-            usuarioDonacion.setDonacionSuministros(donacionSuministros);
-            usuarioDonacion.setCantidadSuministro(cantidadSuministro);
-            usuarioDonacion.setFechaDonacion(fechaDonacion);
-            usuarioDonacion.setTipoDonacion(tipoDonacion);
-
-            boolean exito = daoDon.insertarUsuarioDonacionSuministros(usuarioDonacion);
-
-            if (exito) {
-                response.sendRedirect("SolicitudesDeSuministros");
-            } else {
-                response.sendRedirect("SolicitudesDeSuministros?action=vista&id="+donacionSuministrosID+"&error=true");
-
-            }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
+        Usuario u = (Usuario) request.getSession().getAttribute("UsuarioSession");
+        if (u == null) {
+            // Si no hay usuario en la sesión, redirigir al login
+            response.sendRedirect(request.getContextPath());
+            return;
         }
+        else{
+            DonacionesDao daoDon = new DonacionesDao();
+            int idUsuario = u.getUsuarioID();
+
+            try {
+                int usuarioID = idUsuario;
+                int donacionSuministrosID = Integer.parseInt(request.getParameter("donacionSuministrosID"));
+                System.out.println(request.getParameter("donacionSuministrosID"));
+                int cantidadSuministro = Integer.parseInt(request.getParameter("cantidad"));
+                System.out.println(request.getParameter("cantidad"));
+                String tipoDonacion = request.getParameter("tipo-donacion");
+                System.out.println(request.getParameter("tipo-donacion"));
+
+
+                // Usar DateTimeFormatter para LocalDate
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                System.out.println(request.getParameter("fechaEntrega"));
+                LocalDate fechaDonacion = LocalDate.parse(request.getParameter("fechaEntrega"), formatter);
+
+
+
+                Usuario usuario = new Usuario();
+                usuario.setUsuarioID(usuarioID);
+
+                DonacionSuministros donacionSuministros = new DonacionSuministros();
+                donacionSuministros.setDonacionSuministrosID(donacionSuministrosID);
+
+                UsuarioDonacionSuministro usuarioDonacion = new UsuarioDonacionSuministro();
+                usuarioDonacion.setUsuario(usuario);
+                usuarioDonacion.setDonacionSuministros(donacionSuministros);
+                usuarioDonacion.setCantidadSuministro(cantidadSuministro);
+                usuarioDonacion.setFechaDonacion(fechaDonacion);
+                usuarioDonacion.setTipoDonacion(tipoDonacion);
+
+                boolean exito = daoDon.insertarUsuarioDonacionSuministros(usuarioDonacion);
+
+                if (exito) {
+                    response.sendRedirect("SolicitudesDeSuministros");
+                } else {
+                    response.sendRedirect("SolicitudesDeSuministros?action=vista&id="+donacionSuministrosID+"&error=true");
+
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+
+        }
+
 
     }
 }

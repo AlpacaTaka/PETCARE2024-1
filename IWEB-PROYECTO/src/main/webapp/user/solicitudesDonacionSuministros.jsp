@@ -3,6 +3,7 @@
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="com.example.iwebproyecto.beans.PublicacionMascotaPerdida" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="UsuarioSession" class="com.example.iwebproyecto.beans.Usuario" scope="session" />
 <%
     ArrayList<DonacionSuministros> listaSolicitudes = (ArrayList) request.getAttribute("listaSolicitudes");
     ArrayList<PublicacionMascotaPerdida> listaPerdidos = (ArrayList) request.getAttribute("mascotasPerdidas");
@@ -47,9 +48,9 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Juan</div>
+                <div class="welcome-text">Hola, <%= UsuarioSession.getNombre() %></div>
             </div>
-            <div class="logo"><a href="/user/inicio.html"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="${pageContext.request.contextPath}/Inicio"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
 
 

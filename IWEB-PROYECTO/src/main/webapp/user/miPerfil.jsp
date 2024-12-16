@@ -1,7 +1,7 @@
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:useBean id="usuario" class="com.example.iwebproyecto.beans.Usuario" scope="request" />
-
+<jsp:useBean id="UsuarioSession" class="com.example.iwebproyecto.beans.Usuario" scope="session" />
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -49,9 +49,9 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Juan</div>
+                <div class="welcome-text">Hola, <%= UsuarioSession.getNombre() %></div>
             </div>
-            <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="${pageContext.request.contextPath}/Inicio"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
 
         <div class="main">
@@ -101,7 +101,7 @@
                 <div class="row d-flex flex-column" id="contenido-nofooter">
                     <div class="container">
                         <div class="container md-8" style="width: 100%;max-width: 800px; margin-bottom: 20px; padding: 0;">
-                            <button type="button" onclick="location.href='inicio.jsp'" class="btn btn-personal2">Regresar   </button>
+                            <button type="button" onclick="window.history.back();" class="btn btn-personal2">Regresar   </button>
                         </div>
                         <div class="container md-8" style="width: 100%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
                             <form id="uploadForm" style="padding:10px" >
@@ -110,7 +110,8 @@
                                 <div class="row justify-content-center p-1">
                                     <div class="col d-flex justify-content-center">
                                         <div class="image-container">
-                                            <img src="${pageContext.request.contextPath}/<%=usuario.getFoto().getRutaFoto()%>" alt="Perfil de usuario">
+                                            <img src="${pageContext.request.contextPath}/<%=usuario.getFoto().getRutaFoto()%>" alt="Perfil de usuario"
+                                                 onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Imagen+No+Disponible';">
                                         </div>
                                     </div>
                                 </div>

@@ -1,6 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.iwebproyecto.beans.Albergue" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="UsuarioSession" class="com.example.iwebproyecto.beans.Usuario" scope="session" />
 <%
 
     ArrayList<Albergue> listaAlbergues = (ArrayList) request.getAttribute("listaAlbergues");
@@ -52,7 +53,7 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Juan</div>
+                <div class="welcome-text">Hola, <%= UsuarioSession.getNombre() %></div>
             </div>
             <div class="logo"><a href="/user/inicio.jsp"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
@@ -73,7 +74,7 @@
                     <li><a href="${pageContext.request.contextPath}/TodosLosEventos" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/PostulacionTemporal" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/SolicitudesDeSuministros" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/TodosLosAlbergues" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/TodosLosAlbergues" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd" style="color: #000;"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/PortalDeAdopcion" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/ReportarPerdido" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
 
@@ -135,7 +136,8 @@
                                 <!-- Card 1 -->
                                 <div class="col-12 col-md-6 col-lg-4 mb-4">
                                     <div class="card h-100">
-                                        <img src="${pageContext.request.contextPath}/<%=a.getFoto().getRutaFoto()%>" class="card-img-top" alt="Card 1">
+                                        <img src="${pageContext.request.contextPath}/<%=a.getFoto().getRutaFoto()%>" class="card-img-top" alt="Card 1"
+                                             onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Imagen+No+Disponible';">
                                         <div class="card-body">
                                             <div class="row d-flex justify-content-center">
                                                 <h4 class="card-title text-center"><%=a.getNombreAlbergue()%></h4>
@@ -172,7 +174,8 @@
                             <div class="grid-container" id="grilla-perdidos">
                                 <!-- Card 1 -->
                                 <div class="card .perdido">
-                                    <img src="/common/img/perdidos/perdido1.jpg" class="card-img-top card-img-don" alt="Canela">
+                                    <img src="/common/img/perdidos/perdido1.jpg" class="card-img-top card-img-don" alt="Canela"
+                                         onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Imagen+No+Disponible';">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Canela</h5>
                                         <p class="card-text"><strong>Lugar de extravío:</strong> Parque Condesa</p>

@@ -4,6 +4,7 @@
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.time.LocalTime" %>
 <%@ page import="java.time.LocalDate" %>
+<jsp:useBean id="UsuarioSession" class="com.example.iwebproyecto.beans.Usuario" scope="session" />
 <jsp:useBean id="evento" class="com.example.iwebproyecto.beans.EventoBenefico" scope="request" />
 <%
 DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd MMM.").withLocale(new Locale("es", "ES"));
@@ -38,7 +39,7 @@ String horaFormateada = horaEvento.format(formatoHora);
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Juan</div>
+                <div class="welcome-text">Hola, <%= UsuarioSession.getNombre() %></div>
             </div>
             <div class="logo"><a href="/user/inicio.html"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
@@ -88,14 +89,23 @@ String horaFormateada = horaEvento.format(formatoHora);
 
                 <div class="col" id="contenido-nofooter">
                     <div class="container md-8" style="width: 85%; max-width: 800px; margin-bottom: 20px; padding: 0;">
-                        <button type="button" class="btn btn-personal2" onclick="location.href='/user/allEventos.html'"> Regresar </button>
+                        <button type="button" class="btn btn-personal2" onclick="window.history.back();"> Regresar </button>
                     </div>
                     <div class="container md-8" style="width: 85%; max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px; display: flex; justify-content: center; align-items: center;">
                         <div class="card-body" style="width: 100%; text-align: center; padding: 10px 50px;">
                             <h2 class="card-title" style="margin-top: 10px;"><%=evento.getNombre()%></h2>
                             <div style="display: flex; justify-content: center; margin-top: 10px; ">
-                                <img src="${pageContext.request.contextPath}/<%=evento.getFoto().getRutaFoto()%>" class="card-img-eve" alt="Imagen" style="width: 100%; max-width: 100%; height: auto; border-radius: 15px;">
+                                <img src="${pageContext.request.contextPath}/<%=evento.getFoto().getRutaFoto()%>"
+                                     class="card-img-eve"
+                                     alt="Imagen"
+                                     style="width: 100%; max-width: 60%; height: auto; border-radius: 15px;"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div class="placeholder bg-secondary text-white text-center"
+                                     style="width: 100%; max-width: 60%; height: auto; padding: 20px; border-radius: 15px; display: none;">
+                                    Imagen no disponible
+                                </div>
                             </div>
+
                             <div class="badge text-bg-primary text-wrap" style="margin-top: 10px; font-size: 1.5rem; padding: 10px 20px;">
                                 <%= fechaFormateada + " " + horaFormateada %>
                             </div>                            

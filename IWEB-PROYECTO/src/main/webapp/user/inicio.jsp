@@ -317,134 +317,71 @@
                         <div class="container d-lg-none">
                             <div id="carouselDonaciones-mobile" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="3000">
                                 <div class="carousel-inner">
-                                    <!-- Primera diapositiva -->
-                                    <div class="carousel-item active">
-                                        <div class="card card-don">
-                                            <img src="/common/img/donaciones/donacion1.png" class="card-img-top card-img-don-movil" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Necesitamos dinero para vacunas</h5>
-                                                <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                    Activo
-                                                </div>
-                                                <p class="card-text">Descripción de la tarjeta 7.</p>
-                                                <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
+                                    <%
+                                        contador = 0; // Reiniciamos el contador
+                                        for (DonacionSuministros donacion : listaDonaciones) {
+                                            String activeClass = (contador == 0) ? "active" : "";
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Segunda diapositiva -->
-                                    <div class="carousel-item">
-                                        <div class="card card-don">
-                                            <img src="/common/img/donaciones/donacion2.png" class="card-img-top card-img-don-movil" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Ayudanos a Ayudar</h5>
-                                                <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                    Activo
-                                                </div>
-                                                <p class="card-text">Descripción de la tarjeta 8.</p>
-                                                <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Tercera diapositiva -->
-                                    <div class="carousel-item">
-                                        <div class="card card-don">
-                                            <img src="/common/img/donaciones/donacion3.png" class="card-img-top card-img-don-movil" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="evento4">Necesitamos su Corazon noble</h5>
-                                                <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                    Activo
-                                                </div>
-                                                <p class="card-text">Descripción de la tarjeta 9.</p>
-                                                <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Cuarta Diapositiva -->
-                                    <div class="carousel-item">
-                                        <div class="card card-don">
-                                            <img src="/common/img/donaciones/donacion4.jpg" class="card-img-top card-img-don-movil" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="evento4">Necesitamos su Corazon noble</h5>
-                                                <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                    Activo
-                                                </div>
-                                                <p class="card-text">Descripción de la tarjeta 9.</p>
-                                                <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Quinta Diapositiva -->
-                                    <div class="carousel-item">
-                                        <div class="card card-don">
-                                            <img src="/common/img/donaciones/donacion5.jpg" class="card-img-top card-img-don-movil" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="evento4">Necesitamos su Corazon noble</h5>
-                                                <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                    Activo
-                                                </div>
-                                                <p class="card-text">Descripción de la tarjeta 9.</p>
-                                                <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 6 Diapositiva -->
-                                    <div class="carousel-item">
-                                        <div class="card card-don">
-                                            <img src="/common/img/donaciones/donacion6.jpg" class="card-img-top card-img-don-movil" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="evento4">Necesitamos su Corazon noble</h5>
-                                                <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                    Activo
-                                                </div>
-                                                <p class="card-text">Descripción de la tarjeta 9.</p>
-                                                <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 7 Diapositiva -->
-                                    <div class="carousel-item">
-                                        <div class="card card-don">
-                                            <img src="/common/img/donaciones/donacion7.png" class="card-img-top card-img-don-movil" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="evento4">Necesitamos su Corazon noble</h5>
-                                                <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                    Activo
-                                                </div>
-                                                <p class="card-text">Descripción de la tarjeta 9.</p>
-                                                <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 8 Diapositiva -->
-                                    <div class="carousel-item">
-                                        <div class="card card-don">
-                                            <img src="/common/img/donaciones/donacion8.png" class="card-img-top card-img-don-movil" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="evento4">Necesitamos su Corazon noble</h5>
-                                                <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                    Activo
-                                                </div>
-                                                <p class="card-text">Descripción de la tarjeta 9.</p>
-                                                <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 9 Diapositiva -->
-                                    <div class="carousel-item">
-                                        <div class="card card-don">
-                                            <img src="/common/img/donaciones/donacion9.png" class="card-img-top card-img-don-movil" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="evento4">Necesitamos su Corazon noble</h5>
-                                                <div class="badge text-bg-success text-wrap" style="width: 7rem;">
-                                                    Activo
-                                                </div>
-                                                <p class="card-text">Descripción de la tarjeta 9.</p>
-                                                <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                            Date fechaInicio = null;
+                                            Date fechaFin = null;
+                                            LocalTime horaInicio = null;
+                                            LocalTime horaFin = null;
 
+                                            boolean datosValidos = true;
+
+                                            try {
+                                                // Convertir las fechas de String a Date
+                                                fechaInicio = dateFormat.parse(donacion.getFechaInicioRecepcion());
+                                                fechaFin = dateFormat.parse(donacion.getFechaFinRecepcion());
+
+                                                // Convertir las horas de String a LocalTime
+                                                horaInicio = LocalTime.parse(donacion.getHoraInicioRecepcion(), timeFormat);
+                                                horaFin = LocalTime.parse(donacion.getHoraFinRecepcion(), timeFormat);
+                                            } catch (Exception e) {
+                                                datosValidos = false;
+                                            }
+
+                                            Date fechaActual = new Date();
+                                            LocalTime horaActual = LocalTime.now();
+
+                                            String estadoDonacion = "Pasado";
+                                            if (datosValidos) {
+                                                if (fechaActual.before(fechaInicio) ||
+                                                        (!fechaActual.before(fechaInicio) && !fechaActual.after(fechaFin))) {
+                                                    if (fechaActual.equals(fechaInicio)) {
+                                                        if (!horaActual.isBefore(horaInicio)) {
+                                                            estadoDonacion = "Activo";
+                                                        }
+                                                    } else if (fechaActual.equals(fechaFin)) {
+                                                        if (!horaActual.isAfter(horaFin)) {
+                                                            estadoDonacion = "Activo";
+                                                        }
+                                                    } else {
+                                                        estadoDonacion = "Activo";
+                                                    }
+                                                }
+                                            }
+                                    %>
+                                    <!-- Cada slide tiene solo una tarjeta -->
+                                    <div class="carousel-item <%= activeClass %>">
+                                        <div class="card card-don">
+                                            <img src="${pageContext.request.contextPath}/<%=donacion.getFoto().getRutaFoto()%>"
+                                                 class="card-img-top card-img-don-movil" alt="..."
+                                                 onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Imagen+No+Disponible';">
+                                            <div class="card-body">
+                                                <div class="badge text-bg-<%= estadoDonacion.equals("Activo") ? "success" : "secondary" %> text-wrap" style="width: 7rem;">
+                                                    <%= estadoDonacion %>
+                                                </div>
+                                                <h5 class="card-title"><%= donacion.getTituloAvisoDonacion() %></h5>
+                                                <a href="<%=request.getContextPath()%>/SolicitudesDeSuministros?action=vista&id=<%= donacion.getDonacionSuministrosID() %>"
+                                                   class="btn btn-personal" id="btn-crd-cr">Ver Solicitud</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%
+                                            contador++; // Incrementamos el contador
+                                        }
+                                    %>
                                 </div>
 
                                 <!-- Controles del carrusel -->
@@ -522,106 +459,37 @@
                         <!-- Carrusel para Tablet (2 cards por slide) -->
                         <div id="Adop-tablet" class="carousel carousel-dark slide d-none d-md-block d-lg-none" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
+                                <%
+                                    i = 0;
+                                    for (MascotasAdopcion mascota : listaAdopcion) {
+                                        String activeClass = (i == 0) ? "active" : "";
+                                %>
+                                <% if (i % 2 == 0) { %>
+                                <!-- Empieza un nuevo slide cada 2 tarjetas -->
+                                <div class="carousel-item <%= activeClass %>">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido1.jpg" class="card-img-top card-img-adop" alt="...">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Card 1</h5>
-                                                    <p class="card-text">Descripción de la card 1.</p>
-                                                    <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido2.jpg" class="card-img-top card-img-adop" alt="...">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Card 2</h5>
-                                                    <p class="card-text">Descripción de la card 2.</p>
-                                                    <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Agrega más slides aquí -->
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido3.jpg" class="card-img-top  card-img-adop" alt="...">
+                                        <% } %>
 
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Card 3</h5>
-                                                    <p class="card-text">Descripción de la card 1.</p>
-                                                    <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="col-md-6">
                                             <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido4.jpg" class="card-img-top card-img-adop" alt="...">
+                                                <img src="${pageContext.request.contextPath}/<%=mascota.getFoto().getRutaFoto()%>"
+                                                     class="card-img-top card-img-adop" alt="..."
+                                                     onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Imagen+No+Disponible';">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Card 4</h5>
-                                                    <p class="card-text">Descripción de la card 2.</p>
-                                                    <a href="#" class="btn btn-personal"  id="btn-crd-cr ">Ver Solicitud</a>
+                                                    <h5 class="card-title"><%= mascota.getNombreMascota() %></h5>
+                                                    <a href="PortalDeAdopcion?action=vista&id=<%=mascota.getIdAdopcion()%>" class="btn btn-personal" id="btn-crd-cr">Ver Solicitud</a>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
 
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido5.jpg" class="card-img-top  card-img-adop" alt="...">
-
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Card 5</h5>
-                                                    <p class="card-text">Descripción de la card 1.</p>
-                                                    <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido6.jpg" class="card-img-top card-img-adop" alt="...">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Card 6</h5>
-                                                    <p class="card-text">Descripción de la card 2.</p>
-                                                    <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido7.jpg" class="card-img-top card-img-adop" alt="...">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Card 7</h5>
-                                                    <p class="card-text">Descripción de la card 1.</p>
-                                                    <a href="#" class="btn btn-personal"  id="btn-crd-cr ">Ver Solicitud</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card card-don">
-                                                <img src="/common/img/perdidos/perdido8.jpg" class="card-img-top card-img-adop" alt="...">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Card 8</h5>
-                                                    <p class="card-text">Descripción de la card 2.</p>
-                                                    <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                        <% if ((i + 1) % 2 == 0 || i == listaAdopcion.size() - 1) { %>
+                                    </div> <!-- Cierra la fila -->
+                                </div> <!-- Cierra el slide -->
+                                <% } %>
+                                <%
+                                        i++;
+                                    }
+                                %>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#Adop-tablet" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -636,96 +504,26 @@
                         <!-- Carrusel para Móvil (1 card por slide) -->
                         <div id="Adop-telf" class="carousel carousel-dark slide d-block d-md-none" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class=" card card-don">
-                                        <img src="/common/img/perdidos/perdido1.jpg" class="card-img-top card-img-don-movil" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card 1</h5>
-                                            <p class="card-text">Descripción de la card 1.</p>
-                                            <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
+                                <%
+                                    i = 0;
+                                    for (MascotasAdopcion mascota : listaAdopcion) {
+                                        String activeClass = (i == 0) ? "active" : "";
+                                %>
+                                <div class="carousel-item <%= activeClass %>">
                                     <div class="card card-don">
-                                        <img src="/common/img/perdidos/perdido2.jpg" class="card-img-top card-img-don-movil" alt="...">
+                                        <img src="${pageContext.request.contextPath}/<%=mascota.getFoto().getRutaFoto()%>"
+                                             class="card-img-top card-img-don-movil" alt="..."
+                                             onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Imagen+No+Disponible';">
                                         <div class="card-body">
-                                            <h5 class="card-title">Card 2</h5>
-                                            <p class="card-text">Descripción de la card 1.</p>
-                                            <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
+                                            <h5 class="card-title"><%= mascota.getNombreMascota() %></h5>
+                                            <a href="PortalDeAdopcion?action=vista&id=<%=mascota.getIdAdopcion()%>" class="btn btn-personal" id="btn-crd-cr">Ver Solicitud</a>
                                         </div>
                                     </div>
-
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="card card-don">
-                                        <img src="/common/img/perdidos/perdido3.jpg" class="card-img-top card-img-don-movil" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card 3</h5>
-                                            <p class="card-text">Descripción de la card 1.</p>
-                                            <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="card card-don">
-                                        <img src="/common/img/perdidos/perdido4.jpg" class="card-img-top card-img-don-movil" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card 4</h5>
-                                            <p class="card-text">Descripción de la card 1.</p>
-                                            <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="card card-don">
-                                        <img src="/common/img/perdidos/perdido5.jpg" class="card-img-top card-img-don-movil" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card 5</h5>
-                                            <p class="card-text">Descripción de la card 1.</p>
-                                            <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="card card-don">
-                                        <img src="/common/img/perdidos/perdido6.jpg" class="card-img-top card-img-don-movil" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card 6</h5>
-                                            <p class="card-text">Descripción de la card 1.</p>
-                                            <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="card card-don">
-                                        <img src="/common/img/perdidos/perdido7.jpg" class="card-img-top card-img-don-movil" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card 7</h5>
-                                            <p class="card-text">Descripción de la card 1.</p>
-                                            <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="card card-don">
-                                        <img src="/common/img/perdidos/perdido8.jpg" class="card-img-top card-img-don-movil" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card 8</h5>
-                                            <p class="card-text">Descripción de la card 1.</p>
-                                            <a href="#" class="btn btn-personal"  id="btn-crd-cr">Ver Solicitud</a>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <!-- Agrega más slides aquí -->
-
+                                <%
+                                        i++;
+                                    }
+                                %>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#Adop-telf" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -760,7 +558,8 @@
                                     long diasPerdidos = java.time.temporal.ChronoUnit.DAYS.between(fechaPerdida, hoy);
                             %>
                             <div class="card .perdido">
-                                <img src="/common/img/perdidos/perdido1.jpg" class="card-img-top card-img-don" alt="Canela">
+                                <img src="${pageContext.request.contextPath}/<%=perdido.getFoto().getRutaFoto()%>"" class="card-img-top card-img-don" alt="Canela"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Imagen+No+Disponible';">
                                 <div class="card-body">
                                     <h5 class="card-title text-center">Canela</h5>
                                     <p class="card-text"><strong>Lugar de extravío: </strong><%= perdido.getLugarPerdida() %></p>
@@ -775,7 +574,7 @@
 
                         </div>
                     </div>
-                    <a href="/user/mascotasPerdidas.jsp" class="btn btn-personal m-2" id="btn-crd-cr">Ver más</a>
+                    <a href="${pageContext.request.contextPath}//Inicio" class="btn btn-personal m-2" id="btn-crd-cr">Ver más</a>
 
 
 

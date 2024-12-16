@@ -20,86 +20,105 @@ public class DonMonetariaServlet extends HttpServlet {
         String action = request.getParameter("action") == null ?
                 "lista" : request.getParameter("action");
 
-        switch (action) {
-            case "lista":
-
-                AlbergueDao albergueDao = new AlbergueDao();
-                ArrayList<Albergue> listaAlbergues = albergueDao.listarAlberguesActivosAprobados();
-
-                request.setAttribute("listaAlbergues", listaAlbergues);
-
-
-                RequestDispatcher dispatcher = request.getRequestDispatcher("user/donacionMonetaria.jsp");
-                dispatcher.forward(request, response);
-
-                break;
-            case "vista":
-                int idAlbergue = Integer.parseInt(request.getParameter("id"));
-                AlbergueDao albergueDao2 = new AlbergueDao();
-
-                DonacionesDao donacionesDao = new DonacionesDao();
-                ArrayList<DonacionSuministros> causas =donacionesDao.obtenerSolicitudesDonacionSuministrosPorIdActivo(idAlbergue);
-
-                Albergue albergue= albergueDao2.obtenerAlberguePorID(idAlbergue);
-                request.setAttribute("causas", causas);
-                request.setAttribute("albergue", albergue);
-
-                request.getRequestDispatcher("user/perfilAlbergue.jsp").forward(request, response);
-
-
-                break;
-            case "Donacion":
-
-                break;
-            default:
-
-                break;
+        Usuario u = (Usuario) request.getSession().getAttribute("UsuarioSession");
+        if (u == null) {
+            // Si no hay usuario en la sesión, redirigir al login
+            response.sendRedirect(request.getContextPath());
+            return;
         }
+        else{
+            switch (action) {
+                case "lista":
+
+                    AlbergueDao albergueDao = new AlbergueDao();
+                    ArrayList<Albergue> listaAlbergues = albergueDao.listarAlberguesActivosAprobados();
+
+                    request.setAttribute("listaAlbergues", listaAlbergues);
+
+
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("user/donacionMonetaria.jsp");
+                    dispatcher.forward(request, response);
+
+                    break;
+                case "vista":
+                    int idAlbergue = Integer.parseInt(request.getParameter("id"));
+                    AlbergueDao albergueDao2 = new AlbergueDao();
+
+                    DonacionesDao donacionesDao = new DonacionesDao();
+                    ArrayList<DonacionSuministros> causas =donacionesDao.obtenerSolicitudesDonacionSuministrosPorIdActivo(idAlbergue);
+
+                    Albergue albergue= albergueDao2.obtenerAlberguePorID(idAlbergue);
+                    request.setAttribute("causas", causas);
+                    request.setAttribute("albergue", albergue);
+
+                    request.getRequestDispatcher("user/perfilAlbergue.jsp").forward(request, response);
+
+
+                    break;
+                case "Donacion":
+
+                    break;
+                default:
+
+                    break;
+            }
+
+        }
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            // Captura los parámetros enviados desde el formulario
-            int usuarioId = 7; // Aquí deberías obtener el ID del usuario autenticado (ejemplo)
+        Usuario u = (Usuario) request.getSession().getAttribute("UsuarioSession");
+        if (u == null) {
+            // Si no hay usuario en la sesión, redirigir al login
+            response.sendRedirect(request.getContextPath());
+            return;
+        }
+        else{
+            try {
+                // Captura los parámetros enviados desde el formulario
+                int usuarioId = u.getUsuarioID(); // Aquí deberías obtener el ID del usuario autenticado (ejemplo)
 
-            Usuario usuario = new Usuario();
-            usuario.setUsuarioID(usuarioId);
+                Usuario usuario = new Usuario();
+                usuario.setUsuarioID(usuarioId);
 
-            int albergueId = Integer.parseInt(request.getParameter("albergueId"));
-            Albergue albergue = new Albergue();
-            albergue.setAlbergueID(albergueId);
+                int albergueId = Integer.parseInt(request.getParameter("albergueId"));
+                Albergue albergue = new Albergue();
+                albergue.setAlbergueID(albergueId);
 
-            int monto = Integer.parseInt(request.getParameter("monto"));
-            String causaIdStr = request.getParameter("causaId"); // Opcional: ID de donacionSuministros
+                int monto = Integer.parseInt(request.getParameter("monto"));
+                String causaIdStr = request.getParameter("causaId"); // Opcional: ID de donacionSuministros
 
-            int causaId = causaIdStr != null && !causaIdStr.isEmpty() ? Integer.parseInt(causaIdStr) : 0;
+                int causaId = causaIdStr != null && !causaIdStr.isEmpty() ? Integer.parseInt(causaIdStr) : 0;
 
-            // Fecha actual de donación
-            String fechaDonacion = java.time.LocalDate.now().toString();
+                // Fecha actual de donación
+                String fechaDonacion = java.time.LocalDate.now().toString();
 
-            // Crear objeto DonacionMonetaria
-            DonacionMonetaria donacion = new DonacionMonetaria();
-            donacion.setUsuario(usuario);
-            donacion.setAlbergue(albergue);
-            donacion.setCantidadMonetaria(monto);
-            donacion.setDonacionSuministrosID(causaId != 0 ? causaId : null);
-            donacion.setFechaDonacionMonetaria(fechaDonacion);
+                // Crear objeto DonacionMonetaria
+                DonacionMonetaria donacion = new DonacionMonetaria();
+                donacion.setUsuario(usuario);
+                donacion.setAlbergue(albergue);
+                donacion.setCantidadMonetaria(monto);
+                donacion.setDonacionSuministrosID(causaId != 0 ? causaId : null);
+                donacion.setFechaDonacionMonetaria(fechaDonacion);
 
-            // Llamar al metodo DAO para guardar la donación
-            DonacionesDao donacionesDao = new DonacionesDao();
-            boolean exito = donacionesDao.guardarDonacionMonetaria(donacion);
+                // Llamar al metodo DAO para guardar la donación
+                DonacionesDao donacionesDao = new DonacionesDao();
+                boolean exito = donacionesDao.guardarDonacionMonetaria(donacion);
 
-            if (exito) {
-                response.sendRedirect("TodosLosAlbergues?action=vista&id="+albergueId+"&mensaje=success");
-            } else {
+                if (exito) {
+                    response.sendRedirect("TodosLosAlbergues?action=vista&id="+albergueId+"&mensaje=success");
+                } else {
+                    response.sendRedirect("TodosLosAlbergues?action=lista&mensaje=error");
+                }
+
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
                 response.sendRedirect("TodosLosAlbergues?action=lista&mensaje=error");
             }
-
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            response.sendRedirect("TodosLosAlbergues?action=lista&mensaje=error");
         }
+
 
 
 

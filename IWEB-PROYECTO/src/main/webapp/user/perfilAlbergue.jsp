@@ -2,6 +2,7 @@
 <%@ page import="com.example.iwebproyecto.beans.DonacionSuministros" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="UsuarioSession" class="com.example.iwebproyecto.beans.Usuario" scope="session" />
 <%
 
     Albergue a = (Albergue) request.getAttribute("albergue");
@@ -127,7 +128,7 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Juan</div>
+                <div class="welcome-text">Hola, <%= UsuarioSession.getNombre() %></div>
             </div>
             <div class="logo"><a href="/user/inicio.html"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
@@ -141,7 +142,7 @@
                     <li><a href="/user/allEventos.html" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
                     <li><a href="/user/postularTemporal.html" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
                     <li><a href="/user/solicitudesDonacionSuministros.html" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
-                    <li><a href="/user/donacionMonetaria.html" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
+                    <li><a href="/user/donacionMonetaria.html" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd" style="color: #000;"></i></a></li>
                     <li><a href="/user/solicitudesAdopcion.html" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
                     <li><a href="/user/reportarMascotaPerdida.html" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
                     <li><a href="/user/reportarMaltrato.html" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
@@ -173,7 +174,7 @@
                 <!--Boton de regreso a la página principal-->
                 <div class="col" id="contenido-nofooter">
                     <div class="container md-8 d-flex justify-content-between g-2" style="width: 90%;max-width: 800px; margin-bottom: 20px; padding: 0;">
-                        <button type="button"  class="btn btn-personal2" onclick="location.href='donacionMonetaria.html'">  Regresar   </button>
+                        <button type="button"  class="btn btn-personal2" onclick="window.history.back();">  Regresar   </button>
 
                     </div>
                     <div class="container md-12" style="width: 90%;max-width: 800px; background-color: #fca6519f; border-radius: 30px; margin-bottom: 20px; padding: 10px 20px;">

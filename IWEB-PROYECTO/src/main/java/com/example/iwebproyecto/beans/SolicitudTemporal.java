@@ -11,7 +11,7 @@ public class SolicitudTemporal {
     private int cantidadCuartos;
     private int metrajeVivienda;
     private int tieneMascotas;
-    private int cantidadMascota;
+    private Integer cantidadMascota;
     private String tipoMascota;
     private int tieneHijos;
     private int viveSolo;
@@ -122,7 +122,7 @@ public class SolicitudTemporal {
         this.tieneMascotas = tieneMascotas;
     }
 
-    public int getCantidadMascota() {
+    public Integer getCantidadMascota() {
         return cantidadMascota;
     }
 

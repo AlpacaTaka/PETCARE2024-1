@@ -2,6 +2,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.example.iwebproyecto.beans.UsuarioDonacionSuministro" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="UsuarioSession" class="com.example.iwebproyecto.beans.Usuario" scope="session" />
 <%
     Double totalDonadoObj = (Double) request.getAttribute("totalDonado");
     double totalDonado = totalDonadoObj != null ? totalDonadoObj : 0.0;
@@ -66,9 +67,9 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Juan</div>
+                <div class="welcome-text">Hola, <%= UsuarioSession.getNombre() %></div>
             </div>
-            <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="${pageContext.request.contextPath}/Inicio"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
 
         <div class="main">
@@ -117,7 +118,7 @@
 
                 <div class="row" id="contenido-nofooter">
                     <div class="container md-8" style="width: 85%;max-width: 900px; margin-bottom: 20px; padding: 0;">
-                        <button type="button"  class="btn btn-personal2" onclick="location.href='inicio.jsp'">  Regresar   </button>
+                        <button type="button"  class="btn btn-personal2" onclick="window.history.back()">  Regresar   </button>
                     </div>
                     <div class="container md-8" style="width: 85%;max-width: 900px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
                         

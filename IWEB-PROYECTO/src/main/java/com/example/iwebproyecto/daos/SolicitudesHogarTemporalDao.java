@@ -461,5 +461,54 @@ public class SolicitudesHogarTemporalDao extends BaseDao{
         }
     }
 
+
+    public boolean guardarSolicitudTemporal(SolicitudTemporal solicitud) {
+        String sql = "INSERT INTO solicitudtemporal (usuarioID, edad, genero, celular, cantidadCuartos, " +
+                "metrajeVivienda, tieneHijos, viveSolo, trabajaRemoto, tieneMascotas, cantidadMascota, " +
+                "nombrePersonaReferencia, numeroContactoPR, fotoID, fotoID2, fotoID3, tiempoTemporal, inicioTemporal, " +
+                "finTemporal, fechaFormulario, estadoTemporal, comentarioCoordinador, numeroRechazosConsecutivos) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Mapear los valores de la solicitud a la consulta SQL
+            pstmt.setInt(1, solicitud.getUsuario().getUsuarioID());
+            pstmt.setInt(2, solicitud.getEdad());
+            pstmt.setString(3, solicitud.getGenero());
+            pstmt.setString(4, solicitud.getCelular());
+            pstmt.setInt(5, solicitud.getCantidadCuartos());
+            pstmt.setInt(6, solicitud.getMetrajeVivienda());
+            pstmt.setInt(7, solicitud.getTieneHijos());
+            pstmt.setInt(8, solicitud.getViveSolo());
+            pstmt.setInt(9, solicitud.getTrabajaRemoto());
+            pstmt.setInt(10, solicitud.getTieneMascotas());
+            pstmt.setObject(11, solicitud.getCantidadMascota(), java.sql.Types.INTEGER); // Puede ser NULL
+            pstmt.setString(12, solicitud.getTipoMascota());
+            pstmt.setString(13, solicitud.getNombrePersonaReferencia());
+            pstmt.setString(14, solicitud.getNumeroContactoPR());
+            pstmt.setInt(15, solicitud.getFoto().getFotoID());
+            pstmt.setInt(16, solicitud.getFoto2().getFotoID());
+            pstmt.setInt(17, solicitud.getFoto3().getFotoID());
+            pstmt.setInt(18, solicitud.getTiempoTemporal());
+            pstmt.setDate(19, java.sql.Date.valueOf(solicitud.getInicioTemporal()));
+            pstmt.setDate(20, java.sql.Date.valueOf(solicitud.getFinTemporal()));
+            pstmt.setString(21, solicitud.getEstado());
+            pstmt.setDate(22, java.sql.Date.valueOf(solicitud.getFecha()));
+            pstmt.setString(23, solicitud.getEstadoTemporal());
+            pstmt.setString(24, solicitud.getComentario());
+            pstmt.setInt(25, solicitud.getNumeroRechazos());
+
+            // Ejecutar la consulta
+            int filasAfectadas = pstmt.executeUpdate();
+
+            return filasAfectadas > 0; // Devuelve true si se insertó con éxito
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
 

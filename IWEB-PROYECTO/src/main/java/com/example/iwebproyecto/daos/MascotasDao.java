@@ -78,7 +78,7 @@ public class MascotasDao extends BaseDao {
         mascotaAdopcion.setDescripcionGeneral(rs.getString("descripcionGeneral"));
         mascotaAdopcion.setSeEncuentraTemporal(rs.getBoolean("seEncuentraTemporal"));
         mascotaAdopcion.setCondicionesAdopcion(rs.getString("condicionesAdopcion"));
-        System.out.println(rs.getString("especieMascota"));
+
         mascotaAdopcion.setEliminado(rs.getBoolean("eliminado"));
 
         DistritoDao distritoDao = new DistritoDao();

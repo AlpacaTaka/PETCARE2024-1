@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="UsuarioSession" class="com.example.iwebproyecto.beans.Usuario" scope="session" />
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,7 +33,7 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Juan</div>
+                <div class="welcome-text">Hola, <%= UsuarioSession.getNombre() %></div>
             </div>
             <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
@@ -89,25 +90,25 @@
                     
                     <!--Container del formulario-->
                     <div class="container md-8" style="width: 85%;max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px;">
-                        <form id="uploadForm"style="padding:10px">
+                        <form id="uploadForm" style="padding:10px" method="post" enctype="multipart/form-data" action="PostulacionTemporal">
                             <h1 style="margin-top: 10px;" class="text-center">Formulario de hogar temporal</h1>
                             <br>
                             <!--Primera columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">                         
                                     <label for="Nombre-temporal">Nombres</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese sus nombres" id="Nombre-temporal" name="Nombre-temporal" maxlength="40" required>      
+                                    <input type="text" class="form-control" placeholder="Ingrese sus nombres" id="Nombre-temporal" name="Nombre-temporal" maxlength="40"  readonly value="<%= UsuarioSession.getNombre() %>">
                                 </div>
                                 <div class="col-md-6 p-1">
                                     <label for="Apellido-temporal">Apellidos</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese sus apellidos" id="Apellido-temporal" name="Apellido-temporal" maxlength="50" required> 
+                                    <input type="text" class="form-control" placeholder="Ingrese sus apellidos" id="Apellido-temporal" name="Apellido-temporal" maxlength="50" readonly value="<%= UsuarioSession.getApellido() %>">
                                 </div>
                             </div>
                             <!--Segunda columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-5 p-1">
                                     <label for="edad">Edad</label>
-                                    <input type="number" class="form-control" id="edad" min="14" max="90" placeholder="Ingrese su edad" style="appearance: none; -moz-appearance: textfield;" required>
+                                    <input type="number" class="form-control" name="edad" id="edad" min="14" max="90" placeholder="Ingrese su edad" style="appearance: none; -moz-appearance: textfield;" required>
                                 </div>
                                 <div class="col-md-7 p-1 ">
                                     <label for="Sexo">Género</label>
@@ -138,63 +139,12 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-8 p-1">
                                     <label for="Direccion">Dirección</label>
-                                    <input type="text" class="form-control" placeholder="Ingrese su dirección" maxlength="100" id="Direccion" name="Direccion" required>
+                                    <input type="text" class="form-control" placeholder="Ingrese su dirección" maxlength="100" id="Direccion" name="Direccion" readonly value="<%= UsuarioSession.getDireccion() %>">
                                </div>
                                <div class="col-md-4 p-1" >
                                     <label for="distrito">Distrito</label>
-                                    <select class="form-select" name="distrito" id="distrito" required>
-                                        <option value="" disabled selected>Seleccione una opción</option>
-                                        <optgroup label="Lima Norte">
-                                            <option value="ancon">Ancon</option>
-                                            <option value="santa_rosa">Santa Rosa</option>
-                                            <option value="carabayllo">Carabayllo</option>
-                                            <option value="puente_piedra">Puente Piedra</option>
-                                            <option value="comas">Comas</option>
-                                            <option value="los_olivos">Los Olivos</option>
-                                            <option value="san_martin_porres">San Martín de Porres</option>
-                                            <option value="independencia">Independencia</option>
-                                        </optgroup>
-                                            <optgroup label="Lima Sur">
-                                            <option value="san_juan_miraflores">San Juan de Miraflores</option>
-                                            <option value="villa_maria_triunfo">Villa María del Triunfo</option>
-                                            <option value="villa_salvador">Villa el Salvador</option>
-                                            <option value="pachacamac">Pachacamac</option>
-                                            <option value="lurin">Lurín</option>
-                                            <option value="punta_hermosa">Punta Hermosa</option>
-                                            <option value="punta_negra">Punta Negra</option>
-                                            <option value="san_bartolo">San Bartolo</option>
-                                            <option value="santa_maria_mar">Santa María del Mar</option>
-                                            <option value="pucusana">Pucusana</option>
-                                        </optgroup>
-                                        <optgroup label="Lima Este">
-                                            <option value="san_juan_lurigancho">San Juan de Lurigancho</option>
-                                            <option value="chosica">Lurigancho/Chosica</option>
-                                            <option value="ate">Ate</option>
-                                            <option value="el_agustino">El Agustino</option>
-                                            <option value="santa_anita">Santa Anita</option>
-                                            <option value="la_molina">La Molina</option>
-                                            <option value="cieneguilla">Cieneguilla</option>
-                                        </optgroup>
-                                        <optgroup label="Lima Oeste">
-                                            <option value="rimac">Rimac</option>
-                                            <option value="cercado_lima">Cercado de Lima</option>
-                                            <option value="breña">Breña</option>
-                                            <option value="pueblo_libre">Pueblo Libre</option>
-                                            <option value="magdalena">Magdalena</option>
-                                            <option value="jesus_maria">Jesus María</option>
-                                            <option value="la_victoria">La Victoria</option>
-                                            <option value="lince">Lince</option>
-                                            <option value="san_isidro">San Isidro</option>
-                                            <option value="san_miguel">San Miguel</option>
-                                            <option value="san_borja">San Borja</option>
-                                            <option value="surquillo">Surquillo</option>
-                                            <option value="santiago_surco">Santiago de Surco</option>
-                                            <option value="barranco">Barranco</option>
-                                            <option value="chorrillos">Chorrillos</option>
-                                            <option value="san_luis">San Luis</option>
-                                            <option value="miraflores">Miraflores</option>
-                                        </optgroup>
-                                    </select>
+                                    <input type="text" class="form-control" placeholder="Ingrese su dirección" name="distrito" maxlength="100" id="distrito"  readonly value="<%= UsuarioSession.getDistrito().getNombreDistrito() %>">
+
                                 </div>
                                 
                             </div>
@@ -202,15 +152,15 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-5 p-1">
                                     <label for="celular">Celular</label>
-                                    <input type="number" class="form-control" id="celular" placeholder="Ingrese su número de celular" required>
+                                    <input type="number" class="form-control" id="celular" name="celular" placeholder="Ingrese su número de celular" required>
                                 </div>
                                 <div class="col-md-3 p-1">
                                     <label for="cantidad-cuartos">Cantidad de cuartos</label>
-                                    <input type="number" class="form-control" id="cantidad-cuartos" min="1" max="5" placeholder="Ingrese un número" required>
+                                    <input type="number" class="form-control" id="cantidad-cuartos" name="cantidadCuartos" min="1" max="5" placeholder="Ingrese un número" required>
                                 </div>
                                 <div class="col-md-4 p-1">
                                     <label for="metraje-casa">Metraje de la vivienda <strong>(m²)</strong></label>
-                                    <input type="number" class="form-control" id="metraje-casa" min="30" max="300" placeholder="Ingrese un número" required>
+                                    <input type="number" class="form-control" id="metraje-casa" name="metraje-casa" min="30" max="300" placeholder="Ingrese un número" required>
                                 </div>
                             </div>
                             <!--Quinta columna de selección-->
@@ -299,14 +249,14 @@
                                 </div>
                                 <div class="col-md-4 p-1">
                                     <label for="celular-referencia">Celular</label>
-                                    <input type="number" class="form-control" id="celular-referencia" placeholder="Ingrese el número de celular" required>
+                                    <input type="number" class="form-control" name="celular-referencia" id="celular-referencia" placeholder="Ingrese el número de celular" required>
                                 </div>
                             </div>
                             <!--Octava columna de selección-->
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-12 p-1">
                                     <label for="formFileMultiple" class="form-label">Adjunte imágenes de la vivienda</label>
-                                    <input class="form-control" type="file" id="formFileMultiple" multiple accept=".png" onchange="validateFiles(this)" required>
+                                    <input class="form-control" type="file" name="fotos" id="formFileMultiple" multiple accept=".png" onchange="validateFiles(this)" required>
                                     <div id="fileError" class="text-danger mt-2" style="display: none;">El archivo debe ser una imagen PNG.</div>
                                     <div id="cantError" class="text-danger mt-3" style="display: none;">El máximo de archivos a subir es 4.</div>
                                 </div>
@@ -316,7 +266,7 @@
                             <div class="row justify-content-center p-1">
                                 <div class="col-md-6 p-1">
                                     <label for="tiempo-temporal">Tiempo de temporal (en semanas)</label>
-                                    <input type="number" class="form-control" id="tiempo-temporal" placeholder="Ingrese la cantidad de semanas" min="2" max="104" required>
+                                    <input type="number" name="tiempoTemporal" class="form-control" id="tiempo-temporal" placeholder="Ingrese la cantidad de semanas" min="2" max="104" required>
                                 </div>
                                 <div class="col-md-3 p-1">
                                     <label for="fechaInicio">Fecha de inicio:</label><br>

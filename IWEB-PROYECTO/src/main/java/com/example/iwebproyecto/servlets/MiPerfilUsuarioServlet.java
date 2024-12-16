@@ -25,30 +25,40 @@ public class MiPerfilUsuarioServlet  extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
-        String idParam ="7";
-
-        int id = Integer.parseInt(idParam);
-
-        UsuarioDao usuarioDao = new UsuarioDao();
-        Usuario usuario = null;
-        try {
-            usuario = usuarioDao.obtenerUsuarioPorID(id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        Usuario u = (Usuario) request.getSession().getAttribute("UsuarioSession");
+        if (u == null) {
+            // Si no hay usuario en la sesión, redirigir al login
+            response.sendRedirect(request.getContextPath());
+            return;
         }
 
-        request.setAttribute("usuario", usuario);
+        else{
+
+            int id = u.getUsuarioID();
+
+            UsuarioDao usuarioDao = new UsuarioDao();
+            Usuario usuario = null;
+            try {
+                usuario = usuarioDao.obtenerUsuarioPorID(id);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            request.setAttribute("usuario", usuario);
 
 
-        // Establece el tipo de contenido de la respuesta
-        response.setContentType("text/html");
+            // Establece el tipo de contenido de la respuesta
+            response.setContentType("text/html");
 
-        // Obtiene el RequestDispatcher para la página JSP
-        RequestDispatcher rd = request.getRequestDispatcher("user/miPerfil.jsp");
+            // Obtiene el RequestDispatcher para la página JSP
+            RequestDispatcher rd = request.getRequestDispatcher("user/miPerfil.jsp");
 
-        // Reenvía la solicitud y la respuesta al JSP
-        rd.forward(request, response);
+            // Reenvía la solicitud y la respuesta al JSP
+            rd.forward(request, response);
+
+        }
+
+
 
 
 

@@ -1,4 +1,20 @@
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.LocalTime" %>
+<%@ page import="java.util.Locale" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="UsuarioSession" class="com.example.iwebproyecto.beans.Usuario" scope="session" />
+<jsp:useBean id="evento" class="com.example.iwebproyecto.beans.EventoBenefico" scope="request" />
+<%
+    DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd MMM.").withLocale(new Locale("es", "ES"));
+    DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("hh:mm a").withLocale(new Locale("es", "ES"));
+    LocalDate fechaEvento = evento.getFechaEvento();  // Obtener la fecha del evento
+    LocalTime horaEvento = evento.getHoraInicio();    // Obtener la hora del evento
+
+// Formatear la fecha y la hora
+    String fechaFormateada = fechaEvento.format(formatoFecha);
+    String horaFormateada = horaEvento.format(formatoHora);
+%>
 <!--ESTA ES SOLO UNA PÁGINA CREADA PARA VER LAS FUNCIONES A IMPLEMENTARSE EN UN BOTON RESPONSIVE EN CADA CASO DADO-->
 <!DOCTYPE html>
 <html lang="es">
@@ -22,9 +38,9 @@
                     <div>Menu</div>
                     <div class="burguer"><i class="fi-rr-menu-burger"></i></div>
                 </div>
-                <div class="welcome-text">Hola, Juan</div>
+                <div class="welcome-text">Hola, <%= UsuarioSession.getNombre() %></div>
             </div>
-            <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="${pageContext.request.contextPath}/Inicio"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
 
         <div class="main">
@@ -72,13 +88,21 @@
 
                 <div class="col" id="contenido-nofooter">
                     <div class="container md-8" style="width: 85%; max-width: 800px; margin-bottom: 20px; padding: 0;">
-                        <button type="button" class="btn btn-personal2" onclick="location.href='allEventos.jsp'"> Regresar </button>
+                        <button type="button" class="btn btn-personal2" onclick="window.history.back();"> Regresar </button>
                     </div>
                     <div class="container md-8" style="width: 85%; max-width: 800px; background-color:#eb903b76; border-radius: 30px; padding: 0 20px; display: flex; justify-content: center; align-items: center;">
                         <div class="card-body" style="width: 100%; text-align: center; padding: 10px 50px;">
                             <h2 class="card-title" style="margin-top: 10px;">Gran Evento de Vacunación!</h2>
                             <div style="display: flex; justify-content: center; margin-top: 10px; ">
-                                <img src="/common/img/eventos/evento2.jpeg" class="card-img-eve" alt="Imagen" style="width: 100%; max-width: 100%; height: auto; border-radius: 15px;">
+                                <img src="${pageContext.request.contextPath}/<%=evento.getFoto().getRutaFoto()%>"
+                                     class="card-img-eve"
+                                     alt="Imagen"
+                                     style="width: 100%; max-width: 60%; height: auto; border-radius: 15px;"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div class="placeholder bg-secondary text-white text-center"
+                                     style="width: 100%; max-width: 60%; height: auto; padding: 20px; border-radius: 15px; display: none;">
+                                    Imagen no disponible
+                                </div>
                             </div>
                             <div class="badge text-bg-primary text-wrap" style="margin-top: 10px; font-size: 1.5rem; padding: 10px 20px;">
                                 25 Sep. 08:00am
