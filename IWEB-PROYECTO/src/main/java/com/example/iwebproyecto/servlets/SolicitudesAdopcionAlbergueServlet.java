@@ -1,6 +1,7 @@
 package com.example.iwebproyecto.servlets;
 
 import com.example.iwebproyecto.beans.*;
+import com.example.iwebproyecto.daos.AlbergueDao;
 import com.example.iwebproyecto.daos.AlbergueDaoRevenge;
 import com.example.iwebproyecto.daos.FotoDao;
 import jakarta.servlet.ServletException;
@@ -26,8 +27,10 @@ public class SolicitudesAdopcionAlbergueServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
-
-        int idAlbergue = (Integer) request.getSession().getAttribute("idAlbergue");
+        AlbergueDao albergueDao = new AlbergueDao();
+        int idAlbergue= (Integer) request.getSession().getAttribute("idAlbergue");
+        Albergue albergue = albergueDao.obtenerAlberguePorID(idAlbergue);
+        request.setAttribute("albergue", albergue);
         switch (action) {
             case "lista":
                 Collection<UsuarioAdopcion> lista = albergueDaoRevenge.listaUsuarioAdopcion(idAlbergue);
