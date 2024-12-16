@@ -123,7 +123,8 @@
                             <%for (MascotasAdopcion mascota : lista) {%>
                             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
                                 <div class="card h-100">
-                                    <img src="<%=request.getContextPath()%>/uploads/fotosMascotasAdopcion/<%= mascota.getFoto().getRutaFoto() %>"
+                                    <img src="<%= request.getContextPath() + "/uploads/fotosMascotasAdopcion/" + mascota.getFoto().getRutaFoto()
+                                            %>"
                                          class="card-img-top" alt="<%= mascota.getNombreMascota() %>"
                                          style="max-width: 300px; height: 260px; object-fit: cover;">
                                     <div class="card-body">

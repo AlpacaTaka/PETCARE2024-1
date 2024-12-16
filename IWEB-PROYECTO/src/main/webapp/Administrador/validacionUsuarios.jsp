@@ -1,4 +1,6 @@
+<%@ page import="com.example.iwebproyecto.beans.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="listaUser" type="java.util.ArrayList<com.example.iwebproyecto.beans.Usuario>" scope="request"/>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -45,7 +47,7 @@
             </div>
             <div class="welcome-text">Hola, Administrador</div>
         </div>
-        <div class="logo"><a href="/administrator/dashboard.html"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+        <div class="logo"><a href="<%=request.getContextPath()%>/Dashboard"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
     </header>
 
     <div class="main">
@@ -54,12 +56,12 @@
         <div class="barside">
             <ul class="navlinks">
                 <li><a href="<%=request.getContextPath()%>/admincuentas" title="Administracion"><i class="fi-rr-ballot-check"></i></a></li>
-                <li><a href="/administrator/solicitudCuentaAlbergues.html" title="Validacion Albergues"><i class="fi-rr-house-building"></i></a></li>
-                <li><a href="/administrator/validacionUsuarios.html" title="Validacion Usuarios"><i class="fi-rr-user-trust"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/ValidarAlb" title="Validacion Albergues"><i class="fi-rr-house-building"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/ValidarUser" title="Validacion Usuarios"><i class="fi-rr-user-trust"></i></a></li>
                 <li><a href="<%=request.getContextPath()%>/CrearCoordinador" title="Crear Coordinador de Zona"><i class="fi-rr-people-network-partner"></i></a></li>
                 <li><a href="<%=request.getContextPath()%>/LugarHabilitado" title="Crear Lugar Habilitado"><i class="fi-rr-map-location-track"></i></a></li>
                 <li><a href="<%=request.getContextPath()%>/Dashboard" title="Dashboard"><i class="fi-rr-search-alt"></i></a></li>
-                <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>/Login" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
             </ul>
 
         </div>
@@ -68,8 +70,8 @@
             <a href="<%=request.getContextPath()%>/admincuentas">Administración</a>
             <hr>
 
-            <a href="/administrator/solicitudCuentaAlbergues.html">Validar Albergues</a>
-            <a href="/administrator/validacionUsuarios.html">Validar Usuarios</a>
+            <a href="<%=request.getContextPath()%>/ValidarAlb">Validar Albergues</a>
+            <a href="<%=request.getContextPath()%>/ValidarUser">Validar Usuarios</a>
             <hr>
 
             <a href="<%=request.getContextPath()%>/CrearCoordinador">Crear Coordinador de Zona</a>
@@ -77,7 +79,7 @@
             <hr>
             <a href="<%=request.getContextPath()%>/Dashboard">Dashboard</a>
             <hr>
-            <a href="/login/login.html">Cerrar Sesión</a>
+            <a href="<%=request.getContextPath()%>/Login">Cerrar Sesión</a>
 
 
         </div>
@@ -110,202 +112,21 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <%for (Usuario usuario : listaUser){%>
                                     <tr>
-                                        <td>Juan Ernesto Pacheco Solorzano</td>
-                                        <td>7421973</td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Calle Parque San Martin 242 Dpto. 904</td>
+                                        <td><%=usuario.getNombre()%> <%=usuario.getApellido()%></td>
+                                        <td><%=usuario.getDni()%></td>
+                                        <td><%=usuario.getDistrito().getNombreDistrito()%></td>
+                                        <td><%=usuario.getDireccion()%></td>
 
                                         <td>
                                             <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
+                                                <a href="<%=request.getContextPath()%>/ValidarUser?action=aceptar&id=<%=usuario.getUsuarioID()%>"><button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button></a>
+                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup('<%=request.getContextPath()%>/ValidarUser?action=rechazar&id=<%=usuario.getUsuarioID()%>')"><span class="fi fi-rr-x"></span></button>
                                             </div>
                                         </td>
                                     </tr>
-                                    <!-- Agrega más filas según sea necesario -->
-                                    <tr>
-                                        <td>Pedro Castillo</td>
-                                        <td>7421973</td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Calle Parque San Martin 242 Dpto. 904</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan Ernesto Pacheco Solorzano</td>
-                                        <td>7421973</td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Calle Parque San Martin 242 Dpto. 904</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                    <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan Ernesto Pacheco Solorzano</td>
-                                        <td>7421973</td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Calle Parque San Martin 242 Dpto. 904</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan Ernesto Pacheco Solorzano</td>
-                                        <td>7421973</td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Calle Parque San Martin 242 Dpto. 904</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan Ernesto Pacheco Solorzano</td>
-                                        <td>7421973</td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Calle Parque San Martin 242 Dpto. 904</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan Ernesto Pacheco Solorzano</td>
-                                        <td>7421973</td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Calle Parque San Martin 242 Dpto. 904</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan Ernesto Pacheco Solorzano</td>
-                                        <td>7421973</td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Calle Parque San Martin 242 Dpto. 904</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan Ernesto Pacheco Solorzano</td>
-                                        <td>7421973</td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Calle Parque San Martin 242 Dpto. 904</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan Ernesto Pacheco Solorzano</td>
-                                        <td>7421973</td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Calle Parque San Martin 242 Dpto. 904</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan Ernesto Pacheco Solorzano</td>
-                                        <td>7421973</td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Calle Parque San Martin 242 Dpto. 904</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan Ernesto Pacheco Solorzano</td>
-                                        <td>7421973</td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Calle Parque San Martin 242 Dpto. 904</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan Ernesto Pacheco Solorzano</td>
-                                        <td>7421973</td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Calle Parque San Martin 242 Dpto. 904</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan Ernesto Pacheco Solorzano</td>
-                                        <td>7421973</td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Calle Parque San Martin 242 Dpto. 904</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan Ernesto Pacheco Solorzano</td>
-                                        <td>7421973</td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Calle Parque San Martin 242 Dpto. 904</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <%}%>
                                     </tbody>
                                 </table>
                             </div>
@@ -375,18 +196,20 @@
 
 <script>
     // Función para abrir el popup
-    function abrirPopup() {
+    function abrirPopup(redireccionamiento) {
         document.getElementById('popup').style.display = 'block';
+        document.getElementById('popup').href = redireccionamiento;
     }
-
     // Función para cerrar el popup
     function cerrarPopup() {
         document.getElementById('popup').style.display = 'none';
+        document.getElementById('popup').href = null;
     }
 
     // Función de confirmación (puedes agregar la lógica de eliminación aquí)
     function confirmarAccion() {
         alert('Solicitud rechazada');
+        window.location.href = document.getElementById('popup').href;
         cerrarPopup();
     }
 </script>

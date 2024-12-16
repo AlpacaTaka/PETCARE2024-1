@@ -1,6 +1,7 @@
 package com.example.iwebproyecto.daos;
 
 import com.example.iwebproyecto.beans.*;
+import com.example.iwebproyecto.daos.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -73,14 +74,15 @@ public class EventoDao extends BaseDao {
     }
 
     public void actualizarEvento(EventoBenefico evento) {
-        String sql = "UPDATE eventobenefico SET nombre=?, tipoDonacion=?, detalleMonetario=?, detalleSuministro=?, distritoID=?, fechaEvento=?, lugarID=?, horaInicio=?, horaFin=?, razonEvento=?, descripcionEvento=?, invitados=?, fotoID=?, albergueID=?, aprobado=?, eliminado=? " +
+        String sql = "UPDATE eventobenefico SET nombre=?, tipoDonacion=?, detalleMonetario=?, detalleSuministro=?, distritoID=?, fechaEvento=?, lugarID=?, horaInicio=?, horaFin=?, razonEvento=?, descripcionEvento=?, invitados=?, albergueID=?, aprobado=?, eliminado=? " +
                 "WHERE eventoAlbergueID = ?";
-
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
+            // Configurar los valores para la consulta SQL
             pstmt.setString(1, evento.getNombre());
             pstmt.setString(2, evento.getTipoDonacion());
+
             if (evento.getDetalleMonetario() != null) {
                 pstmt.setInt(3, evento.getDetalleMonetario());
             } else {
@@ -95,18 +97,15 @@ public class EventoDao extends BaseDao {
             pstmt.setString(10, evento.getRazonEvento());
             pstmt.setString(11, evento.getDescripcionEvento());
             pstmt.setString(12, evento.getInvitados());
-            pstmt.setInt(13, evento.getFoto().getFotoID());
-            pstmt.setInt(14, evento.getAlbergue().getAlbergueID());
-            pstmt.setBoolean(15, evento.isAprobado());
-            pstmt.setBoolean(16, evento.isEliminado());
-
-            pstmt.setInt(17, evento.getEventoAlbergueID());
-
+            pstmt.setInt(13, evento.getAlbergue().getAlbergueID());
+            pstmt.setBoolean(14, evento.isAprobado());
+            pstmt.setBoolean(15, evento.isEliminado());
+            pstmt.setInt(16, evento.getEventoAlbergueID());
 
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error al ejecutar la consulta de actualización: " + e.getMessage(), e);
         }
     }
 
