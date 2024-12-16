@@ -48,7 +48,9 @@ public class LoginServlet extends HttpServlet {
 
         }else if(dao.authenticateCoordinador(email, password) !=0) {
             rol = "Coordinador";
+
             id = dao.authenticateCoordinador(email, password);
+
             request.getSession().setAttribute("id", id);
             response.sendRedirect(request.getContextPath() + "/MiPerfilCoodinadorServlet?action=vista");
 
@@ -58,6 +60,12 @@ public class LoginServlet extends HttpServlet {
         }else if(dao.authenticateUsuario(email, password) !=0){
 
             //completa el httpSession de Usuario y el redireccionamiento
+
+        }else if(dao.verificarCoordinadorPrimeraVez(email, password) !=0){
+            id = dao.verificarCoordinadorPrimeraVez(email, password);
+
+            request.getSession().setAttribute("id", id);
+            response.sendRedirect(request.getContextPath() + "/login/cambiarContrasenia.jsp");
 
         }else{
             rol = "Nulo";

@@ -164,6 +164,29 @@ public class LoginDao extends BaseDao{
         return 0; // Credenciales no coinciden o error
     }
 
+    public int verificarCoordinadorPrimeraVez(String username, String password) {
+        String sql = "SELECT cc.idcoordinador_credenciales\n" +
+                "FROM coordinador_credenciales cc\n" +
+                "WHERE cc.correoElectronico = ? AND cc.contraseniaTemporal = ? ;\n";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, username); // Asigna el valor al parámetro de la consulta
+            pstmt.setString(2, password);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    // Si la contraseña no es null, devuelve true
+                    return rs.getInt("idcoordinador_credenciales");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0; // Devuelve false si ocurre una excepción o si no se encuentra el ID
+    }
+
+
     private int authenticateAlbergueAndGetId(String sql, String username, String password) {
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -199,6 +222,28 @@ public class LoginDao extends BaseDao{
         }
         return 0; // Credenciales no coinciden o error
     }
+
+
+    public void actualizarContraseniaCoordinador(int id, String password) {
+        String sql = "UPDATE coordinador_credenciales " +
+                "SET contrasenia = ? , " +
+                "    contraseniaTemporal = ? " +
+                "WHERE idcoordinador_credenciales = ?;";
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, password);
+            pstmt.setString(2, password);
+            pstmt.setInt(3, id);
+
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }
