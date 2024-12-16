@@ -249,7 +249,11 @@ public class AlbergueDaoRevenge extends BaseDao {
     }
 
     public ArrayList<MascotasAdopcion> listarMascotasAdopcion(int albergueID) {
-        String sql = "select * from mascotasadopcion where albergueID=? and eliminado=0 order by idAdopcion desc;";
+        String sql = "SELECT ma.*, f.fotoID, f.rutaFoto " +
+                "FROM mascotasadopcion ma " +
+                "LEFT JOIN fotos f ON ma.fotoID = f.fotoID " +
+                "WHERE ma.albergueID = ? AND ma.eliminado = 0 ORDER BY ma.idAdopcion DESC;";
+
         ArrayList<MascotasAdopcion> listaMascotasAdopcion = new ArrayList<>();
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -260,25 +264,38 @@ public class AlbergueDaoRevenge extends BaseDao {
                 Distrito distrito = new Distrito();
                 Foto foto = new Foto();
                 Albergue albergue = new Albergue();
-                mascotasAdopcion.setIdAdopcion(rs.getInt(1));
-                mascotasAdopcion.setNombreMascota(rs.getString(2));
-                mascotasAdopcion.setEspecie(rs.getString(3));
-                mascotasAdopcion.setRaza(rs.getString(4));
-                distrito.setDistritoID(rs.getInt(5));
+
+                // Asignar datos de mascota
+                mascotasAdopcion.setIdAdopcion(rs.getInt("idAdopcion")); // ID de la mascota
+                mascotasAdopcion.setNombreMascota(rs.getString("nombreMascota"));
+                mascotasAdopcion.setEspecie(rs.getString("especieMascota"));
+                mascotasAdopcion.setRaza(rs.getString("raza"));
+                distrito.setDistritoID(rs.getInt("distritoID"));
                 mascotasAdopcion.setDistrito(distrito);
-                mascotasAdopcion.setDireccionHallazgo(rs.getString(6));
-                mascotasAdopcion.setEdadAprox(rs.getInt(7));
-                mascotasAdopcion.setSexo(rs.getString(8));
-                mascotasAdopcion.setDescripcionGeneral(rs.getString(9));
-                foto.setFotoID(rs.getInt(10));
-                mascotasAdopcion.setFoto(foto);
-                mascotasAdopcion.setSeEncuentraTemporal(rs.getBoolean(11));
-                mascotasAdopcion.setCondicionesAdopcion(rs.getString(12));
-                albergue.setAlbergueID(rs.getInt(13));
+                mascotasAdopcion.setDireccionHallazgo(rs.getString("direccionHallazgo"));
+                mascotasAdopcion.setEdadAprox(rs.getInt("edadAprox"));
+                mascotasAdopcion.setSexo(rs.getString("sexo"));
+                mascotasAdopcion.setDescripcionGeneral(rs.getString("descripcionGeneral"));
+
+                // Asignar datos de la foto
+                if (rs.getInt("fotoID") != 0) { // Si existe una foto asociada
+                    foto.setFotoID(rs.getInt("fotoID"));
+                    foto.setRutaFoto(rs.getString("rutaFoto")); // Ruta de la foto
+                    mascotasAdopcion.setFoto(foto); // Asociar la foto al objeto mascota
+                } else {
+                    mascotasAdopcion.setFoto(null); // Mascota sin foto
+                }
+
+                // Asignar datos del albergue
+                albergue.setAlbergueID(rs.getInt("albergueID"));
                 mascotasAdopcion.setAlbergue(albergue);
-                /*mascotasAdopcion.setFechaAdoptado(rs.getString(14));*/
-                mascotasAdopcion.setEliminado(rs.getBoolean(14));
-                listaMascotasAdopcion.add(mascotasAdopcion);
+
+                // Otros datos de la mascota
+                mascotasAdopcion.setSeEncuentraTemporal(rs.getBoolean("seEncuentraTemporal"));
+                mascotasAdopcion.setCondicionesAdopcion(rs.getString("condicionesAdopcion"));
+                mascotasAdopcion.setEliminado(rs.getBoolean("eliminado"));
+
+                listaMascotasAdopcion.add(mascotasAdopcion); // Agregar a la lista
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,4 +1,5 @@
 <%@ page import="com.example.iwebproyecto.beans.MascotasAdopcion" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:useBean id="lista" type="java.util.ArrayList<com.example.iwebproyecto.beans.MascotasAdopcion>" scope="request"/>
 <jsp:useBean id="albergue" type="com.example.iwebproyecto.beans.Albergue" scope="request"/>
@@ -120,27 +121,52 @@
 
                     <div class="container d-flex justify-content-center mt-4" style="margin-bottom: 30px;">
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="cardContainer" style="width: 100%;">
-                            <%for (MascotasAdopcion mascota : lista) {%>
+                            <%
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                for (MascotasAdopcion mascota : lista) {
+                                    String nombreMascota = mascota.getNombreMascota();
+                                    int mascotaId = mascota.getIdAdopcion();
+                                    String fotoRuta = mascota.getFoto().getRutaFoto();
+                                    int fotoID = mascota.getFoto().getFotoID();
+                            %>
+
+
+
+
                             <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 card-item">
                                 <div class="card h-100">
-                                    <img src="<%= request.getContextPath() + "/uploads/fotosMascotasAdopcion/" + mascota.getFoto().getRutaFoto()
-                                            %>"
-                                         class="card-img-top" alt="<%= mascota.getNombreMascota() %>"
+                                    <%
+                                        String rutaCompleta = request.getContextPath() + fotoRuta;
+                                        System.out.println("La fotoID es: " + fotoID);
+                                        System.out.println("La ruta generada para la imagen es: " + rutaCompleta);
+                                    %>
+                                    <img src="<%= request.getContextPath() + mascota.getFoto().getRutaFoto() %>"
+                                         class="card-img-top"
+                                         alt="<%= nombreMascota %>"
                                          style="max-width: 300px; height: 260px; object-fit: cover;">
                                     <div class="card-body">
-                                        <h4 class="card-title text-center"><%=mascota.getNombreMascota()%></h4>
+                                        <h4 class="card-title text-center"><%= nombreMascota %></h4>
                                         <hr>
                                         <div style="display: flex; justify-content: center;">
-                                            <a href="<%=request.getContextPath()%>/PortalAdopciones?action=view&id=<%=mascota.getIdAdopcion()%>"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Visualizar"><span class="fi fi-rr-eye"></span></button></a>
-                                            <a href="<%=request.getContextPath()%>/PortalAdopciones?action=edit&id=<%=mascota.getIdAdopcion()%>"><button type="button" class="btn btn-personal2" style="margin-right: 3px; border-width: 1px;" title="Editar"><span class="fi fi-rr-edit"></span></button></a>
-                                            <%--a onclick="abrirPopup()" href="<%=request.getContextPath()%>/PortalAdopciones?action=delete&id=<%=mascota.getIdAdopcion()%>"><button type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar"><span class="fi fi-rr-trash"></span></button></a--%>
-                                            <button onclick="abrirPopup('<%=request.getContextPath()%>/PortalAdopciones?action=delete&id=<%=mascota.getIdAdopcion()%>')" type="button" class="btn btn-personal" style="margin-right: 3px; border-width: 1px;" title="Eliminar"><span class="fi fi-rr-trash"></span></button>
+                                            <a href="<%=request.getContextPath()%>/PortalAdopciones?action=view&id=<%= mascotaId %>">
+                                                <button type="button" class="btn btn-personal2" style="margin-right: 3px;">
+                                                    <span class="fi fi-rr-eye"></span>
+                                                </button>
+                                            </a>
+                                            <a href="<%=request.getContextPath()%>/PortalAdopciones?action=edit&id=<%= mascotaId %>">
+                                                <button type="button" class="btn btn-personal2" style="margin-right: 3px;">
+                                                    <span class="fi fi-rr-edit"></span>
+                                                </button>
+                                            </a>
+                                            <button type="button" class="btn btn-personal" style="margin-right: 3px;"
+                                                    onclick="abrirPopup('<%=request.getContextPath()%>/PortalAdopciones?action=delete&id=<%=mascotaId%>')">
+                                                <span class="fi fi-rr-trash"></span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <%}%>
-
+                            <% } %>
                         </div>
                     </div>
 

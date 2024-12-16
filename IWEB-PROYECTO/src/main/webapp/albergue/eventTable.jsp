@@ -16,7 +16,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
-    <link rel="stylesheet" href="CSSDELAPAGINA.css">
     <link href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css" rel="stylesheet">
 
     <title>Mis Eventos</title>
@@ -100,7 +99,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-8 d-flex justify-content-start" style="padding-right: 10px;">
-                                    <a href="<%=request.getContextPath()%>/albergue/albergueFormEvento.jsp">
+                                    <a href="<%=request.getContextPath()%>/eventos?action=crear">
                                         <button type="button" class="btn btn-personal">
                                             <span class="fi fi-rr-add">&nbsp;Nuevo</span>
                                         </button>
@@ -113,7 +112,7 @@
                                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="cardContainer" style="width: 100%;">
                                     <%
                                         EventoDao eventoDao = new EventoDao();
-                                        int albergueId = 6;
+                                        int albergueId = (Integer) session.getAttribute("idAlbergue");
                                         List<EventoBenefico> listaEventos = eventoDao.listarEventosPorAlbergue(albergueId);
 
                                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

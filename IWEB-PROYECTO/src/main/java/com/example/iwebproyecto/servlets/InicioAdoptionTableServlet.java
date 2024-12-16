@@ -43,7 +43,15 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         switch (action) {
             case "lista":
                 ArrayList<MascotasAdopcion> list = albergueDaoRevenge.listarMascotasAdopcion(idAlbergue);
-                request.setAttribute("lista", list);
+                for (MascotasAdopcion mascota : list) {
+                    System.out.println("Mascota ID: " + mascota.getIdAdopcion());
+                    if (mascota.getFoto() == null) {
+                        System.out.println("Foto es NULL para la mascota ID: " + mascota.getIdAdopcion());
+                    } else {
+                        System.out.println("Ruta de la foto: " + mascota.getFoto().getRutaFoto());
+                    }
+                }
+                request.setAttribute("lista", list); // PASAS LA LISTA AL JSP
                 RequestDispatcher rd = request.getRequestDispatcher("albergue/adoptionTable.jsp");
                 rd.forward(request, response);
                 break;
@@ -147,6 +155,8 @@ public class InicioAdoptionTableServlet extends HttpServlet {
                 mascota.setSexo(sexo);
                 mascota.setDescripcionGeneral(descripcion);
                 mascota.setFoto(foto);
+                System.out.println("RUTA MASCOTA: " + mascota.getFoto().getRutaFoto());
+
                 mascota.setSeEncuentraTemporal(seEncuentraTemporal);
                 mascota.setCondicionesAdopcion(condicionesAdopcion);
                 Albergue albergue = new Albergue();
@@ -192,8 +202,8 @@ public class InicioAdoptionTableServlet extends HttpServlet {
     }
 
     private Foto procesarImagen(Part filePart, HttpServletRequest request, HttpServletResponse response, FotoDao fotoDao) throws ServletException, IOException {
-        // Definir una ruta fija fuera de target
-        String uploadPath = "C:/Users/omarr/Desktop/PETCARE2024-1/IWEB-PROYECTO/src/main/webapp/uploads/fotosMascotasAdopcion";
+        // Definir un directorio accesible dentro de "webapp/uploads"
+        String uploadPath = getServletContext().getRealPath("/") + "uploads/fotosMascotasAdopcion";
 
         // Crear directorio si no existe
         File uploadDir = new File(uploadPath);
@@ -204,21 +214,21 @@ public class InicioAdoptionTableServlet extends HttpServlet {
         // Verificar si se ha seleccionado un archivo
         if (filePart == null || filePart.getSize() == 0) {
             request.setAttribute("mensajeError", "Debe seleccionar una imagen.");
-            request.getRequestDispatcher("albergue/albergueEdAdop.jsp").forward(request, response);
+            request.getRequestDispatcher("albergue/albergueFormAdop.jsp").forward(request, response);
             return null;
         }
 
-        // Obtener la imagen desde el formulario y generar un nombre único
+        // Generar un nombre único
         String originalFileName = filePart.getSubmittedFileName();
         String uniqueFileName = System.currentTimeMillis() + "_" + originalFileName;
         String filePath = uploadPath + File.separator + uniqueFileName;
 
-        // Guardar la foto en la base de datos con la ruta generada
+        // Guardar el dato en la base con la ruta relativa al contexto
         Foto foto = new Foto();
         foto.setRutaFoto("/uploads/fotosMascotasAdopcion/" + uniqueFileName);
         fotoDao.GuadarFoto(foto);
 
-        // Guardar el archivo en el sistema de archivos
+        // Guardar el archivo físicamente
         try (InputStream inputStream = filePart.getInputStream();
              FileOutputStream outputStream = new FileOutputStream(filePath)) {
 
@@ -227,7 +237,6 @@ public class InicioAdoptionTableServlet extends HttpServlet {
             while ((bytesRead = inputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, bytesRead);
             }
-            System.out.println("Imagen guardada exitosamente en: " + filePath);
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("mensajeError", "Error al guardar la imagen: " + e.getMessage());
