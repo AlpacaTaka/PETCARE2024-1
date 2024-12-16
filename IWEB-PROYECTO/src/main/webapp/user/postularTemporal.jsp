@@ -35,7 +35,7 @@
                 </div>
                 <div class="welcome-text">Hola, <%= UsuarioSession.getNombre() %></div>
             </div>
-            <div class="logo"><a href="/user/inicio.jsp"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+            <div class="logo"><a href="${pageContext.request.contextPath}/Inicio"><img src="${pageContext.request.contextPath}/common/img/logos/logo_navbar.png" alt="logo"></a></div>
         </header>
 
         <div class="main">
@@ -43,35 +43,35 @@
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="/user/miPerfil.jsp" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="/user/allEventos.jsp" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
-                    <li><a href="/user/postularTemporal.html" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
-                    <li><a href="/user/solicitudesDonacionSuministros.jsp" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
-                    <li><a href="/user/donacionMonetaria.jsp" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
-                    <li><a href="/user/solicitudesAdopcion.jsp" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                    <li><a href="/user/reportarMascotaPerdida.jsp" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
-                    <li><a href="/user/reportarMaltrato.jsp" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
-                    <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/MiPerfilUsuario" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/TodosLosEventos" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/PostulacionTemporal" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/SolicitudesDeSuministros" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/TodosLosAlbergues" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/PortalDeAdopcion" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/Inicio" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
+                    <li id="cerrar-sesion"><a href="${pageContext.request.contextPath}/Login?action=logout" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>                </ul>
                 </ul>
                 
             </div>
 
             <div id="menu" class="menu">
-                <a href="/user/miPerfil.jsp">Mi Perfil</a>
-                <a href="/user/misEventos.jsp">Mis Eventos</a>
-                <a href="/user/misDonaciones.jsp" id="Sep">Mis Donaciones</a>
+                <a href="${pageContext.request.contextPath}/MiPerfilUsuario">Mi Perfil</a>
+                <a href="${pageContext.request.contextPath}/MisEventosUsuario">Mis Eventos</a>
+                <a href="${pageContext.request.contextPath}/MisDonacionesUsuario" id="Sep">Mis Donaciones</a>
                 <hr>
-                <a href="/user/allEventos.jsp">Eventos</a>
-                <a href="/user/postularAlbergue.jsp">Postular a Albergue</a>
-                <a href="/user/postularTemporal.html">Hogar Temporal</a>
-                <a href="/user/solicitudesDonacionSuministros.jsp">Donaciones de Suministros</a>
-                <a href="/user/donacionMonetaria.jsp">Donaciones Monetarias</a>
-                <a href="/user/solicitudesAdopcion.jsp">Portal de Adopciones</a>
-                <a href="/user/mascotasPerdidas.jsp">Portal de Mascotas Perdidas</a>
-                <a href="/user/reportarMascotaPerdida.jsp">Reportar Mascota Perdida</a>
-                <a href="/user/reportarMaltrato.jsp" id="Sep">Reportar Maltrato</a>
+                <a href="${pageContext.request.contextPath}/TodosLosEventos">Eventos</a>
+                <a href="${pageContext.request.contextPath}/PostulacionTemporal">Hogar Temporal</a>
+                <a href="${pageContext.request.contextPath}/SolicitudesDeSuministros">Donaciones de Suministros</a>
+                <a href="${pageContext.request.contextPath}/TodosLosAlbergues">Donaciones Monetarias</a>
+                <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal de Adopciones</a>
+                <a href="${pageContext.request.contextPath}/Inicio">Portal de Mascotas Perdidas</a>
+                <a href="${pageContext.request.contextPath}/Inicio">Portal Avistamiento Perdidos</a>
+                <a href="${pageContext.request.contextPath}/Inicio">Reportar Mascota Perdida</a>
+                <a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" id="Sep">Reportar Maltrato</a>
                 <hr>
-                <a href="/login/login.html">Cerrar Sesión</a>
+                <a href="${pageContext.request.contextPath}/Login?action=logout">Cerrar Sesión</a>
 
             </div>
 
@@ -79,8 +79,8 @@
                 <!--Boton de regreso a la página principal-->
                 <div class="col" id="contenido-nofooter">
                     <div class="container md-8 d-flex justify-content-between" style="width: 85%;max-width: 800px; margin-bottom: 20px; padding: 0;">
-                        <button type="button"  class="btn btn-personal2" onclick="location.href='inicio.jsp'">  Regresar   </button>
-                        <button type="button"  class="btn btn-personal" onclick="location.href='${pageContext.request.contextPath}/PostulacionTemporal?action=lista'">  Ver todas postulaciones   </button>
+                        <button type="button"  class="btn btn-personal2" onclick="window.history.back();">  Regresar   </button>
+                        <button type="button"  class="btn btn-personal" onclick="location.href='${pageContext.request.contextPath}/Inicio'">  Ver todas postulaciones   </button>
                     </div>
                     <div class="container md-12" style="width: 85%;max-width: 800px; background-color: #fca6519f; border-radius: 30px; margin-bottom: 20px; padding: 10px 20px;">
                         <h1 style="margin-top: 10px; color: #4d0e0e; font-style: italic" class="text-center" >Postular como hogar temporal</h1>

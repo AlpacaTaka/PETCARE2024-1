@@ -1,6 +1,7 @@
 package com.example.iwebproyecto.servlets;
 
 import com.example.iwebproyecto.beans.*;
+import com.example.iwebproyecto.daos.AlbergueDao;
 import com.example.iwebproyecto.daos.AlbergueDaoRevenge;
 import com.example.iwebproyecto.daos.FotoDao;
 import jakarta.servlet.ServletException;
@@ -26,11 +27,14 @@ public class SolicitudesAdopcionAlbergueServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
+        AlbergueDao albergueDao = new AlbergueDao();
 
         int idAlbergue = (Integer) request.getSession().getAttribute("idAlbergue");
         switch (action) {
             case "lista":
+                Albergue albergue = albergueDao.obtenerAlberguePorID(idAlbergue);
                 Collection<UsuarioAdopcion> lista = albergueDaoRevenge.listaUsuarioAdopcion(idAlbergue);
+                request.setAttribute("albergue", albergue);
                 request.setAttribute("lista", lista);
                 request.getRequestDispatcher("albergue/solicitudesAdopcion.jsp").forward(request, response);
                 break;

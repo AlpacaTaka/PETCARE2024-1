@@ -21,11 +21,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
+    <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css"  >
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
     <title>Gran Evento de Vacunación!</title>
 </head>
@@ -54,12 +54,11 @@
                     <li><a href="${pageContext.request.contextPath}/SolicitudesDeSuministros" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/TodosLosAlbergues" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
                     <li><a href="${pageContext.request.contextPath}/PortalDeAdopcion" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                    <li><a href="${pageContext.request.contextPath}/ReportarPerdido" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/Inicio" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
 
                     <li><a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
 
-                    <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
-                </ul>
+                    <li id="cerrar-sesion"><a href="${pageContext.request.contextPath}/Login?action=logout" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>                </ul>
 
             </div>
 
@@ -73,12 +72,12 @@
                 <a href="${pageContext.request.contextPath}/SolicitudesDeSuministros">Donaciones de Suministros</a>
                 <a href="${pageContext.request.contextPath}/TodosLosAlbergues">Donaciones Monetarias</a>
                 <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal de Adopciones</a>
-                <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal de Mascotas Perdidas</a>
-                <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal Avistamiento Perdidos</a>
-                <a href="${pageContext.request.contextPath}/ReportarPerdido">Reportar Mascota Perdida</a>
+                <a href="${pageContext.request.contextPath}/Inicio">Portal de Mascotas Perdidas</a>
+                <a href="${pageContext.request.contextPath}/Inicio">Portal Avistamiento Perdidos</a>
+                <a href="${pageContext.request.contextPath}/Inicio">Reportar Mascota Perdida</a>
                 <a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" id="Sep">Reportar Maltrato</a>
                 <hr>
-                <a href="/login/login.html">Cerrar Sesión</a>
+                <a href="${pageContext.request.contextPath}/Login?action=logout">Cerrar Sesión</a>
 
             </div>
 
@@ -164,7 +163,7 @@
         </div>
     </dialog>
 
-    <script src="/common/script/neonavbar.js"></script>
+    <script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     

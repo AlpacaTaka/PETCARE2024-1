@@ -47,7 +47,7 @@
                 <li><a href="<%=request.getContextPath()%>/SolicitudesDeAdopcion" title="Solicitudes de Adopción"><i class="fi-rr-paw-heart"></i></a></li>
                 <li><a href="<%=request.getContextPath()%>/DenunciasDeMaltrato" title="Denuncias de maltrato"><i class="fi-rr-siren-on"></i></a></li>
                 <!--<li><a href="#cuenta" title="Administrar"><i class="fi-rr-chart-tree-map"></i></a></li> PARA MOSTRAR LOS DONANTES...-->
-                <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                <li id="cerrar-sesion"><a href="${pageContext.request.contextPath}/Login?action=logout" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
             </ul>
 
         </div>
@@ -62,7 +62,7 @@
             <a href="<%=request.getContextPath()%>/DenunciasDeMaltrato">Denuncias de maltrato</a>
             <!--<a href="#">Solicitudes de Adopción</a>-->
             <hr>
-            <a href="<%=request.getContextPath()%>">Cerrar Sesión</a>
+            <a href="${pageContext.request.contextPath}/Login?action=logout">Cerrar Sesión</a>
         </div>
 
 

@@ -22,7 +22,7 @@ public class ReportarPerdidoServlet extends HttpServlet {
 
         String action = request.getParameter("action") == null ? "verForm" : request.getParameter("action");
 
-        int idUsuario = 7;
+        int idUsuario = 7; //cambiar en sesion
 
         switch (action) {
             case "verForm":
