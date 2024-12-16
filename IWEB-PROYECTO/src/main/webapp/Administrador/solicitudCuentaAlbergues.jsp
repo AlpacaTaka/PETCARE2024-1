@@ -1,4 +1,6 @@
+<%@ page import="com.example.iwebproyecto.beans.Albergue" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="listaAlb" type="java.util.ArrayList<com.example.iwebproyecto.beans.Albergue>" scope="request"/>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -54,12 +56,12 @@
         <div class="barside">
             <ul class="navlinks">
                 <li><a href="<%=request.getContextPath()%>/admincuentas" title="Administracion"><i class="fi-rr-ballot-check"></i></a></li>
-                <li><a href="/administrator/solicitudCuentaAlbergues.html" title="Validacion Albergues"><i class="fi-rr-house-building"></i></a></li>
-                <li><a href="/administrator/validacionUsuarios.html" title="Validacion Usuarios"><i class="fi-rr-user-trust"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/ValidarAlb" title="Validacion Albergues"><i class="fi-rr-house-building"></i></a></li>
+                <li><a href="<%=request.getContextPath()%>/ValidarUser" title="Validacion Usuarios"><i class="fi-rr-user-trust"></i></a></li>
                 <li><a href="<%=request.getContextPath()%>/CrearCoordinador" title="Crear Coordinador de Zona"><i class="fi-rr-people-network-partner"></i></a></li>
                 <li><a href="<%=request.getContextPath()%>/LugarHabilitado" title="Crear Lugar Habilitado"><i class="fi-rr-map-location-track"></i></a></li>
                 <li><a href="<%=request.getContextPath()%>/Dashboard" title="Dashboard"><i class="fi-rr-search-alt"></i></a></li>
-                <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                <li id="cerrar-sesion"><a href="<%=request.getContextPath()%>/Login" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
             </ul>
 
         </div>
@@ -68,8 +70,8 @@
             <a href="<%=request.getContextPath()%>/admincuentas">Administración</a>
             <hr>
 
-            <a href="/administrator/solicitudCuentaAlbergues.html">Validar Albergues</a>
-            <a href="/administrator/validacionUsuarios.html">Validar Usuarios</a>
+            <a href="<%=request.getContextPath()%>/ValidarAlb">Validar Albergues</a>
+            <a href="<%=request.getContextPath()%>/ValidarUser">Validar Usuarios</a>
             <hr>
 
             <a href="<%=request.getContextPath()%>/CrearCoordinador">Crear Coordinador de Zona</a>
@@ -77,7 +79,7 @@
             <hr>
             <a href="<%=request.getContextPath()%>/Dashboard">Dashboard</a>
             <hr>
-            <a href="/login/login.html">Cerrar Sesión</a>
+            <a href="<%=request.getContextPath()%>/Login">Cerrar Sesión</a>
 
 
         </div>
@@ -111,12 +113,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <%for (Albergue albergue : listaAlb){%>
                                     <tr>
-                                        <td>Huellitas PUCP</td>
-                                        <td>Juan Pacheco</td>
-                                        <td><a href="https://www.facebook.com/huellitaspucp" target="_blank">https://www.facebook.com/huellitaspucp</a></td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Av. Universitaria 1801</td>
+                                        <td><%=albergue.getNombreAlbergue()%></td>
+                                        <td><%=albergue.getNombreEncargado()%></td>
+                                        <td><a href="" target="_blank"><%=albergue.getUrlFacebook()%></a></td>
+                                        <td><%=albergue.getDistrito()%></td>
+                                        <td><%=albergue.getDireccion()%></td>
 
                                         <td>
                                             <div style="display: flex; justify-content: center;">
@@ -125,203 +128,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <!-- Agrega más filas según sea necesario -->
-                                    <tr>
-                                        <td>Patitas Felices</td>
-                                        <td>Juan Pacheco</td>
-                                        <td><a href="https://www.facebook.com/huellitaspucp" target="_blank">https://www.facebook.com/huellitaspucp</a></td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Av. Universitaria 1801</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Huellitas PUCP</td>
-                                        <td>Juan Pacheco</td>
-                                        <td><a href="https://www.facebook.com/huellitaspucp" target="_blank">https://www.facebook.com/huellitaspucp</a></td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Av. Universitaria 1801</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Huellitas PUCP</td>
-                                        <td>Juan Pacheco</td>
-                                        <td><a href="https://www.facebook.com/huellitaspucp" target="_blank">https://www.facebook.com/huellitaspucp</a></td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Av. Universitaria 1801</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Huellitas PUCP</td>
-                                        <td>Juan Pacheco</td>
-                                        <td><a href="https://www.facebook.com/huellitaspucp" target="_blank">https://www.facebook.com/huellitaspucp</a></td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Av. Universitaria 1801</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Huellitas PUCP</td>
-                                        <td>Juan Pacheco</td>
-                                        <td><a href="https://www.facebook.com/huellitaspucp" target="_blank">https://www.facebook.com/huellitaspucp</a></td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Av. Universitaria 1801</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Huellitas PUCP</td>
-                                        <td>Juan Pacheco</td>
-                                        <td><a href="https://www.facebook.com/huellitaspucp" target="_blank">https://www.facebook.com/huellitaspucp</a></td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Av. Universitaria 1801</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Huellitas PUCP</td>
-                                        <td>Juan Pacheco</td>
-                                        <td><a href="https://www.facebook.com/huellitaspucp" target="_blank">https://www.facebook.com/huellitaspucp</a></td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Av. Universitaria 1801</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Huellitas PUCP</td>
-                                        <td>Juan Pacheco</td>
-                                        <td><a href="https://www.facebook.com/huellitaspucp" target="_blank">https://www.facebook.com/huellitaspucp</a></td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Av. Universitaria 1801</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Huellitas PUCP</td>
-                                        <td>Juan Pacheco</td>
-                                        <td><a href="https://www.facebook.com/huellitaspucp" target="_blank">https://www.facebook.com/huellitaspucp</a></td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Av. Universitaria 1801</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Huellitas PUCP</td>
-                                        <td>Juan Pacheco</td>
-                                        <td><a href="https://www.facebook.com/huellitaspucp" target="_blank">https://www.facebook.com/huellitaspucp</a></td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Av. Universitaria 1801</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Huellitas PUCP</td>
-                                        <td>Juan Pacheco</td>
-                                        <td><a href="https://www.facebook.com/huellitaspucp" target="_blank">https://www.facebook.com/huellitaspucp</a></td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Av. Universitaria 1801</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Huellitas PUCP</td>
-                                        <td>Juan Pacheco</td>
-                                        <td><a href="https://www.facebook.com/huellitaspucp" target="_blank">https://www.facebook.com/huellitaspucp</a></td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Av. Universitaria 1801</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Huellitas PUCP</td>
-                                        <td>Juan Pacheco</td>
-                                        <td><a href="https://www.facebook.com/huellitaspucp" target="_blank">https://www.facebook.com/huellitaspucp</a></td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Av. Universitaria 1801</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Huellitas PUCP</td>
-                                        <td>Juan Pacheco</td>
-                                        <td><a href="https://www.facebook.com/huellitaspucp" target="_blank">https://www.facebook.com/huellitaspucp</a></td>
-                                        <td>Pueblo Libre</td>
-                                        <td>Av. Universitaria 1801</td>
-
-                                        <td>
-                                            <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <%}%>
                                     </tbody>
                                 </table>
                             </div>
@@ -392,22 +199,23 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
     // Función para abrir el popup
-    function abrirPopup() {
+    function abrirPopup(redireccionamiento) {
         document.getElementById('popup').style.display = 'block';
+        document.getElementById('popup').href = redireccionamiento;
     }
-
     // Función para cerrar el popup
     function cerrarPopup() {
         document.getElementById('popup').style.display = 'none';
+        document.getElementById('popup').href = null;
     }
 
     // Función de confirmación (puedes agregar la lógica de eliminación aquí)
     function confirmarAccion() {
         alert('Solicitud rechazada');
+        window.location.href = document.getElementById('popup').href;
         cerrarPopup();
     }
 </script>
-
 <script>
 
     // Función de confirmación
