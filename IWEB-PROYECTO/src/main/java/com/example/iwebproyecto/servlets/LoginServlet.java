@@ -96,5 +96,17 @@ public class LoginServlet extends HttpServlet {
 
 
     }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Cierre de sesión
+        String action = request.getParameter("action");
+        if ("logout".equals(action)) {
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.invalidate();
+            }
+
+            response.sendRedirect(request.getContextPath());
+        }
+    }
 }
 

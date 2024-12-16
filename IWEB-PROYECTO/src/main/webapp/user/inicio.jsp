@@ -65,7 +65,7 @@
 
                 <li><a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
 
-                <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
+                <li id="cerrar-sesion"><a href="${pageContext.request.contextPath}/Login?action=logout" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
             </ul>
 
         </div>
@@ -85,7 +85,7 @@
             <a href="${pageContext.request.contextPath}/ReportarPerdido">Reportar Mascota Perdida</a>
             <a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" id="Sep">Reportar Maltrato</a>
             <hr>
-            <a href="/login/login.html">Cerrar Sesión</a>
+            <a href="${pageContext.request.contextPath}/Login?action=logout">Cerrar Sesión</a>
 
         </div>
 
