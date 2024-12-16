@@ -404,7 +404,14 @@ public class AlbergueDaoRevenge extends BaseDao {
     }
 
     public ArrayList<DonacionSuministros> listarDonacionSuministros(int albergueID) {
-        String sql = "select d.*,i.nombreDistrito,a.direccionDonaciones from donacionsuministros d, distrito i,albergue a where i.distritoID=d.distritoID and a.albergueID=d.albergueID and a.albergueID=? and d.eliminado=0 order by d.donacionSuministrosID desc;";
+        String sql = "SELECT d.*, i.nombreDistrito, a.direccionDonaciones, f.rutaFoto " +
+                "FROM donacionsuministros d " +
+                "LEFT JOIN distrito i ON i.distritoID = d.distritoID " +
+                "LEFT JOIN albergue a ON a.albergueID = d.albergueID " +
+                "LEFT JOIN fotos f ON f.fotoID = d.fotoID " +
+                "WHERE a.albergueID = ? " +
+                "AND d.eliminado = 0 " +
+                "ORDER BY d.donacionSuministrosID DESC;";
         ArrayList<DonacionSuministros> listaDonacionSuministros = new ArrayList<>();
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -412,30 +419,43 @@ public class AlbergueDaoRevenge extends BaseDao {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 DonacionSuministros donacionSuministros = new DonacionSuministros();
-                donacionSuministros.setDonacionSuministrosID(rs.getInt(1));
-                donacionSuministros.setTituloAvisoDonacion(rs.getString(2));
-                donacionSuministros.setCorreoElectronicoDonacion(rs.getString(3));
-                donacionSuministros.setTipoSuministro(rs.getString(4));
-                donacionSuministros.setNombreSuministro(rs.getString(5));
-                donacionSuministros.setCantidadDonacionesTotales(rs.getInt(6));
-                donacionSuministros.setMarcaSuministro(rs.getString(7));
+
+                // Asignar valores básicos de la donación
+                donacionSuministros.setDonacionSuministrosID(rs.getInt("donacionSuministrosID"));
+                donacionSuministros.setTituloAvisoDonacion(rs.getString("tituloAvisoDonacion"));
+                donacionSuministros.setCorreoElectronicoDonacion(rs.getString("correoElectronicoDonacion"));
+                donacionSuministros.setTipoSuministro(rs.getString("tipoSuministro"));
+                donacionSuministros.setNombreSuministro(rs.getString("nombreSuministro"));
+                donacionSuministros.setCantidadDonacionesTotales(rs.getInt("cantidadDonacionesTotales"));
+                donacionSuministros.setMarcaSuministro(rs.getString("marcaSuministro"));
+                donacionSuministros.setFechaInicioRecepcion(rs.getString("fechaInicioRecepcion"));
+                donacionSuministros.setFechaFinRecepcion(rs.getString("fechaFinRecepcion"));
+                donacionSuministros.setHoraInicioRecepcion(rs.getString("horaInicioRecepcion"));
+                donacionSuministros.setHoraFinRecepcion(rs.getString("horaFinRecepcion"));
+                donacionSuministros.setMensajeParaDonantes(rs.getString("mensajeParaDonantes"));
+
+                // Asignar información del distrito
                 Distrito distrito = new Distrito();
-                distrito.setDistritoID(rs.getInt(8));
-                distrito.setNombreDistrito(rs.getString(18));
+                distrito.setDistritoID(rs.getInt("distritoID"));
+                distrito.setNombreDistrito(rs.getString("nombreDistrito"));
                 donacionSuministros.setDistrito(distrito);
+
+                // Asignar información del albergue
                 Albergue albergue = new Albergue();
-                albergue.setAlbergueID(rs.getInt(9));
-                albergue.setDireccionDonaciones(rs.getString(19));
+                albergue.setAlbergueID(rs.getInt("albergueID"));
+                albergue.setDireccionDonaciones(rs.getString("direccionDonaciones"));
                 donacionSuministros.setAlbergue(albergue);
-                donacionSuministros.setFechaInicioRecepcion(rs.getString(10));
-                donacionSuministros.setFechaFinRecepcion(rs.getString(11));
-                donacionSuministros.setHoraInicioRecepcion(rs.getString(12));
-                donacionSuministros.setHoraFinRecepcion(rs.getString(13));
-                donacionSuministros.setMensajeParaDonantes(rs.getString(14));
+
+                // Asignar información de la foto
                 Foto foto = new Foto();
-                foto.setFotoID(rs.getInt(15));
+                foto.setFotoID(rs.getInt("fotoID"));
+                foto.setRutaFoto(rs.getString("rutaFoto")); // Ahora recuperamos la ruta de la foto
                 donacionSuministros.setFoto(foto);
-                donacionSuministros.setEliminado(rs.getBoolean(16));
+
+                // Asignar estado de eliminado
+                donacionSuministros.setEliminado(rs.getBoolean("eliminado"));
+
+                // Añadir donación a la lista
                 listaDonacionSuministros.add(donacionSuministros);
             }
         } catch (SQLException e) {
@@ -483,7 +503,7 @@ public class AlbergueDaoRevenge extends BaseDao {
     public void editarDonacionSuministros(DonacionSuministros donacionSuministros){
         String sql="UPDATE donacionsuministros set tituloAvisoDonacion=?, correoElectronicoDonacion=?, tipoSuministro=?, nombreSuministro=?,"+
                 " cantidadDonacionesTotales=?, marcaSuministro=?, distritoID=?, albergueID=?, fechaInicioRecepcion=?,"+
-                " fechaFinRecepcion=?, horaInicioRecepcion=?, horaFinRecepcion=?, mensajeParaDonantes=?, fotoID=?, eliminado=?,"+
+                " fechaFinRecepcion=?, horaInicioRecepcion=?, horaFinRecepcion=?, mensajeParaDonantes=?,eliminado=?,"+
                 " eventoAlbergueID=null where donacionSuministrosID=?;";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -500,9 +520,8 @@ public class AlbergueDaoRevenge extends BaseDao {
             pstmt.setString(11, donacionSuministros.getHoraInicioRecepcion());
             pstmt.setString(12, donacionSuministros.getHoraFinRecepcion());
             pstmt.setString(13, donacionSuministros.getMensajeParaDonantes());
-            pstmt.setInt(14, donacionSuministros.getFoto().getFotoID());
-            pstmt.setBoolean(15, donacionSuministros.isEliminado());
-            pstmt.setInt(16, donacionSuministros.getDonacionSuministrosID());
+            pstmt.setBoolean(14, donacionSuministros.isEliminado());
+            pstmt.setInt(15, donacionSuministros.getDonacionSuministrosID());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

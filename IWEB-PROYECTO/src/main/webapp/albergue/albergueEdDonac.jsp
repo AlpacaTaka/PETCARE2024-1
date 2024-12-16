@@ -1,6 +1,8 @@
+<%@ page import="com.example.iwebproyecto.daos.AlbergueDaoRevenge" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="albergue" type="com.example.iwebproyecto.beans.Albergue" scope="request" />
 <jsp:useBean id="donacionSuministros" scope="request" type="com.example.iwebproyecto.beans.DonacionSuministros"/>
-<jsp:useBean id="albergue" scope="request" type="com.example.iwebproyecto.beans.Albergue"/>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -124,7 +126,7 @@
                         <div class="row justify-content-center p-1">
                             <div class="col-md-4 p-1" >
                                 <label for="distritoNombre">Distrito</label>
-                                <input name="nombreDistrito" value="<%=donacionSuministros.getDistrito().getNombreDistrito()%>" type="text" class="form-control" id="distritoNombre" readonly>
+                                <input name="nombreDistrito" value="<%=donacionSuministros.getDistrito().getNombreDistrito()%>" type="text" class="form-control" id="distritoNombre" readonly disabled>
                                 <%--select-- class="form-select" name="idDistrito" id="distrito" required>
                                         <option value="">Selecciona un distrito</option>
                                         <optgroup label="Lima Norte">
@@ -181,7 +183,7 @@
                             </div>
                             <div class="col-md-8 p-1">
                                 <label for="Direccion">Dirección de recepción</label>
-                                <input value="<%=donacionSuministros.getAlbergue().getPuntoAcopioDonaciones()%>" type="text" class="form-control" placeholder="Maximo 100 caracteres" maxlength="100" id="Direccion" readonly>
+                                <input value="<%=donacionSuministros.getAlbergue().getPuntoAcopioDonaciones()%>" type="text" class="form-control" placeholder="Maximo 100 caracteres" maxlength="100" id="Direccion" readonly disabled>
                             </div>
                         </div>
 
@@ -210,11 +212,11 @@
                         <div class="row justify-content-center p-1">
                             <div class="col-md-6 p-1">
                                 <label for="nombre_contacto">Nombre de contacto del albergue</label>
-                                <input value="<%=donacionSuministros.getAlbergue().getNombreContactoDonaciones()%>" type="text" class="form-control" id="nombre_contacto" placeholder="Ingrese el nombre de la persona" maxlength="80" readonly>
+                                <input value="<%=donacionSuministros.getAlbergue().getNombreContactoDonaciones()%>" type="text" class="form-control" id="nombre_contacto" placeholder="Ingrese el nombre de la persona" maxlength="80" readonly disabled>
                             </div>
                             <div class="col-md-6 p-1">
                                 <label for="num_contacto">Número de contacto para la donación</label>
-                                <input value="<%=donacionSuministros.getAlbergue().getNumeroContactoDonaciones()%>" type="number" class="form-control" id="num_contacto" oninput="validarNumero()" placeholder="Ingrese el número de contacto" readonly>
+                                <input value="<%=donacionSuministros.getAlbergue().getNumeroContactoDonaciones()%>" type="number" class="form-control" id="num_contacto" oninput="validarNumero()" placeholder="Ingrese el número de contacto" readonly disabled>
                             </div>
                         </div>
 
