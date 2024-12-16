@@ -47,7 +47,7 @@
             </div>
             <div class="welcome-text">Hola, Administrador</div>
         </div>
-        <div class="logo"><a href="/administrator/dashboard.html"><img src="/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+        <div class="logo"><a href="<%=request.getContextPath()%>/Dashboard"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
     </header>
 
     <div class="main">
@@ -118,13 +118,13 @@
                                         <td><%=albergue.getNombreAlbergue()%></td>
                                         <td><%=albergue.getNombreEncargado()%></td>
                                         <td><a href="" target="_blank"><%=albergue.getUrlFacebook()%></a></td>
-                                        <td><%=albergue.getDistrito()%></td>
+                                        <td><%=albergue.getDistrito().getNombreDistrito()%></td>
                                         <td><%=albergue.getDireccion()%></td>
 
                                         <td>
                                             <div style="display: flex; justify-content: center;">
-                                                <button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup()"><span class="fi fi-rr-x"></span></button>
+                                                <a href="<%=request.getContextPath()%>/ValidarAlb?action=aceptar&id=<%=albergue.getAlbergueID()%>"><button type="button" onclick="aceptarSolicitud()" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button></a>
+                                                <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup('<%=request.getContextPath()%>/ValidarAlb?action=rechazar&id=<%=albergue.getAlbergueID()%>')"><span class="fi fi-rr-x"></span></button>
                                             </div>
                                         </td>
                                     </tr>

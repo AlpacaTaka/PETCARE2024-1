@@ -24,10 +24,22 @@ public class ServletValidarUsuario extends HttpServlet {
         int idAdmin= (Integer) request.getSession().getAttribute("idAdmin");
         switch (action) {
             case "lista":
-                ArrayList<Usuario> listaUsuarios = dao.listarUsuarios();
+                ArrayList<Usuario> listaUsuarios = dao.solisUsuarios();
                 request.setAttribute("listaUser", listaUsuarios);
                 RequestDispatcher rd = request.getRequestDispatcher("Administrador/validacionUsuarios.jsp");
                 rd.forward(request, response);
+
+            case "aceptar":
+                int idd = Integer.parseInt(request.getParameter("id"));
+                dao.aceptarUsuario(idd);
+                response.sendRedirect(request.getContextPath() + "/ValidarUser");
+                break;
+
+            case "rechazar":
+                int idd2 = Integer.parseInt(request.getParameter("id"));
+                dao.desactivarUsuario(idd2);
+                response.sendRedirect(request.getContextPath() + "/ValidarUser");
+                break;
         }
 
     }

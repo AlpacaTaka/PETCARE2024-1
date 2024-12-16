@@ -23,10 +23,22 @@ public class ServletValidarAlbergue extends HttpServlet {
         int idAdmin= (Integer) request.getSession().getAttribute("idAdmin");
         switch (action) {
             case "lista":
-                ArrayList<Albergue> listaAlb = dao.listarAlbergues();
+                ArrayList<Albergue> listaAlb = dao.solisAlbergue();
                 request.setAttribute("listaAlb", listaAlb);
                 RequestDispatcher rd = request.getRequestDispatcher("Administrador/solicitudCuentaAlbergues.jsp");
                 rd.forward(request, response);
+
+            case "aceptar":
+                int idd = Integer.parseInt(request.getParameter("id"));
+                dao.aceptarAlbergue(idd);
+                response.sendRedirect(request.getContextPath() + "/ValidarAlb");
+                break;
+
+            case "rechazar":
+                int idd2 = Integer.parseInt(request.getParameter("id"));
+                dao.rechazarAlbergue(idd2);
+                response.sendRedirect(request.getContextPath() + "/ValidarAlb");
+                break;
         }
     }
 

@@ -26,7 +26,7 @@
       </div>
       <div class="welcome-text">Hola, Administrador</div>
     </div>
-    <div class="logo"><a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
+    <div class="logo"><a href="<%=request.getContextPath()%>/Dashboard"><img src="<%=request.getContextPath()%>/common/img/logos/logo_navbar.png" alt="logo"></a></div>
   </header>
 
   <div class="main">
