@@ -35,8 +35,10 @@ public class PortalDeAdopcionServlet extends HttpServlet {
 
                   MascotasDao mascotasDao = new MascotasDao();
                   ArrayList<MascotasAdopcion> listaMascotasAdopcion= mascotasDao.listarMascotasActivasAdopcion();
-                  System.out.println("Lista de Adopciones: " + listaMascotasAdopcion.size() + " elementos.");
                   request.setAttribute("listaAdopcion", listaMascotasAdopcion);
+                  MascotasDao mascotasDao3 = new MascotasDao();
+                  ArrayList<PublicacionMascotaPerdida> listaPerdidos = mascotasDao3.listarNoEncontradasYAprobadasMasDiasPerdido5();
+                  request.setAttribute("mascotasPerdidas", listaPerdidos);
 
                   // Obtiene el RequestDispatcher para la página JSP
 
@@ -47,8 +49,7 @@ public class PortalDeAdopcionServlet extends HttpServlet {
                   break;
                case "vista":
 
-
-                  int idUsuario = 7;
+                  int idUsuario = u.getUsuarioID();
 
                   int idMascAdopt = Integer.parseInt(request.getParameter("id"));
                   MascotasDao mascotasDao2 = new MascotasDao();

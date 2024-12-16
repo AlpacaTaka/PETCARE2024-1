@@ -1,9 +1,12 @@
 <%@ page import="com.example.iwebproyecto.beans.MascotasAdopcion" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.iwebproyecto.beans.PublicacionMascotaPerdida" %>
+<%@ page import="java.time.LocalDate" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:useBean id="UsuarioSession" class="com.example.iwebproyecto.beans.Usuario" scope="session" />
 <%
     ArrayList<MascotasAdopcion> listaAdopcion = (ArrayList) request.getAttribute("listaAdopcion");
+    ArrayList<PublicacionMascotaPerdida> listaPerdidos = (ArrayList) request.getAttribute("mascotasPerdidas");
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -62,40 +65,41 @@
             <!-- El barside y el menu se pueden modificar de acuerdo al actor-->
             <div class="barside">
                 <ul class="navlinks">
-                    <li><a href="/user/miPerfil.html" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
-                    <li><a href="/user/allEventos.html" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
-                    <li><a href="/user/postularTemporal.html" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
-                    <li><a href="/user/solicitudesDonacionSuministros.html" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
-                    <li><a href="/user/donacionMonetaria.html" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
-                    <li><a href="/user/solicitudesAdopcion.html" title="Portal de Adopciones"><i class="fi-rr-cat-dog" style="color: #000;"></i></a></li>
-                    <li><a href="/user/reportarMascotaPerdida.html" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
-                    <li><a href="/user/reportarMaltrato.html" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
-                    <li id="cerrar-sesion"><a href="/login/login.html" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>
-                </ul>
-                
+                    <li><a href="${pageContext.request.contextPath}/MiPerfilUsuario" title="Mi cuenta"><i class="fi-rr-circle-user"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/TodosLosEventos" title="Eventos"><i class="fi-rr-calendar-star"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/PostulacionTemporal" title="Hogar Temporal"><i class="fi-rr-home-heart"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/SolicitudesDeSuministros" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/TodosLosAlbergues" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/PortalDeAdopcion" title="Portal de Adopciones"><i class="fi-rr-cat-dog" style="color: #000;"></i></a></li>
+                    <li><a href="${pageContext.request.contextPath}/Inicio" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
+
+                    <li><a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" title="Reportar Maltrato"><i class="fi-rr-siren-on" ></i></a></li>
+
+                    <li id="cerrar-sesion"><a href="${pageContext.request.contextPath}/Login?action=logout" title="Cerrar Sesion"><i class="fi-rr-power"></i></a></li>                </ul>
+
             </div>
 
             
 
             </div>
-            <div id="menu" class="menu">
-                <a href="/user/miPerfil.html">Mi Perfil</a>
-                <a href="/user/misEventos.html">Mis Eventos</a>
-                <a href="/user/misDonaciones.html" id="Sep">Mis Donaciones</a>
-                <hr>
-                <a href="/user/allEventos.html">Eventos</a>
-                <a href="/user/postularTemporal.html">Hogar Temporal</a>
-                <a href="/user/solicitudesDonacionSuministros.html">Donaciones de Suministros</a>
-                <a href="/user/donacionMonetaria.html">Donaciones Monetarias</a>
-                <a href="/user/solicitudesAdopcion.html">Portal de Adopciones</a>
-                <a href="/user/mascotasPerdidas.html">Portal de Mascotas Perdidas</a>
-                <a href="/user/avistamientoPerdidos.html">Portal Avistamiento Perdidos</a>
-                <a href="/user/reportarMascotaPerdida.html">Reportar Mascota Perdida</a>
-                <a href="/user/reportarMaltrato.html" id="Sep">Reportar Maltrato</a>
-                <hr>
-                <a href="/login/login.html">Cerrar Sesión</a>
+        <div id="menu" class="menu">
+            <a href="${pageContext.request.contextPath}/MiPerfilUsuario">Mi Perfil</a>
+            <a href="${pageContext.request.contextPath}/MisEventosUsuario">Mis Eventos</a>
+            <a href="${pageContext.request.contextPath}/MisDonacionesUsuario" id="Sep">Mis Donaciones</a>
+            <hr>
+            <a href="${pageContext.request.contextPath}/TodosLosEventos">Eventos</a>
+            <a href="${pageContext.request.contextPath}/PostulacionTemporal">Hogar Temporal</a>
+            <a href="${pageContext.request.contextPath}/SolicitudesDeSuministros">Donaciones de Suministros</a>
+            <a href="${pageContext.request.contextPath}/TodosLosAlbergues">Donaciones Monetarias</a>
+            <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal de Adopciones</a>
+            <a href="${pageContext.request.contextPath}/Inicio">Portal de Mascotas Perdidas</a>
+            <a href="${pageContext.request.contextPath}/Inicio">Portal Avistamiento Perdidos</a>
+            <a href="${pageContext.request.contextPath}/Inicio">Reportar Mascota Perdida</a>
+            <a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" id="Sep">Reportar Maltrato</a>
+            <hr>
+            <a href="${pageContext.request.contextPath}/Login?action=logout">Cerrar Sesión</a>
 
-            </div>
+        </div>
 
 
             <div class="container-fluid d-flex" id="contenido-principal">
@@ -145,43 +149,25 @@
                             <h1> Mascotas perdidas</h1>
                             <div class="grid-container" id="grilla-perdidos">
                                 <!-- Card 1 -->
+                                <%
+                                    LocalDate hoy = LocalDate.now();
+                                    for (PublicacionMascotaPerdida perdido : listaPerdidos) {
+                                        LocalDate fechaPerdida = perdido.getFechaPerdida();
+                                        long diasPerdidos = java.time.temporal.ChronoUnit.DAYS.between(fechaPerdida, hoy);
+                                %>
                                 <div class="card .perdido">
-                                    <img src="/common/img/perdidos/perdido1.jpg" class="card-img-top card-img-don" alt="Canela">
+                                    <img src="${pageContext.request.contextPath}/<%=perdido.getFoto().getRutaFoto()%>" class="card-img-top card-img-don" alt="Canela"
+                                         onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Imagen+No+Disponible';">
                                     <div class="card-body">
-                                        <h5 class="card-title text-center">Canela</h5>
-                                        <p class="card-text"><strong>Lugar de extravío:</strong> Parque Condesa</p>
-                                        <p class="card-text"><strong>Días perdido:</strong> 2</p>
+                                        <h5 class="card-title text-center"><%= perdido.getNombreMascota() %></h5>
+                                        <p class="card-text"><strong>Lugar de extravío: </strong><%= perdido.getLugarPerdida() %></p>
+                                        <p class="card-text"><strong>Días perdido: </strong><%= diasPerdidos %></p>
                                     </div>
                                 </div>
-                        
-                                <!-- Card 2 -->
-                                <div class="card .perdido">
-                                    <img src="/common/img/perdidos/perdido2.jpg" class="card-img-top card-img-don" alt="Thor">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center">Thor</h5>
-                                        <p class="card-text"><strong>Lugar de extravío:</strong> Puente Azul Santa Anita</p>
-                                        <p class="card-text"><strong>Días perdido:</strong> 8</p>
-                                    </div>
-                                </div>
-                        
-                                <!-- Card 3 -->
-                                <div class="card .perdido">
-                                    <img src="/common/img/perdidos/perdido3.jpg" class="card-img-top card-img-don" alt="Sam">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center">Sam</h5>
-                                        <p class="card-text"><strong>Lugar de extravío:</strong> Calle Flor Tristán La Molina</p>
-                                        <p class="card-text"><strong>Días perdido:</strong> 1</p>
-                                    </div>
-                                </div>
-                                <!-- Card 4 -->
-                                <div class="card .perdido">
-                                    <img src="/common/img/perdidos/perdido4.jpg" class="card-img-top card-img-don" alt="Sam">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center">Sam</h5>
-                                        <p class="card-text"><strong>Lugar de extravío:</strong> Calle Flor Tristán La Molina</p>
-                                        <p class="card-text"><strong>Días perdido:</strong> 1</p>
-                                    </div>
-                                </div>
+                                <%
+                                    }
+                                %>
+
                             </div>
                         </div>
                         <a href="/user/mascotasPerdidas.html" class="btn btn-personal m-2"  id="btn-crd-cr">Ver más</a>

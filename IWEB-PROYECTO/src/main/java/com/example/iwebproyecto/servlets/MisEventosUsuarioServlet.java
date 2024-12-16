@@ -58,7 +58,7 @@ public class MisEventosUsuarioServlet extends HttpServlet {
 
 
 
-                    int idUsuario = 7;
+                    int idUsuario = u.getUsuarioID();
                     String idEventoStr = request.getParameter("idEvento");
 
                     System.out.println(idEventoStr);
