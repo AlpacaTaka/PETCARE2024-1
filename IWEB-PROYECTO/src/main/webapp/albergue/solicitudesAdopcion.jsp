@@ -1,7 +1,7 @@
 <%@ page import="com.example.iwebproyecto.beans.UsuarioAdopcion" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<jsp:useBean id="lista" scope="request" type="java.util.ArrayList<com.example.iwebproyecto.beans.UsuarioAdopcion>"/>
-<jsp:useBean id="albergue" scope="request" type="com.example.iwebproyecto.beans.Albergue"/>
+<jsp:useBean id="lista" type="java.util.ArrayList<com.example.iwebproyecto.beans.UsuarioAdopcion>" scope="request"/>
+<jsp:useBean id="albergue" type="com.example.iwebproyecto.beans.Albergue" scope="request"/>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -111,8 +111,24 @@
                                             <td><%=usuarioAdopcion.getUsuario().getCorreoElectronico()%></td>
                                             <td>
                                                 <div style="display: flex; justify-content: center;">
-                                                    <button type="button" onclick="aceptarSolicitud('<%=request.getContextPath()%>/SolicitudesDeAdopcion?action=accept&id=<%=usuarioAdopcion.getUsuarioAdopcionID()%>&idAdopcion=<%=usuarioAdopcion.getMascotasAdopcion().getIdAdopcion()%>')" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Aceptar"><span class="fi fi-rr-check"></span></button>
-                                                    <button type="button" class="btn btn-light" style="margin-right: 3px;border-color: black; border-width: 1px;" title="Rechazar" onclick="abrirPopup('<%=request.getContextPath()%>/SolicitudesDeAdopcion?action=decline&id=<%=usuarioAdopcion.getUsuarioAdopcionID()%>&idAdopcion=<%=usuarioAdopcion.getMascotasAdopcion().getIdAdopcion()%>')"><span class="fi fi-rr-x"></span></button>
+                                                    <!-- Botón para aceptar -->
+                                                    <button
+                                                            type="button"
+                                                            class="btn btn-light"
+                                                            style="margin-right: 3px;border-color: black; border-width: 1px;"
+                                                            title="Aceptar"
+                                                            onclick="abrirPopup('<%=request.getContextPath()%>/SolicitudesDeAdopcion?action=accept&id=<%=usuarioAdopcion.getUsuarioAdopcionID()%>&idAdopcion=<%=usuarioAdopcion.getMascotasAdopcion().getIdAdopcion()%>', this.closest('tr'), 'aceptar')">
+                                                        <span class="fi fi-rr-check"></span>
+                                                    </button>
+                                                    <!-- Botón para rechazar -->
+                                                    <button
+                                                            type="button"
+                                                            class="btn btn-light"
+                                                            style="margin-right: 3px;border-color: black; border-width: 1px;"
+                                                            title="Rechazar"
+                                                            onclick="abrirPopup('<%=request.getContextPath()%>/SolicitudesDeAdopcion?action=decline&id=<%=usuarioAdopcion.getUsuarioAdopcionID()%>&idAdopcion=<%=usuarioAdopcion.getMascotasAdopcion().getIdAdopcion()%>', this.closest('tr'), 'rechazar')">
+                                                        <span class="fi fi-rr-x"></span>
+                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -135,13 +151,13 @@
             </div>
         </div>
 
-        <div id="popup" class="popup-overlay">
+        <div id="popup" class="popup-overlay" style="display: none;">
             <div class="popup-content">
-            <h2>¿Seguro que desea rechazar esta solicitud?</h2>
-            <div class="popup-buttons">
-                <button class="btn-confirmar" onclick="confirmarAccion()">Confirmar</button>
-                <button class="btn-cancelar" onclick="cerrarPopup()">Cancelar</button>
-            </div>
+                <h2>¿Está seguro que desea proceder con esta acción?</h2>
+                <div class="popup-buttons">
+                    <button class="btn-confirmar" onclick="confirmarAccion()">Confirmar</button>
+                    <button class="btn-cancelar" onclick="cerrarPopup()">Cancelar</button>
+                </div>
             </div>
         </div>
 
@@ -246,48 +262,45 @@
             });
         </script>
         <script>
-            // Función para abrir el popup
-            function abrirPopup(redireccionamiento) {
+            let redireccionEnlace = null;
+            let filaParaEliminar = null; // Variable para guardar la fila que será eliminada
+            let accionEnProgreso = null; // Identifica si es una acción de aceptar o rechazar
+
+            // Función para abrir el popup y guardar la URL y la fila a manipular
+            function abrirPopup(url, fila, accion) {
                 document.getElementById('popup').style.display = 'block';
-                document.getElementById('popup').href = redireccionamiento;
+                redireccionEnlace = url; // Guarda el enlace de redirección
+                filaParaEliminar = fila; // Guarda la fila a eliminar después de confirmar
+                accionEnProgreso = accion; // Guarda si es "aceptar" o "rechazar"
             }
+
             // Función para cerrar el popup
             function cerrarPopup() {
                 document.getElementById('popup').style.display = 'none';
-                document.getElementById('popup').href = null;
+                redireccionEnlace = null; // Limpia la URL de redirección
+                filaParaEliminar = null; // Limpia la fila
+                accionEnProgreso = null; // Limpia la acción
             }
 
-            // Función de confirmación (puedes agregar la lógica de eliminación aquí)
+            // Función para confirmar la acción en el popup
             function confirmarAccion() {
-                alert('Evento eliminado correctamente.')
-                window.location.href = document.getElementById('popup').href;
-                cerrarPopup();
-            }
-        </script>
+                if (redireccionEnlace) {
+                    if (accionEnProgreso === "rechazar") {
+                        // Muestra un mensaje de rechazo antes de eliminar
+                        alert("Solicitud rechazada.");
+                    }
 
-        <script>
-                
-            // Función de confirmación 
-            //function aceptarSolicitud() {
-            //alert('Solicitud aceptada.');
-            //cerrarPopupCoordinador();
-            //}
-            // Función para abrir el popup
-            function aceptarSolicitud(redireccionamiento) {
-                document.getElementById('popup').style.display = 'block';
-                document.getElementById('popup').href = redireccionamiento;
-            }
-            // Función para cerrar el popup
-            function cerrarPopup() {
-                document.getElementById('popup').style.display = 'none';
-                document.getElementById('popup').href = null;
-            }
+                    // Elimina la fila del DOM
+                    if (filaParaEliminar) {
+                        filaParaEliminar.remove();
+                    }
 
-            // Función de confirmación (puedes agregar la lógica de eliminación aquí)
-            function confirmarAccion() {
-                alert('Evento eliminado correctamente.')
-                window.location.href = document.getElementById('popup').href;
-                cerrarPopup();
+                    // Redirige al enlace guardado (si aplica)
+                    window.location.href = redireccionEnlace;
+                } else {
+                    alert("Ocurrió un error al procesar la solicitud.");
+                }
+                cerrarPopup(); // Cierra el popup
             }
         </script>
     </body>
