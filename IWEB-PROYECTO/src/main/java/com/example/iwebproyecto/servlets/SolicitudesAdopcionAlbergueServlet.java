@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -93,6 +94,32 @@ public class SolicitudesAdopcionAlbergueServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
         AlbergueDaoRevenge albergueDaoRevenge = new AlbergueDaoRevenge();
+
+        // Ruta base para almacenamiento de imágenes
+        String uploadPath = getServletContext().getRealPath("/uploads/fotosMascotasAdopcion");
+        System.out.println("Ruta de carga: " + uploadPath);
+        java.io.File uploadDir = new java.io.File(uploadPath);
+
+        // Crear el directorio 'fotos' si no existe
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
+
+        int idFoto = -1; // El ID de la foto en DB (si aplica)
+        String nombreArchivo = "";
+
+        for (Part part : request.getParts()) {
+            // Identificar la parte correspondiente al archivo cargado
+            if (part.getName().equals("fotoMascota") && part.getSize() > 0) {
+                nombreArchivo = java.nio.file.Paths.get(part.getSubmittedFileName()).getFileName().toString();
+                part.write(uploadPath + java.io.File.separator + nombreArchivo);
+            }
+        }
+
+        // Crea la URL para guardar la imagen en la base de datos
+        String rutaFoto = "uploads/fotosMascotasAdopcion/" + nombreArchivo;
+
+
         String nombreMascota = request.getParameter("nombreMascota");
         String especie = request.getParameter("especie");
         String raza = request.getParameter("raza");
@@ -109,12 +136,11 @@ public class SolicitudesAdopcionAlbergueServlet extends HttpServlet {
         int edad = Integer.parseInt(request.getParameter("edad"));
         String sexo = request.getParameter("sexoMascota");
         String descripcion = request.getParameter("breveDescripcion");
-        int idFoto = 30;/*request.getParameter("rutaFoto");*/
         boolean seEncuentraTemporal= Boolean.parseBoolean(request.getParameter("hogarTemp"));
         String condicionesAdopcion = request.getParameter("condiciones");
-        //int albergueID = 6;/*Integer.parseInt(request.getParameter("idAlbergue"));*/
         int albergueID = (Integer) request.getSession().getAttribute("idAlbergue");
         boolean eliminado = false;
+
         MascotasAdopcion mascota = new MascotasAdopcion();
         mascota.setNombreMascota(nombreMascota);
         mascota.setEspecie(especie);
@@ -126,9 +152,12 @@ public class SolicitudesAdopcionAlbergueServlet extends HttpServlet {
         mascota.setEdadAprox(edad);
         mascota.setSexo(sexo);
         mascota.setDescripcionGeneral(descripcion);
+
+        // Asigna la ruta de la imagen al objeto
         Foto foto = new Foto();
-        foto.setFotoID(idFoto);
+        foto.setRutaFoto(rutaFoto); // Asume que existe un setter para la ruta
         mascota.setFoto(foto);
+
         mascota.setSeEncuentraTemporal(seEncuentraTemporal);
         mascota.setCondicionesAdopcion(condicionesAdopcion);
         Albergue albergue = new Albergue();
