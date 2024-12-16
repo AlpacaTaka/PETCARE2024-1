@@ -5,11 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/common/img/logos/paw.ico">
-    <link rel="stylesheet" href="/common/uicons-regular-rounded/css/uicons-regular-rounded.css">
+    <link rel="icon" href="${pageContext.request.contextPath}/common/img/logos/paw.ico">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/uicons-regular-rounded/css/uicons-regular-rounded.css">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/common/css/baseDesign.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/baseDesign.css">
     <link rel="stylesheet" href="CSSDELAPAGINA.css">
     <title>Postular como Hogar Temporal</title>
 
@@ -79,7 +79,7 @@
                 <div class="col" id="contenido-nofooter">
                     <div class="container md-8 d-flex justify-content-between" style="width: 85%;max-width: 800px; margin-bottom: 20px; padding: 0;">
                         <button type="button"  class="btn btn-personal2" onclick="location.href='inicio.jsp'">  Regresar   </button>
-                        <button type="button"  class="btn btn-personal" onclick="location.href='misSolicitudesTemporales.jsp'">  Ver todas postulaciones   </button>
+                        <button type="button"  class="btn btn-personal" onclick="location.href='${pageContext.request.contextPath}/PostulacionTemporal?action=lista'">  Ver todas postulaciones   </button>
                     </div>
                     <div class="container md-12" style="width: 85%;max-width: 800px; background-color: #fca6519f; border-radius: 30px; margin-bottom: 20px; padding: 10px 20px;">
                         <h1 style="margin-top: 10px; color: #4d0e0e; font-style: italic" class="text-center" >Postular como hogar temporal</h1>
@@ -350,7 +350,7 @@
         </div>
     </div>
 
-        <script src="/common/script/neonavbar.js"></script>
+        <script src="${pageContext.request.contextPath}/common/script/neonavbar.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script>
             const nombreTemporalInput = document.getElementById('Nombre-temporal');
