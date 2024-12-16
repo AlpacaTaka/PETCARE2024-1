@@ -307,5 +307,63 @@ public class DonacionesDao extends BaseDao {
         return nombreCausa;
     }
 
+    public ArrayList<UsuarioDonacionSuministro> listarDonacionesPorUsuarioConAlbergue(int usuarioID) {
+        ArrayList<UsuarioDonacionSuministro> listaDonaciones = new ArrayList<>();
+
+        String sql = """
+        SELECT uds.usuarioDonacionSuministrosID, uds.cantidadSuministro, uds.fechaDonacion, uds.tipoDonacion,
+                                                          a.nombreAlbergue, f.rutaFoto, ds.tituloAvisoDonacion
+                                                   FROM usuariodonacionsuministros uds
+                                                   INNER JOIN donacionsuministros ds ON uds.donacionSuministrosID = ds.donacionSuministrosID
+                                                   INNER JOIN albergue a ON ds.albergueID = a.albergueID
+                                                   LEFT JOIN fotos f ON ds.fotoID = f.fotoID
+                                                   WHERE uds.usuarioID = ?
+                                                   ORDER BY uds.fechaDonacion DESC
+    """;
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, usuarioID);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    UsuarioDonacionSuministro usuarioDonacion = new UsuarioDonacionSuministro();
+
+                    // Mapear datos principales
+                    usuarioDonacion.setUsuarioDonacionSuministrosID(rs.getInt("usuarioDonacionSuministrosID"));
+                    usuarioDonacion.setCantidadSuministro(rs.getInt("cantidadSuministro"));
+                    usuarioDonacion.setFechaDonacion(rs.getDate("fechaDonacion").toLocalDate());
+                    usuarioDonacion.setTipoDonacion(rs.getString("tipoDonacion"));
+
+                    // Mapear el nombre del albergue
+                    Albergue albergue = new Albergue();
+                    usuarioDonacion.setNombreAlbergue(rs.getString("nombreAlbergue"));
+                    DonacionSuministros donacionSuministros = new DonacionSuministros();
+                    donacionSuministros.setAlbergue(albergue);
+
+
+                    // Obtener y asignar el título de la solicitud
+                    usuarioDonacion.setTituloAvisoDonacion(rs.getString("tituloAvisoDonacion"));
+                    // Obtener y asignar la ruta de la foto
+                    String rutaFoto = rs.getString("rutaFoto");
+                    usuarioDonacion.setRutaFoto(rutaFoto);
+
+                    // Asignar los datos mapeados
+                    usuarioDonacion.setDonacionSuministros(donacionSuministros);
+
+                    listaDonaciones.add(usuarioDonacion);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al listar donaciones por usuario con albergue", e);
+        }
+
+        return listaDonaciones;
+    }
+
+
+
 
 }

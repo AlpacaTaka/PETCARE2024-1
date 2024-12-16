@@ -1,6 +1,7 @@
 package com.example.iwebproyecto.servlets;
 
 import com.example.iwebproyecto.beans.DonacionMonetaria;
+import com.example.iwebproyecto.beans.UsuarioDonacionSuministro;
 import com.example.iwebproyecto.daos.DonacionesDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -28,6 +29,12 @@ public class MisDonacionesUsuarioServlet extends HttpServlet {
             case "lista":
                 double totalDonado = donacionDao.obtenerTotalDonadoPorUsuario(usuarioId);
                 request.setAttribute("totalDonado", totalDonado);
+                DonacionesDao donacionesDao = new DonacionesDao();
+                ArrayList<UsuarioDonacionSuministro> suministros = donacionesDao.listarDonacionesPorUsuarioConAlbergue(usuarioId);
+
+                // Establecer la lista en los atributos de la solicitud
+                request.setAttribute("suministros", suministros);
+
                 request.getRequestDispatcher("/user/misDonaciones.jsp").forward(request, response);
                 break;
 

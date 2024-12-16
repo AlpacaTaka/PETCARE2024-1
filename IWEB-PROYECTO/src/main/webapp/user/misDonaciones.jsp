@@ -1,3 +1,6 @@
+<%@ page import="com.example.iwebproyecto.beans.DonacionSuministros" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.iwebproyecto.beans.UsuarioDonacionSuministro" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
     Double totalDonadoObj = (Double) request.getAttribute("totalDonado");
@@ -140,24 +143,28 @@
                             
                         </div>
                         <!--Anuncios de donaciones-->
+
+                        <%
+                            ArrayList<UsuarioDonacionSuministro> suministros = (ArrayList<UsuarioDonacionSuministro>) request.getAttribute("suministros");
+                            for (UsuarioDonacionSuministro suministro : suministros) {
+
+                        %>
+
                         <div class="container card-container">
                             <div class="card h-100 mb-3">
                                 <div class="row g-0">
                                     <!-- Imagen del evento -->
                                     <div class="col-md-4">
-                                        <img src="https://www.comfacauca.com/wp-content/uploads/Festival-canino.jpeg" class="img-fluid rounded-start" alt="Imagen del evento">
+                                        <img src="${pageContext.request.contextPath}/<%= suministro.getRutaFoto()%>" class="img-fluid rounded-start" alt="Imagen del evento"
+                                             onerror="this.onerror=null; this.src='https://placehold.co/400x300?text=Imagen+No+Disponible';">
                                     </div>
                                     <!-- Detalles del evento -->
                                     <div class="col-md-8 d-flex align-self-center">
                                         <div class="card-body">
-                                            <h3 class="card-title">Se Necesitan Vacunas</h3>
-                                            <div class="card-text">
-                                                <div class="badge text-bg-success text-wrap" style="margin-bottom: 10px">
-                                                    Entregado
-                                                  </div>
-                                            </div>
-                                            <p class="card-text"><strong>Donación: </strong>1 saco de Ricocan</p>
-                                            <p class="card-text"><strong>Fecha de Entrega: </strong> 5/08/2023</p>
+                                            <h3 class="card-title"><%= suministro.getTituloAvisoDonacion()%></h3>
+                                            <p class="card-text">Solicitado por <strong> <%= suministro.getNombreAlbergue()%> </strong></p>
+                                            <p class="card-text"><strong>Donación: </strong>(<%= suministro.getCantidadSuministro()%>) <%= suministro.getTipoDonacion()%></p>
+                                            <p class="card-text"><strong>Fecha de Entrega programada por ti: </strong> <%= suministro.getFechaDonacion()%></p>
                                             
                                         </div>
                                     </div>
@@ -165,58 +172,11 @@
                             </div>
     
                         </div>
-                        <div class="container card-container">
-                            <div class="card h-100 mb-3">
-                                <div class="row g-0">
-                                    <!-- Imagen del evento -->
-                                    <div class="col-md-4">
-                                        <img src="/common/img/donaciones/donacion1.png" class="img-fluid rounded-start" alt="Imagen del evento">
-                                    </div>
-                                    <!-- Detalles del evento -->
-                                    <div class="col-md-8 d-flex align-self-center">
-                                        <div class="card-body">
-                                            <h3 class="card-title">Se Necesitan Camas</h3>
-                                            <div class="card-text">
-                                                <div class="badge text-bg-primary text-wrap" style="margin-bottom: 10px">
-                                                    En proceso
-                                                  </div>
-                                            </div>
-                                            <p class="card-text"><strong>Donación: </strong>1 saco de Ricocan</p>
-                                            <p class="card-text"><strong>Fecha de Entrega: </strong> 5/08/2023</p>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-    
-                        </div>
-                        <div class="container card-container">
-                            <div class="card h-100 mb-3">
-                                <div class="row g-0">
-                                    <!-- Imagen del evento -->
-                                    <div class="col-md-4">
-                                        <img src="/common/img/donaciones/donacion2.png" class="img-fluid rounded-start" alt="Imagen del evento">
-                                    </div>
-                                    <!-- Detalles del evento -->
-                                    <div class="col-md-8 d-flex align-self-center">
-                                        <div class="card-body">
-                                            
-                                            <h2 class="card-title">Se necesita Comida para perro</h2>
-                                            <div class="card-text">
-                                                <div class="badge text-bg-danger text-wrap" style="margin-bottom: 10px">
-                                                    Inconcluso
-                                                  </div>
-                                            </div>
-                                            <p class="card-text"><strong>Donación: </strong>1 saco de Ricocan</p>
-                                            <p class="card-text"><strong>Fecha de Entrega: </strong> 5/08/2023</p>
-                                            
-                                    
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-    
-                        </div>
+
+                        <%
+                            }
+
+                        %>
                         
                         <div class="row justify-content-center p-1">
                             

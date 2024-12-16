@@ -9,8 +9,10 @@ public class UsuarioDonacionSuministro {
     private DonacionSuministros donacionSuministros; // Relación con el bean DonacionSuministros
     private int cantidadSuministro;
     private LocalDate fechaDonacion;
-    private String tipoDonacion; // Campo adicional para el tipo de donación
-
+    private String tipoDonacion;// Campo adicional para el tipo de donación
+    private String rutaFoto; //ESTO SOLO SE TOMA PARA CUESTIONES PRACTICAS Y NO ESTA NE LA BASE DE DATOS PERO NO HAY PROBLEMA
+    private String tituloAvisoDonacion; //same here
+    private String nombreAlbergue;
     // Constructor vacío
     public UsuarioDonacionSuministro() {
     }
@@ -27,6 +29,15 @@ public class UsuarioDonacionSuministro {
     }
 
     // Getters y Setters
+
+    public String getNombreAlbergue() {
+        return nombreAlbergue;
+    }
+
+    public void setNombreAlbergue(String nombreAlbergue) {
+        this.nombreAlbergue = nombreAlbergue;
+    }
+
     public int getUsuarioDonacionSuministrosID() {
         return usuarioDonacionSuministrosID;
     }
@@ -73,6 +84,22 @@ public class UsuarioDonacionSuministro {
 
     public void setTipoDonacion(String tipoDonacion) {
         this.tipoDonacion = tipoDonacion;
+    }
+
+    public String getRutaFoto() {
+        return rutaFoto;
+    }
+
+    public void setRutaFoto(String rutaFoto) {
+        this.rutaFoto = rutaFoto;
+    }
+
+    public String getTituloAvisoDonacion() {
+        return tituloAvisoDonacion;
+    }
+
+    public void setTituloAvisoDonacion(String tituloAvisoDonacion) {
+        this.tituloAvisoDonacion = tituloAvisoDonacion;
     }
 
     @Override
