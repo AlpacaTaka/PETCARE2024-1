@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<jsp:useBean id="albergue" scope="request" type="com.example.iwebproyecto.beans.Albergue"/>
+<jsp:useBean id="albergue" class="com.example.iwebproyecto.beans.Albergue" scope="request"/>
 <!DOCTYPE html>
 <html lang="es">
 <head>

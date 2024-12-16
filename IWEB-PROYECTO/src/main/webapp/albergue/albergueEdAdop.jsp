@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%--int albergueID = 6; /*(int) request.getAttribute("idAlbergue");*/--%>
 <jsp:useBean id="mascota" scope="request" type="com.example.iwebproyecto.beans.MascotasAdopcion"/>
 <jsp:useBean id="albergue" type="com.example.iwebproyecto.beans.Albergue" scope="request"/>
 <!DOCTYPE html>

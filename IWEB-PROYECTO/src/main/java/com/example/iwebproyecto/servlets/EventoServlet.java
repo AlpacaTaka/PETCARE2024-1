@@ -23,7 +23,8 @@ import java.sql.SQLException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+import java.util.Arrays;
+import java.util.Map;
 
 
 @WebServlet(name = "EventoServlet", urlPatterns = {"/eventos"})
@@ -43,7 +44,13 @@ public class EventoServlet extends HttpServlet {
 
         //AlbergueDao albergueDao = new AlbergueDao();
         int idAlbergue= (Integer) request.getSession().getAttribute("idAlbergue");
+        System.out.println("ID de Albergue: " + idAlbergue);
         Albergue albergue = albergueDao.obtenerAlberguePorID(idAlbergue);
+        System.out.println("Albergue obtenido: " + albergue);
+        if (albergue == null) {
+            System.err.println("Error: No se encontró el albergue con ID " + idAlbergue);
+            // Manejar el caso de albergue nulo
+        }
         request.setAttribute("albergue", albergue);
 
         switch (action) {
@@ -133,7 +140,6 @@ public class EventoServlet extends HttpServlet {
         AlbergueDao albergueDao = new AlbergueDao();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // Cambiado para coincidir con el formato HTML
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-        //Albergue albergue = albergueDao.obtenerAlberguePorID(6);
         Albergue albergue = albergueDao.obtenerAlberguePorID((Integer) request.getSession().getAttribute("idAlbergue"));
 
 
@@ -167,7 +173,6 @@ public class EventoServlet extends HttpServlet {
 
                     Part filePart = request.getPart("foto");
                     Foto foto = procesarImagen(filePart, request, response, fotoDao);
-                    if (foto == null) return;
 
 
                     EventoBenefico nuevoEvento = new EventoBenefico();
@@ -194,7 +199,8 @@ public class EventoServlet extends HttpServlet {
 
                 case "actualizar":
                     // Obtener parámetros del formulario (similar a "guardar")
-                    int eventoID = Integer.parseInt(request.getParameter("eventoAlbergueID"));
+                    int eventoID = Integer.parseInt(request.getParameter("id"));
+                    System.out.println("Evento ID to update: " + eventoID);
                     nombre = request.getParameter("nombre");
                     tipoDonacion = request.getParameter("tipoDonacion");
                     detalleMonetario = getIntegerParameter(request, "detalleMonetario");
@@ -202,15 +208,20 @@ public class EventoServlet extends HttpServlet {
                     fechaEvento = LocalDate.parse(request.getParameter("fechaEvento"), dateFormatter);
                     horaInicio = LocalTime.parse(request.getParameter("horaInicio"), timeFormatter);
                     horaFin = LocalTime.parse(request.getParameter("horaFin"), timeFormatter);
-                    distritoId = Integer.parseInt(request.getParameter("distrito"));
+                    String distritoString = request.getParameter("distrito");
+                    System.out.println("Distrito ID: " + distritoString);
+                    distritoId = getIntegerParameter(request, "distrito");
+                    String lugarString = request.getParameter("lugar");
+                    System.out.println("Lugar ID: " + lugarString);
                     lugarId = Integer.parseInt(request.getParameter("lugar"));
                     razonEvento = request.getParameter("razon");
                     descripcionEvento = request.getParameter("descripcion");
                     invitados = request.getParameter("invitados");
 
-                    filePart = request.getPart("foto");
-                    foto = procesarImagen(filePart, request, response, fotoDao);
-                    if (foto == null) return; // Error en el procesamiento, ya manejado en procesarImagen
+                    Map<String, String[]> parameterMap = request.getParameterMap();
+                    for (String paramName : parameterMap.keySet()) {
+                        System.out.println(paramName + ": " + Arrays.toString(parameterMap.get(paramName)));
+                    }
 
                     // Actualizar el evento
                     EventoBenefico eventoActualizar = new EventoBenefico();
@@ -227,7 +238,6 @@ public class EventoServlet extends HttpServlet {
                     eventoActualizar.setRazonEvento(razonEvento);
                     eventoActualizar.setDescripcionEvento(descripcionEvento);
                     eventoActualizar.setInvitados(invitados);
-                    eventoActualizar.setFoto(foto);
                     eventoActualizar.setAlbergue(albergue);
                     eventoActualizar.setAprobado(false);
                     eventoActualizar.setEliminado(false);
@@ -298,7 +308,7 @@ public class EventoServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("mensajeError", "Error al guardar la imagen: " + e.getMessage());
-            request.getRequestDispatcher("/albergue/albergueFormEvento.jsp").forward(request, response);
+            request.getRequestDispatcher("/albergue/eventTable.jsp").forward(request, response);
             return null;
         }
 
