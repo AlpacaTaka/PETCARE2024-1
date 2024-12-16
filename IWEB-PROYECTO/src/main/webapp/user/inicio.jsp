@@ -61,7 +61,7 @@
                 <li><a href="${pageContext.request.contextPath}/SolicitudesDeSuministros" title="Donaciones de suministros"><i class="fi-rr-paw-heart"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/TodosLosAlbergues" title="Donaciones Monetarias"><i class="fi-rr-hand-holding-usd"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/PortalDeAdopcion" title="Portal de Adopciones"><i class="fi-rr-cat-dog"></i></a></li>
-                <li><a href="${pageContext.request.contextPath}/ReportarPerdido" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/Inicio" title="Reportar Mascota Perdida"><i class="fi-rr-message-alert"></i></a></li>
 
                 <li><a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" title="Reportar Maltrato"><i class="fi-rr-siren-on"></i></a></li>
 
@@ -80,9 +80,9 @@
             <a href="${pageContext.request.contextPath}/SolicitudesDeSuministros">Donaciones de Suministros</a>
             <a href="${pageContext.request.contextPath}/TodosLosAlbergues">Donaciones Monetarias</a>
             <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal de Adopciones</a>
-            <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal de Mascotas Perdidas</a>
-            <a href="${pageContext.request.contextPath}/PortalDeAdopcion">Portal Avistamiento Perdidos</a>
-            <a href="${pageContext.request.contextPath}/ReportarPerdido">Reportar Mascota Perdida</a>
+            <a href="${pageContext.request.contextPath}/Inicio">Portal de Mascotas Perdidas</a>
+            <a href="${pageContext.request.contextPath}/Inicio">Portal Avistamiento Perdidos</a>
+            <a href="${pageContext.request.contextPath}/Inicio">Reportar Mascota Perdida</a>
             <a href="${pageContext.request.contextPath}/ReportarMaltratoServlet" id="Sep">Reportar Maltrato</a>
             <hr>
             <a href="${pageContext.request.contextPath}/Login?action=logout">Cerrar Sesión</a>
@@ -558,10 +558,10 @@
                                     long diasPerdidos = java.time.temporal.ChronoUnit.DAYS.between(fechaPerdida, hoy);
                             %>
                             <div class="card .perdido">
-                                <img src="${pageContext.request.contextPath}/<%=perdido.getFoto().getRutaFoto()%>"" class="card-img-top card-img-don" alt="Canela"
+                                <img src="${pageContext.request.contextPath}/<%=perdido.getFoto().getRutaFoto()%>" class="card-img-top card-img-don" alt="Canela"
                                      onerror="this.onerror=null; this.src='https://placehold.co/400x400?text=Imagen+No+Disponible';">
                                 <div class="card-body">
-                                    <h5 class="card-title text-center">Canela</h5>
+                                    <h5 class="card-title text-center"><%= perdido.getNombreMascota() %></h5>
                                     <p class="card-text"><strong>Lugar de extravío: </strong><%= perdido.getLugarPerdida() %></p>
                                     <p class="card-text"><strong>Días perdido: </strong><%= diasPerdidos %></p>
                                 </div>

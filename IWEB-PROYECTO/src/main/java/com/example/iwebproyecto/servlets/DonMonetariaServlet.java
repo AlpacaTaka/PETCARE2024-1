@@ -1,11 +1,9 @@
 package com.example.iwebproyecto.servlets;
 
-import com.example.iwebproyecto.beans.Albergue;
-import com.example.iwebproyecto.beans.DonacionMonetaria;
-import com.example.iwebproyecto.beans.DonacionSuministros;
-import com.example.iwebproyecto.beans.Usuario;
+import com.example.iwebproyecto.beans.*;
 import com.example.iwebproyecto.daos.AlbergueDao;
 import com.example.iwebproyecto.daos.DonacionesDao;
+import com.example.iwebproyecto.daos.MascotasDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -34,6 +32,10 @@ public class DonMonetariaServlet extends HttpServlet {
                     ArrayList<Albergue> listaAlbergues = albergueDao.listarAlberguesActivosAprobados();
 
                     request.setAttribute("listaAlbergues", listaAlbergues);
+
+                    MascotasDao mascotasDao = new MascotasDao();
+                    ArrayList<PublicacionMascotaPerdida> listaPerdidos = mascotasDao.listarNoEncontradasYAprobadasMasDiasPerdido5();
+                    request.setAttribute("mascotasPerdidas", listaPerdidos);
 
 
                     RequestDispatcher dispatcher = request.getRequestDispatcher("user/donacionMonetaria.jsp");
